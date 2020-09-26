@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+  <div class="container">
+    <div class="navbar-wrapper">
+      <div class="navbar-toggle" (click)="sidebarToggle()">
+        <button type="button" class="navbar-toggler">
+          <span class="navbar-toggler-bar bar1"></span>
+          <span class="navbar-toggler-bar bar2"></span>
+          <span class="navbar-toggler-bar bar3"></span>
+        </button>
+      </div>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+      <span class="navbar-toggler-bar navbar-kebab"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+      
+    </div>
+  </div>
+</nav>
+
+<div class="wrapper wrapper-full-page ">
+  <div class="full-page section-image" filter-color="black" data-image="./assets/img/bg/fabio-mangione.jpg">
+    <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+    <div class="content">
+      <div class="container">
+        <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+          <form class="needs-validation" novalidate (submit)="onLogin(templateForm)" #templateForm="ngForm">
+            <div class="card card-login">
+              <div class="card-header ">
+                <div class="card-header ">
+                  <h3 class="header text-center">Login</h3>
+                </div>
+              </div>
+              <div class="card-body ">
+                <div class="alert alert-warning" role="alert" *ngIf="noLoginValuesAlert">
+                  Type your username and password.
+                </div>
+                <div class="alert alert-danger" role="alert" *ngIf="incorrectUserAlert">
+                  You have entered an incorrect username or password.
+                </div>
+                <div class="alert alert-success" role="alert" *ngIf="logoutAlert">
+                  You have been logged out of the system.
+                </div>
+                <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-single-02"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Username..." (focus)="focus=true" (blur)="focus=false" id="userName" name="userName" ngModel #userName="ngModel" required>
+                </div>
+                <div class="input-group"  [ngClass]="{'input-group-focus':focus1===true}">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">
+                      <i class="nc-icon nc-key-25"></i>
+                    </span>
+                  </div>
+                  <input type="password" placeholder="Password" class="form-control" (focus)="focus1=true" (blur)="focus1=false" id="password" name="password" ngModel #password="ngModel" required>
+                </div>
+                <br/>
+                <div class="form-group">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" value="" checked="">
+                      <span class="form-check-sign"></span>
+                      Remember Me
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                
+                <button type="submit" class="btn btn-warning btn-round btn-block mb-3">Log in</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <footer class="footer footer-black  footer-white ">
+      <div class="container">
+        <div class="row">
+          
+          <div class="credits ml-auto">
+            <span class="copyright">
+              &copy; {{test | date: 'yyyy'}}, made with <i class="fa fa-heart heart"></i> by J3A Development
+            </span>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
