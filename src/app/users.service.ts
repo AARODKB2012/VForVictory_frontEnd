@@ -18,13 +18,7 @@ export class UsersService {
   constructor(private httpClient: HttpClient, private router: Router, private http: Http) { }
 
   saveUser(user: any) {
-    this.httpClient.post<{userCreated: boolean}>(this.serverAddress + 'api/volunteer/new', user)
-    .subscribe((responseData) => {
-        if (responseData.userCreated) {
-          console.log(user);
-            this.router.navigate(['/home']);
-        }
-    });
+    return this.httpClient.post<{userCreated: boolean}>(this.serverAddress + 'api/volunteer/new', user);
   }
 
   listUsers(): any {
