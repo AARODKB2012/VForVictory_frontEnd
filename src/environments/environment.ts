@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  backendURL: 'https://v-backend-service.azurewebsites.net/'
+  backendURL: 'http://localhost:3000/'
 };

@@ -24,6 +24,12 @@ export const ROUTES: RouteInfo[] = [{
         title: 'Dashboard',
         type: 'link',
         icontype: 'nc-icon nc-bank'
+    },
+    {
+        path: '/volunteers',
+        title: 'Volunteers',
+        type: 'link',
+        icontype: 'nc-icon nc-badge'
     }
     /* ,{
         path: '/components',

@@ -17,6 +17,8 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './_guards/index';
+import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
+import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 
 @NgModule({
     imports:      [
@@ -37,6 +39,8 @@ import { AuthGuard } from './_guards/index';
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
+        ListVolunteersComponent,
+        NewVolunteerComponent,
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
