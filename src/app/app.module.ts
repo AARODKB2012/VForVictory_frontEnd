@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './_guards/index';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
+import { ListFamilyComponent } from './list-family/list-family.component';
 
 @NgModule({
     imports:      [
@@ -41,6 +42,7 @@ import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
         AuthLayoutComponent,
         ListVolunteersComponent,
         NewVolunteerComponent,
+        ListFamilyComponent,
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
