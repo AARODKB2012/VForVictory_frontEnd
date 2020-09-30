@@ -4,6 +4,7 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
+import { NewFamilyComponent } from './new-family/new-family.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { AuthGuard } from './_guards/index';
 
@@ -27,6 +28,9 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'families', component: ListFamilyComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'families/new', component: NewFamilyComponent, canActivate: [AuthGuard]
             }
             /* {
                 path: 'components',
