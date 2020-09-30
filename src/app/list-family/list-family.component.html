@@ -5,25 +5,25 @@
               <div class="card-header">
                   <div class="row">
                         <div class="col-md-6">
-                            <h4 class="card-title">List of Families</h4>
+                            <h4 class="card-title">Cancer Warriors</h4>
                         </div>
                         <div class="col-md-6 text-right">
                             <button class="btn btn-info" routerLink="/families/new">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-badge"></i>
                                 </span>
-                                New Family
+                                New Entry
                             </button>
                         </div>
                   </div>
-                
+
               </div>
                 <div class="card-body">
                     <div class="toolbar">
                         <!--        Here you can write extra buttons/actions for the toolbar              -->
-                        
+
                     </div>
-                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table id="familytable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                               <th>{{ dataTable.headerRow[0] }}</th>
@@ -52,9 +52,9 @@
                                 <td>{{row[3]}}</td>
                                 <td>{{row[4]}}</td>
                                 <td class="text-right">
-                                  <a href="javascript:void(0)" class="btn btn-info btn-link btn-icon btn-sm like"><i class="fa fa-heart"></i></a>
+                                  <a href="javascript:void(0)" class="btn btn-info btn-link btn-icon btn-sm service"><i class="fa fa-briefcase"></i></a>
                                   <a href="javascript:void(0)" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                                  <a href="javascript:void(0)" class="btn btn-danger btn-link btn-icon btn-sm remove"><i class="fa fa-times"></i></a>
+                                  <a href="javascript:void(0)" class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
                                 </td>
 
                             </tr>
