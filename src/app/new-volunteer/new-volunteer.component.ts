@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsersService } from '../users.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import {Md5} from 'ts-md5/dist/md5';
 import Swal from 'sweetalert2';
+import { UserModel } from '../user.model';
 
 declare var $: any;
 @Component({
@@ -14,9 +15,24 @@ declare var $: any;
 export class NewVolunteerComponent implements OnInit {
 
   private md5 = new Md5();
+  private volunteerId: number;
+  public user: UserModel;
   errorInForm: boolean;
   passwordMatch: boolean;
-  constructor(public userService: UsersService, public router: Router) { }
+  constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
+    this.activeRoute.queryParams.subscribe(params => {
+      this.volunteerId = params['volunteerId'];
+    });
+    if (this.volunteerId) {
+      console.log(this.volunteerId);
+
+      this.userService.getVolunteerById(this.volunteerId).subscribe((responseData) => {
+        if (responseData) {
+          this.user = responseData.results[0];
+        }
+      });
+    }
+  }
 
   ngOnInit(): void {
   }
@@ -86,7 +102,7 @@ export class NewVolunteerComponent implements OnInit {
           })
           this.router.navigate(['/volunteers']);
         }
-    });
+      });
     } else {
       this.passwordMatch = false;
     }

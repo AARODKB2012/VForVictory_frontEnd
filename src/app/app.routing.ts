@@ -27,6 +27,9 @@ export const AppRoutes: Routes = [{
                 path: 'volunteers/new', component: NewVolunteerComponent, canActivate: [AuthGuard]
             },
             {
+                path: 'volunteers/view', component: NewVolunteerComponent, canActivate: [AuthGuard]
+            },
+            {
                 path: 'families', component: ListFamilyComponent, canActivate: [AuthGuard]
             },
             {

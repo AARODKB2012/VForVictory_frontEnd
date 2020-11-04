@@ -32,4 +32,8 @@ export class UsersService {
   getAllVolunteersBySearchValue(searchValue: string) {
     return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/search/' + searchValue);
   }
+
+  getVolunteerById(volunteerId: Number) {
+    return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/id/' + volunteerId);
+  }
 }

@@ -5,6 +5,9 @@ import { UserModel } from '../../user.model';
 import { UserAPIResponse } from '../../response.model';
 import {AuthService} from '../../auth.service';
 import { NgForm } from '@angular/forms';
+import {Buffer} from '../../../../node_modules/buffer'
+
+
 declare var $:any;
 
 @Component({
@@ -34,12 +37,12 @@ export class LoginComponent implements OnInit{
         this.sidebarVisible = false;
 
         this.activeRoute.queryParams.subscribe(params => {
-            this.endSession = params['endSession'];
-          });
-          if (this.endSession) {
-            this.logoutAlert = true;
-            localStorage.removeItem('currentUser');
-          }
+          this.endSession = params['endSession'];
+        });
+        if (this.endSession) {
+          this.logoutAlert = true;
+          localStorage.removeItem('currentUser');
+        }
     }
     checkFullPageBackgroundImage(){
         var $page = $('.full-page');
@@ -91,13 +94,13 @@ export class LoginComponent implements OnInit{
           this.logoutAlert = false;
           return;
         }
-        console.log(form);
         const user: any = {
           userName: form.value.userName,
           password: form.value.password
         };
         this.authService.getUser(user.userName, user.password).subscribe((userReturned) => {
           if (userReturned) {
+            console.log(userReturned.results[0]);
             this.userModel = userReturned.results[0];
             localStorage.setItem('currentUser', JSON.stringify(this.userModel));
             this.router.navigate(['/dashboard']);
