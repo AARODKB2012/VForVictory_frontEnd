@@ -62,4 +62,20 @@ export class ListVolunteersComponent implements OnInit {
       alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
     });
   }
+
+  getRoleDescription(roleId: string) {
+    if (roleId === '1') {
+      return 'Administrator';
+    } else {
+      return 'Volunteer';
+    }
+  }
+  
+  getStatusDescription(statusId: string) {
+    if (statusId === '1') {
+      return 'Active';
+    } else {
+      return 'Inactive';
+    }
+  }
 }

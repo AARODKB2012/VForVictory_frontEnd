@@ -8,14 +8,18 @@
                         <div class="col-md-6 pull-left">
                             <h5 class="title">Volunteer Profile</h5>
                         </div>
-                        <div class="col-md-6 text-right">
+                        
+                        
+                        <div class="col-md-6 text-right" >
                             <button class="btn btn-default" routerLink="/volunteers">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-bullet-list-67"></i>
                                 </span>
                                 Cancel
                             </button>
-                            <button class="btn btn-success" type="submit">
+
+                            <!-- Hiding save button if is in view mode -->
+                            <button class="btn btn-success" type="submit" *ngIf="!viewMode">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-box"></i>
                                 </span>
@@ -33,7 +37,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                 <label for="firstName">First name</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" [value]="user?.first_name" ngModel #firstName="ngModel" required maxlength="30" minlength="1">
+                                <input type="text" class="form-control" id="firstName" name="firstName" [value]="user?.first_name" ngModel #firstName="ngModel" required maxlength="30" minlength="1" [readonly]="viewMode">
                                 <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="(firstName.errors.required)">
                                     Name is required.
@@ -42,7 +46,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                 <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" [value]="user?.last_name" ngModel #lastName="ngModel" required>
+                                <input type="text" class="form-control" id="lastName" name="lastName" [value]="user?.last_name" ngModel #lastName="ngModel" required [readonly]="viewMode">
                                 <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="lastName.errors.required">
                                     Last name is required.
@@ -54,7 +58,7 @@
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                 <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"  [value]="user?.email" ngModel #email="ngModel" placeholder="you@example.com" required>
+                                <input type="email" class="form-control" id="email" name="email"  [value]="user?.email" ngModel #email="ngModel" placeholder="you@example.com" required [readonly]="viewMode"> 
                                 <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="email.errors.required">
                                     Email is required.
@@ -63,7 +67,7 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                 <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" [value]="user?.username" ngModel #username="ngModel" placeholder="Username" required>
+                                    <input type="text" class="form-control" id="username" name="username" [value]="user?.username" ngModel #username="ngModel" placeholder="Username" required [readonly]="viewMode">
                                 <div *ngIf="username.invalid && (username.dirty || username.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="username.errors.required">
                                     Username is required.
@@ -72,10 +76,11 @@
                                 </div>
                             </div>
                 
-                            <div class="row">
+                            <!-- Hiding Password fields if is in view mode -->
+                            <div class="row" *ngIf="!viewMode">
                                 <div class="col-md-6 mb-3">
                                 <label for="email">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel" required>
+                                <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel" required >
                                 <div class="invalid-feedback">
                                     Please enter a valid password.
                                 </div>
@@ -101,7 +106,7 @@
                 
                             <div class="mb-3">
                                 <label for="address">Address</label>
-                                <input type="text" class="form-control" id="address" name="address" [value]="user?.address" ngModel #address="ngModel" placeholder="1234 Main St" required>
+                                <input type="text" class="form-control" id="address" name="address" [value]="user?.address" ngModel #address="ngModel" placeholder="1234 Main St" required [readonly]="viewMode">
                                 <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="address.errors.required">
                                     Address is required.
@@ -112,11 +117,11 @@
                             <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="homePhone">Home Phone</label>
-                                <input type="tel" class="form-control" id="homePhone" name="homePhone" [value]="user?.home_phone" ngModel #homePhone="ngModel" placeholder="(555)-555-5555">
+                                <input type="tel" class="form-control" id="homePhone" name="homePhone" [value]="user?.home_phone" ngModel #homePhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="cellPhone">Cell Phone</label>
-                                <input type="text" class="form-control" id="cellPhone" name="cellPhone" [value]="user?.cell_phone" ngModel #cellPhone="ngModel" placeholder="(555)-555-5555" required>
+                                <input type="text" class="form-control" id="cellPhone" name="cellPhone" [value]="user?.cell_phone" ngModel #cellPhone="ngModel" placeholder="(555)-555-5555" required [readonly]="viewMode">
                                 <div *ngIf="cellPhone.invalid && (cellPhone.dirty || cellPhone.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="cellPhone.errors.required">
                                     Cell phone is required.
@@ -125,12 +130,12 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="workPhone">Work Phone</label>
-                                <input type="tel" class="form-control" id="workPhone" name="workPhone" [value]="user?.work_phone" ngModel #workPhone="ngModel" placeholder="(555)-555-5555">
+                                <input type="tel" class="form-control" id="workPhone" name="workPhone" [value]="user?.work_phone" ngModel #workPhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
                             </div>
                 
                             <div class="col-md-6 mb-3">
                                 <label for="education">Education</label>
-                                <select class="custom-select d-block w-100" id="education" name="education" [value]="user?.educational_background" ngModel #education="ngModel" required>
+                                <select class="custom-select d-block w-100" id="education" name="education" [value]="user?.educational_background" ngModel #education="ngModel" [disabled]="viewMode">
                                 <option value="1">Primary School</option>
                                 <option value="2">High School</option>
                                 <option value="3">Technical School</option>
@@ -149,17 +154,17 @@
                             <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="licenses">Licenses</label>
-                                <textarea class="form-control" id="licenses" name="licenses" [value]="user?.current_licenses" ngModel #licenses="ngModel"></textarea>
+                                <textarea class="form-control" id="licenses" name="licenses" [value]="user?.current_licenses" ngModel #licenses="ngModel" [readonly]="viewMode"></textarea>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="availability">Availability</label>
-                                <textarea class="form-control" id="availability" name="availability" [value]="user?.availability" ngModel #availability="ngModel"></textarea>
+                                <textarea class="form-control" id="availability" name="availability" [value]="user?.availability" ngModel #availability="ngModel" [readonly]="viewMode"></textarea>
                             </div>
                             </div>
                             <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="role">Role</label>
-                                <select class="custom-select d-block w-100" id="role" name="role" [value]="user?.role" ngModel #role="ngModel" required>
+                                <select class="custom-select d-block w-100" id="role" name="role" [value]="user?.role" ngModel #role="ngModel" required [disabled]="viewMode">
                                 <option value="1">Administrator</option>
                                 <option value="2">Volunteer</option>
                                 </select>
@@ -172,7 +177,7 @@
                 
                             <div class="col-md-6 mb-3">
                                 <label for="status">Status</label>
-                                <select class="custom-select d-block w-100" id="status" name="status" [value]="user?.status" ngModel #status="ngModel" required>
+                                <select class="custom-select d-block w-100" id="status" name="status" [value]="user?.status" ngModel #status="ngModel" required [disabled]="viewMode">
                                 <option value="1">Active</option>
                                 <option value="2">Inactive</option>
                                 </select>
@@ -206,27 +211,27 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                     <label for="emergencyFirstName">First name</label>
-                                    <input type="text" class="form-control" id="emergencyFirstName" name="emergencyFirstName" [value]="user?.emergency_contact_name" ngModel #emergencyFirstName="ngModel">
+                                    <input type="text" class="form-control" id="emergencyFirstName" name="emergencyFirstName" [value]="user?.emergency_contact_name" ngModel #emergencyFirstName="ngModel" [readonly]="viewMode">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                     <label for="emergencyLastName">Last name</label>
-                                    <input type="text" class="form-control" id="emergencyLastName" name="emergencyLastName" [value]="user?.emergency_contact_name" ngModel #emergencyLastName="ngModel">
+                                    <input type="text" class="form-control" id="emergencyLastName" name="emergencyLastName" [value]="user?.emergency_contact_name" ngModel #emergencyLastName="ngModel" [readonly]="viewMode">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                     <label for="emergencyEmail">Email</label>
-                                    <input type="email" class="form-control" id="emergencyEmail" name="emergencyEmail" [value]="user?.emergency_contact_email" ngModel #emergencyEmail="ngModel" placeholder="you@example.com">
+                                    <input type="email" class="form-control" id="emergencyEmail" name="emergencyEmail" [value]="user?.emergency_contact_email" ngModel #emergencyEmail="ngModel" placeholder="you@example.com" [readonly]="viewMode">
                                     </div>
                                     <div class="col-md-6 mb-3">
                                     <label for="emergencyPhone">Phone Number</label>
-                                    <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone" [value]="user?.emergency_contact_phone" ngModel #emergencyPhone="ngModel" placeholder="(555)-555-5555">
+                                    <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone" [value]="user?.emergency_contact_phone" ngModel #emergencyPhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
                                     </div>
                                 </div>
                     
                                 <div class="mb-3">
                                     <label for="emergencyAddress">Address</label>
-                                    <input type="text" class="form-control" id="emergencyAddress" name="emergencyAddress" [value]="user?.emergency_contact_address" ngModel #emergencyAddress="ngModel" placeholder="1234 Main St">
+                                    <input type="text" class="form-control" id="emergencyAddress" name="emergencyAddress" [value]="user?.emergency_contact_address" ngModel #emergencyAddress="ngModel" placeholder="1234 Main St" [readonly]="viewMode">
                                 </div>
                             </div>
                         </div>

@@ -19,13 +19,15 @@ export class NewVolunteerComponent implements OnInit {
   public user: UserModel;
   errorInForm: boolean;
   passwordMatch: boolean;
+  public viewMode: boolean;
+
   constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
     this.activeRoute.queryParams.subscribe(params => {
       this.volunteerId = params['volunteerId'];
     });
     if (this.volunteerId) {
       console.log(this.volunteerId);
-
+      this.viewMode = true;
       this.userService.getVolunteerById(this.volunteerId).subscribe((responseData) => {
         if (responseData) {
           this.user = responseData.results[0];
@@ -45,6 +47,14 @@ export class NewVolunteerComponent implements OnInit {
     }
   }
 
+  getStatusID(statusDescription: string) {
+    if (statusDescription == 'Active') {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
+
   getRoleDescription(roleId: string) {
     if (roleId === '1') {
       return 'Administrator';
@@ -52,6 +62,39 @@ export class NewVolunteerComponent implements OnInit {
       return 'Volunteer';
     }
   }
+
+  getRoleId(roleDescription: string) {
+    if (roleDescription == 'Administrator') {
+      return 1;
+    } else {
+      return 2;
+    }
+  }
+
+  getEducationId(educationDescription: string) {
+    if (educationDescription === 'Primary School') {
+      return '1';
+    }
+    if (educationDescription === 'High School') {
+      return '2';
+    }
+    if (educationDescription === 'Technical School') {
+      return '3';
+    }
+    if (educationDescription === 'Some College') {
+      return '4';
+    }
+    if (educationDescription === 'College Graduate') {
+      return '5';
+    }
+    if (educationDescription === 'Masters Degree') {
+      return '6';
+    }
+    if (educationDescription === 'Doctorate') {
+      return '7';
+    }
+  }
+
   confirmPassword(password: string, confirmPassword: string) {
     if (password === confirmPassword) {
       return true;
@@ -81,8 +124,8 @@ export class NewVolunteerComponent implements OnInit {
         education: form.value.education,
         licenses: form.value.licenses,
         availability: form.value.availability,
-        role: this.getRoleDescription(form.value.role),
-        status: this.getStatusDescription(form.value.status),
+        role: form.value.role,
+        status: form.value.status,
         driversLicense: form.value.driversLicense,
         socialSecurity: form.value.socialSecurity,
         emergencyFirstName: form.value.emergencyFirstName,

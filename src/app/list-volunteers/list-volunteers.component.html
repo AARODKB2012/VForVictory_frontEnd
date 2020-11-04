@@ -52,8 +52,8 @@
                                 <td>{{ row.first_name + " " + row.last_name }}</td>
                                 <td>{{ row.email }}</td>
                                 <td>{{ row.address }}</td>
-                                <td>{{ row.role }}</td>
-                                <td>{{ row.status }}</td>
+                                <td>{{ getRoleDescription(row.role)}}</td>
+                                <td>{{ getStatusDescription(row.status) }}</td>
                                 <td class="text-right">
                                     <a  [routerLink]="['/volunteers/view']" [queryParams]="{ volunteerId: row.record_id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
                                     <a href="javascript:void(0)" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>

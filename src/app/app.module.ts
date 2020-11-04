@@ -44,7 +44,7 @@ import { NewFamilyComponent } from './new-family/new-family.component';
         ListVolunteersComponent,
         NewVolunteerComponent,
         ListFamilyComponent,
-        NewFamilyComponent,
+        NewFamilyComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
