@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { UserModel } from '../user.model';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -19,7 +20,7 @@ export class ListVolunteersComponent implements OnInit {
   public usersList: UserModel[];
   public dataTable: DataTable;
 
-  constructor(public userService: UsersService) {}
+  constructor(public userService: UsersService, public router: Router) {}
 
   ngOnInit() {
     this.userService.listUsers().subscribe((usersReturned) => {
@@ -52,10 +53,11 @@ export class ListVolunteersComponent implements OnInit {
 
     var table = $('#datatable').DataTable();
 
+
+
     // Edit record
     table.on('click', '.edit', function() {
       let $tr = $(this).closest('tr');
-
       var data = table.row($tr).data();
       alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
     });
