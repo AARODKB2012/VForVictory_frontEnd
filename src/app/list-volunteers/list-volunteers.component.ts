@@ -52,15 +52,6 @@ export class ListVolunteersComponent implements OnInit {
     });
 
     var table = $('#datatable').DataTable();
-
-
-
-    // Edit record
-    table.on('click', '.edit', function() {
-      let $tr = $(this).closest('tr');
-      var data = table.row($tr).data();
-      alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-    });
   }
 
   getRoleDescription(roleId: string) {
@@ -70,8 +61,7 @@ export class ListVolunteersComponent implements OnInit {
       return 'Volunteer';
     }
   }
-  
-  getStatusDescription(statusId: string) {
+ getStatusDescription(statusId: string) {
     if (statusId === '1') {
       return 'Active';
     } else {

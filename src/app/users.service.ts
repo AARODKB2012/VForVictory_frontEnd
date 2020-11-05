@@ -36,4 +36,8 @@ export class UsersService {
   getVolunteerById(volunteerId: Number) {
     return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/id/' + volunteerId);
   }
+
+  editUser(user: any) {
+    return this.httpClient.post<{userUpdated: boolean}>(this.serverAddress + 'api/volunteer/edit', user);
+  }
 }
