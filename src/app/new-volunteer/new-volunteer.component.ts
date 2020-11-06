@@ -5,6 +5,7 @@ import { Router, ActivatedRoute, UrlTree, UrlSegmentGroup, UrlSegment, PRIMARY_O
 import {Md5} from 'ts-md5/dist/md5';
 import Swal from 'sweetalert2';
 import { UserModel } from '../user.model';
+import { rejects } from 'assert';
 
 declare var $: any;
 @Component({
@@ -14,8 +15,8 @@ declare var $: any;
 })
 export class NewVolunteerComponent implements OnInit {
 
-  private md5 = new Md5();
-  private volunteerId: number;
+  public md5 = new Md5();
+  public volunteerId: number;
   public user: UserModel;
   errorInForm: boolean;
   passwordMatch: boolean;
@@ -42,8 +43,6 @@ export class NewVolunteerComponent implements OnInit {
       this.volunteerId = params['volunteerId'];
     });
     if (this.volunteerId) {
-      console.log(this.volunteerId);
-
       this.userService.getVolunteerById(this.volunteerId).subscribe((responseData) => {
         if (responseData) {
           this.user = responseData.results[0];
@@ -154,11 +153,11 @@ export class NewVolunteerComponent implements OnInit {
           this.userService.saveUser(user).subscribe((responseData) => {
             if (responseData.userCreated) {
               Swal.fire({
-                title: "Record Saved Successfully!",
-                text: "The volunteer was created successfully.",
+                title: 'Record Saved Successfully!',
+                text: 'The volunteer was created successfully.',
                 buttonsStyling: false,
-                confirmButtonClass: "btn btn-success",
-                type: "success"
+                confirmButtonClass: 'btn btn-success',
+                type: 'success'
               })
               this.router.navigate(['/volunteers']);
             }
@@ -169,7 +168,6 @@ export class NewVolunteerComponent implements OnInit {
       }
 
       if (this.editMode) { // Editing Existing Record
-        console.log("entro edit")
         const user: any = {
           id: this.volunteerId,
           firstName: form.value.firstName,
@@ -197,16 +195,78 @@ export class NewVolunteerComponent implements OnInit {
         this.userService.editUser(user).subscribe((responseData) => {
           if (responseData.userUpdated) {
             Swal.fire({
-              title: "Record Updated Successfully!",
-              text: "The volunteer was updated successfully.",
+              title: 'Record Updated Successfully!',
+              text: 'The volunteer was updated successfully.',
               buttonsStyling: false,
-              confirmButtonClass: "btn btn-success",
-              type: "success"
+              confirmButtonClass: 'btn btn-success',
+              type: 'success'
             })
             this.router.navigate(['/volunteers']);
           }
         });
       }
     }
+  }
+
+  changePassword() {
+    Swal.fire({
+      title: 'Password Change',
+      html: '<div class="form-group">' +
+            '<label for="password">New Password</label>' +
+            '<input id="password" type="password" class="form-control" />' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="confirmPassword">Confirm New Password</label>' +
+            '<input id="confirmPassword" type="password" class="form-control" />' +
+            '</div>',
+      showCancelButton: true,
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      allowOutsideClick: false,
+      allowEscapeKey : false,
+      preConfirm: function() {
+        return new Promise(function(resolve) {
+          if (!$('#password').val()) {
+            Swal.showValidationMessage('Enter a valid password.');
+            resolve();
+          } else {
+            if (!$('#confirmPassword').val()) {
+              Swal.showValidationMessage('Confirm password.');
+              resolve();
+            } else {
+              if ($('#confirmPassword').val() !== $('#password').val()) {
+                Swal.showValidationMessage('Passwords must match.');
+                resolve();
+              } else {resolve(); }
+            }
+          }
+        });
+      }
+    }).then((result) => {
+        if (result.value) { // OK button clicked
+          const md5 = new Md5();
+          const passwordHash = md5.appendStr($('#password').val()).end();
+          this.userService.changePassword(passwordHash, this.volunteerId).subscribe((responseData) => {
+            if (responseData.userUpdated) {
+              Swal.fire({
+                type: 'success',
+                text: 'Password changed successfully.',
+                confirmButtonClass: 'btn btn-info',
+                buttonsStyling: false
+              })
+            }
+          });
+
+
+        } else {
+          Swal.fire({
+            type: 'info',
+            text: 'Password change cancelled.',
+            confirmButtonClass: 'btn btn-info',
+            buttonsStyling: false
+        })
+        }
+      })
   }
 }

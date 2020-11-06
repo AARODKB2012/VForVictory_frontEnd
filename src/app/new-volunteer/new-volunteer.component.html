@@ -19,6 +19,14 @@
                             </button>
 
                             <!-- Hiding save button if is in view mode -->
+                            <button type="button" class="btn btn-default" (click)="changePassword()" *ngIf="editMode">
+                                <span class="btn-label">
+                                    <i class="nc-icon nc-lock-circle-open"></i>
+                                </span>
+                                Change Password
+                            </button>
+
+                            <!-- Hiding save button if is in view mode -->
                             <button class="btn btn-success" type="submit" *ngIf="!viewMode">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-box"></i>
@@ -86,7 +94,7 @@
                                     </div>
                                     <div *ngIf="password.invalid && (password.dirty || password.touched || errorInForm)" class="text-danger">
                                         <div *ngIf="password.errors.required">
-                                        Password is required.
+                                            Password is required.
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +113,6 @@
                                     </div>
                                 </div>
                             </div>
-                            
                 
                             <div class="mb-3">
                                 <label for="address">Address</label>

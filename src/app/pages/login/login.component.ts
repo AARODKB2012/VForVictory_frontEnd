@@ -100,7 +100,6 @@ export class LoginComponent implements OnInit{
         };
         this.authService.getUser(user.userName, user.password).subscribe((userReturned) => {
           if (userReturned) {
-            console.log(userReturned.results[0]);
             this.userModel = userReturned.results[0];
             localStorage.setItem('currentUser', JSON.stringify(this.userModel));
             this.router.navigate(['/dashboard']);
