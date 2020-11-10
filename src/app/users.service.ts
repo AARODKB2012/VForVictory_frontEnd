@@ -40,9 +40,13 @@ export class UsersService {
   editUser(user: any) {
     return this.httpClient.post<{userUpdated: boolean}>(this.serverAddress + 'api/volunteer/edit', user);
   }
-  
+
   changePassword(passwordHash, volunteerId) {
     return this.httpClient.post<{userUpdated: boolean}>(this.serverAddress + 'api/volunteer/change_password/'
     +  passwordHash + '/' + volunteerId, null);
+  }
+
+  getVolunteerByEmail(volunteerEmail: Number) {
+    return this.httpClient.get(this.serverAddress + 'api/volunteer/email/' + volunteerEmail, {observe: 'response'});
   }
 }

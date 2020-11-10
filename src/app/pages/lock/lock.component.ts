@@ -2,7 +2,9 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import {EmailService} from '../../email.service';
+import {UsersService} from '../../users.service';
 import { NgForm } from '@angular/forms';
+import { UserModel } from 'app/user.model';
 
 declare var $:any;
 
@@ -18,8 +20,11 @@ export class LockComponent implements OnInit{
     private sidebarVisible: boolean;
     private nativeElement: Node;
     public emailSent: boolean;
+    public emailNotFound: boolean;
+    private userModel: UserModel;
+    public errorInForm: boolean;
 
-    constructor(private element : ElementRef, public emailService: EmailService) {
+    constructor(private element : ElementRef, public emailService: EmailService, public userService: UsersService) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
@@ -70,20 +75,31 @@ export class LockComponent implements OnInit{
     }
 
     forgotPassword(form: NgForm) {
-        if ( form.invalid ) { // Validating form has data
+        if ( form.invalid ) {
+            this.errorInForm = true;
             return;
-        }
-        const email = {
-            mailTo: form.value.email,
-            subject: "Password Reset",
-            messageBody: "To reset your password click here:"
+        } else {
+            this.errorInForm = false;
+            this.userService.getVolunteerByEmail(form.value.email).subscribe((response) => {
+                if (response.status === 200) {
+                    this.emailNotFound = false;
+                    const emailObject = {
+                        mailTo: form.value.email,
+                        subject: 'Password Reset',
+                        messageBody: 'To reset your password click here:'
+                    }
+    
+                    this.emailService.sendEmail(emailObject).subscribe((mailResponse) => {
+                        if (mailResponse) {
+                        this.emailSent = true;
+                        }
+                    });
+                } else {
+                  this.emailNotFound = true;
+                }
+            });
         }
 
-        this.emailService.sendEmail(email).subscribe((mailResponse) => {
-            if (mailResponse) {
-              console.log(mailResponse);
-              this.emailSent = true;
-            }
-        });
+
     }
 }

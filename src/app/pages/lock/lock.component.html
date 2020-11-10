@@ -28,9 +28,15 @@
                 <div class="alert alert-info" role="alert" *ngIf="emailSent">
                   An email has been sent to the address specified. Follow the instructions to recover your password.
                 </div>
+                <div class="alert alert-danger" role="alert" *ngIf="emailNotFound">
+                  The email specified is not in our records. Please provide a valid email address.
+                </div>
                 <h4 class="card-title">Forgot Password</h4>
                 <div class="form-group">
                   <input type="email" class="form-control" placeholder="Enter Email" id="email" name="email" ngModel #email="ngModel" required>
+                  <div *ngIf="errorInForm" class="text-danger">
+                    Email is required.
+                 </div>
                 </div>
               </div>
               <div class="card-footer ">
