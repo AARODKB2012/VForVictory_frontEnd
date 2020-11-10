@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import {EmailService} from '../../email.service';
+import { NgForm } from '@angular/forms';
 
 declare var $:any;
 
@@ -15,8 +17,9 @@ export class LockComponent implements OnInit{
     private toggleButton;
     private sidebarVisible: boolean;
     private nativeElement: Node;
+    public emailSent: boolean;
 
-    constructor(private element : ElementRef) {
+    constructor(private element : ElementRef, public emailService: EmailService) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
     }
@@ -64,5 +67,23 @@ export class LockComponent implements OnInit{
             this.sidebarVisible = false;
             body.classList.remove('nav-open');
         }
+    }
+
+    forgotPassword(form: NgForm) {
+        if ( form.invalid ) { // Validating form has data
+            return;
+        }
+        const email = {
+            mailTo: form.value.email,
+            subject: "Password Reset",
+            messageBody: "To reset your password click here:"
+        }
+
+        this.emailService.sendEmail(email).subscribe((mailResponse) => {
+            if (mailResponse) {
+              console.log(mailResponse);
+              this.emailSent = true;
+            }
+        });
     }
 }

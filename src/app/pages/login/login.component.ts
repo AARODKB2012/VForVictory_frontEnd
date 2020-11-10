@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit{
     incorrectUserAlert: boolean;
     logoutAlert: boolean;
 
-    constructor(private element : ElementRef, public authService: AuthService, private router: Router, 
-        private activeRoute: ActivatedRoute) {
+    constructor(private element : ElementRef, public authService: AuthService,
+      private router: Router, private activeRoute: ActivatedRoute) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
 

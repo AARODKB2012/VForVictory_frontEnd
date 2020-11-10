@@ -6,6 +6,7 @@ import { ListFamilyComponent } from './list-family/list-family.component';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
+import { LockComponent } from './pages/lock/lock.component';
 import { AuthGuard } from './_guards/index';
 
 export const AppRoutes: Routes = [{
