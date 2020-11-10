@@ -88,26 +88,26 @@ export class LoginComponent implements OnInit{
     }
 
     onLogin(form: NgForm) {
-        if ( form.invalid ) { // Validating form has data
-          this.noLoginValuesAlert = true;
-          this.incorrectUserAlert = false;
-          this.logoutAlert = false;
-          return;
-        }
-        const user: any = {
-          userName: form.value.userName,
-          password: form.value.password
-        };
-        this.authService.getUser(user.userName, user.password).subscribe((userReturned) => {
-          if (userReturned) {
-            this.userModel = userReturned.results[0];
-            localStorage.setItem('currentUser', JSON.stringify(this.userModel));
-            this.router.navigate(['/dashboard']);
-          } else {
-            this.incorrectUserAlert = true;
-            this.logoutAlert = false;
-            this.noLoginValuesAlert = false;
-          }
-        });
+      if ( form.invalid ) { // Validating form has data
+        this.noLoginValuesAlert = true;
+        this.incorrectUserAlert = false;
+        this.logoutAlert = false;
+        return;
       }
+      const user: any = {
+        userName: form.value.userName,
+        password: form.value.password
+      };
+      this.authService.getUser(user.userName, user.password).subscribe((userReturned) => {
+        if (userReturned) {
+          this.userModel = userReturned.results[0];
+          localStorage.setItem('currentUser', JSON.stringify(this.userModel));
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.incorrectUserAlert = true;
+          this.logoutAlert = false;
+          this.noLoginValuesAlert = false;
+        }
+      });
+    }
 }

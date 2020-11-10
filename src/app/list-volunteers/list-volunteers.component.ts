@@ -19,8 +19,11 @@ declare interface DataTable {
 export class ListVolunteersComponent implements OnInit {
   public usersList: UserModel[];
   public dataTable: DataTable;
+  public userRole: number;
 
-  constructor(public userService: UsersService, public router: Router) {}
+  constructor(public userService: UsersService, public router: Router) {
+    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+  }
 
   ngOnInit() {
     this.userService.listUsers().subscribe((usersReturned) => {
