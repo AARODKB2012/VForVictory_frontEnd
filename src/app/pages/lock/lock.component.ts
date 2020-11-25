@@ -96,6 +96,7 @@ export class LockComponent implements OnInit{
                     });
                 } else {
                   this.emailNotFound = true;
+                  this.emailSent = false;
                 }
             });
         }

@@ -146,13 +146,9 @@
                             <div class="col-md-6 mb-3">
                                 <label for="education">Education</label>
                                 <select class="custom-select d-block w-100" id="education" name="education" [ngModel]="user?.educational_background" ngModel #education="ngModel" [disabled]="viewMode">
-                                <option value="1">Primary School</option>
-                                <option value="2">High School</option>
-                                <option value="3">Technical School</option>
-                                <option value="4">Some College</option>
-                                <option value="5">College Graduate</option>
-                                <option value="6">Masters Degree</option>
-                                <option value="7">Doctorate</option>
+                                    <option *ngFor="let education of educationLevelList" [ngValue]="education.id">
+                                        {{education.description}}
+                                    </option>
                                 </select>
                                 <div *ngIf="education.invalid && (education.dirty || education.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="education.errors.required">
@@ -175,8 +171,9 @@
                             <div class="col-md-6 mb-3">
                                 <label for="role">Role</label>
                                 <select class="custom-select d-block w-100" id="role" name="role" [ngModel]="user?.role" ngModel #role="ngModel" required [disabled]="viewMode">
-                                <option value="1">Administrator</option>
-                                <option value="2">Volunteer</option>
+                                    <option *ngFor="let role of roleList" [ngValue]="role.id">
+                                        {{role.description}}
+                                    </option>
                                 </select>
                                 <div *ngIf="role.invalid && (role.dirty || role.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="role.errors.required">

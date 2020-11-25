@@ -23,6 +23,8 @@ export class NewVolunteerComponent implements OnInit {
   public viewMode: boolean;
   public editMode: boolean;
   public creationMode: boolean;
+  public educationLevelList: [];
+  public roleList: [];
 
   constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
     const tree: UrlTree = router.parseUrl(this.router.url);
@@ -52,63 +54,20 @@ export class NewVolunteerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.userService.getAllEducations().subscribe((responseData) => {
+      if (responseData) {
+        this.educationLevelList = responseData.results;
+      }
+    });
+
+    this.userService.getAllRoles().subscribe((responseData) => {
+      if (responseData) {
+        this.roleList = responseData.results;
+      }
+    });
   }
 
-  getStatusDescription(statusId: string) {
-    if (statusId === '1') {
-      return 'Active';
-    } else {
-      return 'Inactive';
-    }
-  }
 
-  getStatusID(statusDescription: string) {
-    if (statusDescription == 'Active') {
-      return 1;
-    } else {
-      return 2;
-    }
-  }
-
-  getRoleDescription(roleId: string) {
-    if (roleId === '1') {
-      return 'Administrator';
-    } else {
-      return 'Volunteer';
-    }
-  }
-
-  getRoleId(roleDescription: string) {
-    if (roleDescription == 'Administrator') {
-      return 1;
-    } else {
-      return 2;
-    }
-  }
-
-  getEducationId(educationDescription: string) {
-    if (educationDescription === 'Primary School') {
-      return '1';
-    }
-    if (educationDescription === 'High School') {
-      return '2';
-    }
-    if (educationDescription === 'Technical School') {
-      return '3';
-    }
-    if (educationDescription === 'Some College') {
-      return '4';
-    }
-    if (educationDescription === 'College Graduate') {
-      return '5';
-    }
-    if (educationDescription === 'Masters Degree') {
-      return '6';
-    }
-    if (educationDescription === 'Doctorate') {
-      return '7';
-    }
-  }
 
   confirmPassword(password: string, confirmPassword: string) {
     if (password === confirmPassword) {

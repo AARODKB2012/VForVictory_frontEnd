@@ -49,4 +49,13 @@ export class UsersService {
   getVolunteerByEmail(volunteerEmail: Number) {
     return this.httpClient.get(this.serverAddress + 'api/volunteer/email/' + volunteerEmail, {observe: 'response'});
   }
+
+  getAllEducations(): any {
+    return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/education/');
+  }
+
+  getAllRoles(): any {
+    return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/role/');
+  }
+
 }
