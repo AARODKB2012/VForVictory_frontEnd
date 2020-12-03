@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
+import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
@@ -31,6 +32,9 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'families/new', component: NewFamilyComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'business', component: ListBusinessComponent, canActivate: [AuthGuard]
             }
             /* {
                 path: 'components',

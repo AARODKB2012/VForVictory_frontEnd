@@ -36,6 +36,12 @@ export const ROUTES: RouteInfo[] = [{
         title: 'Families',
         type: 'link',
         icontype: 'nc-icon nc-trophy'
+    },
+    {
+        path: '/business',
+        title: 'Business',
+        type: 'link',
+        icontype: 'nc-icon nc-trophy'
     }
     /* ,{
         path: '/components',
