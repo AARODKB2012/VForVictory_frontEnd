@@ -42,6 +42,12 @@ export const ROUTES: RouteInfo[] = [{
         title: 'Business',
         type: 'link',
         icontype: 'nc-icon nc-trophy'
+    },
+    {
+        path: '/servicerequest',
+        title: 'Service Request',
+        type: 'link',
+        icontype: 'nc-icon nc-trophy'
     }
     /* ,{
         path: '/components',

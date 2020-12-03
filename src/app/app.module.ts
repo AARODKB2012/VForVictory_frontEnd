@@ -22,6 +22,7 @@ import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
 import { ListBusinessComponent } from './list-business/list-business.component';
+import { ListServicerequestsComponent } from './list-servicerequests/list-servicerequests.component';
 
 @NgModule({
     imports:      [
@@ -47,6 +48,7 @@ import { ListBusinessComponent } from './list-business/list-business.component';
         ListFamilyComponent,
         NewFamilyComponent,
         ListBusinessComponent,
+        ListServicerequestsComponent,
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

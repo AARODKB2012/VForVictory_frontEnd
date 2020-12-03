@@ -5,6 +5,7 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
+import { ListServicerequestsComponent } from './list-servicerequests/list-servicerequests.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { AuthGuard } from './_guards/index';
@@ -35,6 +36,9 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'business', component: ListBusinessComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'servicerequest', component: ListServicerequestsComponent, canActivate: [AuthGuard]
             }
             /* {
                 path: 'components',
