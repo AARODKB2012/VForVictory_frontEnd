@@ -32,6 +32,18 @@
                             <h4 class="card-title">Personal Information</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
+                                    <label for="cancerwarrior">Cancer Warriors Name</label>
+                                    <input type="text" class="form-control" id="cancerwarrior" name="cancerwarrior" ngModel #cancerwarrior="ngModel" required maxlength="30" minlength="1">
+                                    <div *ngIf="cancerwarrior.invalid && (cancerwarrior.dirty || cancerwarrior.touched || errorInForm)" class="text-danger">
+                                        <div *ngIf="(cancerwarrior.errors.required)">
+                                        Name is required.
+                                        </div>
+                                    </div>
+                                    </div>
+                                <div class="col-md-6 mb-3">
+                                <div>
+
+                                </div>
                                 <label for="firstName">First name</label>
                                 <input type="text" class="form-control" id="firstName" name="firstName" ngModel #firstName="ngModel" required maxlength="30" minlength="1">
                                 <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || errorInForm)" class="text-danger">
@@ -59,11 +71,16 @@
                                 </div>
                                 </div>
                             </div>
-                
                             <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="phoneNumber">Phone Number</label>
-                                <input type="tel" class="form-control" id="phoneNumber" name="phoneNumber" ngModel #phoneNumber="ngModel" placeholder="(555)-555-5555">
+                                <label for="phonenumber">Phone Number</label>
+                                <input type="text" class="form-control" id="phonenumber" name="phonenumber" ngModel #phonenumber="ngModel" required maxlength="30" minlength="1">
+                                <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="(phonenumber.errors.required)">
+                                    Name is required.
+                                    </div>
+                                </div>
+                                </div>
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="workPhone">Work Phone</label>
@@ -71,7 +88,7 @@
                             </div>
                             </div>
                             <div class="col-md-10">
-                                <div class="card ">
+                                
                                   <div class="card-header ">
                                     <h5 class="card-title">End of Treatment Date</h5>
                                   </div>
@@ -81,8 +98,17 @@
                                              name="dp1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
                                     </div>
                                   </div>
-                                </div>
+                                
                               </div>
+                            <div class="mb-3">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" ngModel #email="ngModel" placeholder="youremail@email.com" required>
+                                <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="email.errors.required">
+                                    email is required.
+                                </div>
+                                </div>
+                            </div>
                         </div>
                         </div>
                     </div>
