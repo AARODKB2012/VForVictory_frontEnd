@@ -65,22 +65,32 @@
                 
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email"  [ngModel]="user?.email" ngModel #email="ngModel" placeholder="you@example.com" required [readonly]="viewMode"> 
-                                <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="email.errors.required">
-                                    Email is required.
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" name="email"  [ngModel]="user?.email" ngModel #email="ngModel" placeholder="you@example.com" required [readonly]="viewMode"> 
+                                    <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                        <div *ngIf="email.errors.required">
+                                        Email is required.
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-12 mb-12">
+                                        <div *ngIf="emailInUser" class="text-danger">
+                                            This email is already in use.
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" [ngModel]="user?.username" ngModel #username="ngModel" placeholder="Username" required [readonly]="viewMode">
-                                <div *ngIf="username.invalid && (username.dirty || username.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="username.errors.required">
-                                    Username is required.
+                                    <label for="username">Username</label>
+                                        <input type="text" class="form-control" id="username" name="username" [ngModel]="user?.username" ngModel #username="ngModel" placeholder="Username" required [readonly]="viewMode">
+                                    <div *ngIf="username.invalid && (username.dirty || username.touched || errorInForm)" class="text-danger">
+                                        <div *ngIf="username.errors.required">
+                                        Username is required.
+                                        </div>
                                     </div>
-                                </div>
+                                    <div class="col-md-12 mb-12">
+                                        <div *ngIf="usernameInUse" class="text-danger">
+                                            This username is already in use.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                 

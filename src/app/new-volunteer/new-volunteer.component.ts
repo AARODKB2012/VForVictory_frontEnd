@@ -20,6 +20,8 @@ export class NewVolunteerComponent implements OnInit {
   public user: UserModel;
   errorInForm: boolean;
   passwordMatch: boolean;
+  emailInUser: boolean;
+  usernameInUse: boolean;
   public viewMode: boolean;
   public editMode: boolean;
   public creationMode: boolean;
@@ -77,49 +79,75 @@ export class NewVolunteerComponent implements OnInit {
     }
   }
 
+  validateEmail(email: string) {
+    let validEmail: boolean;
+    this.userService.getVolunteerByEmail(email).subscribe((response) => {
+      console.log(response);
+      if (response.status === 200) { // Email is in use
+        validEmail = false;
+      } else {
+        validEmail = true;
+      }
+    });
+    return validEmail;
+  }
+
   onSave(form: NgForm) {
-    if ( form.invalid ) { // Validating form has data
+    if ( form.invalid ) {
       console.log('returned');
       this.errorInForm = true;
       return;
     } else {
       if (this.creationMode) { // Creating New Record
         if (this.confirmPassword(form.value.password, form.value.confirmPassword)) {
-          this.passwordMatch = false;
-          const user: any = {
-            firstName: form.value.firstName,
-            lastName: form.value.lastName,
-            username: form.value.username,
-            password: this.md5.appendStr(form.value.password).end(),
-            email: form.value.email,
-            address: form.value.address,
-            homePhone: form.value.homePhone,
-            cellPhone: form.value.cellPhone,
-            workPhone: form.value.workPhone,
-            education: form.value.education,
-            licenses: form.value.licenses,
-            availability: form.value.availability,
-            role: form.value.role,
-            status: form.value.status,
-            driversLicense: form.value.driversLicense,
-            socialSecurity: form.value.socialSecurity,
-            emergencyFirstName: form.value.emergencyFirstName,
-            emergencyLastName: form.value.emergencyLastName,
-            emergencyEmail: form.value.emergencyEmail,
-            emergencyPhone: form.value.emergencyPhone,
-            emergencyAddress: form.value.emergencyAddress
-          };
-          this.userService.saveUser(user).subscribe((responseData) => {
-            if (responseData.userCreated) {
-              Swal.fire({
-                title: 'Record Saved Successfully!',
-                text: 'The volunteer was created successfully.',
-                buttonsStyling: false,
-                confirmButtonClass: 'btn btn-success',
-                type: 'success'
-              })
-              this.router.navigate(['/volunteers']);
-            }
+            this.passwordMatch = true;
+            this.userService.getVolunteerByEmail(form.value.email).subscribe((response) => {
+              if (response.status === 200) { // Email is in use
+                this.emailInUser = true;
+              } else {
+                this.userService.getVolunteerByUsername(form.value.username).subscribe((responseUserName) => {
+                  console.log(responseUserName);
+                  if (responseUserName.status === 200) { // Username is in use
+                    this.usernameInUse = true;
+                  } else {
+                    const user: any = {
+                      firstName: form.value.firstName,
+                      lastName: form.value.lastName,
+                      username: form.value.username,
+                      password: this.md5.appendStr(form.value.password).end(),
+                      email: form.value.email,
+                      address: form.value.address,
+                      homePhone: form.value.homePhone,
+                      cellPhone: form.value.cellPhone,
+                      workPhone: form.value.workPhone,
+                      education: form.value.education,
+                      licenses: form.value.licenses,
+                      availability: form.value.availability,
+                      role: form.value.role,
+                      status: form.value.status,
+                      driversLicense: form.value.driversLicense,
+                      socialSecurity: form.value.socialSecurity,
+                      emergencyFirstName: form.value.emergencyFirstName,
+                      emergencyLastName: form.value.emergencyLastName,
+                      emergencyEmail: form.value.emergencyEmail,
+                      emergencyPhone: form.value.emergencyPhone,
+                      emergencyAddress: form.value.emergencyAddress
+                    };
+                    this.userService.saveUser(user).subscribe((responseData) => {
+                      if (responseData.userCreated) {
+                        Swal.fire({
+                          title: 'Record Saved Successfully!',
+                          text: 'The volunteer was created successfully.',
+                          buttonsStyling: false,
+                          confirmButtonClass: 'btn btn-success',
+                          type: 'success'
+                        })
+                        this.router.navigate(['/volunteers']);
+                      }
+                    });
+                  }
+                })
+              }
           });
         } else {
           this.passwordMatch = false;

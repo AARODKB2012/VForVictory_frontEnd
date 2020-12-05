@@ -46,8 +46,12 @@ export class UsersService {
     +  passwordHash + '/' + volunteerId, null);
   }
 
-  getVolunteerByEmail(volunteerEmail: Number) {
+  getVolunteerByEmail(volunteerEmail: String) {
     return this.httpClient.get(this.serverAddress + 'api/volunteer/email/' + volunteerEmail, {observe: 'response'});
+  }
+
+  getVolunteerByUsername(username: String) {
+    return this.httpClient.get(this.serverAddress + 'api/volunteer/username/' + username, {observe: 'response'});
   }
 
   getAllEducations(): any {

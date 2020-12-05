@@ -57,15 +57,15 @@ export class ListVolunteersComponent implements OnInit {
     var table = $('#datatable').DataTable();
   }
 
-  getRoleDescription(roleId: string) {
-    if (roleId === '1') {
+  getRoleDescription(roleId: number) {
+    if (roleId === 1) {
       return 'Administrator';
     } else {
       return 'Volunteer';
     }
   }
- getStatusDescription(statusId: string) {
-    if (statusId === '1') {
+ getStatusDescription(statusId: number) {
+    if (statusId == 1) {
       return 'Active';
     } else {
       return 'Inactive';
