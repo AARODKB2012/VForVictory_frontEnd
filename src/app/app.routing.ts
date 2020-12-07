@@ -29,10 +29,10 @@ export const AppRoutes: Routes = [{
                 path: 'volunteers/new', component: NewVolunteerComponent, canActivate: [AuthGuard]
             },
             {
-                path: 'families', component: ListFamilyComponent, canActivate: [AuthGuard]
+                path: 'family', component: ListFamilyComponent, canActivate: [AuthGuard]
             },
             {
-                path: 'families/new', component: NewFamilyComponent, canActivate: [AuthGuard]
+                path: 'family/new', component: NewFamilyComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'business', component: ListBusinessComponent, canActivate: [AuthGuard]

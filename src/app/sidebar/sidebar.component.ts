@@ -32,8 +32,8 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'nc-icon nc-badge'
     },
     {
-        path: '/families',
-        title: 'Families',
+        path: '/family',
+        title: 'Family',
         type: 'link',
         icontype: 'nc-icon nc-trophy'
     },
