@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../users.service';
 import { UserModel } from '../user.model';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -18,8 +19,11 @@ declare interface DataTable {
 export class ListVolunteersComponent implements OnInit {
   public usersList: UserModel[];
   public dataTable: DataTable;
+  public userRole: number;
 
-  constructor(public userService: UsersService) {}
+  constructor(public userService: UsersService, public router: Router) {
+    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+  }
 
   ngOnInit() {
     this.userService.listUsers().subscribe((usersReturned) => {
@@ -51,13 +55,20 @@ export class ListVolunteersComponent implements OnInit {
     });
 
     var table = $('#datatable').DataTable();
+  }
 
-    // Edit record
-    table.on('click', '.edit', function() {
-      let $tr = $(this).closest('tr');
-
-      var data = table.row($tr).data();
-      alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
-    });
+  getRoleDescription(roleId: number) {
+    if (roleId === 1) {
+      return 'Administrator';
+    } else {
+      return 'Volunteer';
+    }
+  }
+ getStatusDescription(statusId: number) {
+    if (statusId == 1) {
+      return 'Active';
+    } else {
+      return 'Inactive';
+    }
   }
 }

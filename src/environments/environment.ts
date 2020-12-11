@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  backendURL: 'http://localhost:3000/'
+  backendURL: 'http://127.0.0.1:3000/'
 };

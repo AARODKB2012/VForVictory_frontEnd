@@ -22,6 +22,7 @@ import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
 
+
 @NgModule({
     imports:      [
         BrowserAnimationsModule,
@@ -44,7 +45,7 @@ import { NewFamilyComponent } from './new-family/new-family.component';
         ListVolunteersComponent,
         NewVolunteerComponent,
         ListFamilyComponent,
-        NewFamilyComponent,
+        NewFamilyComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
