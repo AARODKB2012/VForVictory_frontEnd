@@ -27,6 +27,7 @@ import { YesNoPipe } from './yesno.pipe';
 import { RequestServiceComponent } from './request-service/request-service.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
 
+
 @NgModule({
     imports:      [
         BrowserAnimationsModule,
@@ -54,7 +55,7 @@ import { EditServicesComponent } from './edit-services/edit-services.component';
         ListServicesComponent,
         YesNoPipe,
         RequestServiceComponent,
-        EditServicesComponent,
+        EditServicesComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
