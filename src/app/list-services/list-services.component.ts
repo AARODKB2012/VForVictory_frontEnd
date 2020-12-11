@@ -30,7 +30,6 @@ export class ListServicesComponent implements OnInit {
       this.serviceService.listActiveServices().subscribe((activeReturned) => {
         if (activeReturned) {
           this.activeList = activeReturned.results;
-
           this.activeDataTable = {
             headerRow: [ 'Name', 'Category', 'Business', 'Date Requested', 'Notified Business?', 'Notified Family?'],
             footerRow: [ 'Name', 'Category', 'Business', 'Date Requested', 'Notified Business?', 'Notified Family?'],
@@ -42,7 +41,6 @@ export class ListServicesComponent implements OnInit {
       this.serviceService.listRenderedServices().subscribe((renderedReturned) => {
         if (renderedReturned) {
           this.renderedList = renderedReturned.results;
-
           this.renderedDataTable = {
             headerRow: [ 'Name', 'Category', 'Business', 'Date Requested', 'Date Fulfilled', 'Business Followed Up?', 'Family Followed Up?'],
             footerRow: [  'Name', 'Category', 'Business', 'Date Requested', 'Date Fulfilled', 'Business Followed Up?', 'Family Followed Up?'],

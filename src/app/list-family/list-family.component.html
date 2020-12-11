@@ -23,7 +23,7 @@
                         <!--        Here you can write extra buttons/actions for the toolbar              -->
 
                     </div>
-                    <table id="familytable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                               <th>{{ dataTable?.headerRow[0] }}</th>
@@ -32,7 +32,7 @@
                               <th>{{ dataTable?.headerRow[3] }}</th>
                               <th>{{ dataTable?.headerRow[4] }}</th>
                               <th>{{ dataTable?.headerRow[5] }}</th>
-                              <th class="disabled-sorting text-right">{{ dataTable.headerRow[5] }}</th>
+                              <th class="disabled-sorting text-right">{{ dataTable.headerRow[6] }}</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -43,6 +43,7 @@
                               <th>{{ dataTable?.footerRow[3] }}</th>
                               <th>{{ dataTable?.footerRow[4] }}</th>
                               <th>{{ dataTable?.footerRow[5] }}</th>
+                              <th class="disabled-sorting text-right">{{ dataTable.headerRow[6] }}</th>
                             </tr>
                         </tfoot>
                         <tbody>

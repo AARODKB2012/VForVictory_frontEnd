@@ -19,17 +19,15 @@ export class ListFamilyComponent implements OnInit {
   public familyList: FamilyModel[];
   public dataTable: DataTable;
   constructor(public familyService: FamilyService){
-  
   }
 
-    ngOnInit(){
+    ngOnInit() {
       this.familyService.listFamily().subscribe((familyReturned) => {
         if (familyReturned) {
-          console.log(familyReturned);
           this.familyList = familyReturned.results;
           this.dataTable = {
-            headerRow: [ 'Id', 'First Name', 'Last Name', 'Email', 'Address', 'End Of Treatment Date'],
-            footerRow: [ 'Id', 'First Name', 'Last Name', 'Email', 'Address', 'End Of Treatment Date'],
+            headerRow: [ 'Id', 'First Name', 'Last Name', 'Email', 'Address', 'End Of Treatment Date' , 'Options'],
+            footerRow: [ 'Id', 'First Name', 'Last Name', 'Email', 'Address', 'End Of Treatment Date', 'Options'],
             dataRows: this.familyList
       };
     }

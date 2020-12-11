@@ -39,18 +39,6 @@ export const ROUTES: RouteInfo[] = [{
     },
     {
         path: '/business',
-        title: 'Business',
-        type: 'link',
-        icontype: 'nc-icon nc-trophy'
-    },
-    {
-        path: '/servicerequest',
-        title: 'Service Request',
-        type: 'link',
-        icontype: 'nc-icon nc-single-02'
-    },
-    {
-        path: '/business',
         title: 'Businesses',
         type: 'link',
         icontype: 'nc-icon nc-shop'

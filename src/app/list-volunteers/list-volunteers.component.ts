@@ -29,7 +29,6 @@ export class ListVolunteersComponent implements OnInit {
     this.userService.listUsers().subscribe((usersReturned) => {
       if (usersReturned) {
         this.usersList = usersReturned.results;
-        // console.log(this.usersList);
         this.dataTable = {
           headerRow: [ 'Id', 'Name', 'Email', 'Address', 'role', 'Status', 'Actions' ],
           footerRow: [ 'Id', 'Name', 'Email', 'Address', 'role', 'Status', 'Actions'],
