@@ -1,0 +1,95 @@
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+          <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate>
+              <div class="card-header">
+                  <div class="row">
+                      <div class="col-md-6 pull-left">
+                          <h5 class="title">Service Requests</h5>
+                      </div>
+                      <div class="col-md-6 text-right">
+                          <button class="btn btn-default" routerLink="/service">
+                              <span class="btn-label">
+                                <i class="nc-icon nc-bullet-list-67"></i>
+                              </span>
+                              Cancel
+                          </button>
+                          <button class="btn btn-success" type="submit">
+                              <span class="btn-label">
+                                <i class="nc-icon nc-box"></i>
+                              </span>
+                              Save Changes
+                          </button>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                  <div class="col-md-7">
+                      <div class="card">
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-md-6 mb-3">
+                              <label for="familyName">Name</label>
+                              <input type="text" class="form-control" id="familyName" name="familyName" ngModel #familyName="ngModel" required maxlength="30" minlength="1">
+                              <div *ngIf="familyName.invalid && (familyName.dirty || familyName.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="(familyName.errors.required)">
+                                  Name is required.
+                                  </div>
+                              </div>
+                              </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                            <label for="businessName">Business</label>
+                            <input type="text" class="form-control" id="businessName" name="businessName" ngModel #businessName="ngModel" required maxlength="30" minlength="1">
+                            <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="(businessName.errors.required)">
+                                Business is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                            <label for="businessCategory">Category</label>
+                            <input type="text" class="form-control" id="businessCategory" name="businessCategory" ngModel #businessCategory="ngModel" required maxlength="30" minlength="1">
+                            <div *ngIf="businessCategory.invalid && (businessCategory.dirty || businessCategory.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="(businessCategory.errors.required)">
+                                Category is required.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 mb-3">
+                          <label for="contactedFamily">Family contacted?</label>
+                          <input type="checkbox" class="form-control" id="contactedFamily" name="contactedFamily" ngModel #contactedFamily="ngModel" maxlength="30" minlength="1">
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 mb-3">
+                          <label for="contactedBusiness">Business contacted?</label>
+                          <input type="checkbox" class="form-control" id="contactedBusiness" name="contactedBusiness" ngModel #contactedBusiness="ngModel" maxlength="30" minlength="1">
+                          </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6 mb-3">
+                        <label for="active">Active request?</label>
+                        <input type="checkbox" class="form-control" id="active" name="active" ngModel #active="ngModel" maxlength="30" minlength="1">
+                        </div>
+                    </div>
+                      </div>
+                      </div>
+                      </div>
+                  </div>
+
+              </div>
+          <!--</div>-->
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
