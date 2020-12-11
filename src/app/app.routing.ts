@@ -5,9 +5,12 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
-import { ListServicerequestsComponent } from './list-servicerequests/list-servicerequests.component';
+import { EditServicesComponent } from './edit-services/edit-services.component';
+import { ListServicesComponent } from './list-services/list-services.component';
+import { RequestServiceComponent } from './request-service/request-service.component'
 import { NewFamilyComponent } from './new-family/new-family.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
+import { LockComponent } from './pages/lock/lock.component';
 import { AuthGuard } from './_guards/index';
 
 export const AppRoutes: Routes = [{
@@ -29,17 +32,30 @@ export const AppRoutes: Routes = [{
                 path: 'volunteers/new', component: NewVolunteerComponent, canActivate: [AuthGuard]
             },
             {
+
                 path: 'family', component: ListFamilyComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'family/new', component: NewFamilyComponent, canActivate: [AuthGuard]
+
+                path: 'volunteers/view', component: NewVolunteerComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'volunteers/edit', component: NewVolunteerComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'business', component: ListBusinessComponent, canActivate: [AuthGuard]
             },
             {
-                path: 'servicerequest', component: ListServicerequestsComponent, canActivate: [AuthGuard]
+                path: 'services', component: ListServicesComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'services/edit', component: EditServicesComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'services/new', component: RequestServiceComponent
             }
+
             /* {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
