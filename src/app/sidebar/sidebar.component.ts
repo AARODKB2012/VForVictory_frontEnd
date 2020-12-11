@@ -26,17 +26,30 @@ export const ROUTES: RouteInfo[] = [{
         icontype: 'nc-icon nc-bank'
     },
     {
-        path: '/volunteers',
-        title: 'Volunteers',
-        type: 'link',
-        icontype: 'nc-icon nc-badge'
+      path: '/services',
+      title: 'Services',
+      type: 'link',
+      icontype: 'nc-icon nc-box'
     },
     {
         path: '/families',
         title: 'Families',
         type: 'link',
-        icontype: 'nc-icon nc-trophy'
+        icontype: 'nc-icon nc-single-02'
+    },
+    {
+        path: '/business',
+        title: 'Businesses',
+        type: 'link',
+        icontype: 'nc-icon nc-shop'
+    },
+    {
+      path: '/volunteers',
+      title: 'Volunteers',
+      type: 'link',
+      icontype: 'nc-icon nc-badge'
     }
+
     /* ,{
         path: '/components',
         title: 'Components',

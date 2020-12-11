@@ -21,6 +21,11 @@ import { ListVolunteersComponent } from './list-volunteers/list-volunteers.compo
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
+import { ListBusinessComponent } from './list-business/list-business.component';
+import { ListServicesComponent } from './list-services/list-services.component';
+import { YesNoPipe } from './yesno.pipe';
+import { RequestServiceComponent } from './request-service/request-service.component';
+import { EditServicesComponent } from './edit-services/edit-services.component';
 
 @NgModule({
     imports:      [
@@ -45,6 +50,11 @@ import { NewFamilyComponent } from './new-family/new-family.component';
         NewVolunteerComponent,
         ListFamilyComponent,
         NewFamilyComponent,
+        ListBusinessComponent,
+        ListServicesComponent,
+        YesNoPipe,
+        RequestServiceComponent,
+        EditServicesComponent,
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
