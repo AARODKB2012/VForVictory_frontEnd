@@ -17,6 +17,16 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './_guards/index';
+import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
+import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
+import { ListFamilyComponent } from './list-family/list-family.component';
+import { NewFamilyComponent } from './new-family/new-family.component';
+import { ListBusinessComponent } from './list-business/list-business.component';
+import { ListServicesComponent } from './list-services/list-services.component';
+import { YesNoPipe } from './yesno.pipe';
+import { RequestServiceComponent } from './request-service/request-service.component';
+import { EditServicesComponent } from './edit-services/edit-services.component';
+
 
 @NgModule({
     imports:      [
@@ -37,6 +47,15 @@ import { AuthGuard } from './_guards/index';
         AppComponent,
         AdminLayoutComponent,
         AuthLayoutComponent,
+        ListVolunteersComponent,
+        NewVolunteerComponent,
+        ListFamilyComponent,
+        NewFamilyComponent,
+        ListBusinessComponent,
+        ListServicesComponent,
+        YesNoPipe,
+        RequestServiceComponent,
+        EditServicesComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
