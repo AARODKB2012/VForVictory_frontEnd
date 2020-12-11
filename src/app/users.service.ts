@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import {environment} from '../environments/environment';
 import { UserModel } from './user.model';
 import { UserAPIResponse } from './response.model';
+import { FamilyAPIResponse } from './family_response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +62,4 @@ export class UsersService {
   getAllRoles(): any {
     return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/role/');
   }
-
 }

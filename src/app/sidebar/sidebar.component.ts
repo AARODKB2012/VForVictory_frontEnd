@@ -32,8 +32,20 @@ export const ROUTES: RouteInfo[] = [{
       icontype: 'nc-icon nc-box'
     },
     {
-        path: '/families',
-        title: 'Families',
+        path: '/family',
+        title: 'Family',
+        type: 'link',
+        icontype: 'nc-icon nc-trophy'
+    },
+    {
+        path: '/business',
+        title: 'Business',
+        type: 'link',
+        icontype: 'nc-icon nc-trophy'
+    },
+    {
+        path: '/servicerequest',
+        title: 'Service Request',
         type: 'link',
         icontype: 'nc-icon nc-single-02'
     },
