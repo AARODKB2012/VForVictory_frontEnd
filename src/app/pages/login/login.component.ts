@@ -30,6 +30,8 @@ export class LoginComponent implements OnInit{
     noLoginValuesAlert: boolean;
     incorrectUserAlert: boolean;
     logoutAlert: boolean;
+    private fromPasswordReset: boolean;
+    public passwordResetAlert: boolean;
 
     constructor(private element : ElementRef, public authService: AuthService,
       private router: Router, private activeRoute: ActivatedRoute) {
@@ -38,10 +40,17 @@ export class LoginComponent implements OnInit{
 
         this.activeRoute.queryParams.subscribe(params => {
           this.endSession = params['endSession'];
+          this.fromPasswordReset = params['fromResetPassword'];
         });
+
         if (this.endSession) {
           this.logoutAlert = true;
+          this.fromPasswordReset = false;
           localStorage.removeItem('currentUser');
+        }
+
+        if (this.fromPasswordReset) {
+          this.passwordResetAlert = true;
         }
     }
     checkFullPageBackgroundImage(){

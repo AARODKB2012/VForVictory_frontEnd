@@ -43,6 +43,9 @@
                 <div class="alert alert-success" role="alert" *ngIf="logoutAlert">
                   You have been logged out of the system.
                 </div>
+                <div class="alert alert-success" role="alert" *ngIf="passwordResetAlert">
+                  Your password has been changed successfully. Login with your new password.
+                </div>
                 <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
