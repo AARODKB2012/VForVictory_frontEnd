@@ -119,11 +119,11 @@ export class LockComponent implements OnInit{
                     const emailObject = {
                         mailTo: form.value.email,
                         subject: 'Password Reset',
-                        messageBody: 'To reset your password click here: ' + this.passwordResetURL + '?id=' + btoa(form.value.email)
+                        messageBody: this.passwordResetURL + '?id=' + btoa(form.value.email)
                     }
                     this.emailService.sendEmail(emailObject).subscribe((mailResponse) => {
                         if (mailResponse) {
-                        this.emailSent = true;
+                            this.emailSent = true;
                         }
                     });
                 } else {

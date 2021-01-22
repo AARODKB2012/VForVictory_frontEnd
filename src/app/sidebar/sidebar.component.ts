@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit, AfterViewChecked, AfterContentInit } from '@angular/core';
+import { environment } from 'environments/environment';
 
 //Metadata
 export interface RouteInfo {
@@ -140,7 +141,9 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent {
     public menuItems: any[];
-    username: string;
+    public username: string;
+    public userId: string = null;
+    public profilePictureURL: string = null;
     isNotMobileMenu(){
         if( window.outerWidth > 991){
             return false;
@@ -152,6 +155,10 @@ export class SidebarComponent {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         this.username = JSON.parse(localStorage.getItem('currentUser')).first_name + ' ' +
         JSON.parse(localStorage.getItem('currentUser')).last_name;
+        if (JSON.parse(localStorage.getItem('currentUser')).profile_picture_url){
+            this.userId = JSON.parse(localStorage.getItem('currentUser')).record_id;
+            this.profilePictureURL = environment.backendURL + `api/volunteer/id/${this.userId}/profile/picture`
+        }
     }
     ngAfterViewInit(){
     }

@@ -6,6 +6,7 @@ import {Md5} from 'ts-md5/dist/md5';
 import Swal from 'sweetalert2';
 import { UserModel } from '../user.model';
 import { rejects } from 'assert';
+import { environment } from 'environments/environment';
 
 declare var $: any;
 @Component({
@@ -27,6 +28,8 @@ export class NewVolunteerComponent implements OnInit {
   public creationMode: boolean;
   public educationLevelList: [];
   public roleList: [];
+  public fileToUpload: File = null;
+  public profileURL: string = null;
 
   constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
     const tree: UrlTree = router.parseUrl(this.router.url);
@@ -50,6 +53,9 @@ export class NewVolunteerComponent implements OnInit {
       this.userService.getVolunteerById(this.volunteerId).subscribe((responseData) => {
         if (responseData) {
           this.user = responseData.results[0];
+          if (responseData.results[0]['profile_picture_url'] != null){
+            this.profileURL = environment.backendURL + `api/volunteer/id/${this.volunteerId}/profile/picture`
+          }
         }
       });
     }
@@ -90,6 +96,11 @@ export class NewVolunteerComponent implements OnInit {
       }
     });
     return validEmail;
+  }
+
+  handleFileInput(files: FileList) {
+    this.fileToUpload = files.item(0);
+    //console.log(this.fileToUpload);
   }
 
   onSave(form: NgForm) {
@@ -133,8 +144,16 @@ export class NewVolunteerComponent implements OnInit {
                       emergencyPhone: form.value.emergencyPhone,
                       emergencyAddress: form.value.emergencyAddress
                     };
+
                     this.userService.saveUser(user).subscribe((responseData) => {
                       if (responseData.userCreated) {
+                        if (this.fileToUpload!=null){
+                          this.userService.updateProfilePicture(this.fileToUpload, 'create', this.volunteerId).subscribe((responseData) => {
+                            if (responseData.userUpdated) {
+                              console.log("User updated: " + responseData.userUpdated);
+                            }
+                          });
+                        }
                         Swal.fire({
                           title: 'Record Saved Successfully!',
                           text: 'The volunteer was created successfully.',
@@ -176,11 +195,19 @@ export class NewVolunteerComponent implements OnInit {
           emergencyLastName: form.value.emergencyLastName,
           emergencyEmail: form.value.emergencyEmail,
           emergencyPhone: form.value.emergencyPhone,
-          emergencyAddress: form.value.emergencyAddress
+          emergencyAddress: form.value.emergencyAddress,
+          profilePicture: this.fileToUpload
         };
 
         this.userService.editUser(user).subscribe((responseData) => {
           if (responseData.userUpdated) {
+            if (this.fileToUpload!=null){
+              this.userService.updateProfilePicture(this.fileToUpload, 'edit', this.volunteerId).subscribe((responseData) => {
+                if (responseData.userUpdated) {
+                  console.log("User updated: " + responseData.userUpdated);
+                }
+              });
+            }
             Swal.fire({
               title: 'Record Updated Successfully!',
               text: 'The volunteer was updated successfully.',

@@ -16,7 +16,8 @@
 
   <div class="user">
     <div class="photo">
-      <img src="./assets/img/faces/joe-gardner-1.jpg" />
+      <img *ngIf="!profilePictureURL" src="./assets/img/default-avatar.png" />
+      <img *ngIf="profilePictureURL" src="{{profilePictureURL}}" alt="...">
     </div>
     <div class="info">
       <a data-toggle="collapse" href="#collapseExample" class="collapsed">
