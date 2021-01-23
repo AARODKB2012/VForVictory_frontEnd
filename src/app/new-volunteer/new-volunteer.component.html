@@ -178,33 +178,32 @@
                             </div>
                             </div>
                             <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="role">Role</label>
-                                <select class="custom-select d-block w-100" id="role" name="role" [ngModel]="user?.role" ngModel #role="ngModel" required [disabled]="viewMode">
-                                    <option *ngFor="let role of roleList" [ngValue]="role.id">
-                                        {{role.description}}
-                                    </option>
-                                </select>
-                                <div *ngIf="role.invalid && (role.dirty || role.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="role.errors.required">
-                                    Role is required.
+                                <div class="col-md-6 mb-3">
+                                    <label for="role">Role</label>
+                                    <select class="custom-select d-block w-100" id="role" name="role" [ngModel]="user?.role" ngModel #role="ngModel" required [disabled]="viewMode">
+                                        <option *ngFor="let role of roleList" [ngValue]="role.id">
+                                            {{role.description}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="role.invalid && (role.dirty || role.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="role.errors.required">
+                                        Role is required.
+                                    </div>
+                                    </div>
                                 </div>
+                    
+                                <div class="col-md-6 mb-3">
+                                    <label for="status">Status</label>
+                                    <select class="custom-select d-block w-100" id="status" name="status" [ngModel]="user?.status" ngModel #status="ngModel" required [disabled]="viewMode">
+                                    <option value="1">Active</option>
+                                    <option value="2">Inactive</option>
+                                    </select>
+                                    <div *ngIf="status.invalid && (status.dirty || status.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="status.errors.required">
+                                        Status is required.
+                                    </div>
+                                    </div>
                                 </div>
-                            </div>
-                
-                            <div class="col-md-6 mb-3">
-                                <label for="status">Status</label>
-                                <select class="custom-select d-block w-100" id="status" name="status" [ngModel]="user?.status" ngModel #status="ngModel" required [disabled]="viewMode">
-                                <option value="1">Active</option>
-                                <option value="2">Inactive</option>
-                                </select>
-                                <div *ngIf="status.invalid && (status.dirty || status.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="status.errors.required">
-                                    Status is required.
-                                </div>
-                                </div>
-                            </div>
-                
                             </div>
                             <!-- <div class="row">
                                 <div class="col-md-6 mb-3">

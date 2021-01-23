@@ -26,6 +26,9 @@ import { ListServicesComponent } from './list-services/list-services.component';
 import { YesNoPipe } from './yesno.pipe';
 import { RequestServiceComponent } from './request-service/request-service.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
+import { CommonModule } from '@angular/common';  
+import { BrowserModule } from '@angular/platform-browser';
+import { UserComponent } from './userpage/user.component';
 
 
 @NgModule({
@@ -42,6 +45,7 @@ import { EditServicesComponent } from './edit-services/edit-services.component';
         FooterModule,
         FixedPluginModule,
         HttpClientModule,
+        CommonModule
     ],
     declarations: [
         AppComponent,
@@ -55,7 +59,8 @@ import { EditServicesComponent } from './edit-services/edit-services.component';
         ListServicesComponent,
         YesNoPipe,
         RequestServiceComponent,
-        EditServicesComponent
+        EditServicesComponent,
+        UserComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

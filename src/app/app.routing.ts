@@ -10,6 +10,7 @@ import { ListServicesComponent } from './list-services/list-services.component';
 import { RequestServiceComponent } from './request-service/request-service.component'
 import { NewFamilyComponent } from './new-family/new-family.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
+import { UserComponent } from './userpage/user.component';
 import { LockComponent } from './pages/lock/lock.component';
 import { AuthGuard } from './_guards/index';
 
@@ -33,6 +34,9 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'volunteers/new', component: NewVolunteerComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'volunteers/profile', component: UserComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'family', component: ListFamilyComponent, canActivate: [AuthGuard]

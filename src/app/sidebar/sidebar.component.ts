@@ -141,8 +141,9 @@ export const ROUTES: RouteInfo[] = [{
 
 export class SidebarComponent {
     public menuItems: any[];
-    public username: string;
-    public userId: string = null;
+    public fullName: string;
+    public username: string = null;
+    public userId: string;
     public profilePictureURL: string = null;
     isNotMobileMenu(){
         if( window.outerWidth > 991){
@@ -153,11 +154,13 @@ export class SidebarComponent {
 
     ngOnInit() {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.username = JSON.parse(localStorage.getItem('currentUser')).first_name + ' ' +
+        this.fullName = JSON.parse(localStorage.getItem('currentUser')).first_name + ' ' +
         JSON.parse(localStorage.getItem('currentUser')).last_name;
+        
         if (JSON.parse(localStorage.getItem('currentUser')).profile_picture_url){
+            this.username = JSON.parse(localStorage.getItem('currentUser')).username;
             this.userId = JSON.parse(localStorage.getItem('currentUser')).record_id;
-            this.profilePictureURL = environment.backendURL + `api/volunteer/id/${this.userId}/profile/picture`
+            this.profilePictureURL = environment.backendURL + `api/volunteer/username/${this.username}/profile/picture`
         }
     }
     ngAfterViewInit(){

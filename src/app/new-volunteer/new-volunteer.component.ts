@@ -54,7 +54,7 @@ export class NewVolunteerComponent implements OnInit {
         if (responseData) {
           this.user = responseData.results[0];
           if (responseData.results[0]['profile_picture_url'] != null){
-            this.profileURL = environment.backendURL + `api/volunteer/id/${this.volunteerId}/profile/picture`
+            this.profileURL = environment.backendURL + `api/volunteer/username/${responseData.results[0]['username']}/profile/picture`
           }
         }
       });
@@ -148,7 +148,7 @@ export class NewVolunteerComponent implements OnInit {
                     this.userService.saveUser(user).subscribe((responseData) => {
                       if (responseData.userCreated) {
                         if (this.fileToUpload!=null){
-                          this.userService.updateProfilePicture(this.fileToUpload, 'create', this.volunteerId).subscribe((responseData) => {
+                          this.userService.updateProfilePicture(this.fileToUpload, form.value.username).subscribe((responseData) => {
                             if (responseData.userUpdated) {
                               console.log("User updated: " + responseData.userUpdated);
                             }
@@ -202,7 +202,7 @@ export class NewVolunteerComponent implements OnInit {
         this.userService.editUser(user).subscribe((responseData) => {
           if (responseData.userUpdated) {
             if (this.fileToUpload!=null){
-              this.userService.updateProfilePicture(this.fileToUpload, 'edit', this.volunteerId).subscribe((responseData) => {
+              this.userService.updateProfilePicture(this.fileToUpload,  form.value.username).subscribe((responseData) => {
                 if (responseData.userUpdated) {
                   console.log("User updated: " + responseData.userUpdated);
                 }

@@ -47,10 +47,10 @@ export class UsersService {
     +  passwordHash + '/' + volunteerId, null);
   }
 
-  updateProfilePicture(profilePicture: File,mode: string,  volunteerId) {
+  updateProfilePicture(profilePicture: File, username) {
     const formData: FormData = new FormData();
     formData.append('fileKey', profilePicture, profilePicture.name);
-    return this.httpClient.post<{userUpdated: boolean}>(this.serverAddress + 'api/volunteer/picture/' + volunteerId + '/mode/' + mode, formData);
+    return this.httpClient.post<{userUpdated: boolean}>(this.serverAddress + 'api/volunteer/picture/' + username, formData);
   }
 
   getVolunteerByEmail(volunteerEmail: String) {
