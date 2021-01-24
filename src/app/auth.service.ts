@@ -26,4 +26,20 @@ export class AuthService {
     const hashedPasswrod = md5.appendStr(password).end();
     return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/' + username + '/password/' + hashedPasswrod);
   }
+
+  getCurrentUser(username: string) {
+    return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/current/' + username);
+  }
+
+  postLoginHistory(loginHistory) {
+    return this.httpClient.post<{sessionSaved: Boolean}>(this.serverAddress + 'api/volunteer/login/new/', loginHistory);
+  }
+
+  getIPAddress(){
+    return this.httpClient.get<{ipObject: string}>("http://api.ipify.org/?format=json");
+  }
+
+  getLoginHistory(userId: number) {
+    return this.httpClient.get<{loginHistory: any}>(this.serverAddress + 'api/volunteer/login/history/' + userId);
+  }
 }

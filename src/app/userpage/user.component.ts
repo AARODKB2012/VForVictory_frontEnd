@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import {Md5} from 'ts-md5/dist/md5';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
+import {AuthService} from '../auth.service';
 
 declare var $: any;
 @Component({
@@ -27,7 +28,8 @@ export class UserComponent{
     private md5 = new Md5();
     public errorInForm: boolean;
     public fileToUpload: File = null;
-    constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
+    public loginHistory: [];
+    constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute, public authService: AuthService) {
         this.activeRoute.queryParams.subscribe(params => {
             this.userId = params['id'];
         });
@@ -57,6 +59,12 @@ export class UserComponent{
         this.userService.getAllRoles().subscribe((responseData) => {
             if (responseData) {
               this.roleList = responseData.results;
+            }
+        });
+
+        this.authService.getLoginHistory(this.userId).subscribe((loginHistory) => {
+            if (loginHistory) {
+              this.loginHistory = loginHistory['results'];
             }
         });
     }
@@ -124,10 +132,10 @@ export class UserComponent{
     }
 
     
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-    //console.log(this.fileToUpload);
-  }
+    handleFileInput(files: FileList) {
+        this.fileToUpload = files.item(0);
+        //console.log(this.fileToUpload);
+    }
 
     onSave(form: NgForm) {
         if ( form.invalid ) {

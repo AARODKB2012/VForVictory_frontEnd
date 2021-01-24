@@ -110,6 +110,33 @@
                   </select>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-12">
+                <h4 class="card-title">Login History</h4>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead class="">
+                      <th>
+                        Date
+                      </th>
+                      <th>
+                        Time
+                      </th>
+                      <th>
+                        Client Ip
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let row of loginHistory">
+                        <td>{{ row.date | date:'MM/dd/yyyy'}}</td>
+                        <td>{{ row.time | date:'hh:mm a z'}}</td>
+                        <td>{{ row.client_ip }}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

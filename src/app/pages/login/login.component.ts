@@ -6,6 +6,7 @@ import { UserAPIResponse } from '../../response.model';
 import {AuthService} from '../../auth.service';
 import { NgForm } from '@angular/forms';
 import {Buffer} from '../../../../node_modules/buffer'
+import { DatePipe } from '@angular/common';
 
 
 declare var $:any;
@@ -13,7 +14,8 @@ declare var $:any;
 @Component({
     moduleId:module.id,
     selector: 'login-cmp',
-    templateUrl: './login.component.html'
+    templateUrl: './login.component.html',
+    providers: [DatePipe]
 })
 
 export class LoginComponent implements OnInit{
@@ -34,7 +36,7 @@ export class LoginComponent implements OnInit{
     public passwordResetAlert: boolean;
 
     constructor(private element : ElementRef, public authService: AuthService,
-      private router: Router, private activeRoute: ActivatedRoute) {
+      private router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
 
@@ -111,6 +113,26 @@ export class LoginComponent implements OnInit{
         if (userReturned) {
           this.userModel = userReturned.results[0];
           localStorage.setItem('currentUser', JSON.stringify(this.userModel));
+
+          //Saving Login History
+          var date = new Date();
+          var ipAddress = null;
+          this.authService.getIPAddress().subscribe((ipObject) => {
+            if (ipObject) {
+              ipAddress = ipObject['ip'];
+              const loginHistory = {
+                userId: this.userModel.record_id,
+                date: this.datePipe.transform(date, 'MM/dd/yyyy'),
+                time: this.datePipe.transform(date, 'HH:MM'),
+                clientIp: ipAddress
+              }
+              this.authService.postLoginHistory(loginHistory).subscribe((sessionSaved) => {
+                if (sessionSaved) {
+                  console.log(sessionSaved);
+                }
+              });
+            }
+          });
           this.router.navigate(['/dashboard']);
         } else {
           this.incorrectUserAlert = true;
