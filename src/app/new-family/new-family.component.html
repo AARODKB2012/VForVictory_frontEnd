@@ -101,38 +101,41 @@
                                         </div>
 
 
-                                        <div class="col-md-10">
-                                              <h5 class="card-title">End of Treatment Date</h5>
-                                              <div class="form-group">
-                                                <input class="form-control" placeholder="Year-Month-Day"
-                                                       name="dp1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
-                                              </div>
+                                        <div class="col-md-6 mb-3">
+                                              <label for="endOftreatmentDate">End of Treatment Date</label>
+                                              <input type="text" class="form-control" id="endOftreatmentDate" name="endOftreatmentDate" ngModel #endOftreatmentDate="ngModel" placeholder="Type Here" required>
+                                            <div *ngIf="endOftreatmentDate.invalid && (endOftreatmentDate.dirty || endOftreatmentDate.touched || errorInForm)" class="text-danger">
+                                            <div *ngIf="endOftreatmentDate.errors.required">
+                                                endOftreatmentDate is required.
+                                            </div>
+                                            </div>
                                         </div>
 
-                                        <div class="col-md-10">
-                                            <div class="bold">What is your relationship to the Cancer Warrior?</div>
-                                            <select class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Single Select">
-                                                <option disabled selected>Relationship</option>
-                                                <option value="2">Self</option>
-                                                <option value="3">Parent</option>
-                                                <option value ="4">Spouse</option>
-                                                <option value = "5">Adult Child</option>
-                                                <option value = "6">Friend</option>
-                                                <option value="7">Other</option>
-                                              </select>
+                                        <div class="col-md-6 mb-3">
+                                            <label for="relationship">What is your relationship to the Cancer?</label>
+                                            <input type="text" class="form-control" id="relationship" name="relationship" ngModel #relationship="ngModel" placeholder="relationship status with warrior" required>
+                                            <div *ngIf="relationship.invalid && (relationship.dirty || relationship.touched || errorInForm)" class="text-danger">
+                                            <div *ngIf="relationship.errors.required">
+                                                relationship is required.
+                                            </div>
+                                            </div>
                                         </div>
 
-
-                                        <div class="form-group">
-                                            <label for="textarea"><h3>Additional Information (280 character limit)</h3></label>
-                                            <p>Please include any additional information about your family or 
-                                                needs that you would like to share in order to help us support 
-                                                you and connect you with services in the future.
-                                            </p>
-                                            <textarea maxlength="280" class="form-control" id="textarea" rows="3"></textarea>
-                                          </div>
-
-
+<!-- Write your comments here 
+                                        <div class="col-md-6">
+                                            <label for="addInfo">Additional Info</label>
+                                            <input type="addInfo" class="form-control" id="addInfo" name="addInfo" ngModel #addInfo="ngModel" placeholder="Please include any additional information about your family or 
+                                            needs that you would like to share in order to help us support 
+                                            you and connect you with services in the future.">
+                                        </div>
+                                    --> 
+                                    <div class="row">
+                                        <div class ="col-md-10 ml-auto mr-auto">
+                                            <label for = "addInfo" class ="addInfo">Additional Information (280 character limit)</label>
+                                            <textarea id = "addInfo" class ="form-control" id = "addInfo" ngModel #addInfo = "ngModel"name = "addInfo" rows="3" cols="600" textarea maxlength="280" placeholder="Include any information that you would like to share to help us support you.">     
+                                            </textarea>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                         </div>
@@ -143,7 +146,7 @@
                     <div class="col-md-5">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Profile Picture</h4>
+                                <h4 class="card-title">Family Picture</h4>
                                 <div class="row">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-8">
@@ -218,6 +221,7 @@
                                               <label class="custom-control-label" for="box">Budget Assigned</label>
                                             </div>
                                           </li>
+
                                       </ul>
                                 </div>
                                 </div>

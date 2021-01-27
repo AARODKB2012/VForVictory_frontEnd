@@ -34,14 +34,14 @@ export class NewFamilyComponent implements OnInit {
       const request: any = {
         firstName: form.value.firstName,
         lastName: form.value.lastName,
-        phoneNumber: form.value.phoneNumber,
-        streetAddress: form.value.streetAddress,
+        phoneNumber: form.value.phonenumber,
+        streetAddress: form.value.address,
         zipcode: form.value.zipcode,
         email: form.value.email,
-        cancerWarriorname: form.value.cancerWarriorname,
+        cancerWarriorname: form.value.cancerwarrior,
         workPhone: form.value.workPhone,
-        relationshipTowarrior: form.value.relationshipTowarrior,
-        additionalInfo: form.value.additionalInfo,
+        relationshipTowarrior: form.value.relationship,
+        additionalInfo: form.value.addInfo,
         endOftreatmentDate: form.value.endOftreatmentDate
         };
       this.familyService.saveFamily(request).subscribe((responseData) => {
