@@ -14,10 +14,13 @@ import { FamilyAPIResponse } from './family_response.model';
 })
 
 export class FamilyService{
-  
-    private serverAddress = environment.backendURL;
-    constructor(private httpClient: HttpClient,private route: Router, private http: Http){}
-  
+  private servicesList: any = [];
+  private serverAddress = environment.backendURL;
+  constructor(private httpClient: HttpClient, private router: Router, private http: Http) { }
+
+    saveFamily(family: any) {
+    return this.httpClient.post<{familyCreated: boolean}>(this.serverAddress + 'api/family/new', family);
+  }
     listFamily():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/');
     }
