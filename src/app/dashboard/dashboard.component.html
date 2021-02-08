@@ -11,8 +11,8 @@
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Number of families</p>
-                <p class="card-title">40
+                <p class="card-category">Number of families in system</p>
+                <p class="card-title">150
                 </p>
               </div>
             </div>
@@ -37,8 +37,8 @@
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Number of Businesses</p>
-                <p class="card-title">0
+                <p class="card-category">Businesses in the System</p>
+                <p class="card-title">48
                 </p>
               </div>
             </div>
@@ -47,7 +47,7 @@
         <div class="card-footer ">
           <hr>
           <div class="stats">
-            <i class="fa fa-refresh"></i> Update Now
+            <i class="fa fa-calendar-o"></i> Last day
           </div>
         </div>
       </div>
@@ -58,13 +58,13 @@
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
-                <i class="nc-icon nc-box text-danger"></i>
+                <i class="nc-icon nc-vector text-danger"></i>
               </div>
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Service Requests</p>
-                <p class="card-title">5
+                <p class="card-category">Pending Service Requests</p>
+                <p class="card-title">9
                 </p>
               </div>
             </div>
@@ -73,7 +73,7 @@
         <div class="card-footer ">
           <hr>
           <div class="stats">
-            <i class="fa fa-refresh"></i> Update Now
+            <i class="fa fa-clock-o"></i> In the last 12 days
           </div>
         </div>
       </div>
@@ -99,47 +99,22 @@
           </div>
         </div>
         <div class="card-body">
-          <h6 class="big-title">Total Spendings Per Month</h6>
+          <h6 class="big-title">Family Budget Spent within the last 10 Months</h6>
           <canvas id="activeUsers" width="826" height="380"></canvas>
-          <hr>
-          <h6 class="big-title">Percentage of Monthly Amount</h6>
-          <canvas id="chartDonut1" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
         </div>
         <div class="card-footer">
           <hr>
-          <div class="stats">
-            <i class="fa fa-refresh"></i> Update Now
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
-      <div class="card ">
-        <div class="card-body ">
-          <canvas id="chartActivity"></canvas>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-3">
-      <div class="card ">
-        <div class="card-header ">
-          <h5 class="card-title">New Visitators</h5>
-          <p class="card-category">Out Of Total Number</p>
-        </div>
-        <div class="card-body ">
-          <canvas id="chartDonut2" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
-        </div>
-        <div class="card-footer ">
-          <div class="legend">
-            <i class="fa fa-circle text-warning"></i> Visited
-          </div>
-          <hr>
-          <div class="stats">
-            <i class="fa fa-check"></i> Campaign sent 2 days ago
+          <div class="row">
+            <div class="col-sm-7">
+              <div class="footer-title">Budget of ______ Family Here</div>
+            </div>
+            <div class="col-sm-5">
+              <div class="pull-right">
+                <button class="btn btn-success btn-round btn-icon btn-sm">
+                  <i class="nc-icon nc-simple-add"></i>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -147,42 +122,23 @@
     <div class="col-md-3">
       <div class="card ">
         <div class="card-header ">
-          <h5 class="card-title">Orders</h5>
-          <p class="card-category">Total number</p>
+          <h5 class="card-title">VPizza Statistics</h5>
+          <p class="card-category">Percentage of families with VPizza Voucher</p>
         </div>
         <div class="card-body ">
-          <canvas id="chartDonut3" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+          <canvas id="chartDonut1" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
         </div>
         <div class="card-footer ">
           <div class="legend">
-            <i class="fa fa-circle text-danger"></i> Completed
+            <i class="fa fa-circle text-info"></i> Sent
           </div>
           <hr>
           <div class="stats">
-            <i class="fa fa-clock-o"></i> Updated 3 minutes ago
+            <i class="fa fa-calendar"></i> Number of vouchers sent
           </div>
+          
         </div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card ">
-        <div class="card-header ">
-          <h5 class="card-title">Subscriptions</h5>
-          <p class="card-category">Our Users</p>
-        </div>
-        <div class="card-body ">
-          <canvas id="chartDonut4" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
-        </div>
-        <div class="card-footer ">
-          <div class="legend">
-            <i class="fa fa-circle text-secondary"></i> Ended
-          </div>
-          <hr>
-          <div class="stats">
-            <i class="fa fa-history"></i> Total users
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  </div> 
 </div>

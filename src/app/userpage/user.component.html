@@ -8,20 +8,43 @@
         <div class="card-body">
           <div class="author">
             <a href="javascript:void(0)">
-              <img class="avatar border-gray" src="./assets/img/mike.jpg" alt="...">
-              <h5 class="title">Chet Faker</h5>
+              <img *ngIf="!profilePictureURL" class="avatar border-gray" src="../../assets/img/default-avatar.png" />
+              <img *ngIf="profilePictureURL" class="avatar border-gray" src="{{profilePictureURL}}" />
+              <h5 class="title">{{fullName}}</h5>
             </a>
-            <p class="description">
-              @chetfaker
-            </p>
           </div>
-          <p class="description text-center">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="education">Education</label>
+              <select class="custom-select d-block w-100" id="education" name="education" [ngModel]="user?.educational_background" ngModel #education="ngModel" [disabled]="true">
+                  <option *ngFor="let education of educationLevelList" [ngValue]="education.id">
+                      {{education.description}}
+                  </option>
+              </select>
+              <div *ngIf="education.invalid && (education.dirty || education.touched || errorInForm)" class="text-danger">
+              <div *ngIf="education.errors.required">
+                  Education is required.
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="licenses">Licenses</label>
+                <textarea class="form-control" id="licenses" name="licenses" [ngModel]="user?.current_licenses" ngModel #licenses="ngModel" [readonly]="true"></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="availability">Availability</label>
+                <textarea class="form-control" id="availability" name="availability" [ngModel]="user?.availability" ngModel #availability="ngModel" [readonly]="true"></textarea>
+            </div>
+            </div>
+<!--           <p class="description text-center">
             "I like the way you work it
             <br> No diggity
             <br> I wanna bag it up"
-          </p>
+          </p> -->
         </div>
-        <div class="card-footer">
+<!--         <div class="card-footer">
           <hr>
           <div class="button-container">
             <div class="row">
@@ -45,72 +68,49 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Team Members</h4>
+          <h4 class="card-title">System Information</h4>
         </div>
         <div class="card-body">
-          <ul class="list-unstyled team-members">
-            <li>
-              <div class="row">
-                <div class="col-md-2 col-2">
-                  <div class="avatar">
-                    <img src="./assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                  </div>
-                </div>
-                <div class="col-md-7 col-7">
-                  DJ Khaled
-                  <br />
-                  <span class="text-muted">
-                    <small>Offline</small>
-                  </span>
-                </div>
-                <div class="col-md-3 col-3 text-right">
-                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-                </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" disabled="" id="username" name="username" [ngModel]="user?.username" ngModel #username="ngModel">
               </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="col-md-2 col-2">
-                  <div class="avatar">
-                    <img src="./assets/img/faces/joe-gardner-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                  </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="role">Role</label>
+                <select class="custom-select d-block w-100" id="role" name="role" [ngModel]="user?.role" ngModel #role="ngModel" required [disabled]="true">
+                    <option *ngFor="let role of roleList" [ngValue]="role.id">
+                        {{role.description}}
+                    </option>
+                </select>
+                <div *ngIf="role.invalid && (role.dirty || role.touched || errorInForm)" class="text-danger">
+                <div *ngIf="role.errors.required">
+                    Role is required.
                 </div>
-                <div class="col-md-7 col-7">
-                  Creative Tim
-                  <br />
-                  <span class="text-success">
-                    <small>Available</small>
-                  </span>
                 </div>
-                <div class="col-md-3 col-3 text-right">
-                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="status">Status</label>
+                <select class="custom-select d-block w-100" id="status" name="status" [ngModel]="user?.status" ngModel #status="ngModel" required [disabled]="true">
+                <option value="1">Active</option>
+                <option value="2">Inactive</option>
+                </select>
+                <div *ngIf="status.invalid && (status.dirty || status.touched || errorInForm)" class="text-danger">
+                <div *ngIf="status.errors.required">
+                    Status is required.
                 </div>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="col-md-2 col-2">
-                  <div class="avatar">
-                    <img src="./assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
-                  </div>
                 </div>
-                <div class="col-ms-7 col-7">
-                  Flume
-                  <br />
-                  <span class="text-danger">
-                    <small>Busy</small>
-                  </span>
-                </div>
-                <div class="col-md-3 col-3 text-right">
-                  <button class="btn btn-sm btn-outline-success btn-round btn-icon"><i class="fa fa-envelope"></i></button>
-                </div>
-              </div>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -122,36 +122,30 @@
         <div class="card-body">
           <form>
             <div class="row">
-              <div class="col-md-5 pr-1">
+              <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>Company (disabled)</label>
-                  <input type="text" class="form-control" disabled="" placeholder="Company" value="Creative Code Inc.">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName" [ngModel]="user?.first_name" #firstName="ngModel" required maxlength="30" minlength="1">
                 </div>
               </div>
-              <div class="col-md-3 px-1">
+              <div class="col-md-6 pl-1">
                 <div class="form-group">
-                  <label>Username</label>
-                  <input type="text" class="form-control" placeholder="Username" value="michael23">
-                </div>
-              </div>
-              <div class="col-md-4 pl-1">
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" placeholder="Email">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName" [ngModel]="user?.last_name" ngModel #lastName="ngModel" required>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
-                  <label>First Name</label>
-                  <input type="text" class="form-control" placeholder="Company" value="Chet">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" id="cellPhone" name="cellPhone" [ngModel]="user?.cell_phone" ngModel #cellPhone="ngModel" placeholder="(555)-555-5555" required>
                 </div>
               </div>
               <div class="col-md-6 pl-1">
                 <div class="form-group">
-                  <label>Last Name</label>
-                  <input type="text" class="form-control" placeholder="Last Name" value="Faker">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="email" name="email"  [ngModel]="user?.email" ngModel #email="ngModel" placeholder="you@example.com" required>
                 </div>
               </div>
             </div>
@@ -159,11 +153,11 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label>Address</label>
-                  <input type="text" class="form-control" placeholder="Home Address" value="Melbourne, Australia">
+                  <input type="text" class="form-control" id="address" name="address" [ngModel]="user?.address" ngModel #address="ngModel" placeholder="1234 Main St" required>
                 </div>
               </div>
             </div>
-            <div class="row">
+<!--             <div class="row">
               <div class="col-md-4 pr-1">
                 <div class="form-group">
                   <label>City</label>
@@ -182,7 +176,7 @@
                   <input type="number" class="form-control" placeholder="ZIP Code">
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
@@ -194,6 +188,36 @@
           </form>
         </div>
       </div>
+      <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Emergency Contact</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <label for="emergencyFirstName">First name</label>
+                <input type="text" class="form-control" id="emergencyFirstName" name="emergencyFirstName" [ngModel]="user?.emergency_contact_name" ngModel #emergencyFirstName="ngModel" [readonly]="viewMode">
+                </div>
+                <div class="col-md-6 mb-3">
+                <label for="emergencyLastName">Last name</label>
+                <input type="text" class="form-control" id="emergencyLastName" name="emergencyLastName" [ngModel]="user?.emergency_contact_name" ngModel #emergencyLastName="ngModel" [readonly]="viewMode">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <label for="emergencyEmail">Email</label>
+                <input type="email" class="form-control" id="emergencyEmail" name="emergencyEmail" [ngModel]="user?.emergency_contact_email" ngModel #emergencyEmail="ngModel" placeholder="you@example.com" [readonly]="viewMode">
+                </div>
+                <div class="col-md-6 mb-3">
+                <label for="emergencyPhone">Phone Number</label>
+                <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone" [ngModel]="user?.emergency_contact_phone" ngModel #emergencyPhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="emergencyAddress">Address</label>
+                <input type="text" class="form-control" id="emergencyAddress" name="emergencyAddress" [ngModel]="user?.emergency_contact_address" ngModel #emergencyAddress="ngModel" placeholder="1234 Main St" [readonly]="viewMode">
+            </div>
+        </div>
+    </div>
     </div>
   </div>
 </div>

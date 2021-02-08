@@ -43,6 +43,9 @@
                 <div class="alert alert-success" role="alert" *ngIf="logoutAlert">
                   You have been logged out of the system.
                 </div>
+                <div class="alert alert-success" role="alert" *ngIf="passwordResetAlert">
+                  Your password has been changed successfully. Login with your new password.
+                </div>
                 <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
                   <div class="input-group-prepend">
                     <span class="input-group-text">
@@ -71,8 +74,8 @@
                 </div>
               </div>
               <div class="card-footer ">
-                
                 <button type="submit" class="btn btn-warning btn-round btn-block mb-3">Log in</button>
+                <a routerLink="/pages/lock">Forgot Password</a>
               </div>
             </div>
           </form>

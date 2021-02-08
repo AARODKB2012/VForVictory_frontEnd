@@ -16,12 +16,13 @@
 
   <div class="user">
     <div class="photo">
-      <img src="./assets/img/faces/joe-gardner-1.jpg" />
+      <img *ngIf="!profilePictureURL" src="./assets/img/default-avatar.png" />
+      <img *ngIf="profilePictureURL" src="{{profilePictureURL}}" alt="...">
     </div>
     <div class="info">
       <a data-toggle="collapse" href="#collapseExample" class="collapsed">
         <span>
-          {{username}}
+          {{fullName}}
           <b class="caret"></b>
         </span>
       </a>
@@ -29,7 +30,7 @@
       <div class="collapse" id="collapseExample">
         <ul class="nav">
           <li>
-            <a href="javascript:void(0)">
+            <a [routerLink]="['/volunteers/profile']" [queryParams]="{ id: userId }">
               <span class="sidebar-mini-icon">MP</span>
               <span class="sidebar-normal">My Profile</span>
             </a>

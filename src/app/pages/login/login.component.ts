@@ -5,6 +5,9 @@ import { UserModel } from '../../user.model';
 import { UserAPIResponse } from '../../response.model';
 import {AuthService} from '../../auth.service';
 import { NgForm } from '@angular/forms';
+import {Buffer} from '../../../../node_modules/buffer'
+
+
 declare var $:any;
 
 @Component({
@@ -27,19 +30,28 @@ export class LoginComponent implements OnInit{
     noLoginValuesAlert: boolean;
     incorrectUserAlert: boolean;
     logoutAlert: boolean;
+    private fromPasswordReset: boolean;
+    public passwordResetAlert: boolean;
 
-    constructor(private element : ElementRef, public authService: AuthService, private router: Router, 
-        private activeRoute: ActivatedRoute) {
+    constructor(private element : ElementRef, public authService: AuthService,
+      private router: Router, private activeRoute: ActivatedRoute) {
         this.nativeElement = element.nativeElement;
         this.sidebarVisible = false;
 
         this.activeRoute.queryParams.subscribe(params => {
-            this.endSession = params['endSession'];
-          });
-          if (this.endSession) {
-            this.logoutAlert = true;
-            localStorage.removeItem('currentUser');
-          }
+          this.endSession = params['endSession'];
+          this.fromPasswordReset = params['fromResetPassword'];
+        });
+
+        if (this.endSession) {
+          this.logoutAlert = true;
+          this.fromPasswordReset = false;
+          localStorage.removeItem('currentUser');
+        }
+
+        if (this.fromPasswordReset) {
+          this.passwordResetAlert = true;
+        }
     }
     checkFullPageBackgroundImage(){
         var $page = $('.full-page');
@@ -85,27 +97,26 @@ export class LoginComponent implements OnInit{
     }
 
     onLogin(form: NgForm) {
-        if ( form.invalid ) { // Validating form has data
-          this.noLoginValuesAlert = true;
-          this.incorrectUserAlert = false;
-          this.logoutAlert = false;
-          return;
-        }
-        console.log(form);
-        const user: any = {
-          userName: form.value.userName,
-          password: form.value.password
-        };
-        this.authService.getUser(user.userName, user.password).subscribe((userReturned) => {
-          if (userReturned) {
-            this.userModel = userReturned.results[0];
-            localStorage.setItem('currentUser', JSON.stringify(this.userModel));
-            this.router.navigate(['/dashboard']);
-          } else {
-            this.incorrectUserAlert = true;
-            this.logoutAlert = false;
-            this.noLoginValuesAlert = false;
-          }
-        });
+      if ( form.invalid ) { // Validating form has data
+        this.noLoginValuesAlert = true;
+        this.incorrectUserAlert = false;
+        this.logoutAlert = false;
+        return;
       }
+      const user: any = {
+        userName: form.value.userName,
+        password: form.value.password
+      };
+      this.authService.getUser(user.userName, user.password).subscribe((userReturned) => {
+        if (userReturned) {
+          this.userModel = userReturned.results[0];
+          localStorage.setItem('currentUser', JSON.stringify(this.userModel));
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.incorrectUserAlert = true;
+          this.logoutAlert = false;
+          this.noLoginValuesAlert = false;
+        }
+      });
+    }
 }

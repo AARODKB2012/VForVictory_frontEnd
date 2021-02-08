@@ -32,6 +32,18 @@
                             <h4 class="card-title">Personal Information</h4>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
+                                    <label for="cancerwarrior">Cancer Warriors Name</label>
+                                    <input type="text" class="form-control" id="cancerwarrior" name="cancerwarrior" ngModel #cancerwarrior="ngModel" required maxlength="30" minlength="1">
+                                    <div *ngIf="cancerwarrior.invalid && (cancerwarrior.dirty || cancerwarrior.touched || errorInForm)" class="text-danger">
+                                        <div *ngIf="(cancerwarrior.errors.required)">
+                                        Name is required.
+                                        </div>
+                                    </div>
+                                    </div>
+                                <div class="col-md-6 mb-3">
+                                <div>
+
+                                </div>
                                 <label for="firstName">First name</label>
                                 <input type="text" class="form-control" id="firstName" name="firstName" ngModel #firstName="ngModel" required maxlength="30" minlength="1">
                                 <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || errorInForm)" class="text-danger">
@@ -50,55 +62,6 @@
                                 </div>
                                 </div>
                             </div>
-                            <!--
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                <label for="email">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" ngModel #email="ngModel" placeholder="you@example.com" required>
-                                <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="email.errors.required">
-                                    Email is required.
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                <label for="username">Username</label>
-                                    <input type="text" class="form-control" id="username" name="username" ngModel #username="ngModel" placeholder="Username" required>
-                                <div *ngIf="username.invalid && (username.dirty || username.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="username.errors.required">
-                                    Username is required.
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                <label for="email">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" ngModel #password="ngModel" required>
-                                <div class="invalid-feedback">
-                                    Please enter a valid password.
-                                </div>
-                                <div *ngIf="password.invalid && (password.dirty || password.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="password.errors.required">
-                                    Password is required.
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                <label for="email">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" ngModel #confirmPassword="ngModel" required>
-                                <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="confirmPassword.errors.required">
-                                    Confirm password is required.
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                            <div *ngIf="passwordMatch == false" class="text-danger">
-                                Passwords must match.
-                            </div>
-                        -->
                             <div class="mb-3">
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" id="address" name="address" ngModel #address="ngModel" placeholder="1234 Main St" required>
@@ -108,18 +71,14 @@
                                 </div>
                                 </div>
                             </div>
-                
                             <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="homePhone">Home Phone</label>
-                                <input type="tel" class="form-control" id="homePhone" name="homePhone" ngModel #homePhone="ngModel" placeholder="(555)-555-5555">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="cellPhone">Cell Phone</label>
-                                <input type="text" class="form-control" id="cellPhone" name="cellPhone" ngModel #cellPhone="ngModel" placeholder="(555)-555-5555" required>
-                                <div *ngIf="cellPhone.invalid && (cellPhone.dirty || cellPhone.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="cellPhone.errors.required">
-                                    Cell phone is required.
+                                <label for="phonenumber">Phone Number</label>
+                                <input type="text" class="form-control" id="phonenumber" name="phonenumber" ngModel #phonenumber="ngModel" required maxlength="30" minlength="1">
+                                <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="(phonenumber.errors.required)">
+                                    Name is required.
+                                    </div>
                                 </div>
                                 </div>
                             </div>
@@ -127,143 +86,51 @@
                                 <label for="workPhone">Work Phone</label>
                                 <input type="tel" class="form-control" id="workPhone" name="workPhone" ngModel #workPhone="ngModel" placeholder="(555)-555-5555">
                             </div>
-                            <!--
-                            <div class="col-md-6 mb-3">
-                                <label for="education">Education</label>
-                                <select class="custom-select d-block w-100" id="education" name="education" ngModel #education="ngModel" required>
-                                <option value="1">Primary School</option>
-                                <option value="2">High School</option>
-                                <option value="3">Technical School</option>
-                                <option value="4">Some College</option>
-                                <option value="5">College Graduate</option>
-                                <option value="6">Masters Degree</option>
-                                <option value="7">Doctorate</option>
-                                </select>
-                                <div *ngIf="education.invalid && (education.dirty || education.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="education.errors.required">
-                                    Education is required.
-                                </div>
-                                </div>
                             </div>
-                        -->
-                            </div>
-                            <!--
-                            <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="licenses">Licenses</label>
-                                <textarea class="form-control" id="licenses" name="licenses" ngModel #licenses="ngModel"></textarea>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="availability">Availability</label>
-                                <textarea class="form-control" id="availability" name="availability" ngModel #availability="ngModel"></textarea>
-                            </div>
-                            </div>
-                            -->
-                            <!--
-                            <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="role">Role</label>
-                                <select class="custom-select d-block w-100" id="role" name="role" ngModel #role="ngModel" required>
-                                <option value="1">Administrator</option>
-                                <option value="2">Volunteer</option>
-                                </select>
-                                <div *ngIf="role.invalid && (role.dirty || role.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="role.errors.required">
-                                    Role is required.
-                                </div>
-                                </div>
-                            </div>
-                            -->
-                            <div class="col-md-6 mb-3">
-                                <label for="status">Status</label>
-                                <select class="custom-select d-block w-100" id="status" name="status" ngModel #status="ngModel" required>
-                                <option value="1">Active</option>
-                                <option value="2">Inactive</option>
-                                </select>
-                                <div *ngIf="status.invalid && (status.dirty || status.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="status.errors.required">
-                                    Status is required.
-                                </div>
-                                </div>
-                            </div>
-                
-                            </div>
-                            <!-- <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="driversLicense" name="driversLicense" ngModel #driversLicense="ngModel">
-                                    <label class="form-check-label" for="driversLicense">Drivers License</label>
+                            <div class="col-md-10">
+                                
+                                  <div class="card-header ">
+                                    <h5 class="card-title">End of Treatment Date</h5>
+                                  </div>
+                                  <div class="card-body ">
+                                    <div class="form-group">
+                                      <input class="form-control" placeholder="Year-Month-Day"
+                                             name="dp1" ngbDatepicker #d1="ngbDatepicker" (click)="d1.toggle()">
                                     </div>
+                                  </div>
+                                
+                              </div>
+                            <div class="mb-3">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" ngModel #email="ngModel" placeholder="youremail@email.com" required>
+                                <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="email.errors.required">
+                                    email is required.
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <input type="checkbox" class="form-check-input" id="socialSecurity" name="socialSecurity" ngModel #socialSecurity="ngModel">
-                                    <label class="form-check-label" for="socialSecurity">Social Security</label>
                                 </div>
-                            </div> -->
+                            </div>
+                            <div class="mb-3">
+                                <div class="bold">What is your relationship to the Cancer Warrior?</div>
+                                <select class="selectpicker" data-size="7" data-style="btn btn-primary btn-round" title="Single Select">
+                                    <option disabled selected>Relationship</option>
+                                    <option value="2">Self</option>
+                                    <option value="3">Parent</option>
+                                    <option value ="4">Spouse</option>
+                                    <option value = "5">Adult Child</option>
+                                    <option value = "6">Friend</option>
+                                    <option value="7">Other</option>
+                                  </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="textarea"><h3>Additional Information (280 character limit)</h3></label>
+                                <p>Please include any additional information about your family or 
+                                    needs that you would like to share in order to help us support 
+                                    you and connect you with services in the future.
+                                </p>
+                                <textarea maxlength="280" class="form-control" id="textarea" rows="3"></textarea>
+                              </div>
                         </div>
                         </div>
                     </div>
-                    <div class="col-md-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Emergency Contact</h4>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                    <label for="emergencyFirstName">First name</label>
-                                    <input type="text" class="form-control" id="emergencyFirstName" name="emergencyFirstName" ngModel #emergencyFirstName="ngModel">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                    <label for="emergencyLastName">Last name</label>
-                                    <input type="text" class="form-control" id="emergencyLastName" name="emergencyLastName" ngModel #emergencyLastName="ngModel">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                    <label for="emergencyEmail">Email</label>
-                                    <input type="email" class="form-control" id="emergencyEmail" name="emergencyEmail" ngModel #emergencyEmail="ngModel" placeholder="you@example.com">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                    <label for="emergencyPhone">Phone Number</label>
-                                    <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone" ngModel #emergencyPhone="ngModel" placeholder="(555)-555-5555">
-                                    </div>
-                                </div>
-                    
-                                <div class="mb-3">
-                                    <label for="emergencyAddress">Address</label>
-                                    <input type="text" class="form-control" id="emergencyAddress" name="emergencyAddress" ngModel #emergencyAddress="ngModel" placeholder="1234 Main St">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Family Picture</h4>
-                                <div class="row">
-                                    <div class="col-md-4"></div>
-                                    <div class="col-md-8">
-                                        <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                            <div class="fileinput-new thumbnail">
-                                            <img src="../../assets/img/default-avatar.png" alt="...">
-                                            </div>
-                                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                            <div>
-                                            <span class="btn btn-rose btn-round btn-file">
-                                                <span class="fileinput-new">Select image</span>
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="file" name="..." />
-                                            </span>
-                                            <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <!--</div>-->
-        </form>
         </div>
-      </div>
-    </div>
-  </div>
   

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { ServicesService } from '../services.service';
 import { ServiceModel } from '../service.model';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 
 
@@ -15,7 +17,8 @@ declare interface DataTable {
 @Component({
   selector: 'app-list-services',
   templateUrl: './list-services.component.html',
-  styleUrls: ['./list-services.component.css']
+  styleUrls: ['./list-services.component.css'],
+  providers: [DatePipe]
 })
 export class ListServicesComponent implements OnInit {
 
@@ -23,17 +26,22 @@ export class ListServicesComponent implements OnInit {
     public renderedList: ServiceModel[];
     public activeDataTable: DataTable;
     public renderedDataTable: DataTable;
+    public currentDate = new Date();
+    public today;
+    public url;
 
-    constructor(public serviceService: ServicesService) {}
+    constructor(public serviceService: ServicesService, public router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe) {
+      this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');}
 
     ngOnInit() {
-      this.serviceService.listActiveServices().subscribe((activeReturned) => {
+      this.url = window.location.origin;
+
+      this.serviceService.listActiveRequests().subscribe((activeReturned) => {
         if (activeReturned) {
           this.activeList = activeReturned.results;
-
           this.activeDataTable = {
-            headerRow: [ 'Name', 'Category', 'Business', 'Date Requested', 'Notified Business?', 'Notified Family?'],
-            footerRow: [ 'Name', 'Category', 'Business', 'Date Requested', 'Notified Business?', 'Notified Family?'],
+            headerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Business?', 'Notified Family?'],
+            footerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Business?', 'Notified Family?'],
             dataRows: this.activeList
           };
          }
@@ -42,10 +50,9 @@ export class ListServicesComponent implements OnInit {
       this.serviceService.listRenderedServices().subscribe((renderedReturned) => {
         if (renderedReturned) {
           this.renderedList = renderedReturned.results;
-
           this.renderedDataTable = {
-            headerRow: [ 'Name', 'Category', 'Business', 'Date Requested', 'Date Fulfilled', 'Business Followed Up?', 'Family Followed Up?'],
-            footerRow: [  'Name', 'Category', 'Business', 'Date Requested', 'Date Fulfilled', 'Business Followed Up?', 'Family Followed Up?'],
+            headerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Date Fulfilled', 'Business Followed Up?', 'Family Followed Up?'],
+            footerRow: [  'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Date Fulfilled', 'Business Followed Up?', 'Family Followed Up?'],
             dataRows: this.renderedList
           };
          }
@@ -53,6 +60,7 @@ export class ListServicesComponent implements OnInit {
   }
 
   ngAfterViewInit(){
+
     $('#activetable').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [
@@ -63,31 +71,14 @@ export class ListServicesComponent implements OnInit {
       language: {
         search: "_INPUT_",
         searchPlaceholder: "Search records",
-      }
+      },
 
     });
 
     var aTable = $('#activetable').DataTable();
 
-    // Edit record
-    aTable.on('click', '.edit', function() {
-      let $tr = $(this).closest('tr');
-
-      var data = aTable.row($tr).data();
-      alert('Click here to view or edit ' + data[0] + '\'s information.');
-    });
-
-
-    aTable.on('click', '.fulfill', function(e) {
-      var c = confirm("Are you sure you wish to mark this request as fulfilled?");
-      if(c) {
-        var currentRow = $(this).closest('tr');
-        var data = aTable.row(currentRow).data();
-        this.onFulfill();
-      }
-    });
-
   $('#renderedtable').DataTable({
+
     "pagingType": "full_numbers",
     "lengthMenu": [
       [10, 25, 50, -1],
@@ -97,36 +88,269 @@ export class ListServicesComponent implements OnInit {
     language: {
       search: "_INPUT_",
       searchPlaceholder: "Search records",
-    }
-
+    },
+    bAutoWidth: false,
+    aoColumns : [
+      { sWidth: '2%' },
+      { sWidth: '10%' },
+      { sWidth: '10%' },
+      { sWidth: '10%' },
+      { sWidth: '10%' },
+      { sWidth: '10%' },
+      { sWidth: '10%' },
+      { sWidth: '5%' },
+      { sWidth: '5%' },
+      { sWidth: '20%' }
+    ],
   });
 
   var rTable = $('#renderedtable').DataTable();
 
-  // Edit record
-  rTable.on('click', '.edit', function() {
-    let $tr = $(this).closest('tr');
-
-    var data = rTable.row($tr).data();
-    alert('Click here to view or edit ' + data[0] + '\'s information.');
-  });
   }
 
-  onFulfill(data = []) {
-    const request: any = {
-      familyName: data[0],
-      dateRequested: data[3]
-    }
-    this.serviceService.fulfillRequest(request).subscribe((responseData) => {
-      if (responseData.requestFulfilled) {
-        Swal.fire({
-          title: "Request fulfilled!",
-          text: "The request has been moved to \"Services Rendered.\"",
-          buttonsStyling: false,
-          confirmButtonClass: "btn btn-success",
-          type: "success"
-        })
+  fulfillRequest(itemId) {
+    Swal.fire({
+      title: "Are you sure you wish to mark this request as fulfilled?",
+      text: "It will be moved to the Services Rendered table.",
+      type: "warning",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-info",
+      confirmButtonClass: "btn btn-success",
+      confirmButtonText: "Yes, move it!",
+      cancelButtonText: "No, leave it!",
+      reverseButtons: true
+    })
+    .then((fulfill) => {
+      if(fulfill.value) {
+        const request: any = {
+          id: itemId,
+          dateFulfilled: this.today
+        }
+        this.serviceService.fulfillRequest(request).subscribe((responseData) => {
+          if (responseData.requestFulfilled) {
+            Swal.fire({
+              title: "Request fulfilled!",
+              text: "The request has been moved to Services Rendered.",
+              buttonsStyling: false,
+              confirmButtonClass: "btn btn-success",
+              type: "success"
+            }).then((confirm) => {
+              if(confirm){
+                window.location.reload()
+              }
+            })
+          }
+        });
       }
     });
+  }
+
+  markBusinessNotified(itemId) {
+    Swal.fire({
+      title: "Has this business been notified?",
+      type: "warning",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-info",
+      confirmButtonClass: "btn btn-success",
+      confirmButtonText: "Yes, mark it!",
+      cancelButtonText: "Not yet, leave it!",
+      reverseButtons: true
+    })
+    .then((notify) => {
+      if(notify.value) {
+        const request: any = {
+          id: itemId,
+        }
+        this.serviceService.markBusinessNotified(request).subscribe((responseData) => {
+          if (responseData.requestFulfilled) {
+            Swal.fire({
+              title: "Changes saved!",
+              text: "The service request has been modified.",
+              buttonsStyling: false,
+              confirmButtonClass: "btn btn-success",
+              type: "success"
+            }).then((confirm) => {
+              if(confirm){
+                window.location.reload()
+              }
+            })
+          }
+        });
+      }
+    });
+  }
+
+  markFamilyNotified(itemId) {
+    Swal.fire({
+      title: "Has this family been notified?",
+      type: "warning",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-info",
+      confirmButtonClass: "btn btn-success",
+      confirmButtonText: "Yes, mark it!",
+      cancelButtonText: "Not yet, leave it!",
+      reverseButtons: true
+    })
+    .then((notify) => {
+      if(notify.value) {
+        const request: any = {
+          id: itemId,
+        }
+        this.serviceService.markFamilyNotified(request).subscribe((responseData) => {
+          if (responseData.requestFulfilled) {
+            Swal.fire({
+              title: "Changes saved!",
+              text: "The service request has been modified.",
+              buttonsStyling: false,
+              confirmButtonClass: "btn btn-success",
+              type: "success"
+            }).then((confirm) => {
+              if(confirm){
+                window.location.reload()
+              }
+            })
+          }
+        });
+      }
+    });
+  }
+
+  markBusinessFollowedUp(itemId) {
+    Swal.fire({
+      title: "Has this business been followed up with?",
+      type: "warning",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-info",
+      confirmButtonClass: "btn btn-success",
+      confirmButtonText: "Yes, mark it!",
+      cancelButtonText: "Not yet, leave it!",
+      reverseButtons: true
+    })
+    .then((notify) => {
+      if(notify.value) {
+        const request: any = {
+          id: itemId,
+        }
+        this.serviceService.markBusinessFollowedUp(request).subscribe((responseData) => {
+          if (responseData.requestFulfilled) {
+            Swal.fire({
+              title: "Changes saved!",
+              text: "The rendered service has been modified.",
+              buttonsStyling: false,
+              confirmButtonClass: "btn btn-success",
+              type: "success"
+            }).then((confirm) => {
+              if(confirm){
+                window.location.reload()
+              }
+            })
+          }
+        });
+      }
+    });
+  }
+
+  markFamilyFollowedUp(itemId) {
+    Swal.fire({
+      title: "Has this family been followed up with?",
+      type: "warning",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-info",
+      confirmButtonClass: "btn btn-success",
+      confirmButtonText: "Yes, mark it!",
+      cancelButtonText: "Not yet, leave it!",
+      reverseButtons: true
+    })
+    .then((notify) => {
+      if(notify.value) {
+        const request: any = {
+          id: itemId,
+        }
+        this.serviceService.markFamilyFollowedUp(request).subscribe((responseData) => {
+          if (responseData.requestFulfilled) {
+            Swal.fire({
+              title: "Changes saved!",
+              text: "The rendered service has been modified.",
+              buttonsStyling: false,
+              confirmButtonClass: "btn btn-success",
+              type: "success"
+            }).then((confirm) => {
+              if(confirm){
+                window.location.reload()
+              }
+            })
+          }
+        });
+      }
+    });
+  }
+
+  deleteRequest(itemId) {
+    Swal.fire({
+      title: "DELETE SERVICE REQUEST?",
+      text: "Would you like to permanently delete this request? This cannot be undone!",
+      type: "warning",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-info",
+      confirmButtonClass: "btn btn-danger",
+      confirmButtonText: "Yes, remove it!",
+      cancelButtonText: "No, leave it!",
+      reverseButtons: true
+    })
+    .then((mark) => {
+      if(mark.value) {
+        Swal.fire({
+          title: "ARE YOU SURE?",
+          text: "Once it has been deleted, it cannot be recovered!",
+          type: "warning",
+          showCancelButton: true,
+          cancelButtonClass: "btn btn-info",
+          confirmButtonClass: "btn btn-danger",
+          confirmButtonText: "Yes, remove it!",
+          cancelButtonText: "No, leave it!",
+        })
+        .then((doublemark) => {
+          if(doublemark.value) {
+            const request: any = {
+              id: itemId,
+            }
+            this.serviceService.deleteRequest(request).subscribe((responseData) => {
+              if (responseData.requestFulfilled) {
+                Swal.fire({
+                  title: "Request removed!",
+                  text: "The service request has been deleted.",
+                  buttonsStyling: false,
+                  confirmButtonClass: "btn btn-success",
+                  type: "success"
+                }).then((confirm) => {
+                  if(confirm){
+                    window.location.reload()
+                  }
+                })
+              }
+            });
+          }
+        })
+      }
+      })
+  }
+
+  showClipboard(){
+    Swal.fire({
+      title: "Copied!",
+      text: "The link to the Service Request form has been successfully copied to your clipboard.",
+      buttonsStyling: false,
+      confirmButtonClass: "btn btn-success",
+      type: "success"
+      })
+
+  }
+
+  showNote(note) {
+    Swal.fire({
+      title: "Note from the Family",
+      text: note,
+      confirmButtonClass: "btn btn-success",
+    })
   }
 }

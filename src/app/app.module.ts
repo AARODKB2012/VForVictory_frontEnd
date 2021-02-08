@@ -24,8 +24,15 @@ import { NewFamilyComponent } from './new-family/new-family.component';
 import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListServicesComponent } from './list-services/list-services.component';
 import { YesNoPipe } from './yesno.pipe';
+import { YesNoActivePipe } from './yesnoactive.pipe';
 import { RequestServiceComponent } from './request-service/request-service.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { UserComponent } from './userpage/user.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ActiveServicesComponent } from './active-services/active-services.component';
+
 
 @NgModule({
     imports:      [
@@ -39,8 +46,10 @@ import { EditServicesComponent } from './edit-services/edit-services.component';
         SidebarModule,
         NavbarModule,
         FooterModule,
+        ClipboardModule,
         FixedPluginModule,
         HttpClientModule,
+        CommonModule
     ],
     declarations: [
         AppComponent,
@@ -53,8 +62,11 @@ import { EditServicesComponent } from './edit-services/edit-services.component';
         ListBusinessComponent,
         ListServicesComponent,
         YesNoPipe,
+        YesNoActivePipe,
         RequestServiceComponent,
         EditServicesComponent,
+        UserComponent,
+        ActiveServicesComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
