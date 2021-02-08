@@ -11,7 +11,10 @@ import { ListServicesComponent } from './list-services/list-services.component';
 import { RequestServiceComponent } from './request-service/request-service.component'
 import { NewFamilyComponent } from './new-family/new-family.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
+<<<<<<< HEAD
 import { UserComponent } from './userpage/user.component';
+=======
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
 import { LockComponent } from './pages/lock/lock.component';
 import { AuthGuard } from './_guards/index';
 
@@ -37,6 +40,7 @@ export const AppRoutes: Routes = [{
                 path: 'volunteers/new', component: NewVolunteerComponent, canActivate: [AuthGuard]
             },
             {
+<<<<<<< HEAD
                 path: 'volunteers/profile', component: UserComponent, canActivate: [AuthGuard]
             },
             {
@@ -44,6 +48,15 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'family/new', component: NewFamilyComponent, canActivate: [AuthGuard]
+=======
+                path: 'volunteers/view', component: NewVolunteerComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'volunteers/edit', component: NewVolunteerComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'families', component: ListFamilyComponent, canActivate: [AuthGuard]
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
             },
             {
                 path: 'volunteers/edit', component: NewVolunteerComponent, canActivate: [AuthGuard]

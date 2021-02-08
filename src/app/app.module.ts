@@ -34,6 +34,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ActiveServicesComponent } from './active-services/active-services.component';
 
 
+
 @NgModule({
     imports:      [
         BrowserAnimationsModule,
@@ -64,9 +65,13 @@ import { ActiveServicesComponent } from './active-services/active-services.compo
         YesNoPipe,
         YesNoActivePipe,
         RequestServiceComponent,
+<<<<<<< HEAD
         EditServicesComponent,
         UserComponent,
         ActiveServicesComponent
+=======
+        EditServicesComponent
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
