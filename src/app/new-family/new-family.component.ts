@@ -16,9 +16,59 @@ export class NewFamilyComponent implements OnInit {
   private md5 = new Md5();
   errorInForm: boolean;
   passwordMatch: boolean;
+<<<<<<< HEAD
   constructor(public familyService: FamilyService, public router: Router) { }
 
   ngOnInit(): void {
+=======
+  model2:Date;
+  constructor(public userService: UsersService, public router: Router) { }
+
+  ngOnInit(){
+    this.model2 = new Date();
+    $('[rel="tooltip"]').tooltip();
+
+    var tagClass = $('.tagsinput').data('color');
+
+    if ($(".tagsinput").length != 0) {
+      $('.tagsinput').tagsinput();
+    }
+
+    $('.bootstrap-tagsinput').addClass('' + tagClass + '-badge');
+
+    //  Init Bootstrap Select Picker
+    if ($(".selectpicker").length != 0) {
+      $(".selectpicker").selectpicker({
+        iconBase: "nc-icon",
+        tickIcon: "nc-check-2"
+      });
+    }
+
+    if ($(".datetimepicker").length != 0) {
+      $('.datetimepicker').datetimepicker({
+        icons: {
+          time: "fa fa-clock-o",
+          date: "fa fa-calendar",
+          up: "fa fa-chevron-up",
+          down: "fa fa-chevron-down",
+          previous: 'fa fa-chevron-left',
+          next: 'fa fa-chevron-right',
+          today: 'fa fa-screenshot',
+          clear: 'fa fa-trash',
+          close: 'fa fa-remove'
+        },
+        debug: true
+      });
+    }
+  }
+  getStatusDescription(statusId: string) {
+    if (statusId === '1') {
+      return 'Active';
+    } else {
+      return 'Inactive';
+    }
+  }
+>>>>>>> origin/service_record
 
   }
 

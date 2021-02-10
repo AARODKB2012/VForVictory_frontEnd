@@ -5,10 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { UserModel } from 'app/user.model';
 import { UsersService } from 'app/users.service';
 import { ActivatedRoute, Router } from '@angular/router';
+<<<<<<< HEAD
 import {Md5} from 'ts-md5/dist/md5';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import {AuthService} from '../auth.service';
+=======
+>>>>>>> origin/service_record
 
 declare var $: any;
 @Component({
@@ -25,6 +28,7 @@ export class UserComponent{
     public user: UserModel;
     public educationLevelList: [];
     public roleList: [];
+<<<<<<< HEAD
     private md5 = new Md5();
     public errorInForm: boolean;
     public fileToUpload: File = null;
@@ -33,6 +37,13 @@ export class UserComponent{
         this.activeRoute.queryParams.subscribe(params => {
             this.userId = params['id'];
         });
+=======
+    constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
+        this.activeRoute.queryParams.subscribe(params => {
+            this.userId = params['id'];
+        });
+
+>>>>>>> origin/service_record
         if (this.userId) {
             this.userService.getVolunteerById(this.userId).subscribe((responseData) => {
               if (responseData) {
@@ -61,6 +72,7 @@ export class UserComponent{
               this.roleList = responseData.results;
             }
         });
+<<<<<<< HEAD
 
         this.authService.getLoginHistory(this.userId).subscribe((loginHistory) => {
             if (loginHistory) {
@@ -192,5 +204,7 @@ export class UserComponent{
                 }
             });
         }
+=======
+>>>>>>> origin/service_record
     }
 }

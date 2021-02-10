@@ -17,6 +17,18 @@ export class ServicesService {
   private serverAddress = environment.backendURL;
   constructor(private httpClient: HttpClient, private router: Router, private http: Http) { }
 
+  getAllServices(): any {
+    return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service');
+  }
+
+  getAllCategories(): any {
+    return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/category');
+  }
+
+  getActiveServices(): any {
+    return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/list');
+  }
+
   saveRequest(request: any) {
     return this.httpClient.post<{requestCreated: boolean}>(this.serverAddress + 'api/service/new', request);
   }
@@ -25,11 +37,47 @@ export class ServicesService {
     return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/fulfill', request);
   }
 
-  listActiveServices(): any {
+  markBusinessNotified(request: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/notifyBusiness', request);
+  }
+
+  markFamilyNotified(request: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/notifyFamily', request);
+  }
+
+  markBusinessFollowedUp(request: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/followupBusiness', request);
+  }
+
+  markFamilyFollowedUp(request: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/followupFamily', request);
+  }
+
+  markServiceActive(request: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/markActive', request);
+  }
+
+  markServiceInactive(request: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/markInactive', request);
+  }
+
+  listActiveRequests(): any {
     return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/active');
   }
 
   listRenderedServices(): any {
     return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/rendered');
+  }
+
+  getServiceById(serviceId: Number) {
+    return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/get/id/' + serviceId);
+  }
+
+  getRequestById(serviceId: Number) {
+    return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/id/' + serviceId);
+  }
+
+  deleteRequest(request: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/delete', request);
   }
 }

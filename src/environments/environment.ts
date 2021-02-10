@@ -5,7 +5,17 @@
 
 export const environment = {
   production: false,
+<<<<<<< HEAD
   //backendURL: 'http://vfv-backend-service.azurewebsites.net/'
   backendURL: 'http://localhost:3000/',
   passwordResetURL: 'http://localhost:4200/#/pages/reset'
+=======
+<<<<<<< HEAD
+  //backendURL: 'http://vfv-backend-service.azurewebsites.net/'
+  backendURL: 'http://localhost:3000/',
+  passwordResetURL: 'http://localhost:4200/#/pages/reset'
+=======
+  backendURL: 'http://127.0.0.1:3000/'
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
 };

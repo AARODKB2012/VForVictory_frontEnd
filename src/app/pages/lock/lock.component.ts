@@ -5,8 +5,16 @@ import {EmailService} from '../../email.service';
 import {UsersService} from '../../users.service';
 import { NgForm } from '@angular/forms';
 import { UserModel } from 'app/user.model';
+<<<<<<< HEAD
 import {environment} from '../../../environments/environment';
 import {Md5} from 'ts-md5/dist/md5';
+=======
+<<<<<<< HEAD
+import {environment} from '../../../environments/environment';
+import {Md5} from 'ts-md5/dist/md5';
+=======
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
 
 declare var $:any;
 
@@ -26,12 +34,17 @@ export class LockComponent implements OnInit{
     public emailNotFound: boolean;
     private userModel: UserModel;
     public errorInForm: boolean;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/service_record
     private passwordResetURL = environment.passwordResetURL;
     private userEmail: string;
     private userId: number;
     public resetMode: boolean;
     public recoverMode: boolean;
     public passwordMismatch: boolean;
+<<<<<<< HEAD
 
     constructor(private element : ElementRef, public emailService: EmailService, public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
         const tree: UrlTree = router.parseUrl(this.router.url);
@@ -51,6 +64,33 @@ export class LockComponent implements OnInit{
         } else {
             this.recoverMode = true;
         }
+=======
+
+    constructor(private element : ElementRef, public emailService: EmailService, public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
+        const tree: UrlTree = router.parseUrl(this.router.url);
+        const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
+        const s: UrlSegment[] = g.segments;
+
+        if (s[1].path === 'reset') {
+            this.resetMode = true;
+            this.activeRoute.queryParams.subscribe(params => {
+                this.userEmail = params['id'];
+                this.userService.getVolunteerByEmail(atob(this.userEmail)).subscribe((response) => {
+                    if (response.status === 200) {
+                        this.userId = response.body['results'][0].record_id;
+                    }
+                });
+            });
+        } else {
+            this.recoverMode = true;
+        }
+=======
+
+    constructor(private element : ElementRef, public emailService: EmailService, public userService: UsersService) {
+        this.nativeElement = element.nativeElement;
+        this.sidebarVisible = false;
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
     }
 
     checkFullPageBackgroundImage(){
@@ -99,6 +139,10 @@ export class LockComponent implements OnInit{
         }
     }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/service_record
     confirmPassword(password: string, confirmPassword: string) {
         if (password === confirmPassword) {
           return true;
@@ -107,6 +151,11 @@ export class LockComponent implements OnInit{
         }
       }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
     forgotPassword(form: NgForm) {
         if ( form.invalid ) {
             this.errorInForm = true;
@@ -119,11 +168,27 @@ export class LockComponent implements OnInit{
                     const emailObject = {
                         mailTo: form.value.email,
                         subject: 'Password Reset',
+<<<<<<< HEAD
+                        messageBody: this.passwordResetURL + '?id=' + btoa(form.value.email)
+=======
+<<<<<<< HEAD
                         messageBody: this.passwordResetURL + '?id=' + btoa(form.value.email)
                     }
                     this.emailService.sendEmail(emailObject).subscribe((mailResponse) => {
                         if (mailResponse) {
                             this.emailSent = true;
+=======
+                        messageBody: 'To reset your password click here:'
+>>>>>>> origin/service_record
+                    }
+                    this.emailService.sendEmail(emailObject).subscribe((mailResponse) => {
+                        if (mailResponse) {
+<<<<<<< HEAD
+                            this.emailSent = true;
+=======
+                        this.emailSent = true;
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
                         }
                     });
                 } else {
@@ -132,6 +197,7 @@ export class LockComponent implements OnInit{
                 }
             });
         }
+<<<<<<< HEAD
     }
 
     resetPassword(form: NgForm) {
@@ -151,5 +217,31 @@ export class LockComponent implements OnInit{
                 this.passwordMismatch = true;
             }
         }
+=======
+<<<<<<< HEAD
+    }
+
+    resetPassword(form: NgForm) {
+        if ( form.invalid ) {
+            this.errorInForm = true;
+            return;
+        } else {
+            if(this.confirmPassword(form.value.password, form.value.recoverPassword)){
+                const md5 = new Md5();
+                const passwordHash = md5.appendStr(form.value.password).end();
+                this.userService.changePassword(passwordHash, this.userId).subscribe((responseData) => {
+                    if (responseData.userUpdated) {
+                        this.router.navigate(['/pages/login'], { queryParams: { fromResetPassword: true } });
+                    }
+                  });
+            } else{
+                this.passwordMismatch = true;
+            }
+        }
+=======
+
+
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
     }
 }

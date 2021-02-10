@@ -1,4 +1,5 @@
 <div class="main-content">
+<<<<<<< HEAD
   <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate enctype="multipart/form-data">
     <div class="row">
       <div class="col-md-4">
@@ -27,6 +28,56 @@
                 <h5 class="title">{{fullName}}</h5>
               </a>
             </div>
+=======
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img src="./assets/img/bg/damir-bosnjak.jpg" alt="...">
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <a href="javascript:void(0)">
+              <img *ngIf="!profilePictureURL" class="avatar border-gray" src="../../assets/img/default-avatar.png" />
+              <img *ngIf="profilePictureURL" class="avatar border-gray" src="{{profilePictureURL}}" />
+              <h5 class="title">{{fullName}}</h5>
+            </a>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="education">Education</label>
+              <select class="custom-select d-block w-100" id="education" name="education" [ngModel]="user?.educational_background" ngModel #education="ngModel" [disabled]="true">
+                  <option *ngFor="let education of educationLevelList" [ngValue]="education.id">
+                      {{education.description}}
+                  </option>
+              </select>
+              <div *ngIf="education.invalid && (education.dirty || education.touched || errorInForm)" class="text-danger">
+              <div *ngIf="education.errors.required">
+                  Education is required.
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="licenses">Licenses</label>
+                <textarea class="form-control" id="licenses" name="licenses" [ngModel]="user?.current_licenses" ngModel #licenses="ngModel" [readonly]="true"></textarea>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="availability">Availability</label>
+                <textarea class="form-control" id="availability" name="availability" [ngModel]="user?.availability" ngModel #availability="ngModel" [readonly]="true"></textarea>
+            </div>
+            </div>
+<!--           <p class="description text-center">
+            "I like the way you work it
+            <br> No diggity
+            <br> I wanna bag it up"
+          </p> -->
+        </div>
+<!--         <div class="card-footer">
+          <hr>
+          <div class="button-container">
+>>>>>>> origin/service_record
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="education">Education</label>
@@ -37,6 +88,7 @@
                 </select>
               </div>
             </div>
+<<<<<<< HEAD
             <div class="row">
               <div class="col-md-6 mb-3">
                   <label for="licenses">Licenses</label>
@@ -78,6 +130,59 @@
               </div>
             </div>
           </div> -->
+=======
+          </div>
+        </div> -->
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">System Information</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" disabled="" id="username" name="username" [ngModel]="user?.username" ngModel #username="ngModel">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="role">Role</label>
+                <select class="custom-select d-block w-100" id="role" name="role" [ngModel]="user?.role" ngModel #role="ngModel" required [disabled]="true">
+                    <option *ngFor="let role of roleList" [ngValue]="role.id">
+                        {{role.description}}
+                    </option>
+                </select>
+                <div *ngIf="role.invalid && (role.dirty || role.touched || errorInForm)" class="text-danger">
+                <div *ngIf="role.errors.required">
+                    Role is required.
+                </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label for="status">Status</label>
+                <select class="custom-select d-block w-100" id="status" name="status" [ngModel]="user?.status" ngModel #status="ngModel" required [disabled]="true">
+                <option value="1">Active</option>
+                <option value="2">Inactive</option>
+                </select>
+                <div *ngIf="status.invalid && (status.dirty || status.touched || errorInForm)" class="text-danger">
+                <div *ngIf="status.errors.required">
+                    Status is required.
+                </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Edit Profile</h5>
+>>>>>>> origin/service_record
         </div>
         <div class="card">
           <div class="card-header">
@@ -85,14 +190,28 @@
           </div>
           <div class="card-body">
             <div class="row">
+<<<<<<< HEAD
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Username</label>
                   <input type="text" class="form-control"  id="username" name="username" [ngModel]="user?.username" ngModel #username="ngModel" [readonly]="true">
+=======
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" id="firstName" name="firstName" [ngModel]="user?.first_name" #firstName="ngModel" required maxlength="30" minlength="1">
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" id="lastName" name="lastName" [ngModel]="user?.last_name" ngModel #lastName="ngModel" required>
+>>>>>>> origin/service_record
                 </div>
               </div>
             </div>
             <div class="row">
+<<<<<<< HEAD
               <div class="col-md-6 mb-3">
                   <label for="role">Role</label>
                   <select class="custom-select d-block w-100" id="role" name="role" [ngModel]="user?.role" ngModel #role="ngModel" required [disabled]="true">
@@ -108,10 +227,24 @@
                     <option value="1">Active</option>
                     <option value="2">Inactive</option>
                   </select>
+=======
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" id="cellPhone" name="cellPhone" [ngModel]="user?.cell_phone" ngModel #cellPhone="ngModel" placeholder="(555)-555-5555" required>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="email" name="email"  [ngModel]="user?.email" ngModel #email="ngModel" placeholder="you@example.com" required>
+                </div>
+>>>>>>> origin/service_record
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
+<<<<<<< HEAD
                 <h4 class="card-title">Login History</h4>
                 <div class="table-responsive">
                   <table class="table">
@@ -185,6 +318,19 @@
                     <label>Last Name</label>
                     <input type="text" class="form-control" id="lastName" name="lastName" [ngModel]="user?.last_name" ngModel #lastName="ngModel" required>
                   </div>
+=======
+                <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" id="address" name="address" [ngModel]="user?.address" ngModel #address="ngModel" placeholder="1234 Main St" required>
+                </div>
+              </div>
+            </div>
+<!--             <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>City</label>
+                  <input type="text" class="form-control" placeholder="City" value="Melbourne">
+>>>>>>> origin/service_record
                 </div>
               </div>
               <div class="row">
@@ -209,6 +355,7 @@
                   </div>
                 </div>
               </div>
+<<<<<<< HEAD
   <!--             <div class="row">
                 <div class="col-md-4 pr-1">
                   <div class="form-group">
@@ -235,6 +382,14 @@
                     <label>About Me</label>
                     <textarea rows="4" cols="80" class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
                   </div>
+=======
+            </div> -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>About Me</label>
+                  <textarea rows="4" cols="80" class="form-control textarea">Oh so, your weak rhyme You doubt I'll bother, reading into it</textarea>
+>>>>>>> origin/service_record
                 </div>
               </div>
           </div>
@@ -270,6 +425,36 @@
           </div>
       </div>
       </div>
+      <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Emergency Contact</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <label for="emergencyFirstName">First name</label>
+                <input type="text" class="form-control" id="emergencyFirstName" name="emergencyFirstName" [ngModel]="user?.emergency_contact_name" ngModel #emergencyFirstName="ngModel" [readonly]="viewMode">
+                </div>
+                <div class="col-md-6 mb-3">
+                <label for="emergencyLastName">Last name</label>
+                <input type="text" class="form-control" id="emergencyLastName" name="emergencyLastName" [ngModel]="user?.emergency_contact_name" ngModel #emergencyLastName="ngModel" [readonly]="viewMode">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <label for="emergencyEmail">Email</label>
+                <input type="email" class="form-control" id="emergencyEmail" name="emergencyEmail" [ngModel]="user?.emergency_contact_email" ngModel #emergencyEmail="ngModel" placeholder="you@example.com" [readonly]="viewMode">
+                </div>
+                <div class="col-md-6 mb-3">
+                <label for="emergencyPhone">Phone Number</label>
+                <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone" [ngModel]="user?.emergency_contact_phone" ngModel #emergencyPhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="emergencyAddress">Address</label>
+                <input type="text" class="form-control" id="emergencyAddress" name="emergencyAddress" [ngModel]="user?.emergency_contact_address" ngModel #emergencyAddress="ngModel" placeholder="1234 Main St" [readonly]="viewMode">
+            </div>
+        </div>
+    </div>
     </div>
 </form>
 </div>

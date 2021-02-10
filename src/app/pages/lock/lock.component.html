@@ -21,7 +21,15 @@
     <!--   you can change the color of the filter page using: data-color="blue | green | orange | red | purple" -->
     <div class="content">
       <div class="container">
+<<<<<<< HEAD
         <form *ngIf="recoverMode" class="needs-validation" novalidate (submit)="forgotPassword(templateForm)" #templateForm="ngForm">
+=======
+<<<<<<< HEAD
+        <form *ngIf="recoverMode" class="needs-validation" novalidate (submit)="forgotPassword(templateForm)" #templateForm="ngForm">
+=======
+        <form class="needs-validation" novalidate (submit)="forgotPassword(templateForm)" #templateForm="ngForm">
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
           <div class="col-lg-4 col-md-6 ml-auto mr-auto">
             <div class="card card-lock text-center">
               <div class="card-body ">
@@ -42,6 +50,36 @@
               <div class="card-footer ">
                 <button type="submit" class="btn btn-outline-default btn-round">Recover Password</button>
               </div>
+<<<<<<< HEAD
+            </div>
+          </div>
+        </form>
+        <form *ngIf="resetMode" class="needs-validation" novalidate (submit)="resetPassword(templateForm)" #templateForm="ngForm">
+          <div class="col-lg-4 col-md-6 ml-auto mr-auto">
+            <div class="card card-lock text-center">
+              <div class="card-body ">
+                <div class="alert alert-danger" role="alert" *ngIf="passwordMismatch">
+                  The password entered do not match.
+                </div>
+                <h4 class="card-title">Reset Password</h4>
+                <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Enter new password" id="password" name="password" ngModel #password="ngModel" required>
+                  <div *ngIf="errorInForm" class="text-danger">
+                    Password is required.
+                 </div>
+                </div>
+                <div class="form-group">
+                  <input type="password" class="form-control" placeholder="Enter new password again" id="recoverPassword" name="recoverPassword" ngModel #recoverPassword="ngModel" required>
+                  <div *ngIf="errorInForm" class="text-danger">
+                    Password confirmation is required.
+                 </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <button type="submit" class="btn btn-outline-default btn-round">Reset Password</button>
+              </div>
+=======
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
             </div>
           </div>
         </form>

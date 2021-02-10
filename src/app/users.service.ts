@@ -47,12 +47,21 @@ export class UsersService {
     +  passwordHash + '/' + volunteerId, null);
   }
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> origin/service_record
   updateProfilePicture(profilePicture: File, username) {
     const formData: FormData = new FormData();
     formData.append('fileKey', profilePicture, profilePicture.name);
     return this.httpClient.post<{userUpdated: boolean}>(this.serverAddress + 'api/volunteer/picture/' + username, formData);
   }
 
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
   getVolunteerByEmail(volunteerEmail: String) {
     return this.httpClient.get(this.serverAddress + 'api/volunteer/email/' + volunteerEmail, {observe: 'response'});
   }
@@ -68,4 +77,11 @@ export class UsersService {
   getAllRoles(): any {
     return this.httpClient.get<UserAPIResponse>(this.serverAddress + 'api/volunteer/role/');
   }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
 }

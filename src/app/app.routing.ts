@@ -6,11 +6,19 @@ import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
+import { ActiveServicesComponent } from './active-services/active-services.component';
 import { ListServicesComponent } from './list-services/list-services.component';
 import { RequestServiceComponent } from './request-service/request-service.component'
 import { NewFamilyComponent } from './new-family/new-family.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
+<<<<<<< HEAD
 import { UserComponent } from './userpage/user.component';
+=======
+<<<<<<< HEAD
+import { UserComponent } from './userpage/user.component';
+=======
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
 import { LockComponent } from './pages/lock/lock.component';
 import { AuthGuard } from './_guards/index';
 
@@ -36,6 +44,10 @@ export const AppRoutes: Routes = [{
                 path: 'volunteers/new', component: NewVolunteerComponent, canActivate: [AuthGuard]
             },
             {
+<<<<<<< HEAD
+                path: 'volunteers/profile', component: UserComponent, canActivate: [AuthGuard]
+=======
+<<<<<<< HEAD
                 path: 'volunteers/profile', component: UserComponent, canActivate: [AuthGuard]
             },
             {
@@ -43,6 +55,20 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'family/new', component: NewFamilyComponent, canActivate: [AuthGuard]
+=======
+                path: 'volunteers/view', component: NewVolunteerComponent, canActivate: [AuthGuard]
+>>>>>>> origin/service_record
+            },
+            {
+                path: 'family', component: ListFamilyComponent, canActivate: [AuthGuard]
+            },
+            {
+<<<<<<< HEAD
+                path: 'family/new', component: NewFamilyComponent, canActivate: [AuthGuard]
+=======
+                path: 'families', component: ListFamilyComponent, canActivate: [AuthGuard]
+>>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
+>>>>>>> origin/service_record
             },
             {
                 path: 'volunteers/edit', component: NewVolunteerComponent, canActivate: [AuthGuard]
@@ -57,9 +83,8 @@ export const AppRoutes: Routes = [{
                 path: 'services/edit', component: EditServicesComponent, canActivate: [AuthGuard]
             },
             {
-                path: 'services/new', component: RequestServiceComponent
+                path: 'services/active', component: ActiveServicesComponent, canActivate: [AuthGuard]
             }
-
             /* {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
@@ -105,5 +130,8 @@ export const AppRoutes: Routes = [{
                 path: 'pages',
                 loadChildren: './pages/pages.module#PagesModule'
             }]
-        }
+        },
+            {
+                path: 'request', component: RequestServiceComponent
+            }
 ];

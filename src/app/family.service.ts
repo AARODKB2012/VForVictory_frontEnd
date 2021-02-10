@@ -21,6 +21,10 @@ export class FamilyService{
     saveFamily(family: any) {
     return this.httpClient.post<{familyCreated: boolean}>(this.serverAddress + 'api/family/new', family);
   }
+  
+    private serverAddress = environment.backendURL;
+    constructor(private httpClient: HttpClient,private route: Router, private http: Http){}
+  
     listFamily():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/');
     }

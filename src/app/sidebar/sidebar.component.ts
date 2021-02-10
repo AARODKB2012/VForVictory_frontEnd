@@ -156,9 +156,16 @@ export class SidebarComponent {
         this.menuItems = ROUTES.filter(menuItem => menuItem);
         this.fullName = JSON.parse(localStorage.getItem('currentUser')).first_name + ' ' +
         JSON.parse(localStorage.getItem('currentUser')).last_name;
+<<<<<<< HEAD
         this.username = JSON.parse(localStorage.getItem('currentUser')).username;
         this.userId = JSON.parse(localStorage.getItem('currentUser')).record_id;
         if (JSON.parse(localStorage.getItem('currentUser')).profile_picture_url){
+=======
+        
+        if (JSON.parse(localStorage.getItem('currentUser')).profile_picture_url){
+            this.username = JSON.parse(localStorage.getItem('currentUser')).username;
+            this.userId = JSON.parse(localStorage.getItem('currentUser')).record_id;
+>>>>>>> origin/service_record
             this.profilePictureURL = environment.backendURL + `api/volunteer/username/${this.username}/profile/picture`
         }
     }
