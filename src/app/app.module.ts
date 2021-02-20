@@ -24,11 +24,15 @@ import { NewFamilyComponent } from './new-family/new-family.component';
 import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListServicesComponent } from './list-services/list-services.component';
 import { YesNoPipe } from './yesno.pipe';
+import { YesNoActivePipe } from './yesnoactive.pipe';
 import { RequestServiceComponent } from './request-service/request-service.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { UserComponent } from './userpage/user.component';
+import { ActiveServicesComponent } from './active-services/active-services.component';
+import { FamilyApplicationComponent } from './family-application/family-application.component';
+import { ActiveFamilyComponent } from './active-family/active-family.component';
 
 
 @NgModule({
@@ -58,9 +62,13 @@ import { UserComponent } from './userpage/user.component';
         ListBusinessComponent,
         ListServicesComponent,
         YesNoPipe,
+        YesNoActivePipe,
         RequestServiceComponent,
         EditServicesComponent,
-        UserComponent
+        UserComponent,
+        ActiveServicesComponent,
+        FamilyApplicationComponent,
+        ActiveFamilyComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

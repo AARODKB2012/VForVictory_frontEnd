@@ -5,5 +5,6 @@ export interface FamilyModel {
     email: string;
     endOfTreatmentDate: string;
     address: string;
+    active: boolean;
 }
   

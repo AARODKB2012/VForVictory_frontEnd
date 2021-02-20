@@ -8,21 +8,28 @@
                           <h4 class="card-title">Active Requests</h4>
                       </div>
                       <div class="col-md-6 text-right">
-                          <button class="btn btn-info" routerLink="/services/new">
-                              <span class="btn-label">
-                                <i class="nc-icon nc-badge"></i>
-                              </span>
-                              View Service Request Form
-                          </button>
+                        <button class="btn btn-info" routerLink="/services/active">
+                          <span class="btn-label">
+                            <i class="nc-icon nc-box"></i>
+                          </span>
+                          Edit Active Services
+                        </button>
+                        <button class="btn btn-info" [cdkCopyToClipboard]="url + '/#/request'" (click)="showClipboard()">
+                          <span class="btn-label">
+                            <i class="nc-icon nc-single-copy-04"></i>
+                          </span>
+                          Copy Request Form To Clipboard
+                        </button>
                       </div>
                 </div>
             </div>
               <div class="card-body">
-                  <div class="toolbar">
+                  <div *ngIf="!activeList" class="toolbar">
+                    <h4><em>There are no active requests at this time.</em></h4>
                       <!--        Here you can write extra buttons/actions for the toolbar              -->
 
                   </div>
-                  <table id="activetable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                  <table *ngIf="activeList" id="activetable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                       <thead>
                           <tr>
                             <th>{{ activeDataTable.headerRow[0] }}</th>
@@ -31,7 +38,9 @@
                             <th>{{ activeDataTable.headerRow[3] }}</th>
                             <th>{{ activeDataTable.headerRow[4] }}</th>
                             <th>{{ activeDataTable.headerRow[5] }}</th>
-                            <th class="disabled-sorting">Actions</th>
+                            <th>{{ activeDataTable.headerRow[6] }}</th>
+                            <th>{{ activeDataTable.headerRow[7] }}</th>
+                            <th class="disabled-sorting text-center">Actions</th>
                           </tr>
                       </thead>
                       <tfoot>
@@ -42,19 +51,26 @@
                             <th>{{ activeDataTable.footerRow[3] }}</th>
                             <th>{{ activeDataTable.footerRow[4] }}</th>
                             <th>{{ activeDataTable.footerRow[5] }}</th>
-                            <th class="disabled-sorting">Actions</th>
+                            <th>{{ activeDataTable.footerRow[6] }}</th>
+                            <th>{{ activeDataTable.footerRow[7] }}</th>
+                            <th class="disabled-sorting text-center">Actions</th>
                           </tr>
                       </tfoot>
                       <tbody>
                           <tr *ngFor="let row of (activeDataTable.dataRows || [])">
-                              <td>{{ row.family_name }}</td>
-                              <td>{{ row.business_category }}</td>
+                              <td>{{ row.id }}</td>
+                              <td>{{ row.name }}</td>
+                              <td>{{ row.email }}</td>
                               <td>{{ row.business_name }}</td>
+                              <td>{{ row.business_category }}</td>
                               <td>{{ row.date_requested }}</td>
                               <td>{{ row.notified_business | yesNo }}</td>
                               <td>{{ row.notified_family | yesNo }}</td>
-                              <td class="text-left">
-                                <a [routerLink]="['/services/edit']" [queryParams]="{ familyName: row.family_name}" routerLinkActive="active" class="btn btn-success btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                              <td class="text-right">
+                                <a *ngIf="row.notes != ''" (click)="showNote(row.notes)" [routerLink] class="btn btn-warning btn-link btn-icon btn-lg note"><i class="fa fa-sticky-note-o"></i></a>
+                                <a *ngIf="row.notified_business != 1" (click)="markBusinessNotified(row.id)" [routerLink]="['/services/']" class="btn btn-info btn-link btn-icon btn-lg business"><i class="fa fa-building"></i></a>
+                                <a *ngIf="row.notified_family != 1" (click)="markFamilyNotified(row.id)" [routerLink]="['/services/']" class="btn btn-info btn-link btn-icon btn-lg family"><i class="fa fa-child"></i></a>
+                                <a (click)="fulfillRequest(row.id)" [routerLink]="['/services/']" class="btn btn-success btn-link btn-icon btn-lg fulfill"><i class="fa fa-check"></i></a>
                               </td>
                           </tr>
                       </tbody>
@@ -92,7 +108,9 @@
                           <th>{{ renderedDataTable.headerRow[4] }}</th>
                           <th>{{ renderedDataTable.headerRow[5] }}</th>
                           <th>{{ renderedDataTable.headerRow[6] }}</th>
-                          <th class="disabled-sorting">Actions</th>
+                          <th>{{ renderedDataTable.headerRow[7] }}</th>
+                          <th>{{ renderedDataTable.headerRow[8] }}</th>
+                          <th class="disabled-sorting text-center">Actions</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -104,20 +122,28 @@
                           <th>{{ renderedDataTable.footerRow[4] }}</th>
                           <th>{{ renderedDataTable.footerRow[5] }}</th>
                           <th>{{ renderedDataTable.footerRow[6] }}</th>
-                          <th class="disabled-sorting">Actions</th>
+                          <th>{{ renderedDataTable.footerRow[7] }}</th>
+                          <th>{{ renderedDataTable.footerRow[8] }}</th>
+
+                          <th class="disabled-sorting text-center">Actions</th>
                         </tr>
                     </tfoot>
                     <tbody>
                       <tr *ngFor="let row of (renderedDataTable.dataRows || [])">
-                        <td>{{ row.family_name }}</td>
-                        <td>{{ row.business_category }}</td>
+                        <td>{{ row.id }}</td>
+                        <td>{{ row.name }}</td>
+                        <td>{{ row.email }}</td>
                         <td>{{ row.business_name }}</td>
+                        <td>{{ row.business_category }}</td>
                         <td>{{ row.date_requested }}</td>
                         <td>{{ row.date_fulfilled }}</td>
                         <td>{{ row.followedup_business | yesNo }}</td>
                         <td>{{ row.followedup_family | yesNo }}</td>
-                        <td class="text-left">
-                          <a href="javascript:void(0)" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                        <td class="text-right">
+                          <a *ngIf="row.notes != ''" (click)="showNote(row.notes)" [routerLink] class="btn btn-warning btn-link btn-icon btn-lg note"><i class="fa fa-sticky-note-o"></i></a>
+                          <a *ngIf="row.followedup_business != 1" (click)="markBusinessFollowedUp(row.id)" [routerLink] class="btn btn-info btn-link btn-icon btn-lg business"><i class="fa fa-building"></i></a>
+                          <a *ngIf="row.followedup_family != 1" (click)="markFamilyFollowedUp(row.id)" [routerLink] class="btn btn-info btn-link btn-icon btn-lg family"><i class="fa fa-child"></i></a>
+                          <a (click)="deleteRequest(row.id)" [routerLink] class="btn btn-danger btn-link btn-icon btn-lg delete"><i class="fa fa-remove"></i></a>
                         </td>
                     </tr>
                     </tbody>

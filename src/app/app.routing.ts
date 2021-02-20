@@ -6,6 +6,7 @@ import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
+import { ActiveServicesComponent } from './active-services/active-services.component';
 import { ListServicesComponent } from './list-services/list-services.component';
 import { RequestServiceComponent } from './request-service/request-service.component'
 import { NewFamilyComponent } from './new-family/new-family.component';
@@ -13,6 +14,8 @@ import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { UserComponent } from './userpage/user.component';
 import { LockComponent } from './pages/lock/lock.component';
 import { AuthGuard } from './_guards/index';
+import { FamilyApplicationComponent } from './family-application/family-application.component';
+import { ActiveFamilyComponent } from './active-family/active-family.component';
 
 export const AppRoutes: Routes = [{
         path: '',
@@ -57,7 +60,10 @@ export const AppRoutes: Routes = [{
                 path: 'services/edit', component: EditServicesComponent, canActivate: [AuthGuard]
             },
             {
-                path: 'services/new', component: RequestServiceComponent
+                path: 'services/active', component: ActiveServicesComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'family/active', component: ActiveFamilyComponent, canActivate: [AuthGuard]
             }
 
             /* {
@@ -105,5 +111,11 @@ export const AppRoutes: Routes = [{
                 path: 'pages',
                 loadChildren: './pages/pages.module#PagesModule'
             }]
+        },
+        {
+            path: 'request', component: RequestServiceComponent
+        },
+        {
+            path: 'family-application', component: FamilyApplicationComponent
         }
 ];

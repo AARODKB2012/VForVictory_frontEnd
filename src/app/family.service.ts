@@ -24,5 +24,16 @@ export class FamilyService{
     listFamily():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/');
     }
+    markFamilyActive(family: any) {
+      return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markActive', family);
+    }
+  
+    markFamilyInactive(family: any) {
+      return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markInactive', family);
+    }
+
+    listActiveFamily(): any {
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/active');
+    }
   }
   

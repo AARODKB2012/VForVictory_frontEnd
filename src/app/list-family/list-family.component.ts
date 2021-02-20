@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FamilyService} from '../family.service';
 import { FamilyModel } from '../family.model';
+import { DatePipe } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
 
 declare var $: any;
 
@@ -13,15 +15,22 @@ declare interface DataTable {
 @Component({
   selector: 'app-list-family',
   templateUrl: './list-family.component.html',
-  styleUrls: ['./list-family.component.css']
+  styleUrls: ['./list-family.component.css'],
+  providers: [DatePipe]
 })
 export class ListFamilyComponent implements OnInit {
   public familyList: FamilyModel[];
   public dataTable: DataTable;
+  public currentDate = new Date();
+  public today;
+  public url;
   constructor(public familyService: FamilyService){
   }
+  
 
     ngOnInit() {
+
+      
       this.familyService.listFamily().subscribe((familyReturned) => {
         if (familyReturned) {
           this.familyList = familyReturned.results;
