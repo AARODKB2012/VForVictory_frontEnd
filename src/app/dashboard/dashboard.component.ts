@@ -1,7 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
+import { FamilyService} from '../family.service';
+import { FamilyModel } from '../family.model';
 
 declare const $: any;
+
+declare interface DataTable {
+  headerRow: string[];
+  footerRow: string[];
+  dataRows: FamilyModel[];
+}
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +30,48 @@ export class DashboardComponent implements OnInit {
   public activeUsersChartOptions:any;
   public activeUsersChartLabels:Array<any>;
   public activeUsersChartColors:Array<any>
+
+  public dataTable: DataTable;
+  public familiesAddedThisMonth: number;
+  public familiesToApprove: Array<any>;
+  
+  constructor(public familyService: FamilyService){
+    
+    // For Populating VFV Data
+    this.familyService.familiesAddedThisMonth().subscribe((families) => {
+      if (families) {
+        this.familiesAddedThisMonth = families.resultsLength;
+      }
+    });
+
+    this.familyService.familiesToApprove().subscribe((families) => {
+      if (families) {
+        this.familiesToApprove = families.results;
+        this.dataTable = {
+          headerRow: [ '#', 'Name', 'Cancer Warrior', 'Actions'],
+          footerRow: [ '#', 'Name', 'Cancer Warrior', 'Actions'],
+          dataRows: this.familiesToApprove
+        };
+      }
+    });
+  }
+
+  ngAfterViewInit(){
+    $('#familiesToApprove').DataTable({
+      "pagingType": "full_numbers",
+      "lengthMenu": [
+        [5, 10, -1],
+        [5, 10, "All"]
+      ],
+      responsive: true,
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+
+    });
+    var table = $('#familiesToApprove').DataTable();
+  }
 
   public chartClicked(e:any):void {
     console.log(e);
