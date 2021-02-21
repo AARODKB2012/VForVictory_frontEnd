@@ -1,12 +1,12 @@
 <div class="main-content">
   <div class="row">
-    <div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="col-lg-3 col-md-6 col-sm-6">
       <div class="card card-stats">
         <div class="card-body ">
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
-                <i class="nc-icon nc-vector text-warning"></i>
+                <i class="nc-icon nc-air-baloon text-warning"></i>
               </div>
             </div>
             <div class="col-7 col-md-8">
@@ -25,7 +25,32 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-6 col-md-6 col-sm-6">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-check-2 text-warning"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Families To Approve</p>
+                <p class="card-title">{{familiesToApprove?.length}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh spin"></i> Updated Just Now
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6">
       <div class="card card-stats">
         <div class="card-body ">
           <div class="row">
@@ -37,7 +62,7 @@
             <div class="col-7 col-md-8">
               <div class="numbers">
                 <p class="card-category">Businesses Added</p>
-                <p class="card-title">150
+                <p class="card-title">{{businessesAddedThisMonth}}
                 </p>
               </div>
             </div>
@@ -47,6 +72,32 @@
           <hr>
           <div class="stats">
             <i class="fa fa-calendar-o"></i> Since Last Month
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-check-2 text-success"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Businesses To Approve</p>
+                <p class="card-title">{{businessesToApprove?.length}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh spin"></i> Updated Just Now
           </div>
         </div>
       </div>
@@ -79,8 +130,10 @@
                   <td>  
                     {{ row.cancer_warrior_name }}
                   </td>
-                  <td class="td-actions text-right">
+                  <td class="td-actions text-center">
                     <a  [routerLink]="['/family/view']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a  [routerLink]="['/family/approve']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
+                    <a  [routerLink]="['/family/delete']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-danger btn-link btn-icon btn-sm view"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               </tbody>
@@ -99,46 +152,106 @@
         <div class="card-header ">
           <h4 class="card-title">Businesses to Approve</h4>
         </div>
-        <div class="card-body ">
-          <div class="table-full-width table-responsive">
-            <table class="table">
-              <tbody>
+          <div class="card-body ">
+            <table  id="businessesToApprove" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
                 <tr>
-                  <td>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" checked>
-                        <span class="form-check-sign"></span>
-                      </label>
-                    </div>
+                  <th>{{ dataTableBusiness?.headerRow[0] }}</th>
+                  <th>{{ dataTableBusiness?.headerRow[1] }}</th>
+                  <th>{{ dataTableBusiness?.headerRow[2] }}</th>
+                  <th>{{ dataTableBusiness?.headerRow[3] }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of dataTableBusiness.dataRows; let i = index" [attr.data-index]="i">
+                  <td>  
+                    {{ i + 1 }}
                   </td>
-                  <td class="img-row">
-                    <div class="img-wrapper">
-                      <img src="./assets/img/faces/ayo-ogunseinde-2.jpg" class="img-raised" />
-                    </div>
+                  <td>  
+                    {{ row.business_name }}
                   </td>
-                  <td class="text-left">Sign contract for "What are conference organizers afraid of?"</td>
-                  <td class="td-actions text-right">
-                    <button type="button" rel="tooltip" title="" class="btn btn-info btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Edit Task">
-                      <i class="nc-icon nc-zoom-split"></i>
-                    </button>
-                    <!-- <button type="button" rel="tooltip" title="" class="btn btn-danger btn-round btn-icon btn-icon-mini btn-neutral" data-original-title="Remove">
-                      <i class="nc-icon nc-simple-remove"></i>
-                    </button> -->
+                  <td>  
+                    {{ row.Services_Offered }}
+                  </td>
+                  <td class="td-actions text-center">
+                    <a  [routerLink]="['/family/view']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a  [routerLink]="['/family/approve']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
+                    <a  [routerLink]="['/family/delete']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-danger btn-link btn-icon btn-sm view"><i class="fa fa-trash"></i></a>
                   </td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </div>
         <div class="card-footer ">
           <hr>
           <div class="stats">
-            <i class="fa fa-refresh spin"></i> Updated 3 minutes ago
+            <i class="fa fa-refresh spin"></i> Updated Just Now
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h4 class="card-title">Services Requested This Month</h4>
+        </div>
+          <div class="card-body ">
+            <table  id="requestsThisMonth" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>{{ dataTableRequests?.headerRow[0] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[1] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[2] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[3] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[4] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[5] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[6] }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of dataTableRequests.dataRows; let i = index" [attr.data-index]="i">
+                  <td>  
+                    {{ i + 1 }}
+                  </td>
+                  <td>  
+                    {{ row.name }}
+                  </td>
+                  <td>  
+                    {{ row.business_name }}
+                  </td>
+                  <td>  
+                    {{ row.business_category }}
+                  </td>
+                  <td>  
+                    {{ row.date_requested }}
+                  </td>
+                  <td>  
+                    {{ row.date_fulfilled }}
+                  </td>
+                  <td class="td-actions text-center">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" [checked]="row.active">
+                        <span class="form-check-sign"></span>
+                      </label>
+                    </div>                  
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh spin"></i> Updated Just Now
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-md-6">
       <div class="card ">
         <div class="card-header ">
@@ -160,8 +273,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="row">
     <div class="col-md-3">
       <div class="card ">
         <div class="card-header ">

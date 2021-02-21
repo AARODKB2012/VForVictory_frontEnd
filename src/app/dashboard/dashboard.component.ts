@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js';
 import { FamilyService} from '../family.service';
 import { FamilyModel } from '../family.model';
+import { BusinessService } from '../business.service';
+import { ServicesService } from '../services.service';
 
 declare const $: any;
 
@@ -34,10 +36,18 @@ export class DashboardComponent implements OnInit {
   public dataTable: DataTable;
   public familiesAddedThisMonth: number;
   public familiesToApprove: Array<any>;
+
+  public dataTableBusiness: DataTable;
+  public businessesAddedThisMonth: number;
+  public businessesToApprove: Array<any>;
+
+  public dataTableRequests: DataTable;
+  public requestsThisMonth: Array<any>;
   
-  constructor(public familyService: FamilyService){
+  constructor(public familyService: FamilyService, public businessService: BusinessService, public servicesService: ServicesService){
     
     // For Populating VFV Data
+    // Families
     this.familyService.familiesAddedThisMonth().subscribe((families) => {
       if (families) {
         this.familiesAddedThisMonth = families.resultsLength;
@@ -54,11 +64,42 @@ export class DashboardComponent implements OnInit {
         };
       }
     });
+
+    //Businesses
+    this.businessService.businessAddedThisMonth().subscribe((businesses) => {
+      if (businesses) {
+        this.businessesAddedThisMonth = businesses.resultsLength;
+      }
+    });
+
+    this.businessService.businessToApprove().subscribe((businesses) => {
+      if (businesses) {
+        this.businessesToApprove = businesses.results;
+        this.dataTableBusiness = {
+          headerRow: [ '#', 'Name', 'Services Offered','Actions'],
+          footerRow: [ '#', 'Name', 'Services Offered','Actions'],
+          dataRows: this.businessesToApprove
+        };
+      }
+    });
+
+    //Service Requests
+    this.servicesService.servicesRequestedThisMonth().subscribe((requests) => {
+      if (requests) {
+        this.requestsThisMonth = requests.results;
+        this.dataTableRequests = {
+          headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Active'],
+          footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Active'],
+          dataRows: this.requestsThisMonth
+        };
+      }
+    });
+
   }
 
   ngAfterViewInit(){
     $('#familiesToApprove').DataTable({
-      "pagingType": "full_numbers",
+      "pagingType": "simple",
       "lengthMenu": [
         [5, 10, -1],
         [5, 10, "All"]
@@ -70,7 +111,37 @@ export class DashboardComponent implements OnInit {
       }
 
     });
-    var table = $('#familiesToApprove').DataTable();
+    var familiesToApprove = $('#familiesToApprove').DataTable();
+
+    $('#businessesToApprove').DataTable({
+      "pagingType": "simple",
+      "lengthMenu": [
+        [5, 10, -1],
+        [5, 10, "All"]
+      ],
+      responsive: true,
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+
+    });
+    var businessesToApprove = $('#businessesToApprove').DataTable();
+
+    $('#requestsThisMonth').DataTable({
+      "pagingType": "simple",
+      "lengthMenu": [
+        [5, 10, -1],
+        [5, 10, "All"]
+      ],
+      responsive: true,
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+
+    });
+    var requestsThisMonth = $('#requestsThisMonth').DataTable();
   }
 
   public chartClicked(e:any):void {
