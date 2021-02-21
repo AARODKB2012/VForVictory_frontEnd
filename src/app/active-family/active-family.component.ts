@@ -21,18 +21,21 @@ export class ActiveFamilyComponent implements OnInit {
 
   public dataList;
   public dataTable: DataTable;
+  public inactiveFamily: FamilyModel[];
+  public inactiveFamilyTable: DataTable;
 
-  constructor(public familyService: FamilyService, public router: Router, private activeRoute: ActivatedRoute) { }
+
+  constructor(public familyService: FamilyService, public router: Router, private activeRoute: ActivatedRoute) {}
 
   ngOnInit(){
 
-    this.familyService.listFamily().subscribe((returned) => {
+    this.familyService.listInactiveFamily().subscribe((returned) => {
       if (returned) {
-        this.dataList = returned.results;
-        this.dataTable = {
+        this.inactiveFamily = returned.results;
+        this.inactiveFamilyTable = {
           headerRow: [ 'Id', 'First Name', 'Last Name', 'Email', 'Address', 'End Of Treatment Date' , 'Options'],
             footerRow: [ 'Id', 'First Name', 'Last Name', 'Email', 'Address', 'End Of Treatment Date', 'Options'],
-            dataRows: this.dataList
+            dataRows: this.inactiveFamily
         };
        }
     });
@@ -40,21 +43,22 @@ export class ActiveFamilyComponent implements OnInit {
 
   }
 
-  ngAfterViewInit(){
-    $('#table').DataTable({
-      "pagingType": "full_numbers",
-      "lengthMenu": [
-        [10, 25, 50, -1],
-        [10, 25, 50, "All"]
-      ],
-      responsive: true,
-      language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Search records",
-      }
-  
-    });
+ngAfterViewInit(){
+  $('#table').DataTable({
+    "pagingType": "full_numbers",
+    "lengthMenu": [
+      [10, 25, 50, -1],
+      [10, 25, 50, "All"]
+    ],
+    responsive: true,
+    language: {
+      search: "_INPUT_",
+      searchPlaceholder: "Search records",
     }
+
+  });
+  }
+   
 
 
     markFamilyActive(itemId) {
@@ -127,9 +131,8 @@ export class ActiveFamilyComponent implements OnInit {
           });
         }
       });
-    }
 
-
+    
 
 
 
@@ -139,5 +142,4 @@ export class ActiveFamilyComponent implements OnInit {
 
 
 
-
-
+}

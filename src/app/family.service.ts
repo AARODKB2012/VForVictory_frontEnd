@@ -35,5 +35,10 @@ export class FamilyService{
     listActiveFamily(): any {
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/active');
     }
+    listInactiveFamily(): any {
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/inactive');
+    }
+
+
   }
   
