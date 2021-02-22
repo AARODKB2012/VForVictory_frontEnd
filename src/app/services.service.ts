@@ -68,7 +68,7 @@ export class ServicesService {
   listRenderedServices(): any {
     return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/rendered');
   }
-
+  
   getServiceById(serviceId: Number) {
     return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/get/id/' + serviceId);
   }
@@ -79,5 +79,8 @@ export class ServicesService {
 
   deleteRequest(request: any) {
     return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/delete', request);
+  }
+  servicesRequestedThisMonth():any{
+    return this.httpClient.get<any>(this.serverAddress + 'api/service/requested/month');
   }
 }

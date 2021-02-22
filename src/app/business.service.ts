@@ -14,7 +14,6 @@ import { BusinessAPIResponse } from './response.model';
 })
 
 export class BusinessService{
-
     private serverAddress = environment.backendURL;
     constructor(private httpClient: HttpClient,private route: Router, private http: Http){}
 
@@ -40,5 +39,12 @@ export class BusinessService{
 
     editBusiness(business: any) {
       return this.httpClient.post<{businessUpdated: boolean}>(this.serverAddress + 'api/business/edit', business);
+    }
+    businessAddedThisMonth():any{
+      return this.httpClient.get<BusinessAPIResponse>(this.serverAddress + 'api/business/month');
+    }
+
+    businessToApprove():any{
+      return this.httpClient.get<BusinessAPIResponse>(this.serverAddress + 'api/business/unapproved');
     }
   }
