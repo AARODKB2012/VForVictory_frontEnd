@@ -61,7 +61,6 @@ export class UserComponent{
               this.roleList = responseData.results;
             }
         });
-
         this.authService.getLoginHistory(this.userId).subscribe((loginHistory) => {
             if (loginHistory) {
               this.loginHistory = loginHistory['results'];

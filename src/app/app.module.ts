@@ -21,14 +21,18 @@ import { ListVolunteersComponent } from './list-volunteers/list-volunteers.compo
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
+import { NewBusinessComponent } from './new-business/new-business.component';
 import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListServicesComponent } from './list-services/list-services.component';
 import { YesNoPipe } from './yesno.pipe';
+import { YesNoActivePipe } from './yesnoactive.pipe';
 import { RequestServiceComponent } from './request-service/request-service.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
 import { CommonModule } from '@angular/common';  
 import { BrowserModule } from '@angular/platform-browser';
 import { UserComponent } from './userpage/user.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { ActiveServicesComponent } from './active-services/active-services.component';
 
 
 @NgModule({
@@ -43,6 +47,7 @@ import { UserComponent } from './userpage/user.component';
         SidebarModule,
         NavbarModule,
         FooterModule,
+        ClipboardModule,
         FixedPluginModule,
         HttpClientModule,
         CommonModule
@@ -55,12 +60,15 @@ import { UserComponent } from './userpage/user.component';
         NewVolunteerComponent,
         ListFamilyComponent,
         NewFamilyComponent,
+        NewBusinessComponent,
         ListBusinessComponent,
         ListServicesComponent,
         YesNoPipe,
+        YesNoActivePipe,
         RequestServiceComponent,
         EditServicesComponent,
-        UserComponent
+        UserComponent,
+        ActiveServicesComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

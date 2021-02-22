@@ -6,8 +6,10 @@ import { ListBusinessComponent } from './list-business/list-business.component';
 import { ListFamilyComponent } from './list-family/list-family.component';
 import { ListVolunteersComponent } from './list-volunteers/list-volunteers.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
+import { ActiveServicesComponent } from './active-services/active-services.component';
 import { ListServicesComponent } from './list-services/list-services.component';
 import { RequestServiceComponent } from './request-service/request-service.component'
+import { NewBusinessComponent } from './new-business/new-business.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
 import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { UserComponent } from './userpage/user.component';
@@ -51,15 +53,23 @@ export const AppRoutes: Routes = [{
                 path: 'business', component: ListBusinessComponent, canActivate: [AuthGuard]
             },
             {
+                path: 'business/new', component: NewBusinessComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'business/edit', component: NewBusinessComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'business/view', component: NewBusinessComponent, canActivate: [AuthGuard]
+            },
+            {
                 path: 'services', component: ListServicesComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'services/edit', component: EditServicesComponent, canActivate: [AuthGuard]
             },
             {
-                path: 'services/new', component: RequestServiceComponent
+                path: 'services/active', component: ActiveServicesComponent, canActivate: [AuthGuard]
             }
-
             /* {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
@@ -105,5 +115,8 @@ export const AppRoutes: Routes = [{
                 path: 'pages',
                 loadChildren: './pages/pages.module#PagesModule'
             }]
-        }
+        },
+            {
+                path: 'request', component: RequestServiceComponent
+            }
 ];

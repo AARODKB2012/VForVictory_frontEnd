@@ -21,7 +21,6 @@ export class FamilyService{
     listFamily():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/');
     }
-
     familiesAddedThisMonth():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/month');
     }

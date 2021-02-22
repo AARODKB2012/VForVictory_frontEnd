@@ -9,7 +9,7 @@
                           <h5 class="title">Service Requests</h5>
                       </div>
                       <div class="col-md-6 text-right">
-                          <button class="btn btn-default" routerLink="/service">
+                          <button type="button" class="btn btn-default" routerLink="/services">
                               <span class="btn-label">
                                 <i class="nc-icon nc-bullet-list-67"></i>
                               </span>
@@ -32,7 +32,7 @@
                           <div class="row">
                               <div class="col-md-6 mb-3">
                               <label for="familyName">Name</label>
-                              <input type="text" class="form-control" id="familyName" name="familyName" ngModel #familyName="ngModel" required maxlength="30" minlength="1">
+                              <input type="text" class="form-control" id="familyName" name="familyName" [ngModel]="service?.family_name" ngModel #familyName="ngModel" required maxlength="30" minlength="1">
                               <div *ngIf="familyName.invalid && (familyName.dirty || familyName.touched || errorInForm)" class="text-danger">
                                   <div *ngIf="(familyName.errors.required)">
                                   Name is required.
@@ -44,7 +44,7 @@
                           <div class="row">
                             <div class="col-md-6 mb-3">
                             <label for="businessName">Business</label>
-                            <input type="text" class="form-control" id="businessName" name="businessName" ngModel #businessName="ngModel" required maxlength="30" minlength="1">
+                            <input type="text" class="form-control" id="businessName" name="businessName" [ngModel]="service?.business_name" ngModel #businessName="ngModel" required maxlength="30" minlength="1">
                             <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="(businessName.errors.required)">
                                 Business is required.

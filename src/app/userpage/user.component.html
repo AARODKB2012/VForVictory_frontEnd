@@ -270,6 +270,36 @@
           </div>
       </div>
       </div>
+      <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Emergency Contact</h4>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <label for="emergencyFirstName">First name</label>
+                <input type="text" class="form-control" id="emergencyFirstName" name="emergencyFirstName" [ngModel]="user?.emergency_contact_name" ngModel #emergencyFirstName="ngModel" [readonly]="viewMode">
+                </div>
+                <div class="col-md-6 mb-3">
+                <label for="emergencyLastName">Last name</label>
+                <input type="text" class="form-control" id="emergencyLastName" name="emergencyLastName" [ngModel]="user?.emergency_contact_name" ngModel #emergencyLastName="ngModel" [readonly]="viewMode">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                <label for="emergencyEmail">Email</label>
+                <input type="email" class="form-control" id="emergencyEmail" name="emergencyEmail" [ngModel]="user?.emergency_contact_email" ngModel #emergencyEmail="ngModel" placeholder="you@example.com" [readonly]="viewMode">
+                </div>
+                <div class="col-md-6 mb-3">
+                <label for="emergencyPhone">Phone Number</label>
+                <input type="tel" class="form-control" id="emergencyPhone" name="emergencyPhone" [ngModel]="user?.emergency_contact_phone" ngModel #emergencyPhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="emergencyAddress">Address</label>
+                <input type="text" class="form-control" id="emergencyAddress" name="emergencyAddress" [ngModel]="user?.emergency_contact_address" ngModel #emergencyAddress="ngModel" placeholder="1234 Main St" [readonly]="viewMode">
+            </div>
+        </div>
+    </div>
     </div>
 </form>
 </div>
