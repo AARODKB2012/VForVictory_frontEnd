@@ -5,11 +5,8 @@ import {EmailService} from '../../email.service';
 import {UsersService} from '../../users.service';
 import { NgForm } from '@angular/forms';
 import { UserModel } from 'app/user.model';
-<<<<<<< HEAD
 import {environment} from '../../../environments/environment';
 import {Md5} from 'ts-md5/dist/md5';
-=======
->>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
 
 declare var $:any;
 
@@ -29,7 +26,6 @@ export class LockComponent implements OnInit{
     public emailNotFound: boolean;
     private userModel: UserModel;
     public errorInForm: boolean;
-<<<<<<< HEAD
     private passwordResetURL = environment.passwordResetURL;
     private userEmail: string;
     private userId: number;
@@ -55,12 +51,6 @@ export class LockComponent implements OnInit{
         } else {
             this.recoverMode = true;
         }
-=======
-
-    constructor(private element : ElementRef, public emailService: EmailService, public userService: UsersService) {
-        this.nativeElement = element.nativeElement;
-        this.sidebarVisible = false;
->>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
     }
 
     checkFullPageBackgroundImage(){
@@ -109,7 +99,6 @@ export class LockComponent implements OnInit{
         }
     }
 
-<<<<<<< HEAD
     confirmPassword(password: string, confirmPassword: string) {
         if (password === confirmPassword) {
           return true;
@@ -118,8 +107,6 @@ export class LockComponent implements OnInit{
         }
       }
 
-=======
->>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
     forgotPassword(form: NgForm) {
         if ( form.invalid ) {
             this.errorInForm = true;
@@ -132,20 +119,11 @@ export class LockComponent implements OnInit{
                     const emailObject = {
                         mailTo: form.value.email,
                         subject: 'Password Reset',
-<<<<<<< HEAD
                         messageBody: this.passwordResetURL + '?id=' + btoa(form.value.email)
                     }
                     this.emailService.sendEmail(emailObject).subscribe((mailResponse) => {
                         if (mailResponse) {
                             this.emailSent = true;
-=======
-                        messageBody: 'To reset your password click here:'
-                    }
-    
-                    this.emailService.sendEmail(emailObject).subscribe((mailResponse) => {
-                        if (mailResponse) {
-                        this.emailSent = true;
->>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
                         }
                     });
                 } else {
@@ -154,7 +132,6 @@ export class LockComponent implements OnInit{
                 }
             });
         }
-<<<<<<< HEAD
     }
 
     resetPassword(form: NgForm) {
@@ -174,9 +151,5 @@ export class LockComponent implements OnInit{
                 this.passwordMismatch = true;
             }
         }
-=======
-
-
->>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
     }
 }

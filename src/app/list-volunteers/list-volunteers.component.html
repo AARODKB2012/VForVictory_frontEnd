@@ -47,11 +47,7 @@
                             </tr>
                         </tfoot>
                         <tbody>
-<<<<<<< HEAD
                             <tr *ngFor="let row of dataTable.dataRows">
-=======
-                            <tr *ngFor="let row of (dataTable?.dataRows || [])">
->>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
                                 <td>{{ row.record_id }}</td>
                                 <td>{{ row.first_name + " " + row.last_name }}</td>
                                 <td>{{ row.email }}</td>

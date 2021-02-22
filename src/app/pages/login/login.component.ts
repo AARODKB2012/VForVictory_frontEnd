@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit{
 
         this.activeRoute.queryParams.subscribe(params => {
           this.endSession = params['endSession'];
-<<<<<<< HEAD
           this.fromPasswordReset = params['fromResetPassword'];
         });
 
@@ -53,13 +52,6 @@ export class LoginComponent implements OnInit{
         if (this.fromPasswordReset) {
           this.passwordResetAlert = true;
         }
-=======
-        });
-        if (this.endSession) {
-          this.logoutAlert = true;
-          localStorage.removeItem('currentUser');
-        }
->>>>>>> 030d892982257ae390b5eb53aa07cbce9df585ec
     }
     checkFullPageBackgroundImage(){
         var $page = $('.full-page');
