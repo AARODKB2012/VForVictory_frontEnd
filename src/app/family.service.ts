@@ -14,13 +14,32 @@ import { FamilyAPIResponse } from './family_response.model';
 })
 
 export class FamilyService{
-  
-    private serverAddress = environment.backendURL;
-    constructor(private httpClient: HttpClient,private route: Router, private http: Http){}
-  
+  private servicesList: any = [];
+  private serverAddress = environment.backendURL;
+  constructor(private httpClient: HttpClient, private router: Router, private http: Http) { }
+
+  saveFamily(family: any) {
+    return this.httpClient.post<{familyCreated: boolean}>(this.serverAddress + 'api/family/new', family);
+  }
     listFamily():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/');
     }
+
+    markFamilyActive(family: any) {
+      return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markActive', family);
+    }
+  
+    markFamilyInactive(family: any) {
+      return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markInactive', family);
+    }
+
+    listActiveFamily(): any {
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/active');
+    }
+    listInactiveFamily(): any {
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/inactive');
+    }
+
     familiesAddedThisMonth():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/month');
     }

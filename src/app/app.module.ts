@@ -33,6 +33,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { UserComponent } from './userpage/user.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ActiveServicesComponent } from './active-services/active-services.component';
+import { FamilyApplicationComponent } from './family-application/family-application.component';
+import { ActiveFamilyComponent } from './active-family/active-family.component';
 
 
 @NgModule({
@@ -68,7 +70,9 @@ import { ActiveServicesComponent } from './active-services/active-services.compo
         RequestServiceComponent,
         EditServicesComponent,
         UserComponent,
-        ActiveServicesComponent
+        ActiveServicesComponent,
+        FamilyApplicationComponent,
+        ActiveFamilyComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
