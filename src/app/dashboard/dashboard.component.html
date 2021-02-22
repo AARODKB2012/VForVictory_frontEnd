@@ -6,14 +6,13 @@
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
-                <i class="nc-icon nc-single-02 text-warning"></i>
+                <i class="nc-icon nc-air-baloon text-warning"></i>
               </div>
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Number of families in system</p>
-                <p class="card-title">150
-                </p>
+                <p class="card-category">Families Added</p>
+                <p class="card-title">{{familiesAddedThisMonth}}</p>
               </div>
             </div>
           </div>
@@ -21,12 +20,37 @@
         <div class="card-footer ">
           <hr>
           <div class="stats">
-            <i class="fa fa-refresh"></i> Update Now
+            <i class="fa fa-calendar-o"></i> Since Last Month
           </div>
         </div>
       </div>
     </div>
     <div class="col-lg-3 col-md-6 col-sm-6">
+      <div class="card card-stats">
+        <div class="card-body ">
+          <div class="row">
+            <div class="col-5 col-md-4">
+              <div class="icon-big text-center icon-warning">
+                <i class="nc-icon nc-check-2 text-warning"></i>
+              </div>
+            </div>
+            <div class="col-7 col-md-8">
+              <div class="numbers">
+                <p class="card-category">Families To Approve</p>
+                <p class="card-title">{{familiesToApprove?.length}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh spin"></i> Updated Just Now
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-6">
       <div class="card card-stats">
         <div class="card-body ">
           <div class="row">
@@ -37,8 +61,8 @@
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Businesses in the System</p>
-                <p class="card-title">48
+                <p class="card-category">Businesses Added</p>
+                <p class="card-title">{{businessesAddedThisMonth}}
                 </p>
               </div>
             </div>
@@ -47,24 +71,24 @@
         <div class="card-footer ">
           <hr>
           <div class="stats">
-            <i class="fa fa-calendar-o"></i> Last day
+            <i class="fa fa-calendar-o"></i> Since Last Month
           </div>
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="col-lg-3 col-md-3 col-sm-6">
       <div class="card card-stats">
         <div class="card-body ">
           <div class="row">
             <div class="col-5 col-md-4">
               <div class="icon-big text-center icon-warning">
-                <i class="nc-icon nc-vector text-danger"></i>
+                <i class="nc-icon nc-check-2 text-success"></i>
               </div>
             </div>
             <div class="col-7 col-md-8">
               <div class="numbers">
-                <p class="card-category">Pending Service Requests</p>
-                <p class="card-title">9
+                <p class="card-category">Businesses To Approve</p>
+                <p class="card-title">{{businessesToApprove?.length}}
                 </p>
               </div>
             </div>
@@ -73,48 +97,178 @@
         <div class="card-footer ">
           <hr>
           <div class="stats">
-            <i class="fa fa-clock-o"></i> In the last 12 days
+            <i class="fa fa-refresh spin"></i> Updated Just Now
           </div>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-9 col-sm-6">
-      <div class="card">
-        <div class="card-header">
-          <div class="row">
-            <div class="col-sm-7">
-              <div class="numbers pull-left">
-                $348
-              </div>
-            </div>
-            <div class="col-sm-5">
-              <div class="pull-right">
-                <span class="badge badge-pill badge-success">
-                  +18%
-                </span>
-              </div>
-            </div>
+    <div class="col-md-6">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h4 class="card-title">Families to Approve</h4>
+        </div>
+        <div class="card-body ">
+            <table  id="familiesToApprove" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>{{ dataTable?.headerRow[0] }}</th>
+                  <th>{{ dataTable?.headerRow[1] }}</th>
+                  <th>{{ dataTable?.headerRow[2] }}</th>
+                  <th>{{ dataTable?.headerRow[3] }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of dataTable.dataRows; let i = index" [attr.data-index]="i">
+                  <td>  
+                    {{ i + 1 }}
+                  </td>
+                  <td>  
+                    {{ row.first_name + " " + row.last_name }}
+                  </td>
+                  <td>  
+                    {{ row.cancer_warrior_name }}
+                  </td>
+                  <td class="td-actions text-center">
+                    <a  [routerLink]="['/family/view']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a  [routerLink]="['/family/approve']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
+                    <a  [routerLink]="['/family/delete']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-danger btn-link btn-icon btn-sm view"><i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh spin"></i> Updated Just Now
           </div>
         </div>
-        <div class="card-body">
-          <h6 class="big-title">Family Budget Spent within the last 10 Months</h6>
-          <canvas id="activeUsers" width="826" height="380"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h4 class="card-title">Businesses to Approve</h4>
         </div>
-        <div class="card-footer">
+          <div class="card-body ">
+            <table  id="businessesToApprove" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>{{ dataTableBusiness?.headerRow[0] }}</th>
+                  <th>{{ dataTableBusiness?.headerRow[1] }}</th>
+                  <th>{{ dataTableBusiness?.headerRow[2] }}</th>
+                  <th>{{ dataTableBusiness?.headerRow[3] }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of dataTableBusiness.dataRows; let i = index" [attr.data-index]="i">
+                  <td>  
+                    {{ i + 1 }}
+                  </td>
+                  <td>  
+                    {{ row.business_name }}
+                  </td>
+                  <td>  
+                    {{ row.Services_Offered }}
+                  </td>
+                  <td class="td-actions text-center">
+                    <a  [routerLink]="['/family/view']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a  [routerLink]="['/family/approve']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
+                    <a  [routerLink]="['/family/delete']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-danger btn-link btn-icon btn-sm view"><i class="fa fa-trash"></i></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <div class="card-footer ">
           <hr>
-          <div class="row">
-            <div class="col-sm-7">
-              <div class="footer-title">Budget of ______ Family Here</div>
-            </div>
-            <div class="col-sm-5">
-              <div class="pull-right">
-                <button class="btn btn-success btn-round btn-icon btn-sm">
-                  <i class="nc-icon nc-simple-add"></i>
-                </button>
-              </div>
-            </div>
+          <div class="stats">
+            <i class="fa fa-refresh spin"></i> Updated Just Now
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card  card-tasks">
+        <div class="card-header ">
+          <h4 class="card-title">Services Requested This Month</h4>
+        </div>
+          <div class="card-body ">
+            <table  id="requestsThisMonth" class="table table-striped table-bordered" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>{{ dataTableRequests?.headerRow[0] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[1] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[2] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[3] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[4] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[5] }}</th>
+                  <th>{{ dataTableRequests?.headerRow[6] }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let row of dataTableRequests.dataRows; let i = index" [attr.data-index]="i">
+                  <td>  
+                    {{ i + 1 }}
+                  </td>
+                  <td>  
+                    {{ row.name }}
+                  </td>
+                  <td>  
+                    {{ row.business_name }}
+                  </td>
+                  <td>  
+                    {{ row.business_category }}
+                  </td>
+                  <td>  
+                    {{ row.date_requested }}
+                  </td>
+                  <td>  
+                    {{ row.date_fulfilled }}
+                  </td>
+                  <td class="td-actions text-center">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" [checked]="row.active" disabled>
+                        <span class="form-check-sign"></span>
+                      </label>
+                    </div>                  
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        <div class="card-footer ">
+          <hr>
+          <div class="stats">
+            <i class="fa fa-refresh spin"></i> Updated Just Now
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card ">
+        <div class="card-header ">
+          <h4 class="card-title">2018 Sales</h4>
+          <p class="card-category">All products including Taxes</p>
+        </div>
+        <div class="card-body ">
+          <canvas id="chartActivity"></canvas>
+        </div>
+        <div class="card-footer ">
+          <div class="legend">
+            <i class="fa fa-circle text-info"></i> Tesla Model S
+            <i class="fa fa-circle text-danger"></i> BMW 5 Series
+          </div>
+          <hr>
+          <div class="stats">
+            <i class="fa fa-check"></i> Data information certified
           </div>
         </div>
       </div>
@@ -122,23 +276,82 @@
     <div class="col-md-3">
       <div class="card ">
         <div class="card-header ">
-          <h5 class="card-title">VPizza Statistics</h5>
-          <p class="card-category">Percentage of families with VPizza Voucher</p>
+          <h5 class="card-title">Email Statistics</h5>
+          <p class="card-category">Last Campaign Performance</p>
         </div>
         <div class="card-body ">
           <canvas id="chartDonut1" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
         </div>
         <div class="card-footer ">
           <div class="legend">
-            <i class="fa fa-circle text-info"></i> Sent
+            <i class="fa fa-circle text-info"></i> Open
           </div>
           <hr>
           <div class="stats">
-            <i class="fa fa-calendar"></i> Number of vouchers sent
+            <i class="fa fa-calendar"></i> Number of emails sent
           </div>
-          
         </div>
       </div>
     </div>
-  </div> 
+    <div class="col-md-3">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">New Visitators</h5>
+          <p class="card-category">Out Of Total Number</p>
+        </div>
+        <div class="card-body ">
+          <canvas id="chartDonut2" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+        </div>
+        <div class="card-footer ">
+          <div class="legend">
+            <i class="fa fa-circle text-warning"></i> Visited
+          </div>
+          <hr>
+          <div class="stats">
+            <i class="fa fa-check"></i> Campaign sent 2 days ago
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">Orders</h5>
+          <p class="card-category">Total number</p>
+        </div>
+        <div class="card-body ">
+          <canvas id="chartDonut3" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+        </div>
+        <div class="card-footer ">
+          <div class="legend">
+            <i class="fa fa-circle text-danger"></i> Completed
+          </div>
+          <hr>
+          <div class="stats">
+            <i class="fa fa-clock-o"></i> Updated 3 minutes ago
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card ">
+        <div class="card-header ">
+          <h5 class="card-title">Subscriptions</h5>
+          <p class="card-category">Our Users</p>
+        </div>
+        <div class="card-body ">
+          <canvas id="chartDonut4" class="ct-chart ct-perfect-fourth" width="456" height="300"></canvas>
+        </div>
+        <div class="card-footer ">
+          <div class="legend">
+            <i class="fa fa-circle text-secondary"></i> Ended
+          </div>
+          <hr>
+          <div class="stats">
+            <i class="fa fa-history"></i> Total users
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

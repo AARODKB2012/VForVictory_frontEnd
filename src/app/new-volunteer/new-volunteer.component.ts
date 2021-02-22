@@ -18,6 +18,7 @@ export class NewVolunteerComponent implements OnInit {
 
   public md5 = new Md5();
   public volunteerId: number;
+  private loggedInUser: any;
   public user: UserModel;
   errorInForm: boolean;
   passwordMatch: boolean;
@@ -59,6 +60,8 @@ export class NewVolunteerComponent implements OnInit {
         }
       });
     }
+
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
   ngOnInit(): void {
@@ -142,7 +145,8 @@ export class NewVolunteerComponent implements OnInit {
                       emergencyLastName: form.value.emergencyLastName,
                       emergencyEmail: form.value.emergencyEmail,
                       emergencyPhone: form.value.emergencyPhone,
-                      emergencyAddress: form.value.emergencyAddress
+                      emergencyAddress: form.value.emergencyAddress,
+                      createdBy: this.loggedInUser
                     };
 
                     this.userService.saveUser(user).subscribe((responseData) => {
@@ -150,7 +154,7 @@ export class NewVolunteerComponent implements OnInit {
                         if (this.fileToUpload!=null){
                           this.userService.updateProfilePicture(this.fileToUpload, form.value.username).subscribe((responseData) => {
                             if (responseData.userUpdated) {
-                              console.log("User updated: " + responseData.userUpdated);
+                              console.log("User updated");
                             }
                           });
                         }
@@ -196,7 +200,8 @@ export class NewVolunteerComponent implements OnInit {
           emergencyEmail: form.value.emergencyEmail,
           emergencyPhone: form.value.emergencyPhone,
           emergencyAddress: form.value.emergencyAddress,
-          profilePicture: this.fileToUpload
+          profilePicture: this.fileToUpload,
+          updatedBy: this.loggedInUser
         };
 
         this.userService.editUser(user).subscribe((responseData) => {

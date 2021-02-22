@@ -32,4 +32,8 @@ export class ServicesService {
   listRenderedServices(): any {
     return this.httpClient.get<ServiceAPIResponse>(this.serverAddress + 'api/service/rendered');
   }
+
+  servicesRequestedThisMonth():any{
+    return this.httpClient.get<any>(this.serverAddress + 'api/service/requested/month');
+  }
 }
