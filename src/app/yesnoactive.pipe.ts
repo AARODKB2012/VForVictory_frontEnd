@@ -10,3 +10,4 @@ export class YesNoActivePipe implements PipeTransform {
   }
 
 }
+

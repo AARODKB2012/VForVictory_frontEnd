@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { ServicesService } from '../services.service';
+import { BusinessService } from '../business.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
@@ -24,7 +25,7 @@ export class RequestServiceComponent implements OnInit {
   public currentDate = new Date();
   public today;
   public submitted = false;
-  constructor(public serviceService: ServicesService, public router: Router, private datePipe: DatePipe) {
+  constructor(public serviceService: ServicesService, public businessService: BusinessService, public router: Router, private datePipe: DatePipe) {
     this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
    }
 
@@ -34,7 +35,8 @@ export class RequestServiceComponent implements OnInit {
         this.categoryList = responseData.results;
       }
     });
-    this.serviceService.getActiveServices().subscribe((responseData) => {
+    this.businessService.getActiveBusinesses().subscribe((responseData) => {
+
       if (responseData) {
         this.serviceList = responseData.results;
       }

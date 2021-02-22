@@ -1,83 +1,68 @@
 <div class="main-content">
-    <div class="row justify-content-center">
-      <div class="col-md-10">
-        <div class="card">
-            <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate>
-                <div class="card-header">
-                    <div class="row justify-content-center">
-                            <h1 class="title">Service Request List</h1>
-                    </div>
-                    <div class="row justify-content-center">
-                      <div class="col-md-4">
-                      <h4>Please take a moment to review the services available below. Select up to three services you would like to use this month and a V for Victory Team Member will email you within 24 hours to either mail out the voucher/gift card or arrange the service!</h4>
-                    </div>
-                    </div>
-                </div>
-                <div class="card-body">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+          <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate>
+              <div class="card-header">
+                  <div class="row justify-content-center">
+                          <h1 class="title">Service Request List</h1>
+                  </div>
                   <div class="row justify-content-center">
                     <div class="col-md-4">
-                        <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-10 mb-3">
-                                <label for="familyName">Name</label>
-                                <input type="text" class="form-control" id="familyName" name="familyName" ngModel #familyName="ngModel" required maxlength="30" minlength="1">
-                                <div *ngIf="familyName.invalid && (familyName.dirty || familyName.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="(familyName.errors.required)">
-                                  Please enter your name.
-                                  </div>
-                                </div>
-                                </div>
-                            </div>
-                            <div class="row">
+                    <h4>Please take a moment to review the services available below. Select up to three services you would like to use this month and a V for Victory Team Member will email you within 24 hours to either mail out the voucher/gift card or arrange the service!</h4>
+                  </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="row justify-content-center">
+                  <div class="col-md-4">
+                      <div class="card">
+                      <div class="card-body">
+                          <div class="row">
                               <div class="col-md-10 mb-3">
-                              <label for="email">Email Address</label>
-                              <input type="text" class="form-control" id="email" name="email" ngModel #email="ngModel" required maxlength="30" minlength="1">
-                              <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="(email.errors.required)">
-                                  Please enter your email address.
-                                  </div>
+                              <label for="familyName">Name</label>
+                              <input type="text" class="form-control" id="familyName" name="familyName" ngModel #familyName="ngModel" required maxlength="30" minlength="1">
+                              <div *ngIf="familyName.invalid && (familyName.dirty || familyName.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="(familyName.errors.required)">
+                                Please enter your name.
+                                </div>
                               </div>
                               </div>
                           </div>
                           <div class="row">
                             <div class="col-md-10 mb-3">
-                            <label for="req1">First Requested Service</label>
-                            <select class="custom-select d-block w-100" id="req1" name="req1" ngModel #req1="ngModel" required>
-                              <optgroup *ngFor="let cat of categoryList" label="{{ cat.category_name }}">
-                                <ng-container *ngFor="let item of serviceList">
-                                <option *ngIf="item.business_category == cat.category_name" [ngValue]="item.id">
-                                    {{item.business_name}}
-                                </option>
-                              </ng-container>
-                              </optgroup>
-                            </select>
-                            <div *ngIf="req1.invalid && (req1.dirty || req1.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="(req1.errors.required)">
-                                Please request at least one service.
+                            <label for="email">Email Address</label>
+                            <input type="text" class="form-control" id="email" name="email" ngModel #email="ngModel" required maxlength="30" minlength="1">
+                            <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="(email.errors.required)">
+                                Please enter your email address.
                                 </div>
                             </div>
                             </div>
                         </div>
                         <div class="row">
                           <div class="col-md-10 mb-3">
-                          <label for="req2">Second Requested Service</label>
-                          <select class="custom-select d-block w-100" id="req2" name="req2" ngModel #req2="ngModel">
-                            <option [ngValue]="null" selected>None</option>
+                          <label for="req1">First Requested Service</label>
+                          <select class="custom-select d-block w-100" id="req1" name="req1" ngModel #req1="ngModel" required>
                             <optgroup *ngFor="let cat of categoryList" label="{{ cat.category_name }}">
                               <ng-container *ngFor="let item of serviceList">
-                              <option *ngIf="item.business_category == cat.category_name" [ngValue]="item.id">
+                              <option *ngIf="item.Services_Offered == cat.category_name" [ngValue]="item.id">
                                   {{item.business_name}}
                               </option>
                             </ng-container>
                             </optgroup>
                           </select>
+                          <div *ngIf="req1.invalid && (req1.dirty || req1.touched || errorInForm)" class="text-danger">
+                              <div *ngIf="(req1.errors.required)">
+                              Please request at least one service.
+                              </div>
+                          </div>
                           </div>
                       </div>
                       <div class="row">
                         <div class="col-md-10 mb-3">
-                        <label for="req3">Third Requested Service</label>
-                        <select class="custom-select d-block w-100" id="req3" name="req3" ngModel #req3="ngModel">
+                        <label for="req2">Second Requested Service</label>
+                        <select class="custom-select d-block w-100" id="req2" name="req2" ngModel #req2="ngModel">
                           <option [ngValue]="null" selected>None</option>
                           <optgroup *ngFor="let cat of categoryList" label="{{ cat.category_name }}">
                             <ng-container *ngFor="let item of serviceList">
@@ -89,32 +74,46 @@
                         </select>
                         </div>
                     </div>
-                          <div class="row">
-                            <div class="col-md-10 mb-3">
-                            <label for="notes">Notes</label>
-                            <textarea class="textarea form-control" id="notes" name="notes" ngModel #notes="ngModel" maxlength="500" minlength="0"></textarea>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="card-footer">
-                          <div class="row justify-content-center">
-  
-                              <button class="btn btn-success" type="submit" [disabled]="submitted">
-                                  <span class="btn-label">
-                                    <i class="nc-icon nc-box"></i>
-                                  </span>
-                                  Make Request
-                              </button>
-  
-                        </div>
+                    <div class="row">
+                      <div class="col-md-10 mb-3">
+                      <label for="req3">Third Requested Service</label>
+                      <select class="custom-select d-block w-100" id="req3" name="req3" ngModel #req3="ngModel">
+                        <option [ngValue]="null" selected>None</option>
+                        <optgroup *ngFor="let cat of categoryList" label="{{ cat.category_name }}">
+                          <ng-container *ngFor="let item of serviceList">
+                          <option *ngIf="item.business_category == cat.category_name" [ngValue]="item.id">
+                              {{item.business_name}}
+                          </option>
+                        </ng-container>
+                        </optgroup>
+                      </select>
                       </div>
-                        </div>
+                  </div>
+                        <div class="row">
+                          <div class="col-md-10 mb-3">
+                          <label for="notes">Notes</label>
+                          <textarea class="textarea form-control" id="notes" name="notes" ngModel #notes="ngModel" maxlength="500" minlength="0"></textarea>
+                          </div>
+                      </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="row justify-content-center">
+
+                            <button class="btn btn-success" type="submit" [disabled]="submitted">
+                                <span class="btn-label">
+                                  <i class="nc-icon nc-box"></i>
+                                </span>
+                                Make Request
+                            </button>
+
                       </div>
                     </div>
-                </div>
-            <!--</div>-->
-        </form>
-        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          <!--</div>-->
+      </form>
       </div>
     </div>
   </div>

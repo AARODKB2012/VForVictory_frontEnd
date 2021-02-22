@@ -18,12 +18,13 @@ export class FamilyService{
   private serverAddress = environment.backendURL;
   constructor(private httpClient: HttpClient, private router: Router, private http: Http) { }
 
-    saveFamily(family: any) {
+  saveFamily(family: any) {
     return this.httpClient.post<{familyCreated: boolean}>(this.serverAddress + 'api/family/new', family);
   }
     listFamily():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/');
     }
+
     markFamilyActive(family: any) {
       return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markActive', family);
     }
@@ -39,6 +40,12 @@ export class FamilyService{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/inactive');
     }
 
+    familiesAddedThisMonth():any{
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/month');
+    }
 
+    familiesToApprove():any{
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/unapproved');
+    }
   }
   
