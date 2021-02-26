@@ -353,23 +353,4 @@ export class ListServicesComponent implements OnInit {
       confirmButtonClass: "btn btn-success",
     })
   }
-
-  showClipboard(){
-    Swal.fire({
-      title: "Copied!",
-      text: "The link to the Service Request form has been successfully copied to your clipboard.",
-      buttonsStyling: false,
-      confirmButtonClass: "btn btn-success",
-      type: "success"
-      })
-
-  }
-
-  showNote(note) {
-    Swal.fire({
-      title: "Note from the Family",
-      text: note,
-      confirmButtonClass: "btn btn-success",
-    })
-  }
 }
