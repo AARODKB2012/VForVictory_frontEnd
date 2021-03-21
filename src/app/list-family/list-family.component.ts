@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FamilyService} from '../family.service';
 import { FamilyModel } from '../family.model';
+import { DatePipe } from '@angular/common';
+import { Router, ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 declare var $: any;
 
@@ -13,15 +16,22 @@ declare interface DataTable {
 @Component({
   selector: 'app-list-family',
   templateUrl: './list-family.component.html',
-  styleUrls: ['./list-family.component.css']
+  styleUrls: ['./list-family.component.css'],
+  providers: [DatePipe]
 })
 export class ListFamilyComponent implements OnInit {
   public familyList: FamilyModel[];
   public dataTable: DataTable;
+  public currentDate = new Date();
+  public today;
+  public url;
   constructor(public familyService: FamilyService){
   }
+  
 
     ngOnInit() {
+
+      
       this.familyService.listFamily().subscribe((familyReturned) => {
         if (familyReturned) {
           this.familyList = familyReturned.results;
@@ -57,5 +67,51 @@ ngAfterViewInit(){
     var data = table.row($tr).data();
     alert('You press on Row: ' + data[0] + ' ' + data[1] + ' ' + data[2] + '\'s row.');
   });
+
+  
 }
+markFamilyInactive(itemId) {
+  Swal.fire({
+    title: "MARK INACTIVE?",
+    text: "Would you like to mark this service as inactive? It will no longer be selectable by families.",
+    type: "warning",
+    showCancelButton: true,
+    cancelButtonClass: "btn btn-info",
+    confirmButtonClass: "btn btn-danger",
+    confirmButtonText: "Yes, mark it!",
+    cancelButtonText: "No, leave it!",
+    reverseButtons: true
+  })
+  .then((mark) => {
+    if(mark.value) {
+      const request: any = {
+        id: itemId,
+      }
+      this.familyService.markFamilyInactive(request).subscribe((responseData) => {
+        if (responseData.requestFulfilled) {
+          Swal.fire({
+            title: "Service changed!",
+            text: "The service has been made inactive.",
+            buttonsStyling: false,
+            confirmButtonClass: "btn btn-success",
+            type: "success"
+          }).then((confirm) => {
+            if(confirm){
+              window.location.reload()
+            }
+          })
+        }
+      });
+    }
+  });
+
+
+
+
+
+
+
+}
+
+
 }

@@ -1,29 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { FamilyService } from 'app/family.service';
+import { DatePipe } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import {Md5} from 'ts-md5/dist/md5';
 import Swal from 'sweetalert2';
-import { FamilyService } from 'app/family.service';
 
-declare var $: any;
 @Component({
-  selector: 'app-new-family',
-  templateUrl: './new-family.component.html',
-  styleUrls: ['./new-family.component.css']
+  selector: 'app-family-application',
+  templateUrl: './family-application.component.html',
+  styleUrls: ['./family-application.component.css'],
+  providers: [DatePipe]
 })
-export class NewFamilyComponent implements OnInit {
+export class FamilyApplicationComponent implements OnInit {
 
-  private md5 = new Md5();
-  errorInForm: boolean;
-  passwordMatch: boolean;
-  constructor(public familyService: FamilyService, public router: Router) { }
+  public errorInForm: boolean;
+  public serviceList: [];
+  public requestedFamily: any = [];
+  public requestList: any = [];
+  public currentDate = new Date();
+  public today;
+  public submitted = false;
 
-  ngOnInit(): void {
 
+  constructor(public familyApplication: FamilyService, public router: Router, private datePipe: DatePipe) { 
+    this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
 
-
-
+  ngOnInit(): void {
+  }
   onSave(form: NgForm) {
     if ( form.invalid ) { // Validating form has data
       console.log('returned');
@@ -44,7 +48,7 @@ export class NewFamilyComponent implements OnInit {
         additionalInfo: form.value.addInfo,
         endOftreatmentDate: form.value.endOftreatmentDate
         };
-      this.familyService.saveFamily(request).subscribe((responseData) => {
+      this.familyApplication.saveFamily(request).subscribe((responseData) => {
         if (responseData.familyCreated) {
           Swal.fire({
             title: "Record Saved Successfully!",
@@ -57,4 +61,5 @@ export class NewFamilyComponent implements OnInit {
     });
     } 
     }
-  }
+
+}

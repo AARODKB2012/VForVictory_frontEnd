@@ -15,6 +15,8 @@ import { NewVolunteerComponent } from './new-volunteer/new-volunteer.component';
 import { UserComponent } from './userpage/user.component';
 import { LockComponent } from './pages/lock/lock.component';
 import { AuthGuard } from './_guards/index';
+import { FamilyApplicationComponent } from './family-application/family-application.component';
+import { ActiveFamilyComponent } from './active-family/active-family.component';
 
 export const AppRoutes: Routes = [{
         path: '',
@@ -69,6 +71,9 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'services/active', component: ActiveServicesComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'family/active', component: ActiveFamilyComponent, canActivate: [AuthGuard]
             }
             /* {
                 path: 'components',
@@ -116,7 +121,10 @@ export const AppRoutes: Routes = [{
                 loadChildren: './pages/pages.module#PagesModule'
             }]
         },
-            {
-                path: 'request', component: RequestServiceComponent
-            }
+        {
+            path: 'request', component: RequestServiceComponent
+        },
+        {
+            path: 'family-application', component: FamilyApplicationComponent
+        }
 ];

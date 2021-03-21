@@ -36,6 +36,7 @@ export class RequestServiceComponent implements OnInit {
       }
     });
     this.businessService.getActiveBusinesses().subscribe((responseData) => {
+
       if (responseData) {
         this.serviceList = responseData.results;
       }

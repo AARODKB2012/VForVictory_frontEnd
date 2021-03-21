@@ -1,5 +1,6 @@
 export interface UserModel {
   id: number;
+  record_id: number;
   firstName: string;
   lastName: string;
   userName: string;
