@@ -4,6 +4,8 @@ import { FamilyService} from '../family.service';
 import { FamilyModel } from '../family.model';
 import { BusinessService } from '../business.service';
 import { ServicesService } from '../services.service';
+import Swal from 'sweetalert2';
+import { Router, ActivatedRoute, UrlTree, UrlSegmentGroup, UrlSegment, PRIMARY_OUTLET } from '@angular/router';
 
 declare const $: any;
 
@@ -44,8 +46,9 @@ export class DashboardComponent implements OnInit {
   public dataTableRequests: DataTable;
   public requestsThisMonth: Array<any>;
   public userRole: number;
+  private loggedInUser: any;
   
-  constructor(public familyService: FamilyService, public businessService: BusinessService, public servicesService: ServicesService){
+  constructor(public familyService: FamilyService, public businessService: BusinessService, public servicesService: ServicesService, public router: Router){
     
     // For Populating VFV Data
     // Families
@@ -97,6 +100,7 @@ export class DashboardComponent implements OnInit {
     });
 
     this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
   ngAfterViewInit(){
@@ -144,6 +148,31 @@ export class DashboardComponent implements OnInit {
 
     });
     var requestsThisMonth = $('#requestsThisMonth').DataTable();
+  }
+
+  approvedBusiness(businessId, businessName){
+    this.businessService.approveBusiness(businessId, this.loggedInUser).subscribe((responseData) => {
+      if (responseData.businessApproved) {
+        this.businessService.businessToApprove().subscribe((businesses) => {
+          if (businesses) {
+            this.businessesToApprove = businesses.results;
+            this.dataTableBusiness = {
+              headerRow: [ '#', 'Name', 'Services Offered','Actions'],
+              footerRow: [ '#', 'Name', 'Services Offered','Actions'],
+              dataRows: this.businessesToApprove
+            };
+          }
+        });
+        Swal.fire({
+          title: 'Business Approved Successfully!',
+          text:  businessName + ' was approved successfully.',
+          buttonsStyling: false,
+          confirmButtonClass: 'btn btn-success',
+          type: 'success'
+        })
+        this.router.navigate(['/dashboard']);
+      }
+    });
   }
 
   public chartClicked(e:any):void {

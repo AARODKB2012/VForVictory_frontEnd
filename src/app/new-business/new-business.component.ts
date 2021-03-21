@@ -35,6 +35,7 @@ export class NewBusinessComponent implements OnInit {
   private loggedInUser: any;
   public dataTableServicesRendered: DataTable;
   public servicesRendered: Array<any>;
+  public businessApproved: boolean;
 
   constructor(public businessService: BusinessService, public router: Router, private activeRoute: ActivatedRoute) {
     const tree: UrlTree = router.parseUrl(this.router.url);
@@ -67,6 +68,10 @@ export class NewBusinessComponent implements OnInit {
           this.business = responseData.results[0];
           if (responseData.results[0]['profile_picture_url'] != null){
             this.profileURL = environment.backendURL + `api/business/name/${responseData.results[0]['business_name']}/logo`
+          }
+
+          if (responseData.results[0]['approved_by'] != null){
+            this.businessApproved = true;
           }
 
           this.businessService.getServicesRendered(this.business['business_name']).subscribe((requests) => {
@@ -246,5 +251,20 @@ export class NewBusinessComponent implements OnInit {
         });
       }
     }
+  }
+
+  approvedBusiness(businessId, businessName){
+    this.businessService.approveBusiness(businessId, this.loggedInUser).subscribe((responseData) => {
+      if (responseData.businessApproved) {
+        Swal.fire({
+          title: 'Business Approved Successfully!',
+          text:  businessName + ' was approved successfully.',
+          buttonsStyling: false,
+          confirmButtonClass: 'btn btn-success',
+          type: 'success'
+        })
+        this.router.navigate(['/business/list']);
+      }
+    });
   }
 }

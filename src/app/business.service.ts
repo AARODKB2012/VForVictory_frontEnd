@@ -70,4 +70,7 @@ export class BusinessService{
       return this.httpClient.get<any>(this.serverAddress + 'api/business/services/rendered/' + businessName);
     }
     
+    approveBusiness(businessId, approvedBy) {
+      return this.httpClient.post<{businessApproved: boolean}>(this.serverAddress + `api/business/${businessId}/approve/${approvedBy}`, null);
+    }
   }
