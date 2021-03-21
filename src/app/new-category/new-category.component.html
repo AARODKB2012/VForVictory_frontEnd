@@ -1,0 +1,52 @@
+<div class="main-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+            <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate enctype="multipart/form-data">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6 pull-left">
+                            <h5 class="title">Business Category</h5>
+                        </div>
+                        <div class="col-md-6 text-right" >
+                            <button type="button" class="btn btn-default" routerLink="/business/category">
+                                <span class="btn-label">
+                                  <i class="nc-icon nc-bullet-list-67"></i>
+                                </span>
+                                Cancel
+                            </button>
+                            <!-- Hiding save button if is in view mode -->
+                            <button class="btn btn-success" type="submit" *ngIf="!viewMode">
+                                <span class="btn-label">
+                                  <i class="nc-icon nc-box"></i>
+                                </span>
+                                Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="offset-4 col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title">Category Information</h4>
+                                    <div class="mb-3">
+                                        <label for="businessName">Name of Category</label>
+                                        <input type="text" class="form-control" id="categoryName" name="categoryName" [ngModel]="category?.category_name" #businessName="ngModel" required maxlength="50" minlength="1" [readonly]="viewMode">
+                                        <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
+                                            <div *ngIf="(businessName.errors.required)">
+                                                Category name is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>

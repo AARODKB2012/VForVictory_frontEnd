@@ -47,4 +47,27 @@ export class BusinessService{
     businessToApprove():any{
       return this.httpClient.get<BusinessAPIResponse>(this.serverAddress + 'api/business/unapproved');
     }
+
+    createCategory(category: any) {
+      return this.httpClient.post<{categoryCreated: boolean}>(this.serverAddress + 'api/business/category/new', category);
+    }
+
+    getCategoryById(categoryId: number): any {
+      return this.httpClient.get<any>(this.serverAddress + 'api/business/category/' + categoryId);
+    }
+
+    updateCategory(category: any) {
+      return this.httpClient.post<{categoryUpdated: boolean}>(this.serverAddress + 'api/business/category/update', category);
+    }
+
+    updateProfilePicture(profilePicture: File, businessName) {
+      const formData: FormData = new FormData();
+      formData.append('fileKey', profilePicture, profilePicture.name);
+      return this.httpClient.post<{businessUpdated: boolean}>(this.serverAddress + 'api/business/picture/' + businessName, formData);
+    }
+
+    getServicesRendered(businessName): any {
+      return this.httpClient.get<any>(this.serverAddress + 'api/business/services/rendered/' + businessName);
+    }
+    
   }

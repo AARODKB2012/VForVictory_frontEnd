@@ -174,7 +174,8 @@
                     {{ row.Services_Offered }}
                   </td>
                   <td class="td-actions text-center">
-                    <a  [routerLink]="['/family/view']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
                     <a  [routerLink]="['/family/approve']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
                     <a  [routerLink]="['/family/delete']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-danger btn-link btn-icon btn-sm view"><i class="fa fa-trash"></i></a>
                   </td>
@@ -225,10 +226,10 @@
                     {{ row.business_category }}
                   </td>
                   <td>  
-                    {{ row.date_requested }}
+                    {{ row.date_requested | date:'MM/dd/yyyy'}}
                   </td>
                   <td>  
-                    {{ row.date_fulfilled }}
+                    {{ row.date_fulfilled | date:'MM/dd/yyyy'}}
                   </td>
                   <td class="td-actions text-center">
                     <div class="form-check">

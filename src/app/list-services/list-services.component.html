@@ -135,8 +135,8 @@
                         <td>{{ row.email }}</td>
                         <td>{{ row.business_name }}</td>
                         <td>{{ row.business_category }}</td>
-                        <td>{{ row.date_requested }}</td>
-                        <td>{{ row.date_fulfilled }}</td>
+                        <td>{{ row.date_requested | date:'MM/dd/yyyy'}}</td>
+                        <td>{{ row.date_fulfilled | date:'MM/dd/yyyy'}}</td>
                         <td>{{ row.followedup_business | yesNo }}</td>
                         <td>{{ row.followedup_family | yesNo }}</td>
                         <td class="text-right">

@@ -35,6 +35,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ActiveServicesComponent } from './active-services/active-services.component';
 import { FamilyApplicationComponent } from './family-application/family-application.component';
 import { ActiveFamilyComponent } from './active-family/active-family.component';
+import { BusinessCategoryComponent } from './business-category/business-category.component';
+import { NewCategoryComponent } from './new-category/new-category.component';
 
 
 @NgModule({
@@ -72,7 +74,9 @@ import { ActiveFamilyComponent } from './active-family/active-family.component';
         UserComponent,
         ActiveServicesComponent,
         FamilyApplicationComponent,
-        ActiveFamilyComponent
+        ActiveFamilyComponent,
+        BusinessCategoryComponent,
+        NewCategoryComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

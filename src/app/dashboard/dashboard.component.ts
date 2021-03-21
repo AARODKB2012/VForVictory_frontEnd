@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
 
   public dataTableRequests: DataTable;
   public requestsThisMonth: Array<any>;
+  public userRole: number;
   
   constructor(public familyService: FamilyService, public businessService: BusinessService, public servicesService: ServicesService){
     
@@ -88,13 +89,14 @@ export class DashboardComponent implements OnInit {
       if (requests) {
         this.requestsThisMonth = requests.results;
         this.dataTableRequests = {
-          headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Active'],
-          footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Active'],
+          headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
+          footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
           dataRows: this.requestsThisMonth
         };
       }
     });
 
+    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
   }
 
   ngAfterViewInit(){
