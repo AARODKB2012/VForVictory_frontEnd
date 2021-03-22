@@ -63,8 +63,8 @@ export class RequestServiceComponent implements OnInit {
               const request: any = {
                 name: form.value.familyName,
                 email: form.value.email,
-                businessName: responseData.results[0].business_name.toString(),
-                businessCategory: responseData.results[0].business_category.toString(),
+                businessName: responseData.results[0]['business_name'].toString(),
+                businessCategory: responseData.results[0]['business_category'].toString(),
                 dateRequested: this.today,
                 notes: form.value.notes
               };
