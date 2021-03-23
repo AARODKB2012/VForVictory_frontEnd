@@ -212,6 +212,31 @@
                         </div>
                         <div class="card">
                           <div class="card-body">
+                              <h4 class="card-title">Social Media</h4>
+                              <div class="row">
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label>Facebook</label>
+                                    <input type="text" class="form-control" id="facebook" name="facebook" [ngModel]="business?.facebook_url" ngModel #facebook="ngModel" [readonly]="viewMode">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label>Twitter</label>
+                                    <input type="text" class="form-control" id="twitter" name="twitter" [ngModel]="business?.twiter_url" ngModel #twitter="ngModel" [readonly]="viewMode">
+                                  </div>
+                                </div>
+                                <div class="col-sm-12">
+                                  <div class="form-group">
+                                    <label>Instagram</label>
+                                    <input type="text" class="form-control" id="instagram" name="instagram" [ngModel]="business?.instagram_url" ngModel #instagram="ngModel" [readonly]="viewMode">
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                        <div class="card">
+                          <div class="card-body">
                               <h4 class="card-title">Services Rendered</h4>
                               <div class="row">
                                 <div class="col-md-12">

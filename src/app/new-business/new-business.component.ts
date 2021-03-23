@@ -184,6 +184,9 @@ export class NewBusinessComponent implements OnInit {
           preferredContact: form.value.preferredContact,
           eoyReceipt: form.value.eoyReceipt,
           notes: form.value.notes,
+          facebookUrl: form.value.facebook,
+          twitterUrl: form.value.twitter,
+          instagramUrl: form.value.instagram,
           createdBy: this.loggedInUser
         };
 
@@ -227,6 +230,9 @@ export class NewBusinessComponent implements OnInit {
           preferredContact: form.value.preferredContact,
           eoyReceipt: form.value.eoyReceipt,
           notes: form.value.notes,
+          facebookUrl: form.value.facebook,
+          twitterUrl: form.value.twitter,
+          instagramUrl: form.value.instagram,
           updatedBy: this.loggedInUser
         };
 

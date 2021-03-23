@@ -19,6 +19,7 @@ import { FamilyApplicationComponent } from './family-application/family-applicat
 import { ActiveFamilyComponent } from './active-family/active-family.component';
 import { BusinessCategoryComponent } from './business-category/business-category.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
+import { BusinessSignupComponent } from './business-signup/business-signup.component';
 
 export const AppRoutes: Routes = [{
         path: '',
@@ -140,5 +141,8 @@ export const AppRoutes: Routes = [{
         },
         {
             path: 'family-application', component: FamilyApplicationComponent
+        },
+        {
+            path: 'business/signup', component: BusinessSignupComponent
         }
 ];

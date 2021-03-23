@@ -37,6 +37,7 @@ import { FamilyApplicationComponent } from './family-application/family-applicat
 import { ActiveFamilyComponent } from './active-family/active-family.component';
 import { BusinessCategoryComponent } from './business-category/business-category.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
+import { BusinessSignupComponent } from './business-signup/business-signup.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { NewCategoryComponent } from './new-category/new-category.component';
         FamilyApplicationComponent,
         ActiveFamilyComponent,
         BusinessCategoryComponent,
-        NewCategoryComponent
+        NewCategoryComponent,
+        BusinessSignupComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
