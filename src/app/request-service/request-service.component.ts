@@ -3,10 +3,17 @@ import { DatePipe } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { ServicesService } from '../services.service';
 import { BusinessService } from '../business.service';
-import { Router } from '@angular/router';
+import { FamilyService } from '../family.service';
+import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { ServiceModel } from 'app/service.model';
+import { FamilyModel } from 'app/family.model';
+
+declare interface DataTable {
+  headerRow: string[];
+  dataRows: string[];
+}
 
 declare var $: any;
 @Component({
@@ -20,16 +27,40 @@ export class RequestServiceComponent implements OnInit {
   public errorInForm: boolean;
   public categoryList: [];
   public serviceList: [];
+  public dataTable: DataTable;
+  public familyId;
+  public family: FamilyModel;
   public requestedServices: any = [];
   public requestList: any = [];
   public currentDate = new Date();
   public today;
-  public submitted = false;
-  constructor(public serviceService: ServicesService, public businessService: BusinessService, public router: Router, private datePipe: DatePipe) {
+  public reqCount = 0;
+  public addDisable = false;
+  public submitDisable = true;
+  constructor(public serviceService: ServicesService, public businessService: BusinessService, public familyService: FamilyService, public router: Router, private datePipe: DatePipe, private activeRoute: ActivatedRoute) {
     this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
    }
 
   ngOnInit(): void {
+
+    this.activeRoute.queryParams.subscribe(params => {
+      this.familyId = params['familyId'];
+    });
+    if (!this.familyId) {
+      this.router.navigate(['/request/login']);
+    }
+    else {
+      this.familyService.getFamilyById(this.familyId).subscribe((responseData) => {
+        if(responseData) {
+          this.family = responseData.results[0];
+          this.family.firstName = responseData.results[0]['first_name'] + ' ' + responseData.results[0]['last_name'];
+          this.family.lastName = responseData.results[0]['cancer_warrior_name'];
+        }
+        else {
+          this.router.navigate(['/request/login']);
+        }
+      })
+    }
     this.serviceService.getAllCategories().subscribe((responseData) => {
       if (responseData) {
         this.categoryList = responseData.results;
@@ -41,49 +72,106 @@ export class RequestServiceComponent implements OnInit {
         this.serviceList = responseData.results;
       }
     });
+
+    this.dataTable = {
+      headerRow: [ 'Service', 'Notes', 'Delete?'],
+      dataRows: this.requestList
+    };
   }
 
-  onSave(form: NgForm) {
+  ngAfterViewInit(){
+    $('#datatable').DataTable({
+      searching: false,
+      paging: false,
+      info: false,
+      "language": {
+        "emptyTable": "No services requested."
+      },
+      bAutoWidth: false,
+      aoColumns : [
+        { sWidth: '49%' },
+        { sWidth: '49%' },
+        { sWidth: '2%' },
+      ],
+    });
+    var table = $('#datatable').DataTable();
+  }
 
+  onAdd(form: NgForm) {
     if ( form.invalid ) { // Validating form has data
-      alert(form.value.notes);
       console.log('returned');
       this.errorInForm = true;
       return;
     }
     else {
-      this.requestedServices.push(form.value.req1, form.value.req2, form.value.req3);
-
-      for(var i = 0; i < this.requestedServices.length; i++){
-        var currentRequest = this.requestedServices[i];
-
-        if(currentRequest != null || currentRequest != "") {
-          this.serviceService.getServiceById(currentRequest).subscribe((responseData) => {
-            if (responseData) {
-              const request: any = {
-                name: form.value.familyName,
-                email: form.value.email,
-                businessName: responseData.results[0].business_name.toString(),
-                businessCategory: responseData.results[0].business_category.toString(),
-                dateRequested: this.today,
-                notes: form.value.notes
-              };
-              this.serviceService.saveRequest(request).subscribe((reqResponseData) => {
-                if (reqResponseData.requestCreated) {
-                  this.submitted = true;
-                  Swal.fire({
-                    title: "Request Submitted!",
-                    text: "Your request for service was submitted successfully.  Thank you!",
-                    buttonsStyling: false,
-                    confirmButtonClass: "btn btn-success",
-                    type: "success"
-                  })
-                }
-              });
-            }
-          });
-        }
+      let item;
+      item = {serviceId: form.value.req1.id, service: form.value.req1.name, notes: form.value.notes};
+      this.requestList.push(item);
+      this.submitDisable = false;
+      this.reqCount++;
+      if(this.reqCount >= 3){
+        this.addDisable = true;
       }
     }
   }
+
+  onDelete(serviceId) {
+    this.requestList.splice(serviceId - 1, 1);
+    this.reqCount--;
+    if(this.reqCount < 3) {
+      this.addDisable = false;
+    }
+    if(this.reqCount <= 0) {
+      this.submitDisable = true;
+    }
+  }
+
+  onSave(form: NgForm) {
+    if ( form.invalid ) { // Validating form has data
+      console.log('returned');
+      this.errorInForm = true;
+      return;
+    }
+    else {
+      Swal.fire({
+        title: "Submit request?",
+        text: "Please double-check your request before submitting.",
+        type: "info",
+        showCancelButton: true,
+        cancelButtonClass: "btn btn-info",
+        confirmButtonClass: "btn btn-success",
+        confirmButtonText: "Submit it!",
+        cancelButtonText: "Go back",
+        reverseButtons: true
+      })
+      .then((fulfill) => {
+        if(fulfill.value) {
+          for(let i = 0; i < this.requestList.length; i++){
+            if(this.requestList[i]['serviceId'] || this.requestList[i]['serviceId'] != "") {
+                const request: any = {
+                  familyId: this.familyId,
+                  businessId: this.requestList[i]['serviceId'],
+                  dateRequested: this.today,
+                  notes: this.requestList[i]['notes']
+                };
+                this.serviceService.saveRequest(request).subscribe((reqResponseData) => {
+                  if (reqResponseData.requestCreated) {
+                    this.addDisable = true;
+                    this.submitDisable = true;
+                    Swal.fire({
+                      title: "Request Submitted!",
+                      text: "Your request for service was submitted successfully.  Thank you!",
+                      buttonsStyling: false,
+                      confirmButtonClass: "btn btn-success",
+                      type: "success"
+                    })
+                  }
+              });
+            }
+          }
+        }
+      });
+    }
+  }
+
 }

@@ -28,7 +28,7 @@ export const ROUTES: RouteInfo[] = [{
     },
     {
       path: '/services',
-      title: 'Services',
+      title: 'Requests',
       type: 'link',
       icontype: 'nc-icon nc-box'
     },

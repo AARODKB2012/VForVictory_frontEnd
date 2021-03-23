@@ -28,7 +28,7 @@ export class FamilyService{
     markFamilyActive(family: any) {
       return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markActive', family);
     }
-  
+
     markFamilyInactive(family: any) {
       return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markInactive', family);
     }
@@ -47,5 +47,12 @@ export class FamilyService{
     familiesToApprove():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/unapproved');
     }
+
+    getFamilyByEmail(familyEmail: String) {
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/email/' + familyEmail);
+    }
+
+    getFamilyById(familyId: Number) {
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
+    }
   }
-  
