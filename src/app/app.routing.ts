@@ -74,7 +74,13 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'family/active', component: ActiveFamilyComponent, canActivate: [AuthGuard]
-            }
+            },
+            {
+                path: 'family/view', component: NewFamilyComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'family/edit', component: NewFamilyComponent, canActivate: [AuthGuard]
+            },
             /* {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
