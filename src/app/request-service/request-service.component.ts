@@ -151,7 +151,6 @@ export class RequestServiceComponent implements OnInit {
                 const request: any = {
                   familyId: this.familyId,
                   businessId: this.requestList[i]['serviceId'],
-                  dateRequested: this.today,
                   notes: this.requestList[i]['notes']
                 };
                 this.serviceService.saveRequest(request).subscribe((reqResponseData) => {

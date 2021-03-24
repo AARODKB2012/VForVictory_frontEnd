@@ -124,6 +124,7 @@ export class ListServicesComponent implements OnInit {
         $('td', row).css('background-color', '#ffcccc');
       }
     },
+    "order": [[ 0, "desc" ]],
     "pagingType": "full_numbers",
     "lengthMenu": [
       [10, 25, 50, -1],
@@ -169,10 +170,11 @@ export class ListServicesComponent implements OnInit {
       })
       .then((fulfill) => {
         if(fulfill.value) {
+          let user = JSON.parse(localStorage.getItem('currentUser'));
           const request: any = {
             id: itemId,
             approved: 1,
-            dateFulfilled: this.today,
+            currentUser: user['email'],
             followedUpB: 0,
             followedUpF: 0
           }
@@ -208,10 +210,11 @@ export class ListServicesComponent implements OnInit {
       })
       .then((fulfill) => {
         if(fulfill.value) {
+          let user = JSON.parse(localStorage.getItem('currentUser'));
           const request: any = {
             id: itemId,
             approved: 0,
-            dateFulfilled: this.today
+            currentUser: user['email'],
           }
           this.serviceService.fulfillRequest(request).subscribe((responseData) => {
             if (responseData.requestFulfilled) {
