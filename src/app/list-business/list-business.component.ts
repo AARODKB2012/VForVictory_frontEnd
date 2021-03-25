@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BusinessService} from '../business.service';
 import { BusinessModel } from '../business.model';
+import Swal from 'sweetalert2';
 
 declare var $: any;
 
@@ -19,11 +20,14 @@ export class ListBusinessComponent implements OnInit {
   public businessList: BusinessModel[];
   public dataTable: DataTable;
   public userRole: number;
+  public url: string;
+
   constructor(public businessService: BusinessService){
     this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
   }
 
   ngOnInit() {
+      this.url = window.location.origin;
       this.businessService.listBusiness().subscribe((businessReturned) => {
         if (businessReturned) {
           this.businessList = businessReturned.results;
@@ -32,7 +36,7 @@ export class ListBusinessComponent implements OnInit {
             footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Options'],
             dataRows: this.businessList
           };
-    }
+        }
     })
   };
 
@@ -96,5 +100,15 @@ export class ListBusinessComponent implements OnInit {
 
     return (country + " (" + city + ") " + number).trim();
   };
+
+  showClipboard(){
+    Swal.fire({
+      title: "Copied!",
+      text: "The link to the Business Sign Up form has been successfully copied to your clipboard.",
+      buttonsStyling: false,
+      confirmButtonClass: "btn btn-success",
+      type: "success"
+    });
+  }
 }
 
