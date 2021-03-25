@@ -58,13 +58,13 @@ export class RequestServiceComponent implements OnInit {
         var currentRequest = this.requestedServices[i];
 
         if(currentRequest != null || currentRequest != "") {
-          this.serviceService.getServiceById(currentRequest).subscribe((responseData) => {
+          this.businessService.getBusinessById(currentRequest).subscribe((responseData) => {
             if (responseData) {
               const request: any = {
                 name: form.value.familyName,
                 email: form.value.email,
-                businessName: responseData.results[0].business_name.toString(),
-                businessCategory: responseData.results[0].business_category.toString(),
+                businessName: responseData.results[0]['business_name'].toString(),
+                businessCategory: responseData.results[0]['Services_Offered'].toString(),
                 dateRequested: this.today,
                 notes: form.value.notes
               };
