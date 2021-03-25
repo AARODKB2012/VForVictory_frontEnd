@@ -6,7 +6,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class YesNoPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    return value ? "Yes" : "No";
+    if(typeof value === 'undefined' || value === null) {
+      return "N/A";
+    }
+    else{
+      return value ? "Yes" : "No";
+    }
   }
 
 }
