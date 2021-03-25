@@ -18,6 +18,9 @@ import { LockComponent } from './pages/lock/lock.component';
 import { AuthGuard } from './_guards/index';
 import { FamilyApplicationComponent } from './family-application/family-application.component';
 import { ActiveFamilyComponent } from './active-family/active-family.component';
+import { BusinessCategoryComponent } from './business-category/business-category.component';
+import { NewCategoryComponent } from './new-category/new-category.component';
+import { BusinessSignupComponent } from './business-signup/business-signup.component';
 
 export const AppRoutes: Routes = [{
         path: '',
@@ -53,7 +56,7 @@ export const AppRoutes: Routes = [{
                 path: 'volunteers/edit', component: NewVolunteerComponent, canActivate: [AuthGuard]
             },
             {
-                path: 'business', component: ListBusinessComponent, canActivate: [AuthGuard]
+                path: 'business/list', component: ListBusinessComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'business/new', component: NewBusinessComponent, canActivate: [AuthGuard]
@@ -63,6 +66,18 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'business/view', component: NewBusinessComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'business/category', component: BusinessCategoryComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'business/category/new', component: NewCategoryComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'business/category/view', component: NewCategoryComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'business/category/edit', component: NewCategoryComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'services', component: ListServicesComponent, canActivate: [AuthGuard]
@@ -75,7 +90,13 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'family/active', component: ActiveFamilyComponent, canActivate: [AuthGuard]
-            }
+            },
+            {
+                path: 'family/view', component: NewFamilyComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'family/edit', component: NewFamilyComponent, canActivate: [AuthGuard]
+            },
             /* {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
@@ -130,5 +151,8 @@ export const AppRoutes: Routes = [{
         },
         {
             path: 'family-application', component: FamilyApplicationComponent
+        },
+        {
+            path: 'business/signup', component: BusinessSignupComponent
         }
 ];

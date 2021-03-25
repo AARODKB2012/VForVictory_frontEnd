@@ -41,8 +41,13 @@ export const ROUTES: RouteInfo[] = [{
     {
         path: '/business',
         title: 'Businesses',
-        type: 'link',
-        icontype: 'nc-icon nc-shop'
+        icontype: 'nc-icon nc-shop',
+        type: 'sub',
+        collapse: 'components',
+        children: [
+            {path: 'list', title: 'Businesses', ab:'B'},
+            {path: 'category', title: 'Categories', ab:'BC'},
+        ]
     },
     {
       path: '/volunteers',

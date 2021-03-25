@@ -14,6 +14,12 @@
                                 </span>
                                 New Business
                             </button>
+                            <button class="btn btn-info" [cdkCopyToClipboard]="url + '/#/business/signup'" (click)="showClipboard()">
+                                <span class="btn-label">
+                                  <i class="nc-icon nc-single-copy-04"></i>
+                                </span>
+                                Copy sign Up Link
+                              </button>
                         </div>
                   </div>
 
@@ -55,11 +61,11 @@
                                 <td>{{row.Services_Offered}}</td>
                                 <td>{{row.Service_Area}}</td>
                                 <td>{{row.email}}</td>
-                                <td>{{row.primary_contact_phone_number}}</td>
+                                <td>{{formatPhoneNumber(row.primary_contact_phone_number)}}</td>
                                 <td>{{row.Preferred_Method_Contact}}</td>
                                 <td class="text-right">
                                   <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
-                                  <a [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                                  <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
                                   <a href="javascript:void(0)" class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
                                 </td>
                             </tr>

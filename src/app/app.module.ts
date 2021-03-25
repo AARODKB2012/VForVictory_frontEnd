@@ -36,6 +36,9 @@ import { ActiveServicesComponent } from './active-services/active-services.compo
 import { FamilyApplicationComponent } from './family-application/family-application.component';
 import { ActiveFamilyComponent } from './active-family/active-family.component';
 import { RequestServiceLoginComponent } from './request-service-login/request-service-login.component';
+import { BusinessCategoryComponent } from './business-category/business-category.component';
+import { NewCategoryComponent } from './new-category/new-category.component';
+import { BusinessSignupComponent } from './business-signup/business-signup.component';
 
 
 @NgModule({
@@ -75,6 +78,9 @@ import { RequestServiceLoginComponent } from './request-service-login/request-se
         FamilyApplicationComponent,
         ActiveFamilyComponent,
         RequestServiceLoginComponent
+        BusinessCategoryComponent,
+        NewCategoryComponent,
+        BusinessSignupComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

@@ -438,7 +438,6 @@ export class ListServicesComponent implements OnInit {
       confirmButtonClass: "btn btn-success",
       type: "success"
       })
-
   }
 
   showNote(note) {

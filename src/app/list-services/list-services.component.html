@@ -136,6 +136,10 @@
                         <td>{{ row.requested_date | date:'MMM dd, yyyy'}}</td>
                         <td>{{ row.fulfilled_date | date:'MMM dd, yyyy'}}</td>
                         <td>{{ row.approved | yesNo }}</td>
+                        <td>{{ row.business_name }}</td>
+                        <td>{{ row.business_category }}</td>
+                        <td>{{ row.date_requested | date:'MM/dd/yyyy'}}</td>
+                        <td>{{ row.date_fulfilled | date:'MM/dd/yyyy'}}</td>
                         <td>{{ row.followedup_business | yesNo }}</td>
                         <td>{{ row.followedup_family | yesNo }}</td>
                         <td class="text-right">

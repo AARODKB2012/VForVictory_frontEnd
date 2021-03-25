@@ -8,14 +8,15 @@
                         <div class="col-md-6 pull-left">
                             <h5 class="title">Family Profile</h5>
                         </div>
-                        <div class="col-md-6 text-right">
-                            <button class="btn btn-default" routerLink="/families">
+                        <div class="col-md-6 text-right" >
+                            <button type="button" class="btn btn-default" routerLink="/family">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-bullet-list-67"></i>
                                 </span>
                                 Cancel
                             </button>
-                            <button class="btn btn-success" type="submit">
+                            <!-- Hiding save button if is in view mode -->
+                            <button class="btn btn-success" type="submit" *ngIf="!viewMode">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-box"></i>
                                 </span>
@@ -30,35 +31,49 @@
                         <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Personal Information</h4>
-                            <div class="row">
-                                <div class="col-md-6 mb-3">
-                                    <label for="cancerwarrior">Cancer Warriors Name</label>
-                                    <input type="text" class="form-control" id="cancerwarrior" name="cancerwarrior" ngModel #cancerwarrior="ngModel" required maxlength="30" minlength="1">
+                            <div class ="row">
+                                <div class = "col-md-5">
+
+                                    <label for="cancerwarrior">Cancer Warrior's Name</label>
+                                    <input type="text" class="form-control" id="cancerwarrior" name="cancerwarrior" [ngModel]="family?.cancer_warrior_name" [readonly]="viewMode" #cancerwarrior="ngModel" required maxlength="30" minlength="1">
                                     <div *ngIf="cancerwarrior.invalid && (cancerwarrior.dirty || cancerwarrior.touched || errorInForm)" class="text-danger">
                                         <div *ngIf="(cancerwarrior.errors.required)">
                                         Name is required.
                                         </div>
                                     </div>
-                                    </div>
-                                <div class="col-md-6 mb-3">
-                                <div>
 
-                                </div>
-                                <label for="firstName">First name</label>
-                                <input type="text" class="form-control" id="firstName" name="firstName" ngModel #firstName="ngModel" required maxlength="30" minlength="1">
-                                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="(firstName.errors.required)">
-                                    Name is required.
+                                    <label for="firstName">Contact's First name</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" [ngModel]="family?.first_name"  [readonly]="viewMode" #firstName="ngModel" required maxlength="30" minlength="1">
+                                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || errorInForm)" class="text-danger">
+                                        <div *ngIf="(firstName.errors.required)">
+                                        Name is required.
+                                        </div>
                                     </div>
-                                </div>
-                                </div>
-                                <div class="col-md-6 mb-3">
-                                <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" id="lastName" name="lastName" ngModel #lastName="ngModel" required>
-                                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="lastName.errors.required">
-                                    Last name is required.
+
+                                    <label for="lastName">Contact's Last name</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" [ngModel]="family?.last_name" [readonly]="viewMode" #lastName="ngModel" required>
+                                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || errorInForm)" class="text-danger">
+                                        <div *ngIf="lastName.errors.required">
+                                        Last name is required.
+                                        </div>
                                     </div>
+
+                                    <label for="relationship">What is your relationship to the Cancer?</label>
+                                    <input type="text" class="form-control" id="relationship" name="relationship" [ngModel]="family?.relationship_to_warrior" [readonly]="viewMode" #relationship="ngModel" placeholder="relationship status with warrior" required>
+                                    <div *ngIf="relationship.invalid && (relationship.dirty || relationship.touched || errorInForm)" class="text-danger">
+                                        <div *ngIf="relationship.errors.required">
+                                                relationship is required.
+                                        </div>
+                                    </div>
+
+                                    <label for="endOftreatmentDate">End of Treatment Date</label>
+                                    <input type="text" class="form-control" id="endOftreatmentDate" name="endOftreatmentDate" [ngModel]="family?.end_of_treatment_date" [readonly]="viewMode" #endOftreatmentDate="ngModel" placeholder="Type Here" required>
+                                    <div *ngIf="endOftreatmentDate.invalid && (endOftreatmentDate.dirty || endOftreatmentDate.touched || errorInForm)" class="text-danger">
+                                        <div *ngIf="endOftreatmentDate.errors.required">
+                                                endOftreatmentDate is required.
+                                        </div>
+                                    </div>
+
                                 </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -147,6 +162,80 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Family Picture</h4>
+                            
+                                <div class = "col-md-5">
+
+                                    <label for="phonenumber">Phone Number</label>
+                                    <input type="text" class="form-control" id="phonenumber" name="phonenumber" [ngModel]="family?.phone_number" [readonly]="viewMode" #phonenumber="ngModel" required maxlength="30" minlength="1">
+                                    <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="(phonenumber.errors.required)">
+                                            Phone Number is required.
+                                        </div>
+                                    </div>
+                                    
+
+                                    <label for="workPhone">Work Phone</label>
+                                    <input type="tel" class="form-control" id="workPhone" name="workPhone" [ngModel]="family?.work_phone"  [readonly]="viewMode" #workPhone="ngModel" placeholder="(555)-555-5555">
+                                    
+
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="email" [ngModel]="family?.email" [readonly]="viewMode" #email="ngModel" placeholder="youremail@email.com" required>
+                                    <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="email.errors.required">
+                                                email is required.
+                                        </div>
+                                    </div>    
+                                    
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" name="address" [ngModel]="family?.street_address" [readonly]="viewMode" #address="ngModel" placeholder="1234 Main St" required>
+                                    <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="address.errors.required">
+                                        Address is required.
+                                        </div>
+                                    </div>
+
+                                    <label for="zipcode">ZipCode</label>
+                                    <input type="text" class="form-control" id="zipcode" name="zipcode" [ngModel]="family?.zipcode" [readonly]="viewMode" #zipcode="ngModel" placeholder="zipcode" required>
+                                    <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="zipcode.errors.required">
+                                        Zipcode is required.
+                                        </div>
+                                    </div>
+
+                                    <label for="familySize">Household Size</label>
+                                    <input type="text" class="form-control" id="familySize" name="familySize" [ngModel]="family?.familySize" [readonly]="viewMode" #familySize="ngModel" placeholder="familySize" >
+                                    <div *ngIf="familySize.invalid && (familySize.dirty || familySize.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="familySize.errors.required">
+                                        Household Size is required.
+                                        </div>
+                                    </div>
+
+                                    <label for="refer">How did you hear about us?</label>
+                                    <input type="text" class="form-control" id="refer" name="refer" [ngModel]="family?.refer" [readonly]="viewMode" #refer="ngModel" placeholder="Type here">
+                                    <div *ngIf="refer.invalid && (refer.dirty || refer.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="refer.errors.required">
+                                        Household Size is required.
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                          </div>
+                          <div class="card-body">
+                            <h4 class="card-title">Additional Information</h4>
+                            <div class="row">
+                            </div>
+                            <div class="mb-3">
+                                <label for="addInfo">Add any additional information you would like us to know about.</label>
+                                <textarea class="form-control" id="addInfo" name="addInfo" [ngModel]="family?.additional_info"  [readonly]="viewMode" ngModel #addInfo="ngModel"></textarea>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">V Pizza Gift Card Stuff Here</h4>
                                 <div class="row">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-8">
@@ -235,4 +324,3 @@
       </div>
     </div>
   </div>
-  

@@ -165,6 +165,28 @@ export class RequestServiceComponent implements OnInit {
                       type: "success"
                     })
                   }
+        if(currentRequest != null || currentRequest != "") {
+          this.businessService.getBusinessById(currentRequest).subscribe((responseData) => {
+            if (responseData) {
+              const request: any = {
+                name: form.value.familyName,
+                email: form.value.email,
+                businessName: responseData.results[0]['business_name'].toString(),
+                businessCategory: responseData.results[0]['Services_Offered'].toString(),
+                dateRequested: this.today,
+                notes: form.value.notes
+              };
+              this.serviceService.saveRequest(request).subscribe((reqResponseData) => {
+                if (reqResponseData.requestCreated) {
+                  this.submitted = true;
+                  Swal.fire({
+                    title: "Request Submitted!",
+                    text: "Your request for service was submitted successfully.  Thank you!",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "success"
+                  })
+                }
               });
             }
           }

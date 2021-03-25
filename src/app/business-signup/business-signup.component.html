@@ -1,0 +1,235 @@
+<div class="main-content">
+    <div class="col-md-10 mr-auto ml-auto" >
+        <!--      Wizard container        -->
+        <div class="wizard-container">
+          <div class="card card-wizard" data-color="primary" id="wizardProfile">
+            <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate enctype="multipart/form-data">
+              <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+              <div class="card-header text-center">
+                <h3 class="card-title">
+                  Build Your Profile
+                </h3>
+                <h5 class="description">This information will let us know more about you.</h5>
+                <div class="wizard-navigation">
+                  <ul>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#about" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
+                        <i class="nc-icon nc-shop"></i> About
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#account" data-toggle="tab" role="tab" aria-controls="account" aria-selected="true">
+                        <i class="nc-icon nc-bell-55"></i> Contact Information
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#socialMedia" data-toggle="tab" role="tab" aria-controls="address" aria-selected="true">
+                        <i class="nc-icon nc-mobile"></i> Social Media
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="tab-pane show active" id="about">
+                    <h5 class="info-text"> Let's start with the basic information</h5>
+                    <div class="row justify-content-center">
+                      <div class="col-sm-4">
+                        <div class="picture-container">
+                            <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                <div class="fileinput-new thumbnail">
+                                    <img src="../../assets/img/your-company-lsiting.png" alt="...">
+                                </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                <div>
+                                    <span class="btn btn-rose btn-round btn-file">
+                                        <span class="fileinput-new">Select image</span>
+                                        <span class="fileinput-exists">Change</span>
+                                        <input type="file" name="profilePicture" id="profilePicture" accept="image/*" (change)="handleFileInput($event.target.files)"/>
+                                    </span>
+                                    <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="mb-3">
+                            <label for="businessName">Name of Business</label>
+                            <input type="text" class="form-control" id="firstName" name="businessName" ngModel #businessName="ngModel" required maxlength="50" minlength="1">
+                            <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="(businessName.errors.required)">
+                                Business name is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="address">Address</label>
+                            <input type="text" class="form-control" id="address" name="address" ngModel #address="ngModel" required>
+                            <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="address.errors.required">
+                                    Address is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category">Service Offered</label>
+                            <select class="custom-select d-block w-100" id="category" name="category" ngModel required #category="ngModel">
+                                <option *ngFor="let cat of categoryList" [ngValue]="cat.category_name">
+                                    {{cat.category_name}}
+                                </option>
+                            </select>
+                            <div *ngIf="category.invalid && (category.dirty || category.touched || errorInForm)" class="text-danger">
+                            <div *ngIf="category.errors.required">
+                                Service category is required.
+                            </div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="serviceArea">Service Area</label>
+                                <input type="text" class="form-control" id="serviceArea" name="serviceArea"  ngModel #serviceArea="ngModel" required >
+                            <div *ngIf="serviceArea.invalid && (serviceArea.dirty || serviceArea.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="serviceArea.errors.required">
+                                    Service area is required.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="discountAmount">Discount Offered (%)</label>
+                                <input type="number" class="form-control" id="discountAmount" name="discountAmount" ngModel #discountAmount="ngModel" required>
+                                <div *ngIf="discountAmount.invalid && (discountAmount.dirty || discountAmount.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="discountAmount.errors.required">
+                                      Discount information is required.
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cellPhone"></label>
+                                <div class="col-md-9">
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="checkbox" id="eoyReceipt" name="eoyReceipt" ngModel #eoyReceipt="ngModel">
+                                      <span class="form-check-sign"></span>
+                                      Need an End of Year Receipt?
+                                    </label>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="account">
+                    <h5 class="info-text"> How would you like us to contact you? </h5>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="preferredContact">Preferred Method of Contact</label>
+                                <input type="text" class="form-control" id="preferredContact" name="preferredContact" ngModel  #preferredContact="ngModel" required>
+                                <div *ngIf="preferredContact.invalid && (preferredContact.dirty || preferredContact.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="preferredContact.errors.required">
+                                      Preferred method is required.
+                                  </div>
+                                  </div>
+                            </div>
+                            <div class="mb-3">
+                            <label for="email">Business Email</label>
+                            <input type="text" class="form-control" id="email" name="email" ngModel  #email="ngModel" required>
+                            <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="email.errors.required">
+                                    Email is required.
+                                </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="pContactFName">Primary Contact First Name</label>
+                                    <input type="text" class="form-control" id="pContactFName" name="pContactFName" ngModel  #pContactFName="ngModel" required>
+                                    <div *ngIf="pContactFName.invalid && (pContactFName.dirty || pContactFName.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="pContactFName.errors.required">
+                                        At least one contact is required.
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="pContactLName">Primary Contact Last Name</label>
+                                    <input type="text" class="form-control" id="pContactLName" name="pContactLName" ngModel #pContactLName="ngModel" required>
+                                    <div *ngIf="pContactLName.invalid && (pContactLName.dirty || pContactLName.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="pContactLName.errors.required">
+                                        At least one contact is required.
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="pContactPNum">Primary Contact Phone Number</label>
+                                <input type="tel" mask="(000) 000-000" class="form-control" id="pContactPNum" name="pContactPNum" ngModel #pContactPNum="ngModel" required [readonly]="viewMode">
+                                <div *ngIf="pContactPNum.invalid && (pContactPNum.dirty || pContactPNum.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="pContactPNum.errors.required">
+                                    At least one contact is required.
+                                </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                <label for="sContactFName">Secondary Contact First Name</label>
+                                <input type="text" class="form-control" id="sContactFName" name="sContactFName" ngModel #sContactFName="ngModel" >
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                <label for="sContactLName">Secondary Contact Last Name</label>
+                                <input type="text" class="form-control" id="sContactLName" name="sContactLName" ngModel #sContactLName="ngModel" >
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="sContactPNum">Secondary Contact Phone Number</label>
+                                <input type="tel" class="form-control" id="sContactPNum" name="sContactPNum"  ngModel #sContactPNum="ngModel" >
+                            </div>
+                        </div>
+                       
+                    </div>
+                  </div>
+                  <div class="tab-pane" id="socialMedia">
+                    <div class="row justify-content-center">
+                      <div class="col-sm-12">
+                        <h5 class="info-text"> How we find you on Social Media? </h5>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label>Facebook</label>
+                          <input type="text" class="form-control" id="facebook" name="facebook" ngModel #facebook="ngModel">
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label>Twitter</label>
+                          <input type="text" class="form-control" id="twitter" name="twitter" ngModel #twitter="ngModel">
+                        </div>
+                      </div>
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label>Instagram</label>
+                          <input type="text" class="form-control" id="instagram" name="instagram" ngModel #instagram="ngModel">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="pull-right">
+                  <input type='button' class='btn btn-next btn-fill btn-rose btn-wd' name='next' value='Next' />
+                  <input type='submit' class='btn btn-finish btn-fill btn-rose btn-wd' name='finish' value='Finish' [disabled]="disableSubmit"/>
+                </div>
+                <div class="pull-left">
+                  <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                </div>
+                <div class="clearfix"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- wizard container -->
+      </div>
+</div>
