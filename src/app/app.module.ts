@@ -28,7 +28,7 @@ import { YesNoPipe } from './yesno.pipe';
 import { YesNoActivePipe } from './yesnoactive.pipe';
 import { RequestServiceComponent } from './request-service/request-service.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { UserComponent } from './userpage/user.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
@@ -77,7 +77,7 @@ import { BusinessSignupComponent } from './business-signup/business-signup.compo
         ActiveServicesComponent,
         FamilyApplicationComponent,
         ActiveFamilyComponent,
-        RequestServiceLoginComponent
+        RequestServiceLoginComponent,
         BusinessCategoryComponent,
         NewCategoryComponent,
         BusinessSignupComponent

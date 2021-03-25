@@ -19,13 +19,6 @@ export class NewFamilyComponent implements OnInit {
   public family: FamilyModel;
   errorInForm: boolean;
   passwordMatch: boolean;
-
-  constructor(public familyService: FamilyService, public router: Router) { }
-
-  ngOnInit(): void {
-
-  }
-
   public editMode: boolean;
   public viewMode: boolean;
   public creationMode: boolean;
@@ -55,7 +48,7 @@ export class NewFamilyComponent implements OnInit {
     if (this.familyId) {
       this.familyService.getFamilyById(this.familyId).subscribe((responseData) => {
         console.log(responseData)
-          
+
         if (responseData) {
           console.log(responseData.results[0])
           this.family = responseData.results[0];
@@ -72,14 +65,15 @@ export class NewFamilyComponent implements OnInit {
     });
 
   }
-  
+
+
+
   onSave(form: NgForm) {
     if ( form.invalid ) { // Validating form has data
       console.log('returned');
       this.errorInForm = true;
       return;
-    }
-    else {
+    }else {
       if (this.creationMode){
       const request: any = {
         firstName: form.value.firstName,
@@ -94,6 +88,7 @@ export class NewFamilyComponent implements OnInit {
         additionalInfo: form.value.addInfo,
         endOftreatmentDate: form.value.endOftreatmentDate
         };
+
       this.familyService.saveFamily(request).subscribe((responseData) => {
         if (responseData.familyCreated) {
           Swal.fire({
@@ -103,14 +98,11 @@ export class NewFamilyComponent implements OnInit {
             confirmButtonClass: "btn btn-success",
             type: "success"
           })
-        }
-    });
-    } 
           this.router.navigate(['/family']);
         }
     });
 
-    } 
+    }
     if (this.editMode){
       const family: any = {
         id: this.familyId,
@@ -142,3 +134,4 @@ export class NewFamilyComponent implements OnInit {
     }
     }
   }
+}

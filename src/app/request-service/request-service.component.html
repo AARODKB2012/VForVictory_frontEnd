@@ -42,7 +42,6 @@
                             <optgroup *ngFor="let cat of categoryList" label="{{ cat.category_name }}">
                               <ng-container *ngFor="let item of serviceList">
                               <option *ngIf="item.Services_Offered == cat.category_name" [ngValue]="{id: item.record_id, name: item.business_name}">
-
                                   {{item.business_name}}
                               </option>
                             </ng-container>
@@ -55,36 +54,6 @@
                           </div>
                           </div>
                       </div>
-                      <div class="row">
-                        <div class="col-md-10 mb-3">
-                        <label for="req2">Second Requested Service</label>
-                        <select class="custom-select d-block w-100" id="req2" name="req2" ngModel #req2="ngModel">
-                          <option [ngValue]="null" selected>None</option>
-                          <optgroup *ngFor="let cat of categoryList" label="{{ cat.category_name }}">
-                            <ng-container *ngFor="let item of serviceList">
-                            <option *ngIf="item.Services_Offered == cat.category_name" [ngValue]="item.record_id">
-                                {{item.business_name}}
-                            </option>
-                          </ng-container>
-                          </optgroup>
-                        </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-10 mb-3">
-                      <label for="req3">Third Requested Service</label>
-                      <select class="custom-select d-block w-100" id="req3" name="req3" ngModel #req3="ngModel">
-                        <option [ngValue]="null" selected>None</option>
-                        <optgroup *ngFor="let cat of categoryList" label="{{ cat.category_name }}">
-                          <ng-container *ngFor="let item of serviceList">
-                          <option *ngIf="item.Services_Offered == cat.category_name" [ngValue]="item.record_id">
-                              {{item.business_name}}
-                          </option>
-                        </ng-container>
-                        </optgroup>
-                      </select>
-                      </div>
-                  </div>
                         <div class="row">
                           <div class="col-md-12 mb-3">
                           <label for="notes">Notes</label>
