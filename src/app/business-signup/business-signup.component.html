@@ -10,6 +10,7 @@
                   Build Your Profile
                 </h3>
                 <h5 class="description">This information will let us know more about you.</h5>
+                <p class="info-text">All fields marked with astericks (*) are required.</p>
                 <div class="wizard-navigation">
                   <ul>
                     <li class="nav-item">
@@ -55,7 +56,7 @@
                       </div>
                       <div class="col-sm-6">
                         <div class="mb-3">
-                            <label for="businessName">Name of Business</label>
+                            <label for="businessName">Name of Business *</label>
                             <input type="text" class="form-control" id="firstName" name="businessName" ngModel #businessName="ngModel" required maxlength="50" minlength="1">
                             <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="(businessName.errors.required)">
@@ -64,7 +65,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="address">Address</label>
+                            <label for="address">Address *</label>
                             <input type="text" class="form-control" id="address" name="address" ngModel #address="ngModel" required>
                             <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="address.errors.required">
@@ -73,7 +74,7 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="category">Service Offered</label>
+                            <label for="category">Service Offered *</label>
                             <select class="custom-select d-block w-100" id="category" name="category" ngModel required #category="ngModel">
                                 <option *ngFor="let cat of categoryList" [ngValue]="cat.category_name">
                                     {{cat.category_name}}
@@ -81,12 +82,12 @@
                             </select>
                             <div *ngIf="category.invalid && (category.dirty || category.touched || errorInForm)" class="text-danger">
                             <div *ngIf="category.errors.required">
-                                Service category is required.
+                                Service offered is required.
                             </div>
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label for="serviceArea">Service Area</label>
+                            <label for="serviceArea">Service Area *</label>
                                 <input type="text" class="form-control" id="serviceArea" name="serviceArea"  ngModel #serviceArea="ngModel" required >
                             <div *ngIf="serviceArea.invalid && (serviceArea.dirty || serviceArea.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="serviceArea.errors.required">
@@ -96,7 +97,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="discountAmount">Discount Offered (%)</label>
+                                <label for="discountAmount">Discount Offered (%) *</label>
                                 <input type="number" class="form-control" id="discountAmount" name="discountAmount" ngModel #discountAmount="ngModel" required>
                                 <div *ngIf="discountAmount.invalid && (discountAmount.dirty || discountAmount.touched || errorInForm)" class="text-danger">
                                   <div *ngIf="discountAmount.errors.required">
@@ -124,27 +125,35 @@
                     <h5 class="info-text"> How would you like us to contact you? </h5>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="mb-3">
-                                <label for="preferredContact">Preferred Method of Contact</label>
-                                <input type="text" class="form-control" id="preferredContact" name="preferredContact" ngModel  #preferredContact="ngModel" required>
-                                <div *ngIf="preferredContact.invalid && (preferredContact.dirty || preferredContact.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="preferredContact.errors.required">
-                                      Preferred method is required.
+                            <div class="row">
+                              <div class="col-md-6">
+                                  <label for="preferredContact">Preferred Method of Contact *</label>
+                                  <!-- <input type="text" class="form-control" id="preferredContact" name="preferredContact" ngModel  #preferredContact="ngModel" required> -->
+                                  <select class="custom-select d-block w-100" id="preferredContact" name="preferredContact" ngModel  #preferredContact="ngModel" required>
+                                    <option value="email">Email</option>
+                                    <option value="text">Text</option>
+                                    <option value="phone">Phone Call</option>
+                                    <option value="voucher">Voucher/Gift Card</option>
+                                  </select>
+                                  <div *ngIf="preferredContact.invalid && (preferredContact.dirty || preferredContact.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="preferredContact.errors.required">
+                                        Preferred method is required.
+                                    </div>
                                   </div>
-                                  </div>
-                            </div>
-                            <div class="mb-3">
-                            <label for="email">Business Email</label>
-                            <input type="text" class="form-control" id="email" name="email" ngModel  #email="ngModel" required>
-                            <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="email.errors.required">
-                                    Email is required.
+                              </div>
+                              <div class="col-md-6">
+                                <label for="email">Business Email *</label>
+                                <input type="text" class="form-control" id="email" name="email" ngModel  #email="ngModel" required>
+                                <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="email.errors.required">
+                                        Email is required.
+                                    </div>
                                 </div>
-                                </div>
+                              </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="pContactFName">Primary Contact First Name</label>
+                                    <label for="pContactFName">Primary Contact First Name *</label>
                                     <input type="text" class="form-control" id="pContactFName" name="pContactFName" ngModel  #pContactFName="ngModel" required>
                                     <div *ngIf="pContactFName.invalid && (pContactFName.dirty || pContactFName.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="pContactFName.errors.required">
@@ -153,7 +162,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="pContactLName">Primary Contact Last Name</label>
+                                    <label for="pContactLName">Primary Contact Last Name *</label>
                                     <input type="text" class="form-control" id="pContactLName" name="pContactLName" ngModel #pContactLName="ngModel" required>
                                     <div *ngIf="pContactLName.invalid && (pContactLName.dirty || pContactLName.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="pContactLName.errors.required">
@@ -163,7 +172,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="pContactPNum">Primary Contact Phone Number</label>
+                                <label for="pContactPNum">Primary Contact Phone Number *</label>
                                 <input type="tel" mask="(000) 000-000" class="form-control" id="pContactPNum" name="pContactPNum" ngModel #pContactPNum="ngModel" required [readonly]="viewMode">
                                 <div *ngIf="pContactPNum.invalid && (pContactPNum.dirty || pContactPNum.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="pContactPNum.errors.required">
@@ -186,6 +195,10 @@
                                 <label for="sContactPNum">Secondary Contact Phone Number</label>
                                 <input type="tel" class="form-control" id="sContactPNum" name="sContactPNum"  ngModel #sContactPNum="ngModel" >
                             </div>
+                            <div class="mb-3">
+                              <label for="website">Business Website</label>
+                              <input type="tel" class="form-control" id="website" name="website"  ngModel #website="ngModel" >
+                          </div>
                         </div>
                        
                     </div>

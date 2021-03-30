@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BusinessService } from '../business.service';
-import { Router, ActivatedRoute, UrlTree, UrlSegmentGroup, UrlSegment, PRIMARY_OUTLET } from '@angular/router';
+import { Router, ActivatedRoute, UrlTree, UrlSegmentGroup, UrlSegment, PRIMARY_OUTLET, NavigationEnd } from '@angular/router';
 import Swal from 'sweetalert2';
 import { BusinessModel } from '../business.model';
 import { rejects } from 'assert';
 import { environment } from 'environments/environment';
+import { filter } from 'rxjs/operators';
 
 declare const $: any;
 
@@ -36,6 +37,7 @@ export class NewBusinessComponent implements OnInit {
   public dataTableServicesRendered: DataTable;
   public servicesRendered: Array<any>;
   public businessApproved: boolean;
+  public previousUrl: string;
 
   constructor(public businessService: BusinessService, public router: Router, private activeRoute: ActivatedRoute) {
     const tree: UrlTree = router.parseUrl(this.router.url);
@@ -54,6 +56,8 @@ export class NewBusinessComponent implements OnInit {
 
     this.activeRoute.queryParams.subscribe(params => {
       this.businessId = params['businessId'];
+      this.previousUrl = params['from'];
+      console.log(this.previousUrl)
     });
 
     this.businessService.getAllCategories().subscribe((responseData) => {
@@ -187,6 +191,7 @@ export class NewBusinessComponent implements OnInit {
           facebookUrl: form.value.facebook,
           twitterUrl: form.value.twitter,
           instagramUrl: form.value.instagram,
+          website: form.value.website,
           createdBy: this.loggedInUser
         };
 
@@ -233,6 +238,7 @@ export class NewBusinessComponent implements OnInit {
           facebookUrl: form.value.facebook,
           twitterUrl: form.value.twitter,
           instagramUrl: form.value.instagram,
+          website: form.value.website,
           updatedBy: this.loggedInUser
         };
 

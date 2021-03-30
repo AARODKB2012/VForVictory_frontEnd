@@ -174,8 +174,8 @@
                     {{ row.Services_Offered }}
                   </td>
                   <td class="td-actions text-center">
-                    <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
-                    <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                    <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id, from: '/dashboard'}" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id, from: '/dashboard'}" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
                     <a  (click)="approvedBusiness(row.record_id, row.business_name)" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
                   </td>
                 </tr>

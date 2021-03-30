@@ -11,6 +11,13 @@ import { NgForm } from '@angular/forms';
 import {AuthService} from '../auth.service';
 
 declare var $: any;
+
+declare interface DataTable {
+  headerRow: string[];
+  footerRow: string[];
+  dataRows: UserModel[];
+}
+
 @Component({
     moduleId: module.id,
     selector: 'user-cmp',
@@ -29,6 +36,8 @@ export class UserComponent{
     public errorInForm: boolean;
     public fileToUpload: File = null;
     public loginHistory: [];
+    public dataTable: DataTable;
+
     constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute, public authService: AuthService) {
         this.activeRoute.queryParams.subscribe(params => {
             this.userId = params['id'];
@@ -64,9 +73,75 @@ export class UserComponent{
         this.authService.getLoginHistory(this.userId).subscribe((loginHistory) => {
             if (loginHistory) {
               this.loginHistory = loginHistory['results'];
+              this.dataTable = {
+                headerRow: [ 'Date', 'Time', 'Client IP'],
+                footerRow: [ 'Date', 'Time', 'Client IP'],
+                dataRows: loginHistory['results']
+              };
             }
         });
     }
+
+    ngAfterViewInit(){
+      $('#datatable').DataTable({
+        "pagingType": "simple",
+        "lengthMenu": [
+          [5, 10, -1],
+          [5, 10, "All"]
+        ],
+        responsive: true,
+        language: {
+          search: "_INPUT_",
+          searchPlaceholder: "Search records",
+        }
+  
+      });
+  
+      var table = $('#datatable').DataTable();
+    }
+
+    formatPhoneNumber(phoneNumber: String) {
+      if (!phoneNumber) { return ''; }
+  
+      var value = phoneNumber.toString().trim().replace(/^\+/, '');
+  
+      if (value.match(/[^0-9]/)) {
+          return phoneNumber;
+      }
+  
+      var country, city, number;
+  
+      switch (value.length) {
+          case 10: // +1PPP####### -> C (PPP) ###-####
+              country = 1;
+              city = value.slice(0, 3);
+              number = value.slice(3);
+              break;
+  
+          case 11: // +CPPP####### -> CCC (PP) ###-####
+              country = value[0];
+              city = value.slice(1, 4);
+              number = value.slice(4);
+              break;
+  
+          case 12: // +CCCPP####### -> CCC (PP) ###-####
+              country = value.slice(0, 3);
+              city = value.slice(3, 5);
+              number = value.slice(5);
+              break;
+  
+          default:
+              return phoneNumber;
+      }
+  
+      if (country == 1) {
+          country = "";
+      }
+  
+      number = number.slice(0, 3) + '-' + number.slice(3);
+  
+      return (country + " (" + city + ") " + number).trim();
+    };
 
     changePassword() {
         Swal.fire({

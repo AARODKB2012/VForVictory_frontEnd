@@ -135,37 +135,37 @@
                             </div>
                 
                             <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="homePhone">Home Phone</label>
-                                <input type="tel" class="form-control" id="homePhone" name="homePhone" [ngModel]="user?.home_phone" ngModel #homePhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="cellPhone">Cell Phone</label>
-                                <input type="text" class="form-control" id="cellPhone" name="cellPhone" [ngModel]="user?.cell_phone" ngModel #cellPhone="ngModel" placeholder="(555)-555-5555" required [readonly]="viewMode">
-                                <div *ngIf="cellPhone.invalid && (cellPhone.dirty || cellPhone.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="cellPhone.errors.required">
-                                    Cell phone is required.
+                                <div class="col-md-6 mb-3">
+                                    <label for="cellPhone">Phone Number</label>
+                                    <input type="text" class="form-control" id="cellPhone" name="cellPhone" [ngModel]="formatPhoneNumber(user?.cell_phone)" ngModel #cellPhone="ngModel" placeholder="(555)-555-5555" required [readonly]="viewMode">
+                                    <div *ngIf="cellPhone.invalid && (cellPhone.dirty || cellPhone.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="cellPhone.errors.required">
+                                        Phone number is required.
+                                    </div>
+                                    </div>
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="homePhone">Secondary Phone Number</label>
+                                    <input type="tel" class="form-control" id="homePhone" name="homePhone" [ngModel]="formatPhoneNumber(user?.home_phone)" ngModel #homePhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
                                 </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="workPhone">Work Phone</label>
-                                <input type="tel" class="form-control" id="workPhone" name="workPhone" [ngModel]="user?.work_phone" ngModel #workPhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
-                            </div>
-                
-                            <div class="col-md-6 mb-3">
-                                <label for="education">Education</label>
-                                <select class="custom-select d-block w-100" id="education" name="education" [ngModel]="user?.educational_background" ngModel #education="ngModel" [disabled]="viewMode">
-                                    <option *ngFor="let education of educationLevelList" [ngValue]="education.id">
-                                        {{education.description}}
-                                    </option>
-                                </select>
-                                <div *ngIf="education.invalid && (education.dirty || education.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="education.errors.required">
-                                    Education is required.
+                                <!-- <div class="col-md-6 mb-3">
+                                    <label for="workPhone">Work Phone</label>
+                                    <input type="tel" class="form-control" id="workPhone" name="workPhone" [ngModel]="user?.work_phone" ngModel #workPhone="ngModel" placeholder="(555)-555-5555" [readonly]="viewMode">
+                                </div> -->
+                    
+                                <div class="col-md-6 mb-3">
+                                    <label for="education">Education</label>
+                                    <select class="custom-select d-block w-100" id="education" name="education" [ngModel]="user?.educational_background" ngModel #education="ngModel" [disabled]="viewMode">
+                                        <option *ngFor="let education of educationLevelList" [ngValue]="education.id">
+                                            {{education.description}}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="education.invalid && (education.dirty || education.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="education.errors.required">
+                                        Education is required.
+                                    </div>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
                             </div>
                             <div class="row">
                             <div class="col-md-6 mb-3">

@@ -8,7 +8,7 @@
                             <h4 class="card-title">Currently Active Businesses</h4>
                         </div>
                         <div class="col-md-6 text-right">
-                            <button class="btn btn-info" routerLink="/business/new">
+                            <button class="btn btn-info" routerLink="/business/new" [queryParams]="{from: '/business/list'}">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-badge"></i>
                                 </span>
@@ -64,9 +64,9 @@
                                 <td>{{formatPhoneNumber(row.primary_contact_phone_number)}}</td>
                                 <td>{{row.Preferred_Method_Contact}}</td>
                                 <td class="text-right">
-                                  <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
-                                  <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                                  <a href="javascript:void(0)" class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
+                                  <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id, from: '/business/list' }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                                  <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id, from: '/business/list' }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                                  <!-- <a href="javascript:void(0)" class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a> -->
                                 </td>
                             </tr>
                         </tbody>
