@@ -38,15 +38,28 @@
                       <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Business Information</h4>
-                                <div class="mb-3">
-                                <label for="businessName">Name of Business</label>
-                                <input type="text" class="form-control" id="firstName" name="businessName" [ngModel]="business?.business_name" #businessName="ngModel" required maxlength="50" minlength="1" [readonly]="viewMode">
-                                <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="(businessName.errors.required)">
-                                    Business name is required.
+                              <div class="row">
+                                <div class="col-md-9 mb-3">
+                                  <label for="businessName">Name of Business</label>
+                                  <input type="text" class="form-control" id="firstName" name="businessName" [ngModel]="business?.business_name" #businessName="ngModel" required maxlength="50" minlength="1" [readonly]="viewMode">
+                                  <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
+                                      <div *ngIf="(businessName.errors.required)">
+                                      Business name is required.
+                                      </div>
+                                  </div>
+                                </div>
+                                <div class="col-md-3 mb-3" *ngIf="!creationMode">
+                                  <div class="col-md-9">
+                                    <div class="form-check">
+                                      <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" id="active" name="active" [ngModel]="business?.active" ngModel #active="ngModel" [readonly]="viewMode">
+                                        <span class="form-check-sign"></span>
+                                        Active
+                                      </label>
                                     </div>
+                                  </div>
                                 </div>
-                                </div>
+                              </div>
                                 <div class="mb-3">
                                   <label for="preferredContact">Preferred Method of Contact</label>
                                   <!-- <input type="text" class="form-control" id="preferredContact" name="preferredContact" [ngModel]="business?.Preferred_Method_Contact" ngModel #preferredContact="ngModel" required [readonly]="viewMode"> -->
@@ -73,7 +86,7 @@
                                 </div>
                                 <div class="mb-3">
                                   <label for="email">Business Website</label>
-                                  <input type="text" class="form-control" id="website" name="website" [ngModel]="business?.business_url" ngModel #website="ngModel" required [readonly]="viewMode">
+                                  <input type="text" class="form-control" id="website" name="website" [ngModel]="business?.business_url" ngModel #website="ngModel" [readonly]="viewMode">
                                 </div>
                                 <div class="row">
                                   <div class="col-md-6 mb-3">

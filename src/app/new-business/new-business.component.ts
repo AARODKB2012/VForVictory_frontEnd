@@ -220,6 +220,7 @@ export class NewBusinessComponent implements OnInit {
       if (this.editMode) { // Editing Existing Record
         const business: any = {
           id: this.businessId,
+          active: form.value.active,
           businessName: form.value.businessName,
           email: form.value.email,
           pContactFName: form.value.pContactFName,
