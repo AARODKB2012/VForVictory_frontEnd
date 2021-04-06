@@ -86,7 +86,7 @@ export class NewFamilyComponent implements OnInit {
         workPhone: form.value.workPhone,
         relationshipTowarrior: form.value.relationship,
         additionalInfo: form.value.addInfo,
-        endOftreatmentDate: form.value.endOftreatmentDate
+        endOftreatmentDate: form.value.endOftreatmentDate,
         };
 
       this.familyService.saveFamily(request).subscribe((responseData) => {
@@ -116,7 +116,7 @@ export class NewFamilyComponent implements OnInit {
         workPhone: form.value.workPhone,
         relationshipTowarrior: form.value.relationship,
         additionalInfo: form.value.addInfo,
-        endOftreatmentDate: form.value.endOftreatmentDate
+        endOftreatmentDate: form.value.endOftreatmentDate,
       };
 
       this.familyService.editFamily(family).subscribe((responseData) => {

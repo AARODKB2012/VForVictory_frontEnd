@@ -5,7 +5,7 @@
             <div class="card-header">
                 <div class="row">
                       <div class="col-md-6">
-                          <h4 class="card-title">Cancer Warriors</h4>
+                          <h4 class="card-title">Cancer Warrior's</h4>
                       </div>
                       <div class="col-md-6 text-right">
                           <button class="btn btn-info" routerLink="/family/new">
@@ -18,8 +18,15 @@
                               <span class="btn-label">
                                 <i class="nc-icon nc-box"></i>
                               </span>
-                              Edit Active Family
+                              Make a family active
                             </button>
+                            <button class="btn btn-info" [cdkCopyToClipboard]="url + '/#/family-application'" (click)="showClipboard()">
+                                <span class="btn-label">
+                                  <i class="nc-icon nc-single-copy-04"></i>
+                                </span>
+                                Copy sign Up Link
+                              </button>
+
                       </div>
                 </div>
 
@@ -63,7 +70,7 @@
                               <td class="text-right">
                                   <a [routerLink]="['/family/edit']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
                                   <a [routerLink]="['/family/view']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
-                                  <a (click)="markFamilyInactive(row.id)" [routerLink]="['/family/active/']" class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
+                                  <a (click)="markFamilyInactive(row.id)"  class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
                               </td>
 
                           </tr>

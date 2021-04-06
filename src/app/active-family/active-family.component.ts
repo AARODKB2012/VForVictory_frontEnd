@@ -64,7 +64,7 @@ ngAfterViewInit(){
     markFamilyActive(itemId) {
       Swal.fire({
         title: "MARK ACTIVE?",
-        text: "Would you like to mark this service as active? It will then become selectable by families.",
+        text: "Would you like to make this family active? It will appear with on the Cancer Warrior's page.",
         type: "warning",
         showCancelButton: true,
         cancelButtonClass: "btn btn-info",
@@ -81,8 +81,8 @@ ngAfterViewInit(){
           this.familyService.markFamilyActive(request).subscribe((responseData) => {
             if (responseData.requestFulfilled) {
               Swal.fire({
-                title: "Service changed!",
-                text: "The service has been made active.",
+                title: "Family has been made active.",
+                text: "The family is now active",
                 buttonsStyling: false,
                 confirmButtonClass: "btn btn-success",
                 type: "success"

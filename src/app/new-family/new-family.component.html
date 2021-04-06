@@ -59,7 +59,7 @@
                                   </div>
 
                                   <label for="relationship">What is your relationship to the Cancer?</label>
-                                  <input type="text" class="form-control" id="relationship" name="relationship" [ngModel]="family?.relationship_to_warrior" [readonly]="viewMode" #relationship="ngModel" placeholder="relationship status with warrior" required>
+                                  <input type="text" class="form-control" id="relationship" name="relationship" [ngModel]="family?.relationship_to_warrior" [readonly]="viewMode" #relationship="ngModel"  required>
                                   <div *ngIf="relationship.invalid && (relationship.dirty || relationship.touched || errorInForm)" class="text-danger">
                                       <div *ngIf="relationship.errors.required">
                                               relationship is required.
@@ -67,7 +67,7 @@
                                   </div>
 
                                   <label for="endOftreatmentDate">End of Treatment Date</label>
-                                  <input type="text" class="form-control" id="endOftreatmentDate" name="endOftreatmentDate" [ngModel]="family?.end_of_treatment_date" [readonly]="viewMode" #endOftreatmentDate="ngModel" placeholder="Type Here" required>
+                                  <input type="text" class="form-control" id="endOftreatmentDate" name="endOftreatmentDate" [ngModel]="family?.end_of_treatment_date" [readonly]="viewMode" #endOftreatmentDate="ngModel"  required>
                                   <div *ngIf="endOftreatmentDate.invalid && (endOftreatmentDate.dirty || endOftreatmentDate.touched || errorInForm)" class="text-danger">
                                       <div *ngIf="endOftreatmentDate.errors.required">
                                               endOftreatmentDate is required.
@@ -88,11 +88,11 @@
 
 
                                   <label for="workPhone">Work Phone</label>
-                                  <input type="tel" class="form-control" id="workPhone" name="workPhone" [ngModel]="family?.work_phone"  [readonly]="viewMode" #workPhone="ngModel" placeholder="(555)-555-5555">
+                                  <input type="tel" class="form-control" id="workPhone" name="workPhone" [ngModel]="family?.work_phone"  [readonly]="viewMode" #workPhone="ngModel" >
 
 
                                   <label for="email">Email</label>
-                                  <input type="text" class="form-control" id="email" name="email" [ngModel]="family?.email" [readonly]="viewMode" #email="ngModel" placeholder="youremail@email.com" required>
+                                  <input type="text" class="form-control" id="email" name="email" [ngModel]="family?.email" [readonly]="viewMode" #email="ngModel"  required>
                                   <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
                                   <div *ngIf="email.errors.required">
                                               email is required.
@@ -100,7 +100,7 @@
                                   </div>
 
                                   <label for="address">Address</label>
-                                  <input type="text" class="form-control" id="address" name="address" [ngModel]="family?.street_address" [readonly]="viewMode" #address="ngModel" placeholder="1234 Main St" required>
+                                  <input type="text" class="form-control" id="address" name="address" [ngModel]="family?.street_address" [readonly]="viewMode" #address="ngModel"  required>
                                   <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
                                   <div *ngIf="address.errors.required">
                                       Address is required.
