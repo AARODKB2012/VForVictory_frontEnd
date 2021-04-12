@@ -335,7 +335,9 @@ export class FamilyApplicationComponent implements OnInit {
         workPhone: form.value.workPhone,
         relationshipTowarrior: form.value.relationship,
         additionalInfo: form.value.addInfo,
-        endOftreatmentDate: form.value.endOftreatmentDate
+        endOftreatmentDate: form.value.endOftreatmentDate,
+        familysize:form.value.familySize,
+        hearabout:form.value.hearAbout
         };
       this.familyApplication.saveFamily(request).subscribe((responseData) => {
         if (responseData.familyCreated) {

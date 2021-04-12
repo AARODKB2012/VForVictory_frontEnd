@@ -122,10 +122,10 @@
                                     </div>
                                 </div>
 
-                                <label for="refer">How did you hear about us?</label>
-                                <input type="text" class="form-control" id="refer" name="refer" [ngModel]="family?.refer" [readonly]="viewMode" #refer="ngModel" >
-                                <div *ngIf="refer.invalid && (refer.dirty || refer.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="refer.errors.required">
+                                <label for="hearAbout">How did you hear about us?</label>
+                                <input type="text" class="form-control" id="hearAbout" name="hearAbout" [ngModel]="family?.hearAbout" [readonly]="viewMode" #hearAbout="ngModel" >
+                                <div *ngIf="hearAbout.invalid && (hearAbout.dirty || hearAbout.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="hearAbout.errors.required">
                                     Household Size is required.
                                     </div>
                                 </div>
