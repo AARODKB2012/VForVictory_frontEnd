@@ -108,7 +108,7 @@
                                   </div>
 
                                   <label for="zipcode">ZipCode</label>
-                                  <input type="text" class="form-control" id="zipcode" name="zipcode" [ngModel]="family?.zipcode" [readonly]="viewMode" #zipcode="ngModel" placeholder="zipcode" required>
+                                  <input type="text" class="form-control" id="zipcode" name="zipcode" [ngModel]="family?.zipcode" [readonly]="viewMode" #zipcode="ngModel"  required>
                                   <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched || errorInForm)" class="text-danger">
                                   <div *ngIf="zipcode.errors.required">
                                       Zipcode is required.
@@ -116,17 +116,17 @@
                                   </div>
 
                                   <label for="familySize">Household Size</label>
-                                  <input type="text" class="form-control" id="familySize" name="familySize" [ngModel]="family?.familySize" [readonly]="viewMode" #familySize="ngModel" placeholder="familySize" >
+                                  <input type="text" class="form-control" id="familySize" name="familySize" [ngModel]="family?.familySize" [readonly]="viewMode"  #familySize="ngModel"  >
                                   <div *ngIf="familySize.invalid && (familySize.dirty || familySize.touched || errorInForm)" class="text-danger">
                                   <div *ngIf="familySize.errors.required">
                                       Household Size is required.
                                       </div>
                                   </div>
 
-                                  <label for="refer">How did you hear about us?</label>
-                                  <input type="text" class="form-control" id="refer" name="refer" [ngModel]="family?.refer" [readonly]="viewMode" #refer="ngModel" placeholder="Type here">
-                                  <div *ngIf="refer.invalid && (refer.dirty || refer.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="refer.errors.required">
+                                  <label for="hearAbout">How did you hear about us?</label>
+                                  <input type="text" class="form-control" id="hearAbout" name="hearAbout" [ngModel]="family?.hearAbout" [readonly]="viewMode" #hearAbout="ngModel" >
+                                  <div *ngIf="hearAbout.invalid && (hearAbout.dirty || hearAbout.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="hearAbout.errors.required">
                                       Household Size is required.
                                       </div>
                                   </div>
