@@ -6,5 +6,9 @@ export interface FamilyModel {
     endOfTreatmentDate: string;
     address: string;
     active: boolean;
+    welcomeLetter : boolean;
+    treamentLetter : boolean;
+    subscriberList : boolean;
+    facebookGroup : boolean;
 }
   

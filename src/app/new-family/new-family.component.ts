@@ -76,19 +76,23 @@ export class NewFamilyComponent implements OnInit {
     }else {
       if (this.creationMode){
       const request: any = {
-        firstName: form.value.firstName,
-        lastName: form.value.lastName,
-        phoneNumber: form.value.phonenumber,
-        streetAddress: form.value.address,
-        zipcode: form.value.zipcode,
-        email: form.value.email,
-        cancerWarriorname: form.value.cancerwarrior,
-        workPhone: form.value.workPhone,
-        relationshipTowarrior: form.value.relationship,
-        additionalInfo: form.value.addInfo,
-        endOftreatmentDate: form.value.endOftreatmentDate,
-        familysize:form.value.familySize,
-        hearabout:form.value.hearAbout
+          firstName: form.value.firstName,
+          lastName: form.value.lastName,
+          phoneNumber: form.value.phonenumber,
+          streetAddress: form.value.address,
+          zipcode: form.value.zipcode,
+          email: form.value.email,
+          cancerWarriorname: form.value.cancerwarrior,
+          workPhone: form.value.workPhone,
+          relationshipTowarrior: form.value.relationship,
+          additionalInfo: form.value.addInfo,
+          endOftreatmentDate: form.value.endOftreatmentDate,
+          familysize:form.value.familySize,
+          hearabout:form.value.hearAbout,
+          welcomeLetter:form.value.welcomeLetter,
+          treamentLetter: form.value.treamentLetter,
+          subscriberList:form.value.subscriberList,
+          facebookGroup:form.value.facebookGroup
         };
 
       this.familyService.saveFamily(request).subscribe((responseData) => {
@@ -120,8 +124,14 @@ export class NewFamilyComponent implements OnInit {
         additionalInfo: form.value.addInfo,
         endOftreatmentDate: form.value.endOftreatmentDate,
         familysize:form.value.familySize,
-        hearabout:form.value.hearAbout
+        hearabout:form.value.hearAbout,
+        welcomeLetter:form.value.welcomeLetter,
+        treamentLetter: form.value.treamentLetter,
+        subscriberList:form.value.subscriberList,
+        facebookGroup:form.value.facebookGroup
       };
+
+      console.log('family', family)
 
       this.familyService.editFamily(family).subscribe((responseData) => {
         if(responseData.familyUpdated) {

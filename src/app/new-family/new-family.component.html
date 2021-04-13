@@ -184,46 +184,31 @@
                                       <li class="list-group-item">
                                         <!-- Default checked -->
                                         <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="check1" >
-                                          <label class="custom-control-label" for="check1">Welcome Letter</label>
+                                          <input type="checkbox" class="custom-control-input" name ="welcomeLetter" id="welcomeLetter" [ngModel]="family?.welcomeLetter" #welcomeLetter="ngModel" >
+                                          <label class="custom-control-label" for="welcomeLetter">Welcome Letter</label>
                                         </div>
                                       </li>
                                       <li class="list-group-item">
                                         <!-- Default checked -->
                                         <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="check2">
-                                          <label class="custom-control-label" for="check2">Treatment Letter</label>
+                                            <input type="checkbox" class="custom-control-input" name ="treamentLetter"id="treamentLetter" [ngModel]="family?.treamentLetter" #treamentLetter="ngModel">
+                                            <label class="custom-control-label" for="treamentLetter">Treatment Letter</label>
                                         </div>
                                       </li>
                                       <li class="list-group-item">
                                         <!-- Default checked -->
                                         <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="check3" >
-                                          <label class="custom-control-label" for="check3">Subscriber List</label>
+                                            <input type="checkbox" class="custom-control-input" name ="subscriberList"id="subscriberList" [ngModel]="family?.subscriberList" #subscriberList="ngModel">
+                                          <label class="custom-control-label" for="subscriberList">Subscriber List</label>
                                         </div>
                                       </li>
                                       <li class="list-group-item">
                                         <!-- Default checked -->
                                         <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="check4" >
-                                          <label class="custom-control-label" for="check4">VPizza Gift Card</label>
+                                            <input type="checkbox" class="custom-control-input" name ="facebookGroup"id="facebookGroup" [ngModel]="family?.facebookGroup" #facebookGroup="ngModel">
+                                          <label class="custom-control-label" for="facebookGroup">Facebook Support Group</label>
                                         </div>
                                       </li>
-                                      <li class="list-group-item">
-                                        <!-- Default checked -->
-                                        <div class="custom-control custom-checkbox">
-                                          <input type="checkbox" class="custom-control-input" id="check5">
-                                          <label class="custom-control-label" for="check5">Facebook Support Group</label>
-                                        </div>
-                                      </li>
-                                      <li class="list-group-item">
-                                          <!-- Default checked -->
-                                          <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="box">
-                                            <label class="custom-control-label" for="box">Budget Assigned</label>
-                                          </div>
-                                        </li>
-
                                     </ul>
                               </div>
                               </div>
