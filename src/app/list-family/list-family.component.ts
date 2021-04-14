@@ -27,11 +27,11 @@ export class ListFamilyComponent implements OnInit {
   public url;
   constructor(public familyService: FamilyService){
   }
-  
+
 
     ngOnInit() {
 
-      
+
       this.familyService.listFamily().subscribe((familyReturned) => {
         if (familyReturned) {
           this.familyList = familyReturned.results;
@@ -62,42 +62,7 @@ ngAfterViewInit(){
 
   // Edit record
 
-  
-}
-markFamilyInactive(itemId) {
-  Swal.fire({
-    title: "MARK INACTIVE?",
-    text: "Would you like to mark this service as inactive? It will no longer be selectable by families.",
-    type: "warning",
-    showCancelButton: true,
-    cancelButtonClass: "btn btn-info",
-    confirmButtonClass: "btn btn-danger",
-    confirmButtonText: "Yes, mark it!",
-    cancelButtonText: "No, leave it!",
-    reverseButtons: true
-  })
-  .then((mark) => {
-    if(mark.value) {
-      const request: any = {
-        id: itemId,
-      }
-      this.familyService.markFamilyInactive(request).subscribe((responseData) => {
-        if (responseData.requestFulfilled) {
-          Swal.fire({
-            title: "Service changed!",
-            text: "The service has been made inactive.",
-            buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            type: "success"
-          }).then((confirm) => {
-            if(confirm){
-              window.location.reload()
-            }
-          })
-        }
-      });
-    }
-  });  
+
 }
 markFamilyInactive(itemId) {
   Swal.fire({
@@ -133,7 +98,5 @@ markFamilyInactive(itemId) {
       });
     }
   });
-}
-
-
+  }
 }

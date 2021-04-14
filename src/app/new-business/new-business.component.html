@@ -17,12 +17,12 @@
                             </button>
 
                             <!-- Hiding save button if is in view mode -->
-                            <button type="button" class="btn btn-default" (click)="approvedBusiness(business?.record_id, business?.business_name)" *ngIf="!viewMode && !businessApproved">
+                            <button type="button" class="btn btn-default" (click)="approvedBusiness(business?.record_id, business?.business_name)" *ngIf="!viewMode && !creationMode && !businessApproved">
                               <span class="btn-label">
                                 <i class="nc-icon nc-check-2"></i>
                               </span>
                               Approve
-                            </button> 
+                            </button>
                             <button class="btn btn-success" type="submit" *ngIf="!viewMode">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-box"></i>
@@ -235,6 +235,7 @@
                               </div>
                           </div>
                       </div>
+                      <!--
                         <div class="card">
                           <div class="card-body">
                               <h4 class="card-title">Services Rendered</h4>
@@ -252,16 +253,16 @@
                                     </thead>
                                     <tbody>
                                       <tr *ngFor="let row of dataTableServicesRendered.dataRows">
-                                        <td>  
+                                        <td>
                                           {{ row.id }}
                                         </td>
-                                        <td>  
+                                        <td>
                                           {{ row.name }}
                                         </td>
-                                        <td>  
+                                        <td>
                                           {{ row.date_requested | date:'MM/dd/yyyy' }}
                                         </td>
-                                        <td>  
+                                        <td>
                                           {{ row.date_fulfilled | date:'MM/dd/yyyy'}}
                                         </td>
                                         <td class="td-actions text-center">
@@ -270,7 +271,7 @@
                                               <input class="form-check-input" type="checkbox" [checked]="row.active" disabled>
                                               <span class="form-check-sign"></span>
                                             </label>
-                                          </div>                  
+                                          </div>
                                         </td>
                                       </tr>
                                     </tbody>
@@ -279,6 +280,7 @@
                               </div>
                           </div>
                         </div>
+                      -->
                       </div>
                 </div>
             </div>
