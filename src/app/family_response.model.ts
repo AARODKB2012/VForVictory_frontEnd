@@ -1,4 +1,4 @@
-import { FamilyModel } from "./family.model";
+import { FamilyModel } from './family.model';
 
 export interface FamilyAPIResponse {
   status: number;

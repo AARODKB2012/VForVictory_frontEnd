@@ -49,10 +49,6 @@ export class FamilyService{
     getFamilyByEmail(familyEmail: String) {
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/email/' + familyEmail);
     }
-
-    getFamilyById(familyId: Number) {
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
-    }
     getFamilyById(familyId: Number) {
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
     }

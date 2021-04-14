@@ -1,10 +1,31 @@
 export interface FamilyModel {
-    id: number;
-    firstName: string;
-    lastName: string;
-    email: string;
-    endOfTreatmentDate: string;
-    address: string;
-    active: boolean;
+    first_name: string,
+    last_name: string,
+    phone_number: number,
+    street_address: string,
+    zipcode: number,
+    email: string,
+    cancer_warrior_name: string,
+    work_phone: number,
+    relationship_to_warrior: string,
+    additional_info: string,
+    end_of_treatment_date: string,
+    id: number,
+    active: boolean,
+    created_date: string,
+    created_by: string,
+    updated_date: string,
+    updated_by: string,
+    deleted_date: string,
+    deleted_by: string,
+    approved_date: string,
+    approved_by: string,
+    familySize: string,
+    hearAbout: string,
+    welcomeLetter: boolean,
+    treamentLetter: boolean,
+    subscriberList: boolean,
+    facebookGroup: boolean,
+    vPizza_giftcard: number,
+    vPizza_refill_amount: number,
 }
-  
