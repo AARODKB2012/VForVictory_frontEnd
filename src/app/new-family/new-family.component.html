@@ -15,6 +15,12 @@
                               </span>
                               Cancel
                           </button>
+                            <button type="button" class="btn btn-default" (click)="approvedFamily(family?.id, family?.first_name)" *ngIf="!viewMode && !creationMode && !familyApproved">
+                                <span class="btn-label">
+                                <i class="nc-icon nc-check-2"></i>
+                                </span>
+                                Approve
+                            </button>
                           <!-- Hiding save button if is in view mode -->
                           <button class="btn btn-success" type="submit" *ngIf="!viewMode">
                               <span class="btn-label">
@@ -34,42 +40,42 @@
                           <div class ="row">
                               <div class = "col-md-5">
 
-                                  <label for="cancerwarrior">Cancer Warrior's Name</label>
-                                  <input type="text" class="form-control" id="cancerwarrior" name="cancerwarrior" [ngModel]="family?.cancer_warrior_name" [readonly]="viewMode" #cancerwarrior="ngModel" required maxlength="30" minlength="1">
-                                  <div *ngIf="cancerwarrior.invalid && (cancerwarrior.dirty || cancerwarrior.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="(cancerwarrior.errors.required)">
+                                  <label for="cancer_warrior_name">Cancer Warrior's Name</label>
+                                  <input type="text" class="form-control" id="cancer_warrior_name" name="cancer_warrior_name" [ngModel]="family?.cancer_warrior_name" [readonly]="viewMode" #cancer_warrior_name="ngModel" required maxlength="30" minlength="1">
+                                  <div *ngIf="cancer_warrior_name.invalid && (cancer_warrior_name.dirty || cancer_warrior_name.touched || errorInForm)" class="text-danger">
+                                      <div *ngIf="(cancer_warrior_name.errors.required)">
                                       Name is required.
                                       </div>
                                   </div>
 
-                                  <label for="firstName">Contact's First name</label>
-                                  <input type="text" class="form-control" id="firstName" name="firstName" [ngModel]="family?.first_name"  [readonly]="viewMode" #firstName="ngModel" required maxlength="30" minlength="1">
-                                  <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="(firstName.errors.required)">
+                                  <label for="first_name">Contact's First name</label>
+                                  <input type="text" class="form-control" id="first_name" name="first_name" [ngModel]="family?.first_name"  [readonly]="viewMode" #first_name="ngModel" required maxlength="30" minlength="1">
+                                  <div *ngIf="first_name.invalid && (first_name.dirty || first_name.touched || errorInForm)" class="text-danger">
+                                      <div *ngIf="(first_name.errors.required)">
                                       Name is required.
                                       </div>
                                   </div>
 
-                                  <label for="lastName">Contact's Last name</label>
-                                  <input type="text" class="form-control" id="lastName" name="lastName" [ngModel]="family?.last_name" [readonly]="viewMode" #lastName="ngModel" required>
-                                  <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="lastName.errors.required">
+                                  <label for="last_name">Contact's Last name</label>
+                                  <input type="text" class="form-control" id="last_name" name="last_name" [ngModel]="family?.last_name" [readonly]="viewMode" #last_name="ngModel" required>
+                                  <div *ngIf="last_name.invalid && (last_name.dirty || last_name.touched || errorInForm)" class="text-danger">
+                                      <div *ngIf="last_name.errors.required">
                                       Last name is required.
                                       </div>
                                   </div>
 
-                                  <label for="relationship">What is your relationship to the Cancer?</label>
-                                  <input type="text" class="form-control" id="relationship" name="relationship" [ngModel]="family?.relationship_to_warrior" [readonly]="viewMode" #relationship="ngModel"  required>
-                                  <div *ngIf="relationship.invalid && (relationship.dirty || relationship.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="relationship.errors.required">
+                                  <label for="relationship_to_warrior">What is your relationship to the Cancer?</label>
+                                  <input type="text" class="form-control" id="relationship_to_warrior" name="relationship_to_warrior" [ngModel]="family?.relationship_to_warrior" [readonly]="viewMode" #relationship_to_warrior="ngModel"  required>
+                                  <div *ngIf="relationship_to_warrior.invalid && (relationship_to_warrior.dirty || relationship_to_warrior.touched || errorInForm)" class="text-danger">
+                                      <div *ngIf="relationship_to_warrior.errors.required">
                                               relationship is required.
                                       </div>
                                   </div>
 
-                                  <label for="endOftreatmentDate">End of Treatment Date</label>
-                                  <input type="text" class="form-control" id="endOftreatmentDate" name="endOftreatmentDate" [ngModel]="family?.end_of_treatment_date" [readonly]="viewMode" #endOftreatmentDate="ngModel"  required>
-                                  <div *ngIf="endOftreatmentDate.invalid && (endOftreatmentDate.dirty || endOftreatmentDate.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="endOftreatmentDate.errors.required">
+                                  <label for="end_of_treatment_date">End of Treatment Date</label>
+                                  <input type="text" class="form-control" id="end_of_treatment_date" name="end_of_treatment_date" [ngModel]="family?.end_of_treatment_date" [readonly]="viewMode" #end_of_treatment_date="ngModel"  required>
+                                  <div *ngIf="end_of_treatment_date.invalid && (end_of_treatment_date.dirty || end_of_treatment_date.touched || errorInForm)" class="text-danger">
+                                      <div *ngIf="end_of_treatment_date.errors.required">
                                               endOftreatmentDate is required.
                                       </div>
                                   </div>
@@ -78,17 +84,17 @@
 
                               <div class = "col-md-5">
 
-                                  <label for="phonenumber">Phone Number</label>
-                                  <input type="text" class="form-control" id="phonenumber" name="phonenumber" [ngModel]="family?.phone_number" [readonly]="viewMode" #phonenumber="ngModel" required maxlength="30" minlength="1">
-                                  <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="(phonenumber.errors.required)">
+                                  <label for="phone_number">Phone Number</label>
+                                  <input type="text" class="form-control" id="phone_number" name="phone_number" [ngModel]="family?.phone_number" [readonly]="viewMode" #phone_number="ngModel" required maxlength="30" minlength="1">
+                                  <div *ngIf="phone_number.invalid && (phone_number.dirty || phone_number.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="(phone_number.errors.required)">
                                           Phone Number is required.
                                       </div>
                                   </div>
 
 
-                                  <label for="workPhone">Work Phone</label>
-                                  <input type="tel" class="form-control" id="workPhone" name="workPhone" [ngModel]="family?.work_phone"  [readonly]="viewMode" #workPhone="ngModel" >
+                                  <label for="work_phone">Work Phone</label>
+                                  <input type="tel" class="form-control" id="work_phone" name="work_phone" [ngModel]="family?.work_phone"  [readonly]="viewMode" #work_phone="ngModel" >
 
 
                                   <label for="email">Email</label>
@@ -99,10 +105,10 @@
                                       </div>
                                   </div>
 
-                                  <label for="address">Address</label>
-                                  <input type="text" class="form-control" id="address" name="address" [ngModel]="family?.street_address" [readonly]="viewMode" #address="ngModel"  required>
-                                  <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="address.errors.required">
+                                  <label for="street_address">Address</label>
+                                  <input type="text" class="form-control" id="street_address" name="street_address" [ngModel]="family?.street_address" [readonly]="viewMode" #street_address="ngModel"  required>
+                                  <div *ngIf="street_address.invalid && (street_address.dirty || street_address.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="street_address.errors.required">
                                       Address is required.
                                       </div>
                                   </div>
@@ -139,8 +145,8 @@
                           <div class="row">
                           </div>
                           <div class="mb-3">
-                              <label for="addInfo">Add any additional information you would like us to know about.</label>
-                              <textarea class="form-control" id="addInfo" name="addInfo" [ngModel]="family?.additional_info"  [readonly]="viewMode" ngModel #addInfo="ngModel"></textarea>
+                              <label for="additional_info">Add any additional information you would like us to know about.</label>
+                              <textarea class="form-control" id="additional_info" name="additional_info" [ngModel]="family?.additional_info"  [readonly]="viewMode" ngModel #additional_info="ngModel"></textarea>
                           </div>
                       </div>
                       </div>

@@ -56,4 +56,8 @@ export class FamilyService{
     editFamily(family: any) {
       return this.httpClient.post<{familyUpdated: boolean}>(this.serverAddress + 'api/family/edit', family);
     }
+    approveFamily(familyId, approvedBy) {
+      return this.httpClient.post<{familyApproved: boolean}>(this.serverAddress + `api/family/${familyId}/approve/${approvedBy}`, null);
+    }
+
   }

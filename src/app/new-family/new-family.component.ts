@@ -24,6 +24,8 @@ export class NewFamilyComponent implements OnInit {
   public creationMode: boolean;
   public categoryList: [];
   public profileURL: string = null;
+  public familyApproved: boolean;
+  private loggedInUser: any;
 
   constructor(public familyService: FamilyService, public router: Router,private activeRoute: ActivatedRoute) {
     const tree: UrlTree = router.parseUrl(this.router.url);
@@ -55,6 +57,9 @@ export class NewFamilyComponent implements OnInit {
         }
       });
     }
+
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
+
    }
 
   ngOnInit(): void {
@@ -76,23 +81,23 @@ export class NewFamilyComponent implements OnInit {
     }else {
       if (this.creationMode){
       const request: any = {
-          firstName: form.value.firstName,
-          lastName: form.value.lastName,
-          phoneNumber: form.value.phonenumber,
-          streetAddress: form.value.address,
-          zipcode: form.value.zipcode,
-          email: form.value.email,
-          cancerWarriorname: form.value.cancerwarrior,
-          workPhone: form.value.workPhone,
-          relationshipTowarrior: form.value.relationship,
-          additionalInfo: form.value.addInfo,
-          endOftreatmentDate: form.value.endOftreatmentDate,
-          familysize:form.value.familySize,
-          hearabout:form.value.hearAbout,
-          welcomeLetter:form.value.welcomeLetter,
-          treamentLetter: form.value.treamentLetter,
-          subscriberList:form.value.subscriberList,
-          facebookGroup:form.value.facebookGroup
+            first_name: form.value.first_name,
+            last_name: form.value.last_name,
+            phone_number: form.value.phone_number,
+            street_address: form.value.street_address,
+            zipcode: form.value.zipcode,
+            email: form.value.email,
+            cancer_warrior_name: form.value.cancer_warrior_name,
+            work_phone: form.value.work_phone,
+            relationship_to_warrior: form.value.relationship_to_warrior,
+            additional_info: form.value.additional_info,
+            end_of_treatment_date: form.value.end_of_treatment_date,
+            familysize:form.value.familySize,
+            hearabout:form.value.hearAbout,
+            welcomeLetter:form.value.welcomeLetter,
+            treamentLetter: form.value.treamentLetter,
+            subscriberList:form.value.subscriberList,
+            facebookGroup:form.value.facebookGroup
         };
 
       this.familyService.saveFamily(request).subscribe((responseData) => {
@@ -112,23 +117,23 @@ export class NewFamilyComponent implements OnInit {
     if (this.editMode){
       const family: any = {
         id: this.familyId,
-        firstName: form.value.firstName,
-        lastName: form.value.lastName,
-        phoneNumber: form.value.phonenumber,
-        streetAddress: form.value.address,
-        zipcode: form.value.zipcode,
-        email: form.value.email,
-        cancerWarriorname: form.value.cancerwarrior,
-        workPhone: form.value.workPhone,
-        relationshipTowarrior: form.value.relationship,
-        additionalInfo: form.value.addInfo,
-        endOftreatmentDate: form.value.endOftreatmentDate,
-        familysize:form.value.familySize,
-        hearabout:form.value.hearAbout,
-        welcomeLetter:form.value.welcomeLetter,
-        treamentLetter: form.value.treamentLetter,
-        subscriberList:form.value.subscriberList,
-        facebookGroup:form.value.facebookGroup
+            first_name: form.value.first_name,
+            last_name: form.value.last_name,
+            phone_number: form.value.phone_number,
+            street_address: form.value.street_address,
+            zipcode: form.value.zipcode,
+            email: form.value.email,
+            cancer_warrior_name: form.value.cancer_warrior_name,
+            work_phone: form.value.work_phone,
+            relationship_to_warrior: form.value.relationship_to_warrior,
+            additional_info: form.value.additional_info,
+            end_of_treatment_date: form.value.end_of_treatment_date,
+            familysize:form.value.familySize,
+            hearabout:form.value.hearAbout,
+            welcomeLetter:form.value.welcomeLetter,
+            treamentLetter: form.value.treamentLetter,
+            subscriberList:form.value.subscriberList,
+            facebookGroup:form.value.facebookGroup
       };
 
       console.log('family', family)
@@ -147,5 +152,20 @@ export class NewFamilyComponent implements OnInit {
       });
     }
     }
+  }
+
+  approvedFamily(familyId, familyName){
+    this.familyService.approveFamily(familyId, this.loggedInUser).subscribe((responseData) => {
+      if (responseData.familyApproved) {
+        Swal.fire({
+          title: 'Family Approved Successfully!',
+          text:  familyName + ' was approved successfully.',
+          buttonsStyling: false,
+          confirmButtonClass: 'btn btn-success',
+          type: 'success'
+        })
+        this.router.navigate(['/family/list']);
+      }
+    });
   }
 }

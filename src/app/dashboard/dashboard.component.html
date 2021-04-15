@@ -131,7 +131,7 @@
                     {{ row.cancer_warrior_name }}
                   </td>
                   <td class="td-actions text-center">
-                    <a  [routerLink]="['/family/view']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a [routerLink]="['/family/view']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
                     <a  [routerLink]="['/family/approve']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
                     <a  [routerLink]="['/family/delete']" [queryParams]="{ volunteerId: row.id }" routerLinkActive="active" class="btn btn-danger btn-link btn-icon btn-sm view"><i class="fa fa-trash"></i></a>
                   </td>
