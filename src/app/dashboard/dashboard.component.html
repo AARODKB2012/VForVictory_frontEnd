@@ -121,13 +121,13 @@
               </thead>
               <tbody>
                 <tr *ngFor="let row of dataTable.dataRows; let i = index" [attr.data-index]="i">
-                  <td>  
+                  <td>
                     {{ i + 1 }}
                   </td>
-                  <td>  
+                  <td>
                     {{ row.first_name + " " + row.last_name }}
                   </td>
-                  <td>  
+                  <td>
                     {{ row.cancer_warrior_name }}
                   </td>
                   <td class="td-actions text-center">
@@ -164,13 +164,13 @@
               </thead>
               <tbody>
                 <tr *ngFor="let row of dataTableBusiness.dataRows; let i = index" [attr.data-index]="i">
-                  <td>  
+                  <td>
                     {{ i + 1 }}
                   </td>
-                  <td>  
+                  <td>
                     {{ row.business_name }}
                   </td>
-                  <td>  
+                  <td>
                     {{ row.Services_Offered }}
                   </td>
                   <td class="td-actions text-center">
@@ -212,23 +212,23 @@
               </thead>
               <tbody>
                 <tr *ngFor="let row of dataTableRequests.dataRows; let i = index" [attr.data-index]="i">
-                  <td>  
+                  <td>
                     {{ i + 1 }}
                   </td>
-                  <td>  
+                  <td>
                     {{ row.name }}
                   </td>
-                  <td>  
-                    {{ row.business_name }}
+                  <td>
+                    {{ row.businessName }}
                   </td>
-                  <td>  
-                    {{ row.business_category }}
+                  <td>
+                    {{ row.businessCategory }}
                   </td>
-                  <td>  
-                    {{ row.date_requested | date:'MM/dd/yyyy'}}
+                  <td>
+                    {{ row.requested_date | date:'MM/dd/yyyy'}}
                   </td>
-                  <td>  
-                    {{ row.date_fulfilled | date:'MM/dd/yyyy'}}
+                  <td>
+                    {{ row.fulfilled_date | date:'MM/dd/yyyy'}}
                   </td>
                   <td class="td-actions text-center">
                     <div class="form-check">
@@ -236,7 +236,7 @@
                         <input class="form-check-input" type="checkbox" [checked]="row.active" disabled>
                         <span class="form-check-sign"></span>
                       </label>
-                    </div>                  
+                    </div>
                   </td>
                 </tr>
               </tbody>

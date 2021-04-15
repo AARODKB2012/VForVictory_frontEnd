@@ -56,15 +56,15 @@ export class ListServicesComponent implements OnInit {
             });
           }
           this.activeDataTable = {
-            headerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Business?', 'Notified Family?'],
-            footerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Business?', 'Notified Family?'],
+            headerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Family?', 'Notified Business?'],
+            footerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Family?', 'Notified Business?'],
             dataRows: this.activeList
           };
          }
          else {
           this.activeDataTable = {
-            headerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Business?', 'Notified Family?'],
-            footerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Business?', 'Notified Family?'],
+            headerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Family?', 'Notified Business?'],
+            footerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Family?', 'Notified Business?'],
             dataRows: []
           };
          }
@@ -88,15 +88,15 @@ export class ListServicesComponent implements OnInit {
             });
           }
           this.renderedDataTable = {
-            headerRow: [ 'ID', 'Name', 'Business', 'Date Requested', 'Date Fulfilled', 'Approved?', 'Business Followed Up?', 'Family Followed Up?', 'Service Value', 'Actual Cost'],
-            footerRow: [ 'ID', 'Name', 'Business', 'Date Requested', 'Date Fulfilled', 'Approved?', 'Business Followed Up?', 'Family Followed Up?', 'Service Value', 'Actual Cost'],
+            headerRow: [ 'ID', 'Name', 'Business', 'Date Requested', 'Date Fulfilled', 'Approved?', 'Family Followed Up?', 'Business Followed Up?', 'Service Value', 'Actual Cost'],
+            footerRow: [ 'ID', 'Name', 'Business', 'Date Requested', 'Date Fulfilled', 'Approved?', 'Family Followed Up?', 'Business Followed Up?', 'Service Value', 'Actual Cost'],
             dataRows: this.renderedList
           };
          }
          else {
           this.renderedDataTable = {
-            headerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Business?', 'Notified Family?'],
-            footerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Business?', 'Notified Family?'],
+            headerRow: [ 'ID', 'Name', 'Business', 'Date Requested', 'Date Fulfilled', 'Approved?', 'Family Followed Up?', 'Business Followed Up?', 'Service Value', 'Actual Cost'],
+            footerRow: [ 'ID', 'Name', 'Business', 'Date Requested', 'Date Fulfilled', 'Approved?', 'Family Followed Up?', 'Business Followed Up?', 'Service Value', 'Actual Cost'],
             dataRows: []
           };
          }
@@ -283,21 +283,23 @@ export class ListServicesComponent implements OnInit {
     }
   }
 
-  markBusinessNotified(itemId, val) {
+  viewPendingBusinessOptions(requestId, itemId, itemName, val) {
     Swal.fire({
-      title: "Has this business been notified?",
-      type: "warning",
+      title: "Business Options",
+      html: `
+      <a href="` + this.url + `/#/business/view?businessId=` + itemId + `" class="btn btn-info">View Profile for ` + itemName + `</a>
+      `,
       showCancelButton: true,
-      cancelButtonClass: "btn btn-info",
-      confirmButtonClass: "btn btn-success",
-      confirmButtonText: "Yes, mark it!",
-      cancelButtonText: "Not yet, leave it!",
+      cancelButtonClass: "btn",
+      confirmButtonClass: "btn btn-primary",
+      confirmButtonText: "Mark Business Notified",
+      cancelButtonText: "Cancel",
       reverseButtons: true
     })
     .then((notify) => {
       if(notify.value) {
         const request: any = {
-          id: itemId,
+          id: requestId,
           toggle: val
         }
         this.serviceService.markBusinessNotified(request).subscribe((responseData) => {
@@ -318,22 +320,23 @@ export class ListServicesComponent implements OnInit {
       }
     });
   }
-
-  markFamilyNotified(itemId, val) {
+  viewPendingFamilyOptions(requestId, itemId, itemName, val) {
     Swal.fire({
-      title: "Has this family been notified?",
-      type: "warning",
+      title: "Family Options",
+      html: `
+      <a href="` + this.url + `/#/family/view?familyId=` + itemId + `" class="btn btn-info">View Profile for ` + itemName + `</a>
+      `,
       showCancelButton: true,
-      cancelButtonClass: "btn btn-info",
-      confirmButtonClass: "btn btn-success",
-      confirmButtonText: "Yes, mark it!",
-      cancelButtonText: "Not yet, leave it!",
+      cancelButtonClass: "btn",
+      confirmButtonClass: "btn btn-primary",
+      confirmButtonText: "Mark Family Notified",
+      cancelButtonText: "Cancel",
       reverseButtons: true
     })
     .then((notify) => {
       if(notify.value) {
         const request: any = {
-          id: itemId,
+          id: requestId,
           toggle: val
         }
         this.serviceService.markFamilyNotified(request).subscribe((responseData) => {
@@ -355,21 +358,23 @@ export class ListServicesComponent implements OnInit {
     });
   }
 
-  markBusinessFollowedUp(itemId, val) {
+  viewRenderedBusinessOptions(requestId, itemId, itemName, val) {
     Swal.fire({
-      title: "Has this business been followed up with?",
-      type: "warning",
+      title: "Business Options",
+      html: `
+      <a href="` + this.url + `/#/business/view?businessId=` + itemId + `" class="btn btn-info">View Profile for ` + itemName + `</a>
+      `,
       showCancelButton: true,
-      cancelButtonClass: "btn btn-info",
-      confirmButtonClass: "btn btn-success",
-      confirmButtonText: "Yes, mark it!",
-      cancelButtonText: "Not yet, leave it!",
+      cancelButtonClass: "btn",
+      confirmButtonClass: "btn btn-primary",
+      confirmButtonText: "Mark Business Followed Up",
+      cancelButtonText: "Cancel",
       reverseButtons: true
     })
     .then((notify) => {
       if(notify.value) {
         const request: any = {
-          id: itemId,
+          id: requestId,
           toggle: val
         }
         this.serviceService.markBusinessFollowedUp(request).subscribe((responseData) => {
@@ -391,22 +396,24 @@ export class ListServicesComponent implements OnInit {
     });
   }
 
-  markFamilyFollowedUp(itemId, val) {
+  viewRenderedFamilyOptions(requestId, itemId, itemName, val) {
     Swal.fire({
-      title: "Has this family been followed up with?",
-      type: "warning",
+      title: "Family Options",
+      html: `
+      <a href="` + this.url + `/#/family/view?familyId=` + itemId + `" class="btn btn-info">View Profile for ` + itemName + `</a>
+      `,
       showCancelButton: true,
-      cancelButtonClass: "btn btn-info",
-      confirmButtonClass: "btn btn-success",
-      confirmButtonText: "Yes, mark it!",
-      cancelButtonText: "Not yet, leave it!",
+      cancelButtonClass: "btn",
+      confirmButtonClass: "btn btn-primary",
+      confirmButtonText: "Mark Family Followed Up",
+      cancelButtonText: "Cancel",
       reverseButtons: true
     })
     .then((notify) => {
       if(notify.value) {
         const request: any = {
-          id: itemId,
-          toggle: val,
+          id: requestId,
+          toggle: val
         }
         this.serviceService.markFamilyFollowedUp(request).subscribe((responseData) => {
           if (responseData.requestFulfilled) {
@@ -498,7 +505,13 @@ export class ListServicesComponent implements OnInit {
 
   setValueCost(itemId, currentVal, currentCost) {
     let cV = currentVal;
+    if(!cV) {
+      cV = "";
+    }
     let cC = currentCost;
+    if(!cC) {
+      cC = "";
+    }
     Swal.fire({
         title: "Edit Value/Cost",
         html: `<input type="text" id="newValue" class="swal2-input" value="` + cV + `" placeholder="Enter the value of service">

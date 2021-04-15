@@ -47,9 +47,9 @@ export class DashboardComponent implements OnInit {
   public requestsThisMonth: Array<any>;
   public userRole: number;
   private loggedInUser: any;
-  
+
   constructor(public familyService: FamilyService, public businessService: BusinessService, public servicesService: ServicesService, public router: Router){
-    
+
     // For Populating VFV Data
     // Families
     this.familyService.familiesAddedThisMonth().subscribe((families) => {
@@ -91,6 +91,20 @@ export class DashboardComponent implements OnInit {
     this.servicesService.servicesRequestedThisMonth().subscribe((requests) => {
       if (requests) {
         this.requestsThisMonth = requests.results;
+        for(let i of this.requestsThisMonth) {
+          this.familyService.getFamilyById(i['family_id']).subscribe((responseData) => {
+            if(responseData) {
+              i.name = responseData.results[0]['first_name'].toString() + " " + responseData.results[0]['last_name'].toString();
+              i.email = responseData.results[0]['email'].toString();
+            }
+          });
+          this.businessService.getBusinessById(i['business_id']).subscribe((responseData) => {
+            if(responseData){
+              i.businessName = responseData.results[0]['business_name'].toString();
+              i.businessCategory = responseData.results[0]['Services_Offered'].toString();
+            }
+          });
+        }
         this.dataTableRequests = {
           headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
           footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
