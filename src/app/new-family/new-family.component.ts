@@ -47,6 +47,7 @@ export class NewFamilyComponent implements OnInit {
       this.familyId = params['familyId'];
     });
 
+    
     if (this.familyId) {
       this.familyService.getFamilyById(this.familyId).subscribe((responseData) => {
         console.log(responseData)
@@ -55,7 +56,12 @@ export class NewFamilyComponent implements OnInit {
           console.log(responseData.results[0])
           this.family = responseData.results[0];
         }
+
+        if (responseData.results[0]['approved_by'] != null){
+          this.familyApproved = true;
+        }
       });
+      
     }
 
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
@@ -164,7 +170,7 @@ export class NewFamilyComponent implements OnInit {
           confirmButtonClass: 'btn btn-success',
           type: 'success'
         })
-        this.router.navigate(['/family/list']);
+        this.router.navigate(['/family']);
       }
     });
   }
