@@ -59,5 +59,9 @@ export class FamilyService{
     approveFamily(familyId, approvedBy) {
       return this.httpClient.post<{familyApproved: boolean}>(this.serverAddress + `api/family/${familyId}/approve/${approvedBy}`, null);
     }
+    getApprovedFamily():any{
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/approved');
+    }
+    
 
   }

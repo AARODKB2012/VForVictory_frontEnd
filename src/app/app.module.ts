@@ -39,6 +39,7 @@ import { RequestServiceLoginComponent } from './request-service-login/request-se
 import { BusinessCategoryComponent } from './business-category/business-category.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { BusinessSignupComponent } from './business-signup/business-signup.component';
+import { YesNoApprovedPipe } from './yesnoapproved.pipe';
 
 
 @NgModule({
@@ -80,7 +81,8 @@ import { BusinessSignupComponent } from './business-signup/business-signup.compo
         RequestServiceLoginComponent,
         BusinessCategoryComponent,
         NewCategoryComponent,
-        BusinessSignupComponent
+        BusinessSignupComponent,
+        YesNoApprovedPipe
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]
