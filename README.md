@@ -1,6 +1,6 @@
 # V for Victory Information System (Front-End)
 
-<img src="https://i.imgur.com/5tYKr1L.png" width="200px" height="200px">
+<img src="https://i.imgur.com/5tYKr1L.png" width="300px" height="300px">
 
 **The V for Victory Information System** was developed by **J₃A Group** for **V Pizza** and its non-profit organization **V for Victory** during the **Fall 2020 and Spring 2021** semesters at the **University of North Florida.**
 
@@ -13,7 +13,7 @@
 * [Browser Compatibility](#browser-compatibility)
 * [Support](#Support)
 * [Licensing](#licensing)
-* [Useful Links](#useful-links)
+* [Credits](#credits)
 
 ## Versions
 
