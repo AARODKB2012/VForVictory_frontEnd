@@ -28,4 +28,8 @@ export interface FamilyModel {
     facebookGroup: boolean,
     vPizza_giftcard: number,
     vPizza_refill_amount: number,
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

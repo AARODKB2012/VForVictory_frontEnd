@@ -149,7 +149,8 @@
                               <textarea class="form-control" id="additional_info" name="additional_info" [ngModel]="family?.additional_info"  [readonly]="viewMode" ngModel #additional_info="ngModel"></textarea>
                           </div>
                       </div>
-                      </div><div class="row">
+                      </div>
+                      <div class="row">
                         <div class="col-md-12">
                           <div class="card">
                             <div class="card-body">
@@ -184,25 +185,25 @@
                   <div class="col-md-5">
                       <div class="card">
                           <div class="card-body">
-                              <h4 class="card-title">V Pizza Gift Card Stuff Here</h4>
+                              <h4 class="card-title">VPizza GiftCard</h4>
                               <div class="row">
                                   <div class="col-md-4"></div>
                                   <div class="col-md-8">
-                                      <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                          <div class="fileinput-new thumbnail">
-                                              <img *ngIf="!profileURL" src="../../assets/img/default-avatar.png" alt="...">
-                                              <img *ngIf="profileURL" src="{{profileURL}}" alt="...">
-                                          </div>
-                                          <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                          <div>
-                                              <span class="btn btn-rose btn-round btn-file">
-                                                  <span class="fileinput-new">Select image</span>
-                                                  <span class="fileinput-exists">Change</span>
-                                                  <input type="file" name="profilePicture" id="profilePicture" accept="image/*" (change)="handleFileInput($event.target.files)"/>
-                                              </span>
-                                              <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                          </div>
+                                    <label for="vPizza_giftcard">VPizza GiftCard Number</label>
+                                    <input type="text" class="form-control" id="vPizza_giftcard" name="vPizza_giftcard" [ngModel]="family?.vPizza_giftcard" [readonly]="viewMode"  #vPizza_giftcard="ngModel"  >
+                                    <div *ngIf="vPizza_giftcard.invalid && (vPizza_giftcard.dirty || vPizza_giftcard.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="vPizza_giftcard.errors.required">
+                                      VPizza GiftCard information is required.
                                       </div>
+                                  </div>
+                                  <label for="vPizza_refill_amount">Refill Amount</label>
+                                  <input type="text" class="form-control" id="vPizza_refill_amount" name="vPizza_refill_amount" [ngModel]="family?.vPizza_refill_amount" [readonly]="viewMode" #vPizza_refill_amount="ngModel" >
+                                  <div *ngIf="vPizza_refill_amount.invalid && (vPizza_refill_amount.dirty || vPizza_refill_amount.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="vPizza_refill_amount.errors.required">
+                                      Refill Amount is required.
+                                      </div>
+                                  </div>
+                                    <input type=button (click)="addVPizza()" value="Add VPizza GiftCard" class="btn btn-primary btn-info">
                                   </div>
                               </div>
                           </div>

@@ -58,7 +58,7 @@ export class NewFamilyComponent implements OnInit {
       this.familyId = params['familyId'];
     });
 
-    
+
     if (this.familyId) {
       this.familyService.getFamilyById(this.familyId).subscribe((responseData) => {
         console.log(responseData)
@@ -68,11 +68,11 @@ export class NewFamilyComponent implements OnInit {
           this.family = responseData.results[0];
         }
 
-        if (responseData.results[0]['approved_by'] != null){
+        if (responseData.results[0]['approved_by'] != null) {
           this.familyApproved = true;
         }
       });
-      
+
     }
 
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
@@ -88,8 +88,7 @@ export class NewFamilyComponent implements OnInit {
           footerRow: [ 'Note', 'Note By', 'Note Date', 'Options'],
           dataRows: this.noteList
         };
-      }
-      else {
+      } else {
         this.dataTable = {
           headerRow: [ 'Note', 'Note By', 'Note Date', 'Options'],
           footerRow: [ 'Note', 'Note By', 'Note Date', 'Options'],
@@ -98,26 +97,26 @@ export class NewFamilyComponent implements OnInit {
       }
     });
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     $('#datatable').DataTable({
-      "pagingType": "full_numbers",
-      "lengthMenu": [
+      'pagingType': 'full_numbers',
+      'lengthMenu': [
         [5, 10, 20, -1],
-        [5, 10, 20, "All"]
+        [5, 10, 20, 'All']
       ],
-      "order": [[ 2, "desc" ]],
-      "oLanguage": {
-        "sEmptyTable": "No notes for this family.",
+      'order': [[ 2, 'desc' ]],
+      'oLanguage': {
+        'sEmptyTable': 'No notes for this family.',
       },
       responsive: true,
       language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Search records",
+        search: '_INPUT_',
+        searchPlaceholder: 'Search records',
       }
 
     });
 
-    var table = $('#datatable').DataTable();
+    let table = $('#datatable').DataTable();
 
     // Edit record
 
@@ -128,8 +127,8 @@ export class NewFamilyComponent implements OnInit {
       console.log('returned');
       this.errorInForm = true;
       return;
-    }else {
-      if (this.creationMode){
+    } else {
+      if (this.creationMode) {
       const request: any = {
             first_name: form.value.first_name,
             last_name: form.value.last_name,
@@ -153,18 +152,18 @@ export class NewFamilyComponent implements OnInit {
       this.familyService.saveFamily(request).subscribe((responseData) => {
         if (responseData.familyCreated) {
           Swal.fire({
-            title: "Record Saved Successfully!",
-            text: "The family was created successfully.",
+            title: 'Record Saved Successfully!',
+            text: 'The family was created successfully.',
             buttonsStyling: false,
-            confirmButtonClass: "btn btn-success",
-            type: "success"
+            confirmButtonClass: 'btn btn-success',
+            type: 'success'
           })
           this.router.navigate(['/family']);
         }
     });
 
     }
-    if (this.editMode){
+    if (this.editMode) {
       const family: any = {
         id: this.familyId,
             first_name: form.value.first_name,
@@ -204,7 +203,7 @@ export class NewFamilyComponent implements OnInit {
     }
   }
 
-  approvedFamily(familyId, familyName){
+  approvedFamily(familyId, familyName) {
     this.familyService.approveFamily(familyId, this.loggedInUser).subscribe((responseData) => {
       if (responseData.familyApproved) {
         Swal.fire({
@@ -220,27 +219,39 @@ export class NewFamilyComponent implements OnInit {
   }
   saveNote(noteId, currentContent) {
     let noteVal = currentContent;
+<<<<<<< Updated upstream
     if (!noteVal){
+=======
+    if (!noteVal) {
+>>>>>>> Stashed changes
       Swal.fire({
-        title: "New Note",
+        title: 'New Note',
         input: 'textarea',
         inputPlaceholder: 'Enter note here...',
         preConfirm: (value) => {
+<<<<<<< Updated upstream
           if (value){
+=======
+          if (value) {
+>>>>>>> Stashed changes
             noteVal = value;
           }
         },
-        type: "info",
+        type: 'info',
         showCancelButton: true,
-        cancelButtonClass: "btn btn-info",
-        confirmButtonClass: "btn btn-success",
-        confirmButtonText: "Add note",
-        cancelButtonText: "Cancel",
+        cancelButtonClass: 'btn btn-info',
+        confirmButtonClass: 'btn btn-success',
+        confirmButtonText: 'Add note',
+        cancelButtonText: 'Cancel',
         reverseButtons: true
       })
       .then((fulfill) => {
         if (fulfill.value) {
+<<<<<<< Updated upstream
           let user = JSON.parse(localStorage.getItem('currentUser'));
+=======
+          const user = JSON.parse(localStorage.getItem('currentUser'));
+>>>>>>> Stashed changes
           const request: any = {
             familyId: this.familyId,
             currentUser: user['email'],
@@ -249,12 +260,16 @@ export class NewFamilyComponent implements OnInit {
           this.notesService.addNote(request).subscribe((noteData) => {
             if (noteData.noteAdded) {
               Swal.fire({
-                title: "Note saved!",
+                title: 'Note saved!',
                 buttonsStyling: false,
-                confirmButtonClass: "btn btn-success",
-                type: "success"
+                confirmButtonClass: 'btn btn-success',
+                type: 'success'
               }).then((confirm) => {
+<<<<<<< Updated upstream
                 if (confirm){
+=======
+                if (confirm) {
+>>>>>>> Stashed changes
                   window.location.reload()
                 }
               })
@@ -262,29 +277,36 @@ export class NewFamilyComponent implements OnInit {
           });
         }
       });
-    }
-    else {
+    } else {
       Swal.fire({
-        title: "Edit Note",
+        title: 'Edit Note',
         input: 'textarea',
         inputValue: noteVal,
         inputPlaceholder: 'Enter note here...',
         preConfirm: (value) => {
+<<<<<<< Updated upstream
           if (value){
+=======
+          if (value) {
+>>>>>>> Stashed changes
             noteVal = value;
           }
         },
-        type: "info",
+        type: 'info',
         showCancelButton: true,
-        cancelButtonClass: "btn btn-info",
-        confirmButtonClass: "btn btn-success",
-        confirmButtonText: "Save changes",
-        cancelButtonText: "Cancel",
+        cancelButtonClass: 'btn btn-info',
+        confirmButtonClass: 'btn btn-success',
+        confirmButtonText: 'Save changes',
+        cancelButtonText: 'Cancel',
         reverseButtons: true
       })
       .then((fulfill) => {
         if (fulfill.value) {
+<<<<<<< Updated upstream
           let user = JSON.parse(localStorage.getItem('currentUser'));
+=======
+          const user = JSON.parse(localStorage.getItem('currentUser'));
+>>>>>>> Stashed changes
           const request: any = {
             id: noteId,
             familyId: this.familyId,
@@ -294,12 +316,16 @@ export class NewFamilyComponent implements OnInit {
           this.notesService.editNote(request).subscribe((noteData) => {
             if (noteData.noteUpdated) {
               Swal.fire({
-                title: "Note updated!",
+                title: 'Note updated!',
                 buttonsStyling: false,
-                confirmButtonClass: "btn btn-success",
-                type: "success"
+                confirmButtonClass: 'btn btn-success',
+                type: 'success'
               }).then((confirm) => {
+<<<<<<< Updated upstream
                 if (confirm){
+=======
+                if (confirm) {
+>>>>>>> Stashed changes
                   window.location.reload()
                 }
               })
@@ -309,16 +335,15 @@ export class NewFamilyComponent implements OnInit {
       });
     }
   }
-
   deleteNote(noteId) {
     Swal.fire({
-      title: "Delete note?",
-      type: "error",
+      title: 'Delete note?',
+      type: 'error',
       showCancelButton: true,
-      cancelButtonClass: "btn btn-info",
-      confirmButtonClass: "btn btn-danger",
-      confirmButtonText: "Yes, delete",
-      cancelButtonText: "No, cancel",
+      cancelButtonClass: 'btn btn-info',
+      confirmButtonClass: 'btn btn-danger',
+      confirmButtonText: 'Yes, delete',
+      cancelButtonText: 'No, cancel',
       reverseButtons: true
     })
     .then((remove) => {
@@ -329,12 +354,16 @@ export class NewFamilyComponent implements OnInit {
         this.notesService.deleteNote(request).subscribe((noteData) => {
           if (noteData.noteDeleted) {
             Swal.fire({
-              title: "Note deleted.",
+              title: 'Note deleted.',
               buttonsStyling: false,
-              confirmButtonClass: "btn btn-info",
-              type: "error"
+              confirmButtonClass: 'btn btn-info',
+              type: 'error'
             }).then((confirm) => {
+<<<<<<< Updated upstream
               if (confirm){
+=======
+              if (confirm) {
+>>>>>>> Stashed changes
                 window.location.reload()
               }
             })
