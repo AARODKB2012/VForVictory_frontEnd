@@ -21,28 +21,25 @@ export class FamilyService{
   saveFamily(family: any) {
     return this.httpClient.post<{familyCreated: boolean}>(this.serverAddress + 'api/family/new', family);
   }
-    listFamily():any{
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/');
-    }
+  listFamily(): any {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/');
+  }
 
-    markFamilyActive(family: any) {
-      return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markActive', family);
-    }
-    markFamilyInactive(family: any) {
-      return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markInactive', family);
-    }
+  markFamilyActive(family: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markActive', family);
+  }
+  markFamilyInactive(family: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markInactive', family);
+  }
 
-    listActiveFamily(): any {
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/active');
-    }
-    listInactiveFamily(): any {
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/inactive');
-    }
+  listActiveFamily(): any {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/active');
+  }
+  listInactiveFamily(): any {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/inactive');
+  }
 
-    familiesAddedThisMonth():any{
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/month');
-    }
-
+<<<<<<< Updated upstream
     familiesToApprove():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/unapproved');
     }
@@ -55,4 +52,29 @@ export class FamilyService{
     editFamily(family: any) {
       return this.httpClient.post<{familyUpdated: boolean}>(this.serverAddress + 'api/family/edit', family);
     }
+=======
+  familiesAddedThisMonth(): any {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/month');
   }
+
+  familiesToApprove(): any {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/unapproved');
+  }
+  getFamilyByEmail(familyEmail: String) {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/email/' + familyEmail);
+  }
+
+  getFamilyById(familyId: Number) {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
+  }
+  editFamily(family: any) {
+    return this.httpClient.post<{familyUpdated: boolean}>(this.serverAddress + 'api/family/edit', family);
+  }
+  approveFamily(familyId, approvedBy) {
+    return this.httpClient.post<{familyApproved: boolean}>(this.serverAddress + `api/family/${familyId}/approve/${approvedBy}`, null);
+  }
+  getApprovedFamily(): any {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/approved');
+>>>>>>> Stashed changes
+  }
+}
