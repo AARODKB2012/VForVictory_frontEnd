@@ -40,7 +40,7 @@ export class NewBusinessComponent implements OnInit {
   public previousUrl: string;
 
   constructor(public businessService: BusinessService, public router: Router, private activeRoute: ActivatedRoute) {
-    
+
   }
 
   ngOnInit() {
@@ -100,12 +100,12 @@ export class NewBusinessComponent implements OnInit {
         }
       });
     }
-    
+
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
   ngAfterViewInit(){
-    
+
     $('#dataTable').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [

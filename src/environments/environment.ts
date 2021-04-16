@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  //backendURL: 'https://vfv-backend-service.azurewebsites.net/',
-  backendURL: 'http://localhost:3000/',
-  passwordResetURL: 'http://localhost:4200/#/pages/reset'
-  //passwordResetURL: 'https://vforvictory.azurewebsites.net/#/pages/reset'
+  backendURL: 'https://vfv-backend-service.azurewebsites.net/',
+  //backendURL: 'http://localhost:3000/',
+  //passwordResetURL: 'http://localhost:4200/#/pages/reset'
+  passwordResetURL: 'https://vforvictory.azurewebsites.net/#/pages/reset'
 };
