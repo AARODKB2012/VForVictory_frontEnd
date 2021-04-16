@@ -518,16 +518,20 @@ export class ListServicesComponent implements OnInit {
           <input type="text" id="newCost" class="swal2-input" value="` + cC + `" placeholder="Enter the actual cost">`,
         preConfirm: () =>{
           const thisV = document.getElementById('newValue') as HTMLInputElement;
-          if(isNaN(parseFloat(thisV.value))) {
-            cV = null;
+          if(thisV.value && isNaN(parseFloat(thisV.value))) {
+            Swal.showValidationMessage(
+              'Numbers only, please!'
+            )
           }
           else {
             cV = parseFloat(thisV.value);
           }
 
           const thisC = document.getElementById('newCost') as HTMLInputElement;
-          if(isNaN(parseFloat(thisC.value))) {
-            cC = null;
+          if(thisC.value && isNaN(parseFloat(thisC.value))) {
+            Swal.showValidationMessage(
+              'Numbers only, please!'
+            )
           }
           else {
             cC = parseFloat(thisC.value);

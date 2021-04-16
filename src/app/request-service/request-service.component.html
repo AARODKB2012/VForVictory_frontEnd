@@ -45,6 +45,7 @@
                                   {{item.business_name}} ({{item.Service_Area}})
                               </option>
                             </ng-container>
+                            <ng-container *ngIf="cat.length == 0"><option>None</option></ng-container>
                             </optgroup>
                           </select>
                           <div *ngIf="req1.invalid && (req1.dirty || req1.touched || errorInForm)" class="text-danger">
