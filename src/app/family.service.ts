@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { HttpClient } from '../../node_modules/@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Http, ResponseContentType } from '@angular/http';
 import { map } from 'rxjs/operators';
 import {environment} from '../environments/environment';
@@ -50,9 +50,6 @@ export class FamilyService{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/email/' + familyEmail);
     }
 
-    getFamilyById(familyId: Number) {
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
-    }
     getFamilyById(familyId: Number) {
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
     }

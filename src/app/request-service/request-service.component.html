@@ -42,9 +42,10 @@
                             <optgroup *ngFor="let cat of categoryList" label="{{ cat.category_name }}">
                               <ng-container *ngFor="let item of serviceList">
                               <option *ngIf="item.Services_Offered == cat.category_name" [ngValue]="{id: item.record_id, name: item.business_name}">
-                                  {{item.business_name}}
+                                  {{item.business_name}} ({{item.Service_Area}})
                               </option>
                             </ng-container>
+                            <ng-container *ngIf="cat.length == 0"><option>None</option></ng-container>
                             </optgroup>
                           </select>
                           <div *ngIf="req1.invalid && (req1.dirty || req1.touched || errorInForm)" class="text-danger">
@@ -57,14 +58,14 @@
                         <div class="row">
                           <div class="col-md-12 mb-3">
                           <label for="notes">Notes</label>
-                          <textarea class="textarea form-control" id="notes" name="notes" ngModel #notes="ngModel" maxlength="500" minlength="0"></textarea>
+                          <textarea class="textarea form-control" id="notes" name="notes" [(ngModel)]="note" #notes="ngModel" maxlength="500" minlength="0"></textarea>
                           </div>
                       </div>
                       </div>
                       <div class="card-footer">
                         <div class="row justify-content-center">
                           <div class="col-md-4 mb-3">
-                            <button class="btn btn-info" type="button" (click)="onAdd(templateForm)" [disabled]="addDisable">
+                            <button class="btn btn-info" type="button" (click)="onAdd(templateForm);" [disabled]="addDisable">
                                 <span class="btn-label">
                                   <i class="nc-icon nc-simple-add"></i>
                                 </span>

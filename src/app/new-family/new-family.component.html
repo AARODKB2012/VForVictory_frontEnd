@@ -131,7 +131,6 @@
                                       </div>
                                   </div>
                               </div>
-
                           </div>
                         </div>
                         <div class="card-body">
@@ -143,6 +142,37 @@
                               <textarea class="form-control" id="addInfo" name="addInfo" [ngModel]="family?.additional_info"  [readonly]="viewMode" ngModel #addInfo="ngModel"></textarea>
                           </div>
                       </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="card">
+                            <div class="card-body">
+                              <h4 class="card-title">Family Notes</h4>
+                                <input type=button (click)="saveNote()" value="Add Note" class="btn btn-primary btn-info">
+                              <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                      <th>{{ dataTable?.headerRow[0] }}</th>
+                                      <th>{{ dataTable?.headerRow[1] }}</th>
+                                      <th>{{ dataTable?.headerRow[2] }}</th>
+                                      <th class="disabled-sorting text-right">{{ dataTable.headerRow[3] }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let row of dataTable.dataRows">
+                                        <td>{{row.contents}}</td>
+                                        <td>{{row.created_by}}</td>
+                                        <td>{{row.last_modified | date:'short'}}</td>
+                                        <td class="text-right">
+                                          <a (click)="saveNote(row.record_id, row.contents)" class="btn btn-warning btn-link btn-icon btn-md"><i class="fa fa-edit" style="color:orange"></i></a>
+                                          <a (click)="deleteNote(row.record_id)" class="btn btn-danger btn-link btn-icon btn-md"><i class="fa fa-times" style="color:orangered"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                   </div>
                   <div class="col-md-5">

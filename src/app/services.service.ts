@@ -83,4 +83,8 @@ export class ServicesService {
   servicesRequestedThisMonth():any{
     return this.httpClient.get<any>(this.serverAddress + 'api/service/requested/month');
   }
+
+  setValueCost(request: any) {
+    return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/service/valuecost', request);
+  }
 }
