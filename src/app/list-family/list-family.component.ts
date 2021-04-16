@@ -25,14 +25,13 @@ export class ListFamilyComponent implements OnInit {
   public currentDate = new Date();
   public today;
   public url;
-
+  
   constructor(public familyService: FamilyService) {
 
   }
 
 
   ngOnInit() {
-
     this.url = window.location.origin;
     this.familyService.listFamily().subscribe((familyReturned) => {
       if (familyReturned) {
@@ -76,8 +75,6 @@ export class ListFamilyComponent implements OnInit {
     $('#unapproved').on('click', function () {
       table.columns(6).search("Pending").draw();
     });
-
-    
 
 
   }
@@ -127,8 +124,4 @@ export class ListFamilyComponent implements OnInit {
       type: "success"
     });
   }
-  
-
-
-
 }

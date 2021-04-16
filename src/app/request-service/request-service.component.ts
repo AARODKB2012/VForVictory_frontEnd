@@ -32,6 +32,7 @@ export class RequestServiceComponent implements OnInit {
   public family: FamilyModel;
   public requestedServices: any = [];
   public requestList: any = [];
+  public note;
   public currentDate = new Date();
   public today;
   public reqCount = 0;
@@ -107,9 +108,10 @@ export class RequestServiceComponent implements OnInit {
       let item;
       item = {serviceId: form.value.req1.id, service: form.value.req1.name, notes: form.value.notes};
       this.requestList.push(item);
+      this.note = null;
       this.submitDisable = false;
       this.reqCount++;
-      if(this.reqCount >= 3){
+      if(this.reqCount >= 8){
         this.addDisable = true;
       }
     }
@@ -118,7 +120,7 @@ export class RequestServiceComponent implements OnInit {
   onDelete(serviceId) {
     this.requestList.splice(serviceId - 1, 1);
     this.reqCount--;
-    if(this.reqCount < 3) {
+    if(this.reqCount < 8) {
       this.addDisable = false;
     }
     if(this.reqCount <= 0) {

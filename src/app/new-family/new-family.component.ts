@@ -116,7 +116,6 @@ export class NewFamilyComponent implements OnInit {
       }
 
     });
-
     var table = $('#datatable').DataTable();
 
     // Edit record
@@ -218,6 +217,7 @@ export class NewFamilyComponent implements OnInit {
       }
     });
   }
+
   saveNote(noteId, currentContent) {
     let noteVal = currentContent;
     if(!noteVal){
@@ -343,5 +343,4 @@ export class NewFamilyComponent implements OnInit {
       }
     });
   }
-
 }
