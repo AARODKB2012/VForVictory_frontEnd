@@ -12,7 +12,7 @@ declare const $: any;
 declare interface DataTable {
   headerRow: string[];
   footerRow: string[];
-  dataRows: FamilyModel[];
+  dataRows: any[];
 }
 
 @Component({
@@ -52,55 +52,7 @@ export class DashboardComponent implements OnInit {
     
     // For Populating VFV Data
     // Families
-    this.familyService.familiesAddedThisMonth().subscribe((families) => {
-      if (families) {
-        this.familiesAddedThisMonth = families.resultsLength;
-      }
-    });
 
-    this.familyService.familiesToApprove().subscribe((families) => {
-      if (families) {
-        this.familiesToApprove = families.results;
-        this.dataTable = {
-          headerRow: [ '#', 'Name', 'Cancer Warrior', 'Actions'],
-          footerRow: [ '#', 'Name', 'Cancer Warrior', 'Actions'],
-          dataRows: this.familiesToApprove
-        };
-      }
-    });
-
-    //Businesses
-    this.businessService.businessAddedThisMonth().subscribe((businesses) => {
-      if (businesses) {
-        this.businessesAddedThisMonth = businesses.resultsLength;
-      }
-    });
-
-    this.businessService.businessToApprove().subscribe((businesses) => {
-      if (businesses) {
-        this.businessesToApprove = businesses.results;
-        this.dataTableBusiness = {
-          headerRow: [ '#', 'Name', 'Services Offered','Actions'],
-          footerRow: [ '#', 'Name', 'Services Offered','Actions'],
-          dataRows: this.businessesToApprove
-        };
-      }
-    });
-
-    //Service Requests
-    this.servicesService.servicesRequestedThisMonth().subscribe((requests) => {
-      if (requests) {
-        this.requestsThisMonth = requests.results;
-        this.dataTableRequests = {
-          headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
-          footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
-          dataRows: this.requestsThisMonth
-        };
-      }
-    });
-
-    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
-    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
   ngAfterViewInit(){
@@ -194,6 +146,89 @@ export class DashboardComponent implements OnInit {
     }
   }
   public ngOnInit() {
+    this.familyService.familiesAddedThisMonth().subscribe((families) => {
+      if (families) {
+        this.familiesAddedThisMonth = families.resultsLength;
+      }
+    });
+
+    this.familyService.familiesToApprove().subscribe((families) => {
+      if (families) {
+        this.familiesToApprove = families.results;
+        this.dataTable = {
+          headerRow: [ 'ID', 'Name', 'Cancer Warrior', 'Actions'],
+          footerRow: [ 'ID', 'Name', 'Cancer Warrior', 'Actions'],
+          dataRows: this.familiesToApprove
+        };
+      }else{
+        this.dataTable = {
+          headerRow: [ 'ID', 'Name', 'Cancer Warrior', 'Actions'],
+          footerRow: [ 'ID', 'Name', 'Cancer Warrior', 'Actions'],
+          dataRows: []
+        };
+      }
+    });
+
+    //Businesses
+    this.businessService.businessAddedThisMonth().subscribe((businesses) => {
+      if (businesses) {
+        this.businessesAddedThisMonth = businesses.resultsLength;
+      }
+    });
+
+    this.businessService.businessToApprove().subscribe((businesses) => {
+      if (businesses) {
+        this.businessesToApprove = businesses.results;
+        this.dataTableBusiness = {
+          headerRow: [ 'ID', 'Name', 'Services Offered','Actions'],
+          footerRow: [ 'ID', 'Name', 'Services Offered','Actions'],
+          dataRows: this.businessesToApprove
+        };
+      } else{
+        this.dataTableBusiness = {
+          headerRow: [ 'ID', 'Name', 'Services Offered','Actions'],
+          footerRow: [ 'ID', 'Name', 'Services Offered','Actions'],
+          dataRows: []
+        };
+      }
+    });
+
+    //Service Requests
+    this.servicesService.servicesRequestedThisMonth().subscribe((requests) => {
+      if (requests) {
+        this.requestsThisMonth = requests.results;
+        for(let i of this.requestsThisMonth) {
+          this.familyService.getFamilyById(i['family_id']).subscribe((responseData) => {
+          if(responseData) {
+            i.name = responseData.results[0]['first_name'].toString() + " " + responseData.results[0]['last_name'].toString();
+            i.email = responseData.results[0]['email'].toString();
+          }
+          });
+          this.businessService.getBusinessById(i['business_id']).subscribe((responseData) => {
+          if(responseData){
+            i.businessName = responseData.results[0]['business_name'].toString();
+            i.businessCategory = responseData.results[0]['Services_Offered'].toString();
+          }
+          });
+        }
+        this.dataTableRequests = {
+          headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
+          footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
+          dataRows: this.requestsThisMonth
+        };
+      } else {
+        this.dataTableRequests = {
+          headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
+          footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
+          dataRows: []
+        };
+      }
+    });
+
+    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
+
+    
     this.chartColor = "#FFFFFF";
 
     var cardStatsMiniLineColor = "#fff",

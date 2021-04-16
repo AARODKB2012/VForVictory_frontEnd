@@ -39,6 +39,12 @@ export class ListBusinessComponent implements OnInit {
             footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Active', 'Options'],
             dataRows: this.businessList
           };
+        }else{
+          this.dataTable = {
+            headerRow: [ 'Id', 'Name',  'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Active', 'Options'],
+            footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Active', 'Options'],
+            dataRows: []
+          };
         }
       })
   };

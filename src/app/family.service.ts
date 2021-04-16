@@ -47,5 +47,9 @@ export class FamilyService{
     familiesToApprove():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/unapproved');
     }
+
+    getFamilyById(familyId: Number) {
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
+    }
   }
   

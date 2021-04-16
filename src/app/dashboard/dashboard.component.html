@@ -12,7 +12,7 @@
             <div class="col-7 col-md-8">
               <div class="numbers">
                 <p class="card-category">Families Added</p>
-                <p class="card-title">{{familiesAddedThisMonth}}</p>
+                <p class="card-title">{{familiesAddedThisMonth || 0}}</p>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
             <div class="col-7 col-md-8">
               <div class="numbers">
                 <p class="card-category">Families To Approve</p>
-                <p class="card-title">{{familiesToApprove?.length}}</p>
+                <p class="card-title">{{familiesToApprove?.length ||0}}</p>
               </div>
             </div>
           </div>
@@ -62,7 +62,7 @@
             <div class="col-7 col-md-8">
               <div class="numbers">
                 <p class="card-category">Businesses Added</p>
-                <p class="card-title">{{businessesAddedThisMonth}}
+                <p class="card-title">{{businessesAddedThisMonth || 0}}
                 </p>
               </div>
             </div>
@@ -88,7 +88,7 @@
             <div class="col-7 col-md-8">
               <div class="numbers">
                 <p class="card-category">Businesses To Approve</p>
-                <p class="card-title">{{businessesToApprove?.length}}
+                <p class="card-title">{{businessesToApprove?.length || 0}}
                 </p>
               </div>
             </div>
@@ -120,9 +120,9 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let row of dataTable.dataRows; let i = index" [attr.data-index]="i">
+                <tr *ngFor="let row of dataTable.dataRows">
                   <td>  
-                    {{ i + 1 }}
+                    {{ row.id }}
                   </td>
                   <td>  
                     {{ row.first_name + " " + row.last_name }}
@@ -153,34 +153,38 @@
           <h4 class="card-title">Businesses to Approve</h4>
         </div>
           <div class="card-body" >
-            <table  id="businessesToApprove" class="table table-striped table-bordered" cellspacing="0" width="100%">
-              <thead>
-                <tr>
-                  <th>{{ dataTableBusiness?.headerRow[0] }}</th>
-                  <th>{{ dataTableBusiness?.headerRow[1] }}</th>
-                  <th>{{ dataTableBusiness?.headerRow[2] }}</th>
-                  <th>{{ dataTableBusiness?.headerRow[3] }}</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let row of dataTableBusiness.dataRows; let i = index" [attr.data-index]="i">
-                  <td>  
-                    {{ i + 1 }}
-                  </td>
-                  <td>  
-                    {{ row.business_name }}
-                  </td>
-                  <td>  
-                    {{ row.Services_Offered }}
-                  </td>
-                  <td class="td-actions text-center">
-                    <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id, from: '/dashboard'}" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
-                    <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id, from: '/dashboard'}" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                    <a  (click)="approvedBusiness(row.record_id, row.business_name)" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <div class="row">
+              <div class="col-md-12">
+                <table  id="businessesToApprove" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                  <thead>
+                    <tr>
+                      <th>{{ dataTableBusiness?.headerRow[0] }}</th>
+                      <th>{{ dataTableBusiness?.headerRow[1] }}</th>
+                      <th>{{ dataTableBusiness?.headerRow[2] }}</th>
+                      <th>{{ dataTableBusiness?.headerRow[3] }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let row of dataTableBusiness.dataRows">
+                      <td>  
+                        {{ row.record_id }}
+                      </td>
+                      <td>  
+                        {{ row.business_name }}
+                      </td>
+                      <td>  
+                        {{ row.Services_Offered }}
+                      </td>
+                      <td class="td-actions text-center">
+                        <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id, from: '/dashboard'}" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                        <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id, from: '/dashboard'}" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                        <a  (click)="approvedBusiness(row.record_id, row.business_name)" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         <div class="card-footer ">
           <hr>
@@ -200,45 +204,45 @@
           <div class="card-body ">
             <table  id="requestsThisMonth" class="table table-striped table-bordered" cellspacing="0" width="100%">
               <thead>
-                <tr>
-                  <th>{{ dataTableRequests?.headerRow[0] }}</th>
-                  <th>{{ dataTableRequests?.headerRow[1] }}</th>
-                  <th>{{ dataTableRequests?.headerRow[2] }}</th>
-                  <th>{{ dataTableRequests?.headerRow[3] }}</th>
-                  <th>{{ dataTableRequests?.headerRow[4] }}</th>
-                  <th>{{ dataTableRequests?.headerRow[5] }}</th>
-                  <th>{{ dataTableRequests?.headerRow[6] }}</th>
-                </tr>
+              <tr>
+                <th>{{ dataTableRequests?.headerRow[0] }}</th>
+                <th>{{ dataTableRequests?.headerRow[1] }}</th>
+                <th>{{ dataTableRequests?.headerRow[2] }}</th>
+                <th>{{ dataTableRequests?.headerRow[3] }}</th>
+                <th>{{ dataTableRequests?.headerRow[4] }}</th>
+                <th>{{ dataTableRequests?.headerRow[5] }}</th>
+                <th>{{ dataTableRequests?.headerRow[6] }}</th>
+              </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let row of dataTableRequests.dataRows; let i = index" [attr.data-index]="i">
-                  <td>  
-                    {{ i + 1 }}
-                  </td>
-                  <td>  
-                    {{ row.name }}
-                  </td>
-                  <td>  
-                    {{ row.business_name }}
-                  </td>
-                  <td>  
-                    {{ row.business_category }}
-                  </td>
-                  <td>  
-                    {{ row.date_requested | date:'MM/dd/yyyy'}}
-                  </td>
-                  <td>  
-                    {{ row.date_fulfilled | date:'MM/dd/yyyy'}}
-                  </td>
-                  <td class="td-actions text-center">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" [checked]="row.active" disabled>
-                        <span class="form-check-sign"></span>
-                      </label>
-                    </div>                  
-                  </td>
-                </tr>
+              <tr *ngFor="let row of dataTableRequests.dataRows; let i = index" [attr.data-index]="i">
+                <td>
+                {{ i + 1 }}
+                </td>
+                <td>
+                {{ row.name }}
+                </td>
+                <td>
+                {{ row.businessName }}
+                </td>
+                <td>
+                {{ row.businessCategory }}
+                </td>
+                <td>
+                {{ row.requested_date | date:'MM/dd/yyyy'}}
+                </td>
+                <td>
+                {{ row.fulfilled_date | date:'MM/dd/yyyy'}}
+                </td>
+                <td class="td-actions text-center">
+                <div class="form-check">
+                  <label class="form-check-label">
+                  <input class="form-check-input" type="checkbox" [checked]="row.active" disabled>
+                  <span class="form-check-sign"></span>
+                  </label>
+                </div>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>

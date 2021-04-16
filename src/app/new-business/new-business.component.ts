@@ -34,13 +34,17 @@ export class NewBusinessComponent implements OnInit {
   public fileToUpload: File = null;
   public profileURL: string = null;
   private loggedInUser: any;
-  public dataTableServicesRendered: DataTable;
+  public dataTable: DataTable;
   public servicesRendered: Array<any>;
   public businessApproved: boolean;
   public previousUrl: string;
 
   constructor(public businessService: BusinessService, public router: Router, private activeRoute: ActivatedRoute) {
-    const tree: UrlTree = router.parseUrl(this.router.url);
+    
+  }
+
+  ngOnInit() {
+    const tree: UrlTree = this.router.parseUrl(this.router.url);
     const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
     const s: UrlSegment[] = g.segments;
 
@@ -57,7 +61,6 @@ export class NewBusinessComponent implements OnInit {
     this.activeRoute.queryParams.subscribe(params => {
       this.businessId = params['businessId'];
       this.previousUrl = params['from'];
-      console.log(this.previousUrl)
     });
 
     this.businessService.getAllCategories().subscribe((responseData) => {
@@ -70,6 +73,7 @@ export class NewBusinessComponent implements OnInit {
       this.businessService.getBusinessById(this.businessId).subscribe((responseData) => {
         if (responseData) {
           this.business = responseData.results[0];
+          console.log(this.business)
           if (responseData.results[0]['profile_picture_url'] != null){
             this.profileURL = environment.backendURL + `api/business/name/${responseData.results[0]['business_name']}/logo`
           }
@@ -77,14 +81,19 @@ export class NewBusinessComponent implements OnInit {
           if (responseData.results[0]['approved_by'] != null){
             this.businessApproved = true;
           }
-
-          this.businessService.getServicesRendered(this.business['business_name']).subscribe((requests) => {
+          this.businessService.getServicesRendered(this.business['record_id']).subscribe((requests) => {
             if (requests) {
               this.servicesRendered = requests.results;
-              this.dataTableServicesRendered = {
+              this.dataTable = {
                 headerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Pending'],
                 footerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Pending'],
-                dataRows: this.servicesRendered
+                dataRows:  this.servicesRendered
+              };
+            } else{
+              this.dataTable = {
+                headerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Pending'],
+                footerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Pending'],
+                dataRows: []
               };
             }
           });
@@ -95,13 +104,9 @@ export class NewBusinessComponent implements OnInit {
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
-  ngOnInit() {
-
-  }
-
   ngAfterViewInit(){
     
-    $('#servicesRendered').DataTable({
+    $('#dataTable').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [
         [10, 25, 50, -1],
