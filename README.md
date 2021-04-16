@@ -47,7 +47,7 @@ If you have questions about the product, please contact a member of the team at 
 ## Licensing
 
 - Dashboard Template Courtesy of Creative Tim (https://www.creative-tim.com)
-- Images Courtesy of V Pizza/V for Victory (https://www.vforvictory.com)
+- Images Courtesy of V Pizza/V for Victory (https://www.vforvictory.org)
 
 ## Credits
 
