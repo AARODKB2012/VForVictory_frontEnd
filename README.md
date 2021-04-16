@@ -10,7 +10,6 @@
 * [Versions](#versions)
 * [How to Run](#how-to-run)
 * [Documentation](#documentation)
-* [File Structure](#file-structure)
 * [Browser Compatibility](#browser-compatibility)
 * [Support](#Support)
 * [Licensing](#licensing)
@@ -32,7 +31,7 @@ This is version 1.0 of the V for Victory Information System.
 
 ## Documentation
 
-A video manual for the V for Victory Information System can be found [here.](http://127.0.0.1). (coming soon!)
+A video manual for the V for Victory Information System can be found [here.](http://127.0.0.1) (coming soon!)
 
 ## Browser Compatibility
 
