@@ -20,11 +20,11 @@ export class VPizzaServices {
   }
 
   getVPizzaByFamilyID(id: Number): any {
-    return this.httpClient.get<VPizzaAPIResponse>(this.serverAddress + 'api/VPizza/giftcard/id/' + id);
+    return this.httpClient.get<VPizzaAPIResponse>(this.serverAddress + `api/VPizza/giftcard/id/${id}`);
   }
 
   getFullVPizza(id: Number, family_id: Number): any {
-    return this.httpClient.get<VPizzaAPIResponse>(this.serverAddress + 'api/Family/id/' + id + '/VPizza/family_id/' + family_id);
+    return this.httpClient.get<VPizzaAPIResponse>(this.serverAddress + `api/Family/id/${id}/VPizza/family_id/${family_id}`);
   }
 
 }

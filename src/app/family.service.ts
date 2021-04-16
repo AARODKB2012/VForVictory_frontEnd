@@ -38,43 +38,26 @@ export class FamilyService {
   listInactiveFamily(): any {
     return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/inactive');
   }
-
-<<<<<<< Updated upstream
-    familiesToApprove():any{
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/unapproved');
-    }
-    getFamilyByEmail(familyEmail: String) {
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/email/' + familyEmail);
-    }
-    getFamilyById(familyId: Number) {
-      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
-    }
-    editFamily(family: any) {
-      return this.httpClient.post<{familyUpdated: boolean}>(this.serverAddress + 'api/family/edit', family);
-    }
-=======
-  familiesAddedThisMonth(): any {
-    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/month');
-  }
-
-  familiesToApprove(): any {
+  familiesToApprove():any{
     return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/unapproved');
   }
   getFamilyByEmail(familyEmail: String) {
     return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/email/' + familyEmail);
   }
-
   getFamilyById(familyId: Number) {
     return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
   }
   editFamily(family: any) {
     return this.httpClient.post<{familyUpdated: boolean}>(this.serverAddress + 'api/family/edit', family);
   }
-  approveFamily(familyId, approvedBy) {
-    return this.httpClient.post<{familyApproved: boolean}>(this.serverAddress + `api/family/${familyId}/approve/${approvedBy}`, null);
+  familiesAddedThisMonth() {
+    return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/approved/month');
   }
   getApprovedFamily(): any {
     return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/approved');
->>>>>>> Stashed changes
+  }
+  approveFamily(familyId, approvedBy) {
+    return this.httpClient.post<{familyApproved: boolean}>(this.serverAddress + `api/family/${familyId}/approve/${approvedBy}`, null);
   }
 }
+
