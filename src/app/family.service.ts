@@ -13,7 +13,7 @@ import { FamilyAPIResponse } from './family_response.model';
   providedIn: 'root'
 })
 
-export class FamilyService{
+export class FamilyService {
   private servicesList: any = [];
   private serverAddress = environment.backendURL;
   constructor(private httpClient: HttpClient, private router: Router, private http: Http) { }
