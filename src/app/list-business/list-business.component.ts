@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BusinessService} from '../business.service';
 import { BusinessModel } from '../business.model';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -21,9 +22,11 @@ export class ListBusinessComponent implements OnInit {
   public dataTable: DataTable;
   public userRole: number;
   public url: string;
+  private loggedInUser: any;
 
-  constructor(public businessService: BusinessService){
+  constructor(public businessService: BusinessService, public router: Router){
     this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
   ngOnInit() {
@@ -32,12 +35,18 @@ export class ListBusinessComponent implements OnInit {
         if (businessReturned) {
           this.businessList = businessReturned.results;
           this.dataTable = {
-            headerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Options'],
-            footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Options'],
+            headerRow: [ 'Id', 'Name',  'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Active', 'Options'],
+            footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Active', 'Options'],
             dataRows: this.businessList
           };
+        }else{
+          this.dataTable = {
+            headerRow: [ 'Id', 'Name',  'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Active', 'Options'],
+            footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Active', 'Options'],
+            dataRows: []
+          };
         }
-    })
+      })
   };
 
   ngAfterViewInit(){
@@ -109,6 +118,43 @@ export class ListBusinessComponent implements OnInit {
       confirmButtonClass: "btn btn-success",
       type: "success"
     });
+  }
+
+  disableBusiness(businessId, businessName){
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "This business will not be visible for requests if disabled.",
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonClass: 'btn btn-success',
+      cancelButtonClass: 'btn btn-danger',
+      confirmButtonText: 'Yes, disable it!',
+       buttonsStyling: false
+    }).then((result) => {
+      if (result.value) {
+        this.businessService.disableBusiness(businessId, this.loggedInUser).subscribe((responseData) => {
+          if (responseData.businessDisabled) {
+            this.businessService.listBusiness().subscribe((businessReturned) => {
+              if (businessReturned) {
+                this.businessList = businessReturned.results;
+                this.dataTable = {
+                  headerRow: [ 'Id', 'Name',  'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Active', 'Options'],
+                  footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Active', 'Options'],
+                  dataRows: this.businessList
+                };
+              }
+            })
+            Swal.fire({
+              title: 'Business Disabled Successfully!',
+              text:  businessName + ' was disabled successfully.',
+              buttonsStyling: false,
+              confirmButtonClass: 'btn btn-success',
+              type: 'success'
+            });
+          }
+        });
+      }
+    })
   }
 }
 

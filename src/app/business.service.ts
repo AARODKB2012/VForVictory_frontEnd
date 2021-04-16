@@ -73,4 +73,8 @@ export class BusinessService{
     approveBusiness(businessId, approvedBy) {
       return this.httpClient.post<{businessApproved: boolean}>(this.serverAddress + `api/business/${businessId}/approve/${approvedBy}`, null);
     }
+    disableBusiness(businessId, disabledBy) {
+      return this.httpClient.post<{businessDisabled: boolean}>(this.serverAddress + `api/business/${businessId}/disable/${disabledBy}`, null);
+    }
+    
   }

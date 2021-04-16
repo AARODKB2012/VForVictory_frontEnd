@@ -53,6 +53,7 @@ export class FamilyService{
     getFamilyById(familyId: Number) {
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
     }
+
     editFamily(family: any) {
       return this.httpClient.post<{familyUpdated: boolean}>(this.serverAddress + 'api/family/edit', family);
     }
@@ -62,6 +63,5 @@ export class FamilyService{
     getApprovedFamily():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/approved');
     }
-    
 
   }

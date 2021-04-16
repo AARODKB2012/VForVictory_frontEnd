@@ -341,6 +341,7 @@ export class BusinessSignupComponent implements OnInit {
         facebookUrl: form.value.facebook,
         twitterUrl: form.value.twitter,
         instagramUrl: form.value.instagram,
+        website: form.value.website,
         createdBy: 'Business Sign Up Process'
       };
 
