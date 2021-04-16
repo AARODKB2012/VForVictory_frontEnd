@@ -867,4 +867,33 @@ export class DashboardComponent implements OnInit {
         },
     });
   }
+
+  
+  approvedFamily(familyId, familyName){
+    this.familyService.approveFamily(familyId, this.loggedInUser).subscribe((responseData) => {
+      if (responseData.familyApproved) {
+        this.familyService.familiesToApprove().subscribe((families) => {
+          if (families) {
+            this.familiesToApprove = families.results;
+            this.dataTableBusiness = {
+              headerRow: [ '#', 'Name', 'Services Offered','Actions'],
+              footerRow: [ '#', 'Name', 'Services Offered','Actions'],
+              dataRows: this.familiesToApprove
+            };
+          }
+        });
+        Swal.fire({
+          title: 'Family Approved Successfully!',
+          text:  familyName + ' was approved successfully.',
+          buttonsStyling: false,
+          confirmButtonClass: 'btn btn-success',
+          type: 'success'
+        })
+        this.router.navigate(['/dashboard']);
+      }
+    });
+  }
+
+
+
 }

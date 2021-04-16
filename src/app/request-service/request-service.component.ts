@@ -54,8 +54,8 @@ export class RequestServiceComponent implements OnInit {
       this.familyService.getFamilyById(this.familyId).subscribe((responseData) => {
         if(responseData) {
           this.family = responseData.results[0];
-          this.family.firstName = responseData.results[0]['first_name'] + ' ' + responseData.results[0]['last_name'];
-          this.family.lastName = responseData.results[0]['cancer_warrior_name'];
+          this.family.first_name  = responseData.results[0]['first_name'] + ' ' + responseData.results[0]['last_name'];
+          this.family.last_name  = responseData.results[0]['cancer_warrior_name'];
         }
         else {
           this.router.navigate(['/request/login']);
