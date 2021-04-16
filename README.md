@@ -1,6 +1,6 @@
 # V for Victory Information System (Front-End)
 
-<img src="https://i.imgur.com/5tYKr1L.png">
+<img src="https://i.imgur.com/5tYKr1L.png" width="200px" height="200px">
 
 **The V for Victory Information System** was developed by **J₃A Group** for **V Pizza** and its non-profit organization **V for Victory** during the **Fall 2020 and Spring 2021** semesters at the **University of North Florida.**
 
@@ -54,13 +54,13 @@ If you have questions about the product, please contact a member of the team at 
 
 **J₃A Group** is:
 
-- [Jonathan Cordova]()
+- [Jonathan Cordova](https://github.com/jonathancordova)
 
-- [Jacob McCann]()
+- [Jacob McCann](https://github.com/mccajd)
 
-- [Jimmy Peña]()
+- [Jimmy Peña](https://github.com/JimmyIsmael)
 
-- [Ángel Selva Rodriguez]()
+- [Ángel Selva Rodriguez](https://github.com/AARODKB2012)
 
 **Special thanks to:**
 
