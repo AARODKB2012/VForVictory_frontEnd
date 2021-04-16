@@ -47,12 +47,57 @@ export class DashboardComponent implements OnInit {
   public requestsThisMonth: Array<any>;
   public userRole: number;
   private loggedInUser: any;
-  
+
   constructor(public familyService: FamilyService, public businessService: BusinessService, public servicesService: ServicesService, public router: Router){
-    
+
     // For Populating VFV Data
     // Families
+    //Businesses
+    this.businessService.businessAddedThisMonth().subscribe((businesses) => {
+      if (businesses) {
+        this.businessesAddedThisMonth = businesses.resultsLength;
+      }
+    });
 
+    this.businessService.businessToApprove().subscribe((businesses) => {
+      if (businesses) {
+        this.businessesToApprove = businesses.results;
+        this.dataTableBusiness = {
+          headerRow: [ '#', 'Name', 'Services Offered','Actions'],
+          footerRow: [ '#', 'Name', 'Services Offered','Actions'],
+          dataRows: this.businessesToApprove
+        };
+      }
+    });
+
+    //Service Requests
+    this.servicesService.servicesRequestedThisMonth().subscribe((requests) => {
+      if (requests) {
+        this.requestsThisMonth = requests.results;
+        for(let i of this.requestsThisMonth) {
+          this.familyService.getFamilyById(i['family_id']).subscribe((responseData) => {
+            if(responseData) {
+              i.name = responseData.results[0]['first_name'].toString() + " " + responseData.results[0]['last_name'].toString();
+              i.email = responseData.results[0]['email'].toString();
+            }
+          });
+          this.businessService.getBusinessById(i['business_id']).subscribe((responseData) => {
+            if(responseData){
+              i.businessName = responseData.results[0]['business_name'].toString();
+              i.businessCategory = responseData.results[0]['Services_Offered'].toString();
+            }
+          });
+        }
+        this.dataTableRequests = {
+          headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
+          footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
+          dataRows: this.requestsThisMonth
+        };
+      }
+    });
+
+    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
   ngAfterViewInit(){
@@ -888,4 +933,33 @@ export class DashboardComponent implements OnInit {
         },
     });
   }
+
+  
+  approvedFamily(familyId, familyName){
+    this.familyService.approveFamily(familyId, this.loggedInUser).subscribe((responseData) => {
+      if (responseData.familyApproved) {
+        this.familyService.familiesToApprove().subscribe((families) => {
+          if (families) {
+            this.familiesToApprove = families.results;
+            this.dataTableBusiness = {
+              headerRow: [ '#', 'Name', 'Services Offered','Actions'],
+              footerRow: [ '#', 'Name', 'Services Offered','Actions'],
+              dataRows: this.familiesToApprove
+            };
+          }
+        });
+        Swal.fire({
+          title: 'Family Approved Successfully!',
+          text:  familyName + ' was approved successfully.',
+          buttonsStyling: false,
+          confirmButtonClass: 'btn btn-success',
+          type: 'success'
+        })
+        this.router.navigate(['/dashboard']);
+      }
+    });
+  }
+
+
+
 }

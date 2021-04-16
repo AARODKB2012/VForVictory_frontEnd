@@ -1,0 +1,56 @@
+  <div class="main-content">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card">
+          <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate>
+              <div class="card-header">
+                  <div class="row justify-content-center">
+                    <div class="mb-3">
+                    <h1 class="title">Request Service</h1>
+                  </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div class="col-md-4">
+                    <h5>Please enter your email address to begin your request for service.</h5>
+                    </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="row justify-content-center">
+                  <div class="col-md-4">
+                      <div class="card">
+                      <div class="card-body">
+                          <div class="row">
+                            <div class="col-md-12 mb-3">
+                            <label for="email">Email Address</label>
+                            <input type="text" class="form-control" id="email" name="email" ngModel #email="ngModel" required maxlength="30" minlength="1">
+                            <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="(email.errors.required)">
+                                Please enter your email address.
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="card-footer">
+                        <div class="row justify-content-center">
+                            <button class="btn btn-success" type="submit" [disabled]="submitted">
+                                <span class="btn-label">
+                                  <i class="nc-icon nc-box"></i>
+                                </span>
+                                Continue
+                            </button>
+
+                      </div>
+                    </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          <!--</div>-->
+      </form>
+      </div>
+    </div>
+  </div>
+  </div>
+

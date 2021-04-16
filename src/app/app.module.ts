@@ -28,16 +28,18 @@ import { YesNoPipe } from './yesno.pipe';
 import { YesNoActivePipe } from './yesnoactive.pipe';
 import { RequestServiceComponent } from './request-service/request-service.component';
 import { EditServicesComponent } from './edit-services/edit-services.component';
-import { CommonModule } from '@angular/common';  
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { UserComponent } from './userpage/user.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ActiveServicesComponent } from './active-services/active-services.component';
 import { FamilyApplicationComponent } from './family-application/family-application.component';
 import { ActiveFamilyComponent } from './active-family/active-family.component';
+import { RequestServiceLoginComponent } from './request-service-login/request-service-login.component';
 import { BusinessCategoryComponent } from './business-category/business-category.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { BusinessSignupComponent } from './business-signup/business-signup.component';
+import { YesNoApprovedPipe } from './yesnoapproved.pipe';
 
 
 @NgModule({
@@ -76,9 +78,11 @@ import { BusinessSignupComponent } from './business-signup/business-signup.compo
         ActiveServicesComponent,
         FamilyApplicationComponent,
         ActiveFamilyComponent,
+        RequestServiceLoginComponent,
         BusinessCategoryComponent,
         NewCategoryComponent,
-        BusinessSignupComponent
+        BusinessSignupComponent,
+        YesNoApprovedPipe
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

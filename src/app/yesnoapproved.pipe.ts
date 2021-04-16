@@ -1,16 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'yesNo'
+  name: 'yesNoApproved'
 })
-export class YesNoPipe implements PipeTransform {
+export class YesNoApprovedPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
     if(typeof value === 'undefined' || value === null) {
-      return "N/A";
+      return "Pending";
     }
     else{
-      return value ? "Yes" : "No";
+      return "Approved";
     }
   }
 

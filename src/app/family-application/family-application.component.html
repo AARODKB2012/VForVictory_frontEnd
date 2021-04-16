@@ -1,146 +1,174 @@
 <div class="main-content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-          <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate enctype="multipart/form-data">
-              <div class="card-header">
-                <div class="card-header">
-                  <div class="row justify-content-center">
-                          <h4 class="title">V for Victory Family Application</h4>
-                  </div>
-                      
-                  </div>
+    <div class="col-md-10 mr-auto ml-auto" >
+        <!--      Wizard container        -->
+        <div class="wizard-container">
+          <div class="card card-wizard" data-color="primary" id="wizardProfile">
+            <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate enctype="multipart/form-data">
+              <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
+              <div class="card-header text-center">
+                <h3 class="card-title">
+                  V for Victory Family Family Application
+                </h3>
+                <h5 class="description">This information will let us know more about you.</h5>
+                <div class="wizard-navigation">
+                  <ul>
+                    <li class="nav-item">
+                      <a class="nav-link active" href="#about" data-toggle="tab" role="tab" aria-controls="about" aria-selected="true">
+                        <i class="nc-icon nc-shop"></i> Contact Information
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </div>
               <div class="card-body">
-                  <div class="row justify-content-center">
-                  <div class="col-md-7">
-                      <div class="card">
-                      <div class="card-body">
-                          <h4 class="card-title">Personal Information</h4>
-                          <div class="row">
-                              <div class="col-md-6 mb-3">
-                                  <label for="cancerwarrior">Cancer Warriors Name</label>
-                                  <input type="text" class="form-control" id="cancerwarrior" name="cancerwarrior" ngModel #cancerwarrior="ngModel" required maxlength="30" minlength="1">
-                                  <div *ngIf="cancerwarrior.invalid && (cancerwarrior.dirty || cancerwarrior.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="(cancerwarrior.errors.required)">
-                                      Name is required.
-                                      </div>
-                                  </div>
-                                  </div>
-                              <div class="col-md-6 mb-3">
-                              <div>
 
-                              </div>
-                              <label for="firstName">First name</label>
-                              <input type="text" class="form-control" id="firstName" name="firstName" ngModel #firstName="ngModel" required maxlength="30" minlength="1">
-                              <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="(firstName.errors.required)">
+                <div class="tab-content">
+
+                  <div class="tab-pane show active" id="about">
+
+                        <div class="row justify-content-center">
+
+                            <div class="col-md-6 mb-3">
+  
+  
+                                <label for="cancerwarrior">Cancer Warrior's Name</label>
+                                <input type="text" class="form-control" id="cancerwarrior" name="cancerwarrior" ngModel #cancerwarrior="ngModel" required maxlength="30" minlength="1">
+                                <div *ngIf="cancerwarrior.invalid && (cancerwarrior.dirty || cancerwarrior.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="(cancerwarrior.errors.required)">
                                   Name is required.
                                   </div>
-                              </div>
-                              </div>
-                              <div class="col-md-6 mb-3">
-                              <label for="lastName">Last name</label>
-                              <input type="text" class="form-control" id="lastName" name="lastName" ngModel #lastName="ngModel" required>
-                              <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="lastName.errors.required">
-                                  Last name is required.
-                                  </div>
-                              </div>
-                              </div>
-                              <div class="col-md-6 mb-3">
-                                  <label for="address">Address</label>
-                                  <input type="text" class="form-control" id="address" name="address" ngModel #address="ngModel" placeholder="1234 Main St" required>
-                                  <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="address.errors.required">
-                                      Address is required.
-                                  </div>
-                                  </div>  
-                              </div>
-                          </div>
-              
-                          
-                          <div class="row">
-                          
-                                  <div class="col-md-6 mb-3">
-                                      <label for="phonenumber">Phone Number</label>
-                                      <input type="text" class="form-control" id="phonenumber" name="phonenumber" ngModel #phonenumber="ngModel" required maxlength="30" minlength="1">
-                                      <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched || errorInForm)" class="text-danger">
-                                          <div *ngIf="(phonenumber.errors.required)">
-                                          Phone Number is required.
-                                          </div>
-                                      </div>
-                                      </div>
-
-                                      <div class="col-md-6 mb-3">
-                                          <label for="workPhone">Work Phone</label>
-                                          <input type="tel" class="form-control" id="workPhone" name="workPhone" ngModel #workPhone="ngModel" placeholder="(555)-555-5555">
-                                      </div>
-
-                                      <div class="col-md-6 mb-3">
-                                          <label for="email">Email</label>
-                                          <input type="text" class="form-control" id="email" name="email" ngModel #email="ngModel" placeholder="youremail@email.com" required>
-                                          <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
-                                          <div *ngIf="email.errors.required">
-                                              email is required.
-                                          </div>
-                                          </div>
-                                      </div>
-
-
-                                      <div class="col-md-6 mb-3">
-                                            <label for="endOftreatmentDate">End of Treatment Date</label>
-                                            <input type="text" class="form-control" id="endOftreatmentDate" name="endOftreatmentDate" ngModel #endOftreatmentDate="ngModel" placeholder="Type Here" required>
-                                          <div *ngIf="endOftreatmentDate.invalid && (endOftreatmentDate.dirty || endOftreatmentDate.touched || errorInForm)" class="text-danger">
-                                          <div *ngIf="endOftreatmentDate.errors.required">
-                                              endOftreatmentDate is required.
-                                          </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="col-md-6 mb-3">
-                                          <label for="relationship">What is your relationship to the Cancer?</label>
-                                          <input type="text" class="form-control" id="relationship" name="relationship" ngModel #relationship="ngModel" placeholder="relationship status with warrior" required>
-                                          <div *ngIf="relationship.invalid && (relationship.dirty || relationship.touched || errorInForm)" class="text-danger">
-                                          <div *ngIf="relationship.errors.required">
-                                              relationship is required.
-                                          </div>
-                                          </div>
-                                      </div>
-
-<!-- Write your comments here 
-                                      <div class="col-md-6">
-                                          <label for="addInfo">Additional Info</label>
-                                          <input type="addInfo" class="form-control" id="addInfo" name="addInfo" ngModel #addInfo="ngModel" placeholder="Please include any additional information about your family or 
-                                          needs that you would like to share in order to help us support 
-                                          you and connect you with services in the future.">
-                                      </div>
-                                  --> 
-                                  <div class="row">
-                                      <div class ="col-md-10 ml-auto mr-auto">
-                                          <label for = "addInfo" class ="addInfo">Additional Information (280 character limit)</label>
-                                          <textarea id = "addInfo" class ="form-control" id = "addInfo" ngModel #addInfo = "ngModel"name = "addInfo" rows="3" cols="600" textarea maxlength="280" placeholder="Include any information that you would like to share to help us support you.">     
-                                          </textarea>
-                                      </div>
-                                  </div>
-                                  <div class="card-footer">
-                                    <div class="row justify-content-center">
-                                    <button class="btn btn-success" routerLink="/families" type="submit" >
-                                      <span class="btn-label">
-                                        <i class="nc-icon nc-box"></i>
-                                      </span>
-                                      Save
-                                  </button>
-                                  </div>
                                 </div>
-                          </div>
-                      </div>
-                      </div>
+
+                                <label for="firstName">Contact's First name</label>
+                                <input type="text" class="form-control" id="firstName" name="firstName" ngModel #firstName="ngModel" required maxlength="30" minlength="1">
+                                <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="(firstName.errors.required)">
+                                    Name is required.
+                                    </div>
+                                </div>
+
+
+                                <label for="lastName">Contact's Last name</label>
+                                <input type="text" class="form-control" id="lastName" name="lastName" [ngModel]="family?.last_name" [readonly]="viewMode" #lastName="ngModel" required>
+                                <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="lastName.errors.required">
+                                    Last name is required.
+                                    </div>
+                                </div>
+
+                                <label for="relationship">What is your relationship to the Cancer?</label>
+                                <input type="text" class="form-control" id="relationship" name="relationship" [ngModel]="family?.relationship_to_warrior" [readonly]="viewMode" #relationship="ngModel"  required>
+                                <div *ngIf="relationship.invalid && (relationship.dirty || relationship.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="relationship.errors.required">
+                                            relationship is required.
+                                    </div>
+                                </div>
+
+                                <label for="endOftreatmentDate">End of Treatment Date</label>
+                                <input type="text" class="form-control" id="endOftreatmentDate" name="endOftreatmentDate" [ngModel]="family?.end_of_treatment_date" [readonly]="viewMode" #endOftreatmentDate="ngModel"  required>
+                                <div *ngIf="endOftreatmentDate.invalid && (endOftreatmentDate.dirty || endOftreatmentDate.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="endOftreatmentDate.errors.required">
+                                            endOftreatmentDate is required.
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div class="col-md-6 mb-3">
+  
+                                <label for="phonenumber">Phone Number</label>
+                                <input type="text" class="form-control" id="phonenumber" name="phonenumber" [ngModel]="family?.phone_number" [readonly]="viewMode" #phonenumber="ngModel" required maxlength="30" minlength="1">
+                                <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="(phonenumber.errors.required)">
+                                        Phone Number is required.
+                                    </div>
+                                </div>
+                                
+
+                                <label for="workPhone">Secondary Phone Number</label>
+                                <input type="tel" class="form-control" id="workPhone" name="workPhone" [ngModel]="family?.work_phone"  [readonly]="viewMode" #workPhone="ngModel" >
+                                
+
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" id="email" name="email" [ngModel]="family?.email" [readonly]="viewMode" #email="ngModel"  required>
+                                <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="email.errors.required">
+                                            email is required.
+                                    </div>
+                                </div>    
+                                
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" name="address" [ngModel]="family?.street_address" [readonly]="viewMode" #address="ngModel"  required>
+                                <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="address.errors.required">
+                                    Address is required.
+                                    </div>
+                                </div>
+
+                                <label for="zipcode">ZipCode</label>
+                                <input type="text" class="form-control" id="zipcode" name="zipcode" [ngModel]="family?.zipcode" [readonly]="viewMode" #zipcode="ngModel"  required>
+                                <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="zipcode.errors.required">
+                                    Zipcode is required.
+                                    </div>
+                                </div>
+
+                                <label for="familySize">Household Size</label>
+                                <input type="text" class="form-control" id="familySize" name="familySize" [ngModel]="family?.familySize" [readonly]="viewMode" #familySize="ngModel"  >
+                                <div *ngIf="familySize.invalid && (familySize.dirty || familySize.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="familySize.errors.required">
+                                    Household Size is required.
+                                    </div>
+                                </div>
+
+                                <label for="hearAbout">How did you hear about us?</label>
+                                <input type="text" class="form-control" id="hearAbout" name="hearAbout" [ngModel]="family?.hearAbout" [readonly]="viewMode" #hearAbout="ngModel" >
+                                <div *ngIf="hearAbout.invalid && (hearAbout.dirty || hearAbout.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="hearAbout.errors.required">
+                                    Household Size is required.
+                                    </div>
+                                </div>
+
+
+                                
+                                
+                            </div>
+
+
+                            <div class="card-body">
+                                <h4 class="card-title">Additional Information</h4>
+                                <div class="row">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="addInfo">Add any additional information you would like us to know about.</label>
+                                    <textarea class="form-control" id="addInfo" name="addInfo" [ngModel]="family?.additional_info"  [readonly]="viewMode" ngModel #addInfo="ngModel"></textarea>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                
+                    </div>
+                  
                   </div>
+                      
+                </div>
+              <div class="card-footer">
+                <div class="pull-right">
+                  <input type='button' class='btn btn-next btn-fill btn-rose btn-wd' name='next' value='Next' />
+                  <input type='submit' class='btn btn-finish btn-fill btn-rose btn-wd' name='finish' value='Finish' [disabled]="disableSubmit"/>
+                </div>
+                <div class="pull-left">
+                  <input type='button' class='btn btn-previous btn-fill btn-default btn-wd' name='previous' value='Previous' />
+                </div>
+                <div class="clearfix"></div>
               </div>
+            </form>
           </div>
-      </form>
+        </div>
+        <!-- wizard container -->
       </div>
-    </div>
-  </div>
 </div>

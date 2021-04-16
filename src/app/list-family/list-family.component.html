@@ -1,80 +1,108 @@
 <div class="main-content">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-              <div class="card-header">
-                  <div class="row">
-                        <div class="col-md-6">
-                            <h4 class="card-title">Cancer Warriors</h4>
-                        </div>
-                        <div class="col-md-6 text-right">
-                            <button class="btn btn-info" routerLink="/family/new">
-                                <span class="btn-label">
-                                  <i class="nc-icon nc-badge"></i>
-                                </span>
-                                New Entry
+  <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+                <div class="row">
+                      <div class="col-md-6">
+                          <h4 class="card-title">Cancer Warriors</h4>
+                      </div>
+                      <div class="col-md-6 text-right">
+                          <button class="btn btn-info" routerLink="/family/new">
+                              <span class="btn-label">
+                                <i class="nc-icon nc-badge"></i>
+                              </span>
+                              New Entry
+                          </button>
+                          <button class="btn btn-info" routerLink="/family/active">
+                              <span class="btn-label">
+                                <i class="nc-icon nc-box"></i>
+                              </span>
+                              Make a family active
                             </button>
-                            <button class="btn btn-info" routerLink="/family/active">
+                            <button class="btn btn-info" [cdkCopyToClipboard]="url + '/#/family-application'" (click)="showClipboard()">
                                 <span class="btn-label">
-                                  <i class="nc-icon nc-box"></i>
+                                  <i class="nc-icon nc-single-copy-04"></i>
                                 </span>
-                                Edit Active Family
+                                Copy sign Up Link
                               </button>
-                        </div>
-                  </div>
+                            
 
-              </div>
-                <div class="card-body">
-                    <div class="toolbar">
-                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-
-                    </div>
-                    <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                              <th>{{ dataTable?.headerRow[0] }}</th>
-                              <th>{{ dataTable?.headerRow[1] }}</th>
-                              <th>{{ dataTable?.headerRow[2] }}</th>
-                              <th>{{ dataTable?.headerRow[3] }}</th>
-                              <th>{{ dataTable?.headerRow[4] }}</th>
-                              <th>{{ dataTable?.headerRow[5] }}</th>
-                              <th class="disabled-sorting text-right">{{ dataTable.headerRow[6] }}</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                              <th>{{ dataTable?.footerRow[0] }}</th>
-                              <th>{{ dataTable?.footerRow[1] }}</th>
-                              <th>{{ dataTable?.footerRow[2] }}</th>
-                              <th>{{ dataTable?.footerRow[3] }}</th>
-                              <th>{{ dataTable?.footerRow[4] }}</th>
-                              <th>{{ dataTable?.footerRow[5] }}</th>
-                              <th class="disabled-sorting text-right">{{ dataTable.headerRow[6] }}</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <tr *ngFor="let row of dataTable.dataRows">
-                                <td>{{row.id}}</td>
-                                <td>{{row.first_name}}</td>
-                                <td>{{row.last_name}}</td>
-                                <td>{{row.email}}</td>
-                                <td>{{row.street_address}}</td>
-                                <td>{{row.end_of_treatment_date}}</td>
-                                <td class="text-right">
-                                  <a href="javascript:void(0)" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                                  <a href="javascript:void(0)" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
-                                  <a (click)="markFamilyInactive(row.id)" [routerLink]="['/family/active/']" class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
+                      </div>
                 </div>
-                <!-- end content-->
+
             </div>
-            <!--  end card  -->
-        </div>
-        <!-- end col-md-12 -->
-    </div>
-    <!-- end row -->
+              <div class="card-body">
+                  <div class="toolbar">
+                    <button id="all" class="btn btn-sm btn-info">
+                      <span class="btn-label">
+                        <i class="nc-icon nc-alert-circle-i"></i>
+                      </span>
+                      Show All
+                    </button>
+                    <button id="approved" class="btn btn-sm btn-info">
+                      <span class="btn-label">
+                        <i class="nc-icon nc-check-2"></i>
+                      </span>
+                      Show Approved
+                    </button>
+                    <button id="unapproved" class="btn btn-sm btn-info">
+                      <span class="btn-label">
+                        <i class="nc-icon nc-check-2"></i>
+                      </span>
+                      Show Pending Approval
+                    </button>
+
+                  </div>
+                  <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                      <thead>
+                          <tr>
+                            <th>{{ dataTable?.headerRow[0] }}</th>
+                            <th>{{ dataTable?.headerRow[1] }}</th>
+                            <th>{{ dataTable?.headerRow[2] }}</th>
+                            <th>{{ dataTable?.headerRow[3] }}</th>
+                            <th>{{ dataTable?.headerRow[4] }}</th>
+                            <th>{{ dataTable?.headerRow[5] }}</th>
+                            <th>{{ dataTable?.footerRow[6] }}</th>
+                            <th class="disabled-sorting text-right">{{ dataTable?.headerRow[7] }}</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                            <th>{{ dataTable?.footerRow[0] }}</th>
+                            <th>{{ dataTable?.footerRow[1] }}</th>
+                            <th>{{ dataTable?.footerRow[2] }}</th>
+                            <th>{{ dataTable?.footerRow[3] }}</th>
+                            <th>{{ dataTable?.footerRow[4] }}</th>
+                            <th>{{ dataTable?.footerRow[5] }}</th>
+                            <th>{{ dataTable?.footerRow[6] }}</th>
+                            <th class="disabled-sorting text-right">{{ dataTable?.headerRow[7] }}</th>
+                          </tr>
+                      </tfoot>
+                      <tbody>
+                          <tr *ngFor="let row of dataTable.dataRows">
+                              <td>{{row.id}}</td>
+                              <td>{{row.first_name}}</td>
+                              <td>{{row.last_name}}</td>
+                              <td>{{row.email}}</td>
+                              <td>{{row.street_address}}</td>
+                              <td>{{row.end_of_treatment_date}}</td>
+                              <td>{{row.approved_by | yesNoApproved}}</td>
+                              <td class="text-right">
+                                  <a [routerLink]="['/family/edit']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                                  <a [routerLink]="['/family/view']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                                  <a (click)="markFamilyInactive(row.id)"  class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
+                              </td>
+
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+              <!-- end content-->
+          </div>
+          <!--  end card  -->
+      </div>
+      <!-- end col-md-12 -->
+  </div>
+  <!-- end row -->
 </div>

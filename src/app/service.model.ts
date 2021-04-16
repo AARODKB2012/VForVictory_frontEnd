@@ -1,11 +1,11 @@
 export interface ServiceModel {
   id: number;
+  familyId: number;
+  businessId: number;
   name: string;
   email: string;
   businessName: string;
-  business_name: string;
   businessCategory: string;
-  business_category: string;
   dateRequested: string;
   dateFulfilled: string;
   notifiedBusiness: boolean;

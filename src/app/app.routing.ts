@@ -8,6 +8,7 @@ import { ListVolunteersComponent } from './list-volunteers/list-volunteers.compo
 import { EditServicesComponent } from './edit-services/edit-services.component';
 import { ActiveServicesComponent } from './active-services/active-services.component';
 import { ListServicesComponent } from './list-services/list-services.component';
+import { RequestServiceLoginComponent } from './request-service-login/request-service-login.component'
 import { RequestServiceComponent } from './request-service/request-service.component'
 import { NewBusinessComponent } from './new-business/new-business.component';
 import { NewFamilyComponent } from './new-family/new-family.component';
@@ -89,7 +90,13 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'family/active', component: ActiveFamilyComponent, canActivate: [AuthGuard]
-            }
+            },
+            {
+                path: 'family/view', component: NewFamilyComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'family/edit', component: NewFamilyComponent, canActivate: [AuthGuard]
+            },
             /* {
                 path: 'components',
                 loadChildren: './components/components.module#ComponentsModule'
@@ -135,6 +142,9 @@ export const AppRoutes: Routes = [{
                 path: 'pages',
                 loadChildren: './pages/pages.module#PagesModule'
             }]
+        },
+        {
+            path: 'request/login', component: RequestServiceLoginComponent
         },
         {
             path: 'request', component: RequestServiceComponent

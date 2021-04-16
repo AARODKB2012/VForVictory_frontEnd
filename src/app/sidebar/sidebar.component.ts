@@ -28,15 +28,15 @@ export const ROUTES: RouteInfo[] = [{
     },
     {
       path: '/services',
-      title: 'Services',
+      title: 'Requests',
       type: 'link',
       icontype: 'nc-icon nc-box'
     },
     {
         path: '/family',
-        title: 'Family',
+        title: 'Families',
         type: 'link',
-        icontype: 'nc-icon nc-trophy'
+        icontype: 'nc-icon nc-single-02'
     },
     {
         path: '/business',

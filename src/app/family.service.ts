@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { HttpClient } from '../../node_modules/@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Http, ResponseContentType } from '@angular/http';
 import { map } from 'rxjs/operators';
 import {environment} from '../environments/environment';
@@ -28,7 +28,6 @@ export class FamilyService{
     markFamilyActive(family: any) {
       return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markActive', family);
     }
-  
     markFamilyInactive(family: any) {
       return this.httpClient.post<{requestFulfilled: boolean}>(this.serverAddress + 'api/family/markInactive', family);
     }
@@ -47,9 +46,22 @@ export class FamilyService{
     familiesToApprove():any{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/unapproved');
     }
+    getFamilyByEmail(familyEmail: String) {
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/email/' + familyEmail);
+    }
 
     getFamilyById(familyId: Number) {
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/id/' + familyId);
     }
+
+    editFamily(family: any) {
+      return this.httpClient.post<{familyUpdated: boolean}>(this.serverAddress + 'api/family/edit', family);
+    }
+    approveFamily(familyId, approvedBy) {
+      return this.httpClient.post<{familyApproved: boolean}>(this.serverAddress + `api/family/${familyId}/approve/${approvedBy}`, null);
+    }
+    getApprovedFamily():any{
+      return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/approved');
+    }
+
   }
-  
