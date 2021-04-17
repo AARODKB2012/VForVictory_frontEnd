@@ -65,8 +65,8 @@
                                 <a *ngIf="row.notified_family == 1" (click)="viewPendingFamilyOptions(row.record_id, row.family_id, row.name, 0)" class="btn btn-info btn-link btn-icon btn-lg family"><i class="fa fa-child" style="color:lightgrey"></i></a>
                                 <a *ngIf="row.notified_business != 1" (click)="viewPendingBusinessOptions(row.record_id, row.business_id, row.businessName, 1)" class="btn btn-info btn-link btn-icon btn-lg business"><i class="fa fa-building"></i></a>
                                 <a *ngIf="row.notified_business == 1" (click)="viewPendingBusinessOptions(row.record_id, row.business_id, row.businessName, 0)" class="btn btn-info btn-link btn-icon btn-lg business"><i class="fa fa-building" style="color:lightgrey"></i></a>
-                                <a (click)="fulfillRequest(row.record_id, 1)" [routerLink]="['/services/']" class="btn btn-success btn-link btn-icon btn-lg fulfill"><i class="fa fa-check"></i></a>
-                                <a (click)="fulfillRequest(row.record_id, 0)" [routerLink]="['/services/']" class="btn btn-danger btn-link btn-icon btn-lg deny"><i class="fa fa-ban"></i></a>
+                                <a *ngIf="userRole == 1" (click)="fulfillRequest(row.record_id, 1)" class="btn btn-success btn-link btn-icon btn-lg fulfill"><i class="fa fa-check" style="color:olivedrab"></i></a>
+                                <a *ngIf="userRole == 1" (click)="fulfillRequest(row.record_id, 0)" class="btn btn-danger btn-link btn-icon btn-lg deny"><i class="fa fa-ban" style="color:orangered"></i></a>
                               </td>
                           </tr>
                       </tbody>
@@ -167,13 +167,13 @@
                         <td>{{ row.service_value | currency }}</td>
                         <td>{{ row.service_cost | currency }}</td>
                         <td class="text-right">
-                          <a *ngIf="row.notes != ''" (click)="showNote(row.notes)" [routerLink] class="btn btn-link btn-icon btn-lg note"><i class="fa fa-sticky-note-o" style="color:orange"></i></a>
+                          <a *ngIf="row.notes != ''" (click)="showNote(row.notes)" class="btn btn-link btn-icon btn-lg note"><i class="fa fa-sticky-note-o" style="color:orange"></i></a>
                           <a *ngIf="row.followedup_family == 0" (click)="viewRenderedFamilyOptions(row.record_id, row.family_id, row.name, 1)" class="btn btn-info btn-link btn-icon btn-lg family"><i class="fa fa-child"></i></a>
                           <a *ngIf="row.followedup_family == 1" (click)="viewRenderedFamilyOptions(row.record_id, row.family_id, row.name, 0)" class="btn btn-info btn-link btn-icon btn-lg family"><i class="fa fa-child" style="color:lightgrey"></i></a>
                           <a *ngIf="row.followedup_business == 0" (click)="viewRenderedBusinessOptions(row.record_id, row.business_id, row.name, 1)" class="btn btn-info btn-link btn-icon btn-lg business"><i class="fa fa-building"></i></a>
                           <a *ngIf="row.followedup_business == 1" (click)="viewRenderedBusinessOptions(row.record_id, row.business_id, row.name, 0)" class="btn btn-info btn-link btn-icon btn-lg business"><i class="fa fa-building" style="color:lightgrey"></i></a>
-                          <a *ngIf="row.approved == 1"(click)="setValueCost(row.record_id, row.service_value, row.service_cost)" [routerLink] class="btn btn-success btn-link btn-icon btn-lg delete"><i class="fa fa-dollar"></i></a>
-                          <a (click)="deleteRequest(row.record_id)" [routerLink] class="btn btn-danger btn-link btn-icon btn-lg delete"><i class="fa fa-remove"></i></a>
+                          <a *ngIf="row.approved == 1 && userRole == 1" (click)="setValueCost(row.record_id, row.service_value, row.service_cost)" class="btn btn-success btn-link btn-icon btn-lg delete"><i class="fa fa-dollar" style="color:darkolivegreen"></i></a>
+                          <a *ngIf="userRole == 1" (click)="deleteRequest(row.record_id)" class="btn btn-danger btn-link btn-icon btn-lg delete"><i class="fa fa-remove" style="color:orangered"></i></a>
                         </td>
                     </tr>
                     </tbody>

@@ -31,9 +31,12 @@ export class ListServicesComponent implements OnInit {
     public currentDate = new Date();
     public today;
     public url;
+    public userRole: number;
 
     constructor(public serviceService: ServicesService, public businessService: BusinessService, public familyService: FamilyService, public router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe) {
-      this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');}
+      this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
+      this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+    }
 
     ngOnInit() {
       this.url = window.location.origin;

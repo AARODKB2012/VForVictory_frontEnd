@@ -64,4 +64,8 @@ export class FamilyService{
       return this.httpClient.get<FamilyAPIResponse>(this.serverAddress + 'api/family/approved');
     }
 
+    getServicesRendered(familyName): any {
+      return this.httpClient.get<any>(this.serverAddress + 'api/family/services/rendered/' + familyName);
+    }
+
   }

@@ -36,7 +36,10 @@ export class NewFamilyComponent implements OnInit {
   public categoryList: [];
   public profileURL: string = null;
   public familyApproved: boolean;
+  public servicesRendered: Array<any>;
+  public renderedTable: DataTable;
   private loggedInUser: any;
+  public previousUrl;
 
   constructor(public familyService: FamilyService, public notesService: NotesService, public router: Router,private activeRoute: ActivatedRoute) {
     const tree: UrlTree = router.parseUrl(this.router.url);
@@ -56,9 +59,13 @@ export class NewFamilyComponent implements OnInit {
 
     this.activeRoute.queryParams.subscribe(params => {
       this.familyId = params['familyId'];
+      this.previousUrl = params['from'];
+      if(!this.previousUrl) {
+        this.previousUrl = "/services/list";
+      }
     });
 
-    
+
     if (this.familyId) {
       this.familyService.getFamilyById(this.familyId).subscribe((responseData) => {
         console.log(responseData)
@@ -71,8 +78,24 @@ export class NewFamilyComponent implements OnInit {
         if (responseData.results[0]['approved_by'] != null){
           this.familyApproved = true;
         }
+        this.familyService.getServicesRendered(this.family['id']).subscribe((requests) => {
+          if (requests) {
+            this.servicesRendered = requests.results;
+            this.renderedTable = {
+              headerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Service Value', 'Service Cost', 'Pending'],
+              footerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Service Value', 'Service Cost', 'Pending'],
+              dataRows:  this.servicesRendered
+            };
+          } else{
+            this.renderedTable = {
+              headerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Pending'],
+              footerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Pending'],
+              dataRows: []
+            };
+          }
+        });
       });
-      
+
     }
 
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
@@ -118,7 +141,20 @@ export class NewFamilyComponent implements OnInit {
     });
     var table = $('#datatable').DataTable();
 
-    // Edit record
+    $('#renderedTable').DataTable({
+      "pagingType": "full_numbers",
+      "lengthMenu": [
+        [10, 25, 50, -1],
+        [10, 25, 50, "All"]
+      ],
+      responsive: true,
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+
+    });
+    var servicesRendered = $('#renderedTable').DataTable();
 
   }
 
@@ -146,7 +182,9 @@ export class NewFamilyComponent implements OnInit {
             welcomeLetter:form.value.welcomeLetter,
             treamentLetter: form.value.treamentLetter,
             subscriberList:form.value.subscriberList,
-            facebookGroup:form.value.facebookGroup
+            facebookGroup:form.value.facebookGroup,
+            vPizzaGiftCard:form.value.vPizza_giftcard,
+            vPizzaRefillAmount:form.value.vPizza_refill_amount
         };
 
       this.familyService.saveFamily(request).subscribe((responseData) => {
@@ -182,7 +220,9 @@ export class NewFamilyComponent implements OnInit {
             welcomeLetter:form.value.welcomeLetter,
             treamentLetter: form.value.treamentLetter,
             subscriberList:form.value.subscriberList,
-            facebookGroup:form.value.facebookGroup
+            facebookGroup:form.value.facebookGroup,
+            vPizza_giftcard:form.value.vPizza_giftcard,
+            vPizza_refill_amount:form.value.vPizza_refill_amount
       };
 
       console.log('family', family)
@@ -333,6 +373,44 @@ export class NewFamilyComponent implements OnInit {
               buttonsStyling: false,
               confirmButtonClass: "btn btn-info",
               type: "error"
+            }).then((confirm) => {
+              if(confirm){
+                window.location.reload()
+              }
+            })
+          }
+        });
+      }
+    });
+  }
+
+  markVPizzaRefilled(pizzaId, pizzaBalance) {
+    Swal.fire({
+      title: "Mark this card refilled?",
+      text: "This will appear in the V Pizza Transaction History page.",
+      type: "info",
+      showCancelButton: true,
+      cancelButtonClass: "btn btn-info",
+      confirmButtonClass: "btn btn-success",
+      confirmButtonText: "Yes, refill",
+      cancelButtonText: "No, cancel",
+      reverseButtons: true
+    })
+    .then((refill) => {
+      if(refill.value) {
+        let user = JSON.parse(localStorage.getItem('currentUser'));
+        const request: any = {
+          id: pizzaId,
+          balance: pizzaBalance,
+          currentUser: user['email']
+        }
+        this.notesService.markPizzaRefilled(request).subscribe((pizzaData) => {
+          if (pizzaData.refilled) {
+            Swal.fire({
+              title: "Card refilled.",
+              buttonsStyling: false,
+              confirmButtonClass: "btn btn-info",
+              type: "success"
             }).then((confirm) => {
               if(confirm){
                 window.location.reload()

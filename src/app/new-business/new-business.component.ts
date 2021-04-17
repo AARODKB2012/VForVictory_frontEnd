@@ -40,7 +40,7 @@ export class NewBusinessComponent implements OnInit {
   public previousUrl: string;
 
   constructor(public businessService: BusinessService, public router: Router, private activeRoute: ActivatedRoute) {
-    
+
   }
 
   ngOnInit() {
@@ -61,6 +61,9 @@ export class NewBusinessComponent implements OnInit {
     this.activeRoute.queryParams.subscribe(params => {
       this.businessId = params['businessId'];
       this.previousUrl = params['from'];
+      if(!this.previousUrl) {
+        this.previousUrl = "/services/list";
+      }
     });
 
     this.businessService.getAllCategories().subscribe((responseData) => {
@@ -85,8 +88,8 @@ export class NewBusinessComponent implements OnInit {
             if (requests) {
               this.servicesRendered = requests.results;
               this.dataTable = {
-                headerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Pending'],
-                footerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Pending'],
+                headerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Service Value', 'Service Cost', 'Pending'],
+                footerRow: [ 'ID', 'Name', 'Date Requested', 'Date Fulfilled', 'Service Value', 'Service Cost', 'Pending'],
                 dataRows:  this.servicesRendered
               };
             } else{
@@ -100,12 +103,12 @@ export class NewBusinessComponent implements OnInit {
         }
       });
     }
-    
+
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
   ngAfterViewInit(){
-    
+
     $('#dataTable').DataTable({
       "pagingType": "full_numbers",
       "lengthMenu": [

@@ -30,4 +30,12 @@ export class NotesService{
     deleteNote(note: any) {
       return this.httpClient.post<{noteDeleted: boolean}>(this.serverAddress + 'api/family/notes/delete', note);
     }
+
+    getVPizzaTransactionHistory():any{
+      return this.httpClient.get<NoteAPIResponse>(this.serverAddress + 'api/VPizza/history');
+    }
+
+    markPizzaRefilled(pizza: any) {
+      return this.httpClient.post<{refilled: boolean}>(this.serverAddress + 'api/VPizza/refill', pizza);
+    }
   }

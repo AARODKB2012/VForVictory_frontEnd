@@ -1,315 +1,320 @@
 <div class="main-content">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-            <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate enctype="multipart/form-data">
-                <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-6 pull-left">
-                            <h5 class="title">Business Profile</h5>
-                        </div>
-                        <div class="col-md-6 text-right" >
-                            <button type="button" class="btn btn-default" [routerLink]="previousUrl">
-                                <span class="btn-label">
-                                  <i class="nc-icon nc-bullet-list-67"></i>
-                                </span>
-                                Cancel
-                            </button>
-
-                            <!-- Hiding save button if is in view mode -->
-                            <button type="button" class="btn btn-default" (click)="approvedBusiness(business?.record_id, business?.business_name)" *ngIf="!viewMode && !creationMode && !businessApproved">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+          <form #f="ngForm" novalidate (ngSubmit)="onSave(templateForm)" #templateForm="ngForm" novalidate enctype="multipart/form-data">
+              <div class="card-header">
+                  <div class="row">
+                      <div class="col-md-6 pull-left">
+                          <h5 class="title">Business Profile</h5>
+                      </div>
+                      <div class="col-md-6 text-right" >
+                          <button type="button" class="btn btn-default" [routerLink]="previousUrl">
                               <span class="btn-label">
-                                <i class="nc-icon nc-check-2"></i>
+                                <i class="nc-icon nc-bullet-list-67"></i>
                               </span>
-                              Approve
-                            </button>
-                            <button class="btn btn-success" type="submit" *ngIf="!viewMode">
-                                <span class="btn-label">
-                                  <i class="nc-icon nc-box"></i>
-                                </span>
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                    <div class="col-md-7">
-                      <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">Business Information</h4>
-                              <div class="row">
-                                <div class="col-md-9 mb-3">
-                                  <label for="businessName">Name of Business</label>
-                                  <input type="text" class="form-control" id="firstName" name="businessName" [ngModel]="business?.business_name" #businessName="ngModel" required maxlength="50" minlength="1" [readonly]="viewMode">
-                                  <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="(businessName.errors.required)">
-                                      Business name is required.
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-3 mb-3" *ngIf="!creationMode">
-                                  <div class="col-md-9">
-                                    <div class="form-check">
-                                      <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" id="active" name="active" [ngModel]="business?.active" ngModel #active="ngModel" [readonly]="viewMode">
-                                        <span class="form-check-sign"></span>
-                                        Active
-                                      </label>
+                              Cancel
+                          </button>
+
+                          <!-- Hiding save button if is in view mode -->
+                          <button type="button" class="btn btn-default" (click)="approvedBusiness(business?.record_id, business?.business_name)" *ngIf="!viewMode && !businessApproved">
+                            <span class="btn-label">
+                              <i class="nc-icon nc-check-2"></i>
+                            </span>
+                            Approve
+                          </button>
+                          <button class="btn btn-success" type="submit" *ngIf="!viewMode">
+                              <span class="btn-label">
+                                <i class="nc-icon nc-box"></i>
+                              </span>
+                              Save
+                          </button>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <div class="row">
+                  <div class="col-md-7">
+                    <div class="card">
+                      <div class="card-body">
+                          <h4 class="card-title">Business Information</h4>
+                            <div class="row">
+                              <div class="col-md-9 mb-3">
+                                <label for="businessName">Name of Business</label>
+                                <input type="text" class="form-control" id="firstName" name="businessName" [ngModel]="business?.business_name" #businessName="ngModel" required maxlength="50" minlength="1" [readonly]="viewMode">
+                                <div *ngIf="businessName.invalid && (businessName.dirty || businessName.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="(businessName.errors.required)">
+                                    Business name is required.
                                     </div>
+                                </div>
+                              </div>
+                              <div class="col-md-3 mb-3" *ngIf="!creationMode">
+                                <div class="col-md-9">
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="checkbox" id="active" name="active" [ngModel]="business?.active" ngModel #active="ngModel" [readonly]="viewMode">
+                                      <span class="form-check-sign"></span>
+                                      Active
+                                    </label>
                                   </div>
                                 </div>
                               </div>
-                                <div class="mb-3">
-                                  <label for="preferredContact">Preferred Method of Contact</label>
-                                  <!-- <input type="text" class="form-control" id="preferredContact" name="preferredContact" [ngModel]="business?.Preferred_Method_Contact" ngModel #preferredContact="ngModel" required [readonly]="viewMode"> -->
-                                  <select class="custom-select d-block w-100" id="preferredContact" name="preferredContact" [ngModel]="business?.Preferred_Method_Contact" ngModel #preferredContact="ngModel" required [disabled]="viewMode">
-                                    <option value="email">Email</option>
-                                    <option value="text">Text</option>
-                                    <option value="phone">Phone Call</option>
-                                    <option value="voucher">Voucher/Gift Card</option>
-                                  </select>
-                                  <div *ngIf="preferredContact.invalid && (preferredContact.dirty || preferredContact.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="preferredContact.errors.required">
-                                        Preferred method is required.
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                  <label for="email">Business Email</label>
-                                  <input type="text" class="form-control" id="email" name="email" [ngModel]="business?.email" ngModel #email="ngModel" required [readonly]="viewMode">
-                                  <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="email.errors.required">
-                                        Email is required.
-                                    </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                  <label for="email">Business Website</label>
-                                  <input type="text" class="form-control" id="website" name="website" [ngModel]="business?.business_url" ngModel #website="ngModel" [readonly]="viewMode">
-                                </div>
-                                <div class="row">
-                                  <div class="col-md-6 mb-3">
-                                    <label for="pContactFName">Primary Contact First Name</label>
-                                    <input type="text" class="form-control" id="pContactFName" name="pContactFName" [ngModel]="business?.primary_contact_fName" ngModel #pContactFName="ngModel" required [readonly]="viewMode">
-                                    <div *ngIf="pContactFName.invalid && (pContactFName.dirty || pContactFName.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="pContactFName.errors.required">
-                                        At least one contact is required.
-                                      </div>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-6 mb-3">
-                                    <label for="pContactLName">Primary Contact Last Name</label>
-                                    <input type="text" class="form-control" id="pContactLName" name="pContactLName" [ngModel]="business?.primary_contact_lName" ngModel #pContactLName="ngModel" required [readonly]="viewMode">
-                                    <div *ngIf="pContactLName.invalid && (pContactLName.dirty || pContactLName.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="pContactLName.errors.required">
-                                        At least one contact is required.
-                                      </div>
-                                      </div>
-                                  </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pContactPNum">Primary Contact Phone Number</label>
-                                    <input type="tel" mask="(000) 000-000" class="form-control" id="pContactPNum" name="pContactPNum" [ngModel]="formatPhoneNumber(business?.primary_contact_phone_number)" ngModel #pContactPNum="ngModel" required [readonly]="viewMode">
-                                    <div *ngIf="pContactPNum.invalid && (pContactPNum.dirty || pContactPNum.touched || errorInForm)" class="text-danger">
-                                      <div *ngIf="pContactPNum.errors.required">
-                                          At least one contact is required.
-                                      </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                    <label for="sContactFName">Secondary Contact First Name</label>
-                                    <input type="text" class="form-control" id="sContactFName" name="sContactFName" [ngModel]="business?.secondary_contact_fName" ngModel #sContactFName="ngModel" [readonly]="viewMode">
-                                    </div>
-                                    <div class="col-md-6 mb-3">
-                                    <label for="sContactLName">Secondary Contact Last Name</label>
-                                    <input type="text" class="form-control" id="sContactLName" name="sContactLName" [ngModel]="business?.secondary_contact_lName" ngModel #sContactLName="ngModel" [readonly]="viewMode">
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="sContactPNum">Secondary Contact Phone Number</label>
-                                    <input type="tel" class="form-control" id="sContactPNum" name="sContactPNum" [ngModel]="formatPhoneNumber(business?.secondary_contact_phone_number)" ngModel #sContactPNum="ngModel" [readonly]="viewMode">
-                                </div>
+                            </div>
                               <div class="mb-3">
-                                <label for="address">Address</label>
-                                <input type="text" class="form-control" id="address" name="address" [ngModel]="business?.address" ngModel #address="ngModel" required [readonly]="viewMode">
-                                <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
-                                <div *ngIf="address.errors.required">
-                                    Address is required.
+                                <label for="preferredContact">Preferred Method of Contact</label>
+                                <!-- <input type="text" class="form-control" id="preferredContact" name="preferredContact" [ngModel]="business?.Preferred_Method_Contact" ngModel #preferredContact="ngModel" required [readonly]="viewMode"> -->
+                                <select class="custom-select d-block w-100" id="preferredContact" name="preferredContact" [ngModel]="business?.Preferred_Method_Contact" ngModel #preferredContact="ngModel" required [disabled]="viewMode">
+                                  <option value="email">Email</option>
+                                  <option value="text">Text</option>
+                                  <option value="phone">Phone Call</option>
+                                  <option value="voucher">Voucher/Gift Card</option>
+                                </select>
+                                <div *ngIf="preferredContact.invalid && (preferredContact.dirty || preferredContact.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="preferredContact.errors.required">
+                                      Preferred method is required.
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="mb-3">
+                                <label for="email">Business Email</label>
+                                <input type="text" class="form-control" id="email" name="email" [ngModel]="business?.email" ngModel #email="ngModel" required [readonly]="viewMode">
+                                <div *ngIf="email.invalid && (email.dirty || email.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="email.errors.required">
+                                      Email is required.
+                                  </div>
+                                  </div>
+                              </div>
+                              <div class="mb-3">
+                                <label for="email">Business Website</label>
+                                <input type="text" class="form-control" id="website" name="website" [ngModel]="business?.business_url" ngModel #website="ngModel" [readonly]="viewMode">
+                              </div>
+                              <div class="row">
+                                <div class="col-md-6 mb-3">
+                                  <label for="pContactFName">Primary Contact First Name</label>
+                                  <input type="text" class="form-control" id="pContactFName" name="pContactFName" [ngModel]="business?.primary_contact_fName" ngModel #pContactFName="ngModel" required [readonly]="viewMode">
+                                  <div *ngIf="pContactFName.invalid && (pContactFName.dirty || pContactFName.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="pContactFName.errors.required">
+                                      At least one contact is required.
+                                    </div>
+                                    </div>
                                 </div>
+                                <div class="col-md-6 mb-3">
+                                  <label for="pContactLName">Primary Contact Last Name</label>
+                                  <input type="text" class="form-control" id="pContactLName" name="pContactLName" [ngModel]="business?.primary_contact_lName" ngModel #pContactLName="ngModel" required [readonly]="viewMode">
+                                  <div *ngIf="pContactLName.invalid && (pContactLName.dirty || pContactLName.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="pContactLName.errors.required">
+                                      At least one contact is required.
+                                    </div>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="mb-3">
+                                  <label for="pContactPNum">Primary Contact Phone Number</label>
+                                  <input type="tel" mask="(000) 000-000" class="form-control" id="pContactPNum" name="pContactPNum" [ngModel]="formatPhoneNumber(business?.primary_contact_phone_number)" ngModel #pContactPNum="ngModel" required [readonly]="viewMode">
+                                  <div *ngIf="pContactPNum.invalid && (pContactPNum.dirty || pContactPNum.touched || errorInForm)" class="text-danger">
+                                    <div *ngIf="pContactPNum.errors.required">
+                                        At least one contact is required.
+                                    </div>
+                                  </div>
+                              </div>
+
+                              <div class="row">
+                                  <div class="col-md-6 mb-3">
+                                  <label for="sContactFName">Secondary Contact First Name</label>
+                                  <input type="text" class="form-control" id="sContactFName" name="sContactFName" [ngModel]="business?.secondary_contact_fName" ngModel #sContactFName="ngModel" [readonly]="viewMode">
+                                  </div>
+                                  <div class="col-md-6 mb-3">
+                                  <label for="sContactLName">Secondary Contact Last Name</label>
+                                  <input type="text" class="form-control" id="sContactLName" name="sContactLName" [ngModel]="business?.secondary_contact_lName" ngModel #sContactLName="ngModel" [readonly]="viewMode">
+                                  </div>
+                              </div>
+                              <div class="mb-3">
+                                  <label for="sContactPNum">Secondary Contact Phone Number</label>
+                                  <input type="tel" class="form-control" id="sContactPNum" name="sContactPNum" [ngModel]="formatPhoneNumber(business?.secondary_contact_phone_number)" ngModel #sContactPNum="ngModel" [readonly]="viewMode">
+                              </div>
+                            <div class="mb-3">
+                              <label for="address">Address</label>
+                              <input type="text" class="form-control" id="address" name="address" [ngModel]="business?.address" ngModel #address="ngModel" required [readonly]="viewMode">
+                              <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
+                              <div *ngIf="address.errors.required">
+                                  Address is required.
+                              </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6 mb-3" *ngIf="viewMode != true">
+                              <label for="category">Service Offered</label>
+                              <select class="custom-select d-block w-100" id="category" name="category" [ngModel]="business?.Services_Offered" ngModel required #category="ngModel">
+                                  <option *ngFor="let cat of categoryList" [ngValue]="cat.category_name">
+                                      {{cat.category_name}}
+                                  </option>
+                              </select>
+                              <div *ngIf="category.invalid && (category.dirty || category.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="category.errors.required">
+                                    Service category is required.
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6 mb-3" *ngIf="viewMode == true">
+                              <label for="category">Service Offered</label>
+                              <input type="text" class="form-control" id="category" name="category" [ngModel]="business?.Services_Offered" ngModel #category="ngModel" required [readonly]="viewMode">
+                              <div *ngIf="category.invalid && (category.dirty || category.touched || errorInForm)" class="text-danger">
+                                <div *ngIf="category.errors.required">
+                                    Service category is required.
+                                </div>
+                              </div>
+                            </div>
+                              <div class="col-md-6 mb-3">
+                                  <label for="serviceArea">Service Area</label>
+                                      <input type="text" class="form-control" id="serviceArea" name="serviceArea" [ngModel]="business?.Service_Area" ngModel #serviceArea="ngModel" required [readonly]="viewMode">
+                                  <div *ngIf="serviceArea.invalid && (serviceArea.dirty || serviceArea.touched || errorInForm)" class="text-danger">
+                                      <div *ngIf="serviceArea.errors.required">
+                                      Service area is required.
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <h4 class="card-title">Notes</h4>
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="discountAmount">Discount (%)</label>
+                                <input type="number" class="form-control" id="discountAmount" name="discountAmount" [ngModel]="business?.Discount_Amount" ngModel #discountAmount="ngModel" required [readonly]="viewMode">
+                                <div *ngIf="discountAmount.invalid && (discountAmount.dirty || discountAmount.touched || errorInForm)" class="text-danger">
+                                  <div *ngIf="discountAmount.errors.required">
+                                      Discount information is required.
+                                  </div>
+                                  </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cellPhone"></label>
+                                <div class="col-md-9">
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input class="form-check-input" type="checkbox" id="eoyReceipt" name="eoyReceipt" [ngModel]="business?.EOY_Receipt" ngModel #eoyReceipt="ngModel" [readonly]="viewMode">
+                                      <span class="form-check-sign"></span>
+                                      End of Year Receipt?
+                                    </label>
+                                  </div>
                                 </div>
                             </div>
-                            <div class="row">
-                              <div class="col-md-6 mb-3" *ngIf="viewMode != true">
-                                <label for="category">Service Offered</label>
-                                <select class="custom-select d-block w-100" id="category" name="category" [ngModel]="business?.Services_Offered" ngModel required #category="ngModel">
-                                    <option *ngFor="let cat of categoryList" [ngValue]="cat.category_name">
-                                        {{cat.category_name}}
-                                    </option>
-                                </select>
-                                <div *ngIf="category.invalid && (category.dirty || category.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="category.errors.required">
-                                      Service category is required.
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="col-md-6 mb-3" *ngIf="viewMode == true">
-                                <label for="category">Service Offered</label>
-                                <input type="text" class="form-control" id="category" name="category" [ngModel]="business?.Services_Offered" ngModel #category="ngModel" required [readonly]="viewMode">
-                                <div *ngIf="category.invalid && (category.dirty || category.touched || errorInForm)" class="text-danger">
-                                  <div *ngIf="category.errors.required">
-                                      Service category is required.
-                                  </div>
-                                </div>
-                              </div>
-                                <div class="col-md-6 mb-3">
-                                    <label for="serviceArea">Service Area</label>
-                                        <input type="text" class="form-control" id="serviceArea" name="serviceArea" [ngModel]="business?.Service_Area" ngModel #serviceArea="ngModel" required [readonly]="viewMode">
-                                    <div *ngIf="serviceArea.invalid && (serviceArea.dirty || serviceArea.touched || errorInForm)" class="text-danger">
-                                        <div *ngIf="serviceArea.errors.required">
-                                        Service area is required.
+                          </div>
+                          <div class="mb-3">
+                              <label for="notes">Comments</label>
+                              <textarea class="form-control" id="notes" name="notes" [ngModel]="business?.notes" ngModel #notes="ngModel"></textarea>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-5">
+                      <div class="card">
+                          <div class="card-body">
+                              <h4 class="card-title">Business Logo</h4>
+                              <div class="row">
+                                <div class="col-md-4"></div>
+                                <div class="col-md-8">
+                                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
+                                        <div class="fileinput-new thumbnail">
+                                            <img *ngIf="!profileURL" src="../../assets/img/default-avatar.png" alt="...">
+                                            <img *ngIf="profileURL" src="{{profileURL}}" alt="...">
+                                        </div>
+                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                        <div>
+                                            <span class="btn btn-rose btn-round btn-file">
+                                                <span class="fileinput-new">Select image</span>
+                                                <span class="fileinput-exists">Change</span>
+                                                <input type="file" name="profilePicture" id="profilePicture" accept="image/*" (change)="handleFileInput($event.target.files)"/>
+                                            </span>
+                                            <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                              </div>
                           </div>
-                          <div class="card-body">
-                            <h4 class="card-title">Notes</h4>
+                      </div>
+                      <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Social Media</h4>
                             <div class="row">
-                              <div class="col-md-6 mb-3">
-                                  <label for="discountAmount">Discount (%)</label>
-                                  <input type="number" class="form-control" id="discountAmount" name="discountAmount" [ngModel]="business?.Discount_Amount" ngModel #discountAmount="ngModel" required [readonly]="viewMode">
-                                  <div *ngIf="discountAmount.invalid && (discountAmount.dirty || discountAmount.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="discountAmount.errors.required">
-                                        Discount information is required.
-                                    </div>
-                                    </div>
+                              <div class="col-sm-12">
+                                <div class="form-group">
+                                  <label>Facebook</label>
+                                  <input type="text" class="form-control" id="facebook" name="facebook" [ngModel]="business?.facebook_url" ngModel #facebook="ngModel" [readonly]="viewMode">
+                                </div>
                               </div>
-                              <div class="col-md-6 mb-3">
-                                  <label for="cellPhone"></label>
-                                  <div class="col-md-9">
-                                    <div class="form-check">
-                                      <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" id="eoyReceipt" name="eoyReceipt" [ngModel]="business?.EOY_Receipt" ngModel #eoyReceipt="ngModel" [readonly]="viewMode">
-                                        <span class="form-check-sign"></span>
-                                        End of Year Receipt?
-                                      </label>
-                                    </div>
-                                  </div>
+                              <div class="col-sm-12">
+                                <div class="form-group">
+                                  <label>Twitter</label>
+                                  <input type="text" class="form-control" id="twitter" name="twitter" [ngModel]="business?.twiter_url" ngModel #twitter="ngModel" [readonly]="viewMode">
+                                </div>
+                              </div>
+                              <div class="col-sm-12">
+                                <div class="form-group">
+                                  <label>Instagram</label>
+                                  <input type="text" class="form-control" id="instagram" name="instagram" [ngModel]="business?.instagram_url" ngModel #instagram="ngModel" [readonly]="viewMode">
+                                </div>
                               </div>
                             </div>
-                            <div class="mb-3">
-                                <label for="notes">Comments</label>
-                                <textarea class="form-control" id="notes" name="notes" [ngModel]="business?.notes" ngModel #notes="ngModel"></textarea>
+                        </div>
+                    </div>
+                      <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Services Rendered</h4>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <table  id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                  <thead>
+                                    <tr>
+                                      <th>{{ dataTable?.headerRow[0] }}</th>
+                                      <th>{{ dataTable?.headerRow[1] }}</th>
+                                      <th>{{ dataTable?.headerRow[2] }}</th>
+                                      <th>{{ dataTable?.headerRow[3] }}</th>
+                                      <th>{{ dataTable?.headerRow[4] }}</th>
+                                      <th>{{ dataTable?.headerRow[5] }}</th>
+                                      <th>{{ dataTable?.headerRow[6] }}</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr *ngFor="let row of dataTable.dataRows">
+                                      <td>
+                                        {{ row.id }}
+                                      </td>
+                                      <td>
+                                        {{ row.name }}
+                                      </td>
+                                      <td>
+                                        {{ row.requested_date | date:'MM/dd/yyyy' }}
+                                      </td>
+                                      <td>
+                                        {{ row.fulfilled_date | date:'MM/dd/yyyy'}}
+                                      </td>
+                                      <td>
+                                        {{ row.service_value | currency}}
+                                      </td>
+                                      <td>
+                                        {{ row.service_cost | currency}}
+                                      </td>
+                                      <td class="td-actions text-center">
+                                        <div class="form-check">
+                                          <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" [checked]="row.pending" disabled>
+                                            <span class="form-check-sign"></span>
+                                          </label>
+                                        </div>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
                             </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-5">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Business Logo</h4>
-                                <div class="row">
-                                  <div class="col-md-4"></div>
-                                  <div class="col-md-8">
-                                      <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-                                          <div class="fileinput-new thumbnail">
-                                              <img *ngIf="!profileURL" src="../../assets/img/default-avatar.png" alt="...">
-                                              <img *ngIf="profileURL" src="{{profileURL}}" alt="...">
-                                          </div>
-                                          <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                          <div>
-                                              <span class="btn btn-rose btn-round btn-file">
-                                                  <span class="fileinput-new">Select image</span>
-                                                  <span class="fileinput-exists">Change</span>
-                                                  <input type="file" name="profilePicture" id="profilePicture" accept="image/*" (change)="handleFileInput($event.target.files)"/>
-                                              </span>
-                                              <a href="javascript:void(0)" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-                                          </div>
-                                      </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                          <div class="card-body">
-                              <h4 class="card-title">Social Media</h4>
-                              <div class="row">
-                                <div class="col-sm-12">
-                                  <div class="form-group">
-                                    <label>Facebook</label>
-                                    <input type="text" class="form-control" id="facebook" name="facebook" [ngModel]="business?.facebook_url" ngModel #facebook="ngModel" [readonly]="viewMode">
-                                  </div>
-                                </div>
-                                <div class="col-sm-12">
-                                  <div class="form-group">
-                                    <label>Twitter</label>
-                                    <input type="text" class="form-control" id="twitter" name="twitter" [ngModel]="business?.twiter_url" ngModel #twitter="ngModel" [readonly]="viewMode">
-                                  </div>
-                                </div>
-                                <div class="col-sm-12">
-                                  <div class="form-group">
-                                    <label>Instagram</label>
-                                    <input type="text" class="form-control" id="instagram" name="instagram" [ngModel]="business?.instagram_url" ngModel #instagram="ngModel" [readonly]="viewMode">
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
-                      </div>
-                      <!--
-                        <div class="card">
-                          <div class="card-body">
-                              <h4 class="card-title">Services Rendered</h4>
-                              <div class="row">
-                                <div class="col-md-12">
-                                  <table  id="dataTable" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                      <tr>
-                                        <th>{{ dataTable?.headerRow[0] }}</th>
-                                        <th>{{ dataTable?.headerRow[1] }}</th>
-                                        <th>{{ dataTable?.headerRow[2] }}</th>
-                                        <th>{{ dataTable?.headerRow[3] }}</th>
-                                        <th>{{ dataTable?.headerRow[4] }}</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr *ngFor="let row of dataTable.dataRows">
-                                        <td>  
-                                          {{ row.record_id }}
-                                        </td>
-                                        <td>
-                                          {{ row.name }}
-                                        </td>
-                                        <td>  
-                                          {{ row.requested_date | date:'MM/dd/yyyy' }}
-                                        </td>
-                                        <td>  
-                                          {{ row.fulfilled_date | date:'MM/dd/yyyy'}}
-
-                                        </td>
-                                        <td class="td-actions text-center">
-                                          <div class="form-check">
-                                            <label class="form-check-label">
-                                              <input class="form-check-input" type="checkbox" [checked]="row.active" disabled>
-                                              <span class="form-check-sign"></span>
-                                            </label>
-                                          </div>
-                                        </td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                                </div>
-                              </div>
-                          </div>
-                        </div>
-                      -->
-                      </div>
-                </div>
-            </div>
-        </form>
-        </div>
+              </div>
+          </div>
+      </form>
       </div>
     </div>
   </div>
+</div>

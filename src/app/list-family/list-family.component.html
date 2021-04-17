@@ -26,7 +26,7 @@
                                 </span>
                                 Copy sign Up Link
                               </button>
-                            
+
 
                       </div>
                 </div>
@@ -89,8 +89,8 @@
                               <td>{{row.end_of_treatment_date}}</td>
                               <td>{{row.approved_by | yesNoApproved}}</td>
                               <td class="text-right">
-                                  <a [routerLink]="['/family/edit']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                                  <a [routerLink]="['/family/view']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                                  <a [routerLink]="['/family/view']" [queryParams]="{ familyId: row.id, from: '/family'}" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                                  <a [routerLink]="['/family/edit']" [queryParams]="{ familyId: row.id, from: '/family' }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
                                   <a (click)="markFamilyInactive(row.id)"  class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
                               </td>
 

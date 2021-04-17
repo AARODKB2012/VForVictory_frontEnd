@@ -21,6 +21,7 @@ import { ActiveFamilyComponent } from './active-family/active-family.component';
 import { BusinessCategoryComponent } from './business-category/business-category.component';
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { BusinessSignupComponent } from './business-signup/business-signup.component';
+import { VpizzaHistoryComponent } from './vpizza-history/vpizza-history.component';
 
 export const AppRoutes: Routes = [{
         path: '',
@@ -81,6 +82,9 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'services', component: ListServicesComponent, canActivate: [AuthGuard]
+           },
+            {
+                path: 'services/list', component: ListServicesComponent, canActivate: [AuthGuard]
             },
             {
                 path: 'services/edit', component: EditServicesComponent, canActivate: [AuthGuard]
@@ -96,6 +100,9 @@ export const AppRoutes: Routes = [{
             },
             {
                 path: 'family/edit', component: NewFamilyComponent, canActivate: [AuthGuard]
+            },
+            {
+                path: 'services/vpizza', component: VpizzaHistoryComponent, canActivate: [AuthGuard]
             },
             /* {
                 path: 'components',

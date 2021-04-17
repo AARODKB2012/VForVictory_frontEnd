@@ -40,6 +40,7 @@ import { BusinessCategoryComponent } from './business-category/business-category
 import { NewCategoryComponent } from './new-category/new-category.component';
 import { BusinessSignupComponent } from './business-signup/business-signup.component';
 import { YesNoApprovedPipe } from './yesnoapproved.pipe';
+import { VpizzaHistoryComponent } from './vpizza-history/vpizza-history.component';
 
 
 @NgModule({
@@ -82,7 +83,8 @@ import { YesNoApprovedPipe } from './yesnoapproved.pipe';
         BusinessCategoryComponent,
         NewCategoryComponent,
         BusinessSignupComponent,
-        YesNoApprovedPipe
+        YesNoApprovedPipe,
+        VpizzaHistoryComponent
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

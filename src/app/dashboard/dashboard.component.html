@@ -122,7 +122,7 @@
               <tbody>
 
                 <tr *ngFor="let row of dataTable.dataRows">
-                  <td>  
+                  <td>
                     {{ row.id }}
                   </td>
                   <td>
@@ -132,9 +132,9 @@
                     {{ row.cancer_warrior_name }}
                   </td>
                   <td class="td-actions text-center">
-                    <a [routerLink]="['/family/view']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
-                    <a  (click)="approvedFamily(row.id, row.first_name)" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
-                    <a [routerLink]="['/family/edit']" [queryParams]="{ familyId: row.id }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                    <a [routerLink]="['/family/view']" [queryParams]="{ familyId: row.id, from: '/dashboard' }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+                    <a *ngIf="userRole == 1"[routerLink]="['/family/edit']" [queryParams]="{ familyId: row.id, from: '/dashboard'  }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                    <a *ngIf="userRole == 1"(click)="approvedFamily(row.id, row.first_name)" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
                   </td>
                 </tr>
               </tbody>
@@ -167,19 +167,19 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let row of dataTableBusiness.dataRows">
-                      <td>  
+                      <td>
                         {{ row.record_id }}
                       </td>
-                      <td>  
+                      <td>
                         {{ row.business_name }}
                       </td>
-                      <td>  
+                      <td>
                         {{ row.Services_Offered }}
                       </td>
                       <td class="td-actions text-center">
                         <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id, from: '/dashboard'}" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
                         <a *ngIf="userRole == 1" [routerLink]="['/business/edit']" [queryParams]="{ businessId: row.record_id, from: '/dashboard'}" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
-                        <a  (click)="approvedBusiness(row.record_id, row.business_name)" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
+                        <a *ngIf="userRole == 1" (click)="approvedBusiness(row.record_id, row.business_name)" class="btn btn-warning btn-link btn-icon btn-sm view"><i class="fa fa-check"></i></a>
                       </td>
                     </tr>
                   </tbody>

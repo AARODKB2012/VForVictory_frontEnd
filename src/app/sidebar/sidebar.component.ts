@@ -29,8 +29,13 @@ export const ROUTES: RouteInfo[] = [{
     {
       path: '/services',
       title: 'Requests',
-      type: 'link',
-      icontype: 'nc-icon nc-box'
+      icontype: 'nc-icon nc-box',
+      type: 'sub',
+      collapse: 'components',
+      children: [
+          {path: 'list', title: 'Service Requests', ab:'R'},
+          {path: 'vpizza', title: 'V Pizza History', ab:'VP'},
+      ]
     },
     {
         path: '/family',
