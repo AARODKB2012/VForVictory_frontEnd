@@ -21,6 +21,12 @@
                                 </span>
                                 Approve
                             </button>
+                            <button type="button" class="btn btn-default" [routerLink]="['/family/edit']" [queryParams]="{ familyId: family?.id, from: previousUrl}" *ngIf="!editMode && !creationMode && userRole == 1">
+                              <span class="btn-label">
+                                <i class="nc-icon nc-paper"></i>
+                              </span>
+                              Edit
+                          </button>
                           <!-- Hiding save button if is in view mode -->
                           <button class="btn btn-success" type="submit" *ngIf="!viewMode">
                               <span class="btn-label">
@@ -184,14 +190,22 @@
                   <div class="col-md-5">
                     <div class="card">
                       <div class="card-body">
+<<<<<<< Updated upstream
                           <h4 class="card-title">V Pizza Gift Card</h4>
                           <div class="row">
                               <div class="col-md-8">
                                 <label for="vPizza_giftcard">V Pizza Gift Card Number</label>
+=======
+                          <img class="card-title" src="../assets/img/VP_logo.png" height=162 width=200>
+                          <div class="row">
+                              <div class="col-md-8">
+                                <label for="vPizza_giftcard">Gift Card Number</label>
+>>>>>>> Stashed changes
                                 <input type="text" class="form-control" id="vPizza_giftcard" name="vPizza_giftcard" [ngModel]="family?.vPizza_giftcard" [readonly]="viewMode"  #vPizza_giftcard="ngModel"  >
                                 <div *ngIf="vPizza_giftcard.invalid && (vPizza_giftcard.dirty || vPizza_giftcard.touched || errorInForm)" class="text-danger">
                                 <div *ngIf="vPizza_giftcard.errors.required">
                                   VPizza GiftCard information is required.
+<<<<<<< Updated upstream
                                   </div>
                               </div>
                               <label for="vPizza_refill_amount">Maximum Balance</label>
@@ -201,6 +215,17 @@
                                   Refill Amount is required.
                                   </div>
                               </div>
+=======
+                                  </div>
+                              </div>
+                              <label for="vPizza_refill_amount">Maximum Balance</label>
+                              <input type="text" class="form-control" id="vPizza_refill_amount" name="vPizza_refill_amount" [ngModel]="family?.vPizza_refill_amount" [readonly]="viewMode" #vPizza_refill_amount="ngModel" >
+                              <div *ngIf="vPizza_refill_amount.invalid && (vPizza_refill_amount.dirty || vPizza_refill_amount.touched || errorInForm)" class="text-danger">
+                              <div *ngIf="vPizza_refill_amount.errors.required">
+                                  Refill Amount is required.
+                                  </div>
+                              </div>
+>>>>>>> Stashed changes
                                 <input *ngIf="family?.vPizza_giftcard" type=button (click)="markVPizzaRefilled(family?.id, family?.vPizza_refill_amount)" value="Mark Card Refilled" class="btn btn-primary btn-info" [disabled]="viewMode">
                               </div>
                           </div>

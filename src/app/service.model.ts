@@ -12,5 +12,7 @@ export interface ServiceModel {
   notifiedFamily: boolean;
   followedupBusiness: boolean;
   followedupFamily: boolean;
+  pizzaCard: number;
+  pizzaAmount: number;
   active: boolean;
 }

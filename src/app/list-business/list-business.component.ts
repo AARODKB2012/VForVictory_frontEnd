@@ -35,14 +35,14 @@ export class ListBusinessComponent implements OnInit {
         if (businessReturned) {
           this.businessList = businessReturned.results;
           this.dataTable = {
-            headerRow: [ 'Id', 'Name',  'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Active', 'Options'],
-            footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Active', 'Options'],
+            headerRow: [ 'Id', 'Name',  'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Approval Status', 'Active', 'Options'],
+            footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Approval Status','Active', 'Options'],
             dataRows: this.businessList
           };
         }else{
           this.dataTable = {
-            headerRow: [ 'Id', 'Name',  'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Active', 'Options'],
-            footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Active', 'Options'],
+            headerRow: [ 'Id', 'Name',  'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' , 'Approval Status', 'Active', 'Options'],
+            footerRow: [ 'Id', 'Name', 'Services Offered', 'Service Area', 'Email', 'Phone Number', 'Preferred Contact' ,'Approval Status','Active', 'Options'],
             dataRows: []
           };
         }
@@ -51,6 +51,7 @@ export class ListBusinessComponent implements OnInit {
 
   ngAfterViewInit(){
     $('#datatable').DataTable({
+      "order": [[ 1, "asc" ]],
       "pagingType": "full_numbers",
       "lengthMenu": [
         [10, 25, 50, -1],
@@ -61,10 +62,30 @@ export class ListBusinessComponent implements OnInit {
         search: "_INPUT_",
         searchPlaceholder: "Search records",
       }
-  
+
     });
-  
+
     var table = $('#datatable').DataTable();
+
+    $('#all').on('click', function () {
+      table.search('').columns().search('').draw();
+    });
+
+    $('#approved').on('click', function () {
+      table.columns(7).search("Approved").draw();
+    });
+    $('#unapproved').on('click', function () {
+      table.columns(7).search("Pending").draw();
+    });
+
+    $('#active').on('click', function () {
+      table.columns(8).search("Active").draw();
+    });
+
+    $('#inactive').on('click', function () {
+      table.columns(8).search("Inactive").draw();
+    });
+
   }
 
   formatPhoneNumber(phoneNumber: String) {
@@ -126,8 +147,8 @@ export class ListBusinessComponent implements OnInit {
       text: "This business will not be visible for requests if disabled.",
       type: 'warning',
       showCancelButton: true,
-      confirmButtonClass: 'btn btn-success',
-      cancelButtonClass: 'btn btn-danger',
+      confirmButtonClass: 'btn btn-danger',
+      cancelButtonClass: 'btn btn-info',
       confirmButtonText: 'Yes, disable it!',
        buttonsStyling: false
     }).then((result) => {

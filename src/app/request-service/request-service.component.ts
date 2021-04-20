@@ -37,6 +37,7 @@ export class RequestServiceComponent implements OnInit {
   public today;
   public reqCount = 0;
   public addDisable = false;
+  public pizzaDisable = false;
   public submitDisable = true;
   constructor(public serviceService: ServicesService, public businessService: BusinessService, public familyService: FamilyService, public router: Router, private datePipe: DatePipe, private activeRoute: ActivatedRoute) {
     this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
@@ -161,7 +162,7 @@ export class RequestServiceComponent implements OnInit {
                     this.submitDisable = true;
                     Swal.fire({
                       title: "Request Submitted!",
-                      text: "Your request for service was submitted successfully.  Thank you!",
+                      text: "Your request for service was submitted successfully.  Thank you!  You may now close this form.",
                       buttonsStyling: false,
                       confirmButtonClass: "btn btn-success",
                       type: "success"
@@ -174,5 +175,41 @@ export class RequestServiceComponent implements OnInit {
       });
     }
   }
+
+  requestRefill(form: NgForm) {
+      Swal.fire({
+        title: "Request a V Pizza card refill?",
+        text: "If you have recently used your V Pizza gift card and would like to request a refill, please click \"Yes\" below.",
+        imageUrl: "../assets/img/VP_logo.png",
+        imageWidth: 150,
+        imageHeight: 121,
+        showCancelButton: true,
+        cancelButtonClass: "btn btn-info",
+        confirmButtonClass: "btn btn-success",
+        confirmButtonText: "Yes, refill my card!",
+        cancelButtonText: "No thanks",
+        reverseButtons: true
+      })
+      .then((fulfill) => {
+        if(fulfill.value) {
+              const request: any = {
+                familyId: this.familyId,
+                businessId: -1
+              };
+              this.serviceService.saveRequest(request).subscribe((reqResponseData) => {
+                if (reqResponseData.requestCreated) {
+                  this.pizzaDisable = true;
+                  Swal.fire({
+                    title: "Refill Request Submitted!",
+                    text: "Your refill request was submitted successfully.  You may now submit additional requests for service, or close this form.",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-success",
+                    type: "success"
+                  })
+                }
+            });
+        }
+      });
+    }
 
 }

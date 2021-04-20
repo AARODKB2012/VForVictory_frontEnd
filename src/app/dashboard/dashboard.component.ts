@@ -49,128 +49,10 @@ export class DashboardComponent implements OnInit {
   private loggedInUser: any;
 
   constructor(public familyService: FamilyService, public businessService: BusinessService, public servicesService: ServicesService, public router: Router){
-
-    // For Populating VFV Data
-    // Families
-    //Businesses
-    this.businessService.businessAddedThisMonth().subscribe((businesses) => {
-      if (businesses) {
-        this.businessesAddedThisMonth = businesses.resultsLength;
-      }
-    });
-
-    this.businessService.businessToApprove().subscribe((businesses) => {
-      if (businesses) {
-        this.businessesToApprove = businesses.results;
-        this.dataTableBusiness = {
-          headerRow: [ '#', 'Name', 'Services Offered','Actions'],
-          footerRow: [ '#', 'Name', 'Services Offered','Actions'],
-          dataRows: this.businessesToApprove
-        };
-      }
-    });
-
-    //Service Requests
-    this.servicesService.servicesRequestedThisMonth().subscribe((requests) => {
-      if (requests) {
-        this.requestsThisMonth = requests.results;
-        for(let i of this.requestsThisMonth) {
-          this.familyService.getFamilyById(i['family_id']).subscribe((responseData) => {
-            if(responseData) {
-              i.name = responseData.results[0]['first_name'].toString() + " " + responseData.results[0]['last_name'].toString();
-              i.email = responseData.results[0]['email'].toString();
-            }
-          });
-          this.businessService.getBusinessById(i['business_id']).subscribe((responseData) => {
-            if(responseData){
-              i.businessName = responseData.results[0]['business_name'].toString();
-              i.businessCategory = responseData.results[0]['Services_Offered'].toString();
-            }
-          });
-        }
-        this.dataTableRequests = {
-          headerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
-          footerRow: [ '#', 'Name', 'Business Name','Category', 'Date Requested', 'Date Fulfilled', 'Pending'],
-          dataRows: this.requestsThisMonth
-        };
-      }
-    });
-
     this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
     this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
-  ngAfterViewInit(){
-    $('#familiesToApprove').DataTable({
-      "pagingType": "simple",
-      "lengthMenu": [
-        [5, 10, -1],
-        [5, 10, "All"]
-      ],
-      responsive: true,
-      language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Search records",
-      }
-
-    });
-    var familiesToApprove = $('#familiesToApprove').DataTable();
-
-    $('#businessesToApprove').DataTable({
-      "pagingType": "simple",
-      "lengthMenu": [
-        [5, 10, -1],
-        [5, 10, "All"]
-      ],
-      responsive: true,
-      language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Search records",
-      }
-
-    });
-    var businessesToApprove = $('#businessesToApprove').DataTable();
-
-    $('#requestsThisMonth').DataTable({
-      "pagingType": "simple",
-      "lengthMenu": [
-        [5, 10, -1],
-        [5, 10, "All"]
-      ],
-      responsive: true,
-      language: {
-        search: "_INPUT_",
-        searchPlaceholder: "Search records",
-      }
-
-    });
-    var requestsThisMonth = $('#requestsThisMonth').DataTable();
-  }
-
-  approvedBusiness(businessId, businessName){
-    this.businessService.approveBusiness(businessId, this.loggedInUser).subscribe((responseData) => {
-      if (responseData.businessApproved) {
-        this.businessService.businessToApprove().subscribe((businesses) => {
-          if (businesses) {
-            this.businessesToApprove = businesses.results;
-            this.dataTableBusiness = {
-              headerRow: [ '#', 'Name', 'Services Offered','Actions'],
-              footerRow: [ '#', 'Name', 'Services Offered','Actions'],
-              dataRows: this.businessesToApprove
-            };
-          }
-        });
-        Swal.fire({
-          title: 'Business Approved Successfully!',
-          text:  businessName + ' was approved successfully.',
-          buttonsStyling: false,
-          confirmButtonClass: 'btn btn-success',
-          type: 'success'
-        })
-        this.router.navigate(['/dashboard']);
-      }
-    });
-  }
 
   public chartClicked(e:any):void {
     console.log(e);
@@ -245,14 +127,14 @@ export class DashboardComponent implements OnInit {
         for(let i of this.requestsThisMonth) {
           this.familyService.getFamilyById(i['family_id']).subscribe((responseData) => {
           if(responseData) {
-            i.name = responseData.results[0]['first_name'].toString() + " " + responseData.results[0]['last_name'].toString();
-            i.email = responseData.results[0]['email'].toString();
+            i.name = responseData.results[0]['first_name'] + " " + responseData.results[0]['last_name'];
+            i.email = responseData.results[0]['email'];
           }
           });
           this.businessService.getBusinessById(i['business_id']).subscribe((responseData) => {
           if(responseData){
-            i.businessName = responseData.results[0]['business_name'].toString();
-            i.businessCategory = responseData.results[0]['Services_Offered'].toString();
+            i.businessName = responseData.results[0]['business_name'];
+            i.businessCategory = responseData.results[0]['Services_Offered'];
           }
           });
         }
@@ -270,17 +152,14 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
-    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
 
-    
     this.chartColor = "#FFFFFF";
 
     var cardStatsMiniLineColor = "#fff",
       cardStatsMiniDotColor = "#fff";
 
     this.canvas = document.getElementById("chartActivity");
-    this.ctx = this.canvas.getContext("2d");
+    this.ctx = null;
 
     this.gradientStroke = this.ctx.createLinearGradient(500, 0, 100, 0);
     this.gradientStroke.addColorStop(0, '#80b6f4');
@@ -934,16 +813,90 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  
+  ngAfterViewInit(){
+    $('#familiesToApprove').DataTable({
+      "pagingType": "simple",
+      "lengthMenu": [
+        [5, 10, -1],
+        [5, 10, "All"]
+      ],
+      responsive: true,
+      language: {
+        "emptyTable": "No families to approve!",
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+
+    });
+    var familiesToApprove = $('#familiesToApprove').DataTable();
+
+    $('#businessesToApprove').DataTable({
+      "pagingType": "simple",
+      "lengthMenu": [
+        [5, 10, -1],
+        [5, 10, "All"]
+      ],
+      responsive: true,
+      language: {
+        "emptyTable": "No businesses to approve!",
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+
+    });
+    var businessesToApprove = $('#businessesToApprove').DataTable();
+
+    $('#requestsThisMonth').DataTable({
+      "pagingType": "simple",
+      "lengthMenu": [
+        [5, 10, -1],
+        [5, 10, "All"]
+      ],
+      responsive: true,
+      language: {
+        search: "_INPUT_",
+        searchPlaceholder: "Search records",
+      }
+
+    });
+    var requestsThisMonth = $('#requestsThisMonth').DataTable();
+  }
+
+  approvedBusiness(businessId, businessName){
+    this.businessService.approveBusiness(businessId, this.loggedInUser).subscribe((responseData) => {
+      if (responseData.businessApproved) {
+        this.businessService.businessToApprove().subscribe((businesses) => {
+          if (businesses) {
+            this.businessesToApprove = businesses.results;
+            this.dataTableBusiness = {
+              headerRow: [ '#', 'Name', 'Services Offered','Actions'],
+              footerRow: [ '#', 'Name', 'Services Offered','Actions'],
+              dataRows: this.businessesToApprove
+            };
+          }
+        });
+        Swal.fire({
+          title: 'Business Approved Successfully!',
+          text:  businessName + ' was approved successfully.',
+          buttonsStyling: false,
+          confirmButtonClass: 'btn btn-success',
+          type: 'success'
+        })
+        this.router.navigate(['/dashboard']);
+      }
+    });
+  }
+
+
   approvedFamily(familyId, familyName){
     this.familyService.approveFamily(familyId, this.loggedInUser).subscribe((responseData) => {
       if (responseData.familyApproved) {
         this.familyService.familiesToApprove().subscribe((families) => {
           if (families) {
             this.familiesToApprove = families.results;
-            this.dataTableBusiness = {
-              headerRow: [ '#', 'Name', 'Services Offered','Actions'],
-              footerRow: [ '#', 'Name', 'Services Offered','Actions'],
+            this.dataTable = {
+              headerRow: [ 'ID', 'Name', 'Cancer Warrior', 'Actions'],
+              footerRow: [ 'ID', 'Name', 'Cancer Warrior', 'Actions'],
               dataRows: this.familiesToApprove
             };
           }

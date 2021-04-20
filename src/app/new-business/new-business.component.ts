@@ -38,6 +38,7 @@ export class NewBusinessComponent implements OnInit {
   public servicesRendered: Array<any>;
   public businessApproved: boolean;
   public previousUrl: string;
+  public userRole: number;
 
   constructor(public businessService: BusinessService, public router: Router, private activeRoute: ActivatedRoute) {
 
@@ -47,6 +48,7 @@ export class NewBusinessComponent implements OnInit {
     const tree: UrlTree = this.router.parseUrl(this.router.url);
     const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
     const s: UrlSegment[] = g.segments;
+    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
 
     if (s[1].path === 'new') {
       this.creationMode = true;
@@ -62,7 +64,11 @@ export class NewBusinessComponent implements OnInit {
       this.businessId = params['businessId'];
       this.previousUrl = params['from'];
       if(!this.previousUrl) {
+<<<<<<< Updated upstream
         this.previousUrl = "/services/list";
+=======
+        this.previousUrl = "/services/requests";
+>>>>>>> Stashed changes
       }
     });
 

@@ -29,7 +29,7 @@ export class FamilyApplicationComponent implements OnInit {
   public disableSubmit: boolean;
 
 
-  constructor(public familyApplication: FamilyService, public router: Router, private datePipe: DatePipe) { 
+  constructor(public familyApplication: FamilyService, public router: Router, private datePipe: DatePipe) {
     this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
   }
 
@@ -261,7 +261,7 @@ export class FamilyApplicationComponent implements OnInit {
 
       $('.set-full-height').css('height', 'auto');
 
-    
+
   }
 
   ngAfterViewInit() {
@@ -325,26 +325,26 @@ export class FamilyApplicationComponent implements OnInit {
     }
     else {
       const request: any = {
-        firstName: form.value.firstName,
-        lastName: form.value.lastName,
-        phoneNumber: form.value.phonenumber,
-        streetAddress: form.value.address,
+        first_name: form.value.firstName,
+        last_name: form.value.lastName,
+        phone_number: form.value.phonenumber,
+        street_address: form.value.address,
         zipcode: form.value.zipcode,
         email: form.value.email,
-        cancerWarriorname: form.value.cancerwarrior,
-        workPhone: form.value.workPhone,
-        relationshipTowarrior: form.value.relationship,
-        additionalInfo: form.value.addInfo,
-        endOftreatmentDate: form.value.endOftreatmentDate,
+        cancer_warrior_name: form.value.cancerwarrior,
+        work_phone: form.value.workPhone,
+        relationship_to_warrior: form.value.relationship,
+        additional_info: form.value.addInfo,
+        end_of_treatment_date: form.value.endOftreatmentDate,
         familysize:form.value.familySize,
-        hearabout:form.value.hearAbout
+        hearabout:form.value.hearAbout,
         };
       this.familyApplication.saveFamily(request).subscribe((responseData) => {
         if (responseData.familyCreated) {
           this.disableSubmit = true;
           Swal.fire({
             title: 'Sign Up Completed Successfully!',
-            text: 'You can now close this page. Thanks for being apart of V for Victory',
+            text: 'You can now close this page. Thank you for being a part of V for Victory!',
             buttonsStyling: false,
             confirmButtonClass: 'btn btn-success',
             type: 'success'
@@ -353,7 +353,7 @@ export class FamilyApplicationComponent implements OnInit {
 
         }
     });
-    } 
+    }
     }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { BusinessService } from '../business.service';
 import { FamilyService } from '../family.service';
+import { NotesService } from '../notes.service'
 import { ServicesService } from '../services.service';
 import { ServiceModel } from '../service.model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -33,7 +34,11 @@ export class ListServicesComponent implements OnInit {
     public url;
     public userRole: number;
 
+<<<<<<< Updated upstream
     constructor(public serviceService: ServicesService, public businessService: BusinessService, public familyService: FamilyService, public router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe) {
+=======
+    constructor(public serviceService: ServicesService, public businessService: BusinessService, public familyService: FamilyService, public notesService: NotesService, public router: Router, private activeRoute: ActivatedRoute, private datePipe: DatePipe) {
+>>>>>>> Stashed changes
       this.today = this.datePipe.transform(this.currentDate, 'yyyy-MM-dd');
       this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
     }
@@ -47,16 +52,24 @@ export class ListServicesComponent implements OnInit {
           for(let i of this.activeList) {
             this.familyService.getFamilyById(i['family_id']).subscribe((responseData) => {
               if(responseData) {
-                i.name = responseData.results[0]['first_name'].toString() + " " + responseData.results[0]['last_name'].toString();
-                i.email = responseData.results[0]['email'].toString();
+                i.name = responseData.results[0]['first_name'] + " " + responseData.results[0]['last_name'];
+                i.email = responseData.results[0]['email'];
+                i.pizzaCard = responseData.results[0]['vPizza_giftcard'];
+                i.pizzaAmount = responseData.results[0]['vPizza_refill_amount'];
               }
             });
-            this.businessService.getBusinessById(i['business_id']).subscribe((responseData) => {
-              if(responseData){
-                i.businessName = responseData.results[0]['business_name'].toString();
-                i.businessCategory = responseData.results[0]['Services_Offered'].toString();
-              }
-            });
+            if(i['business_id'] == -1) {
+              i.businessName = "V Pizza";
+              i.businessCategory = "V Pizza";
+            }
+            else {
+              this.businessService.getBusinessById(i['business_id']).subscribe((responseData) => {
+                if(responseData){
+                  i.businessName = responseData.results[0]['business_name'];
+                  i.businessCategory = responseData.results[0]['Services_Offered'];
+                }
+              });
+            }
           }
           this.activeDataTable = {
             headerRow: [ 'ID', 'Name', 'Email', 'Business', 'Category', 'Date Requested', 'Notified Family?', 'Notified Business?'],
@@ -79,14 +92,14 @@ export class ListServicesComponent implements OnInit {
           for(let i of this.renderedList) {
             this.familyService.getFamilyById(i['family_id']).subscribe((responseData) => {
               if(responseData) {
-                i.name = responseData.results[0]['first_name'].toString() + " " + responseData.results[0]['last_name'].toString();
-                i.email = responseData.results[0]['email'].toString();
+                i.name = responseData.results[0]['first_name'] + " " + responseData.results[0]['last_name'];
+                i.email = responseData.results[0]['email'];
               }
             });
             this.businessService.getBusinessById(i['business_id']).subscribe((responseData) => {
               if(responseData){
-                i.businessName = responseData.results[0]['business_name'].toString();
-                i.businessCategory = responseData.results[0]['Services_Offered'].toString();
+                i.businessName = responseData.results[0]['business_name'];
+                i.businessCategory = responseData.results[0]['Services_Offered'];
               }
             });
           }
@@ -109,6 +122,11 @@ export class ListServicesComponent implements OnInit {
   ngAfterViewInit(){
 
     $('#activetable').DataTable({
+      "createdRow": function(row, data, dataIndex){
+        if(data[3] == "V Pizza" || data[4] == "V Pizza"){
+          $('td', row).css('background-color', '#ffcc00');
+        }
+      },
       "pagingType": "full_numbers",
       "lengthMenu": [
         [10, 25, 50, -1],
@@ -116,6 +134,7 @@ export class ListServicesComponent implements OnInit {
       ],
       responsive: true,
       language: {
+        "emptyTable": "There are no available requests at this time.",
         search: "_INPUT_",
         searchPlaceholder: "Search records",
       },
@@ -197,21 +216,23 @@ export class ListServicesComponent implements OnInit {
       Swal.fire({
         title: "Fulfill request?",
         text: "It will be moved to the Services Rendered table.",
-        input: 'text',
         inputPlaceholder: 'Enter value of service (optional)',
-        preConfirm: (value) => {
-          if(value){
-            if(isNaN(parseFloat(value))) {
-              serviceValue = null;
-            }
-            else {
-              serviceValue = parseFloat(value);
-            }
+        html: `<p>It will be moved to the Services Rendered table.</p>
+          <input type="text" id="newVal" class="swal2-input" placeholder="Enter the value of service">`,
+        preConfirm: () =>{
+          const fulV = document.getElementById('newVal') as HTMLInputElement;
+          if(fulV.value && isNaN(parseFloat(fulV.value))) {
+            Swal.showValidationMessage(
+              'Numbers only, please!'
+            )
+          }
+          else {
+            serviceValue = parseFloat(fulV.value);
           }
         },
         type: "success",
         showCancelButton: true,
-        cancelButtonClass: "btn btn-info",
+        cancelButtonClass: "btn",
         confirmButtonClass: "btn btn-success",
         confirmButtonText: "Yes, approve it!",
         cancelButtonText: "No, leave it!",
@@ -252,7 +273,7 @@ export class ListServicesComponent implements OnInit {
         text: "It will be moved to the Services Rendered table.",
         type: "error",
         showCancelButton: true,
-        cancelButtonClass: "btn btn-info",
+        cancelButtonClass: "btn",
         confirmButtonClass: "btn btn-danger",
         confirmButtonText: "Yes, deny it",
         cancelButtonText: "No, leave it!",
@@ -443,7 +464,7 @@ export class ListServicesComponent implements OnInit {
       text: "Would you like to permanently delete this request? This cannot be undone!",
       type: "warning",
       showCancelButton: true,
-      cancelButtonClass: "btn btn-info",
+      cancelButtonClass: "btn",
       confirmButtonClass: "btn btn-danger",
       confirmButtonText: "Yes, remove it!",
       cancelButtonText: "No, leave it!",
@@ -456,7 +477,7 @@ export class ListServicesComponent implements OnInit {
           text: "Once it has been deleted, it cannot be recovered!",
           type: "warning",
           showCancelButton: true,
-          cancelButtonClass: "btn btn-info",
+          cancelButtonClass: "btn",
           confirmButtonClass: "btn btn-danger",
           confirmButtonText: "Yes, remove it!",
           cancelButtonText: "No, leave it!",
@@ -541,7 +562,7 @@ export class ListServicesComponent implements OnInit {
           }
         },
         showCancelButton: true,
-        cancelButtonClass: "btn btn-info",
+        cancelButtonClass: "btn",
         confirmButtonClass: "btn btn-success",
         confirmButtonText: "Submit change",
         cancelButtonText: "Cancel",
@@ -571,5 +592,70 @@ export class ListServicesComponent implements OnInit {
           });
         }
       });
+  }
+
+  markVPizzaRefilled(pizzaId, pizzaNum, pizzaBalance, requestId) {
+    if(!pizzaNum) {
+      Swal.fire({
+        title: "No card found!",
+        text: "Please add a V Pizza card to this family profile before marking it as refilled.",
+        type: "error",
+        showCancelButton: true,
+        cancelButtonClass: "btn",
+        confirmButtonClass: "btn btn-info",
+        confirmButtonText: "Edit Profile",
+        cancelButtonText: "No, cancel",
+        reverseButtons: true
+      }).then((confirm) => {
+        if(confirm.value){
+          this.router.navigate(['/family/edit'], { queryParams: { familyId: pizzaId } });
+        }
+      })
+
+    }
+    else {
+      Swal.fire({
+        title: "Mark this card refilled?",
+        text: "This will appear in the V Pizza Transaction History page.",
+        type: "info",
+        showCancelButton: true,
+        cancelButtonClass: "btn",
+        confirmButtonClass: "btn btn-success",
+        confirmButtonText: "Yes, refill",
+        cancelButtonText: "No, cancel",
+        reverseButtons: true
+      })
+      .then((refill) => {
+        if(refill.value) {
+          let user = JSON.parse(localStorage.getItem('currentUser'));
+          const request: any = {
+            id: pizzaId,
+            balance: parseFloat(pizzaBalance),
+            currentUser: user['email']
+          }
+          this.notesService.markPizzaRefilled(request).subscribe((pizzaData) => {
+            if (pizzaData.refilled) {
+              const remove: any = {
+                id: requestId,
+              }
+              this.serviceService.deleteRequest(remove).subscribe((req) => {
+                if (req.requestFulfilled) {
+                  Swal.fire({
+                    title: "Card refilled.",
+                    buttonsStyling: false,
+                    confirmButtonClass: "btn btn-info",
+                    type: "success"
+                  }).then((confirm) => {
+                    if(confirm){
+                      window.location.reload()
+                    }
+                  })
+                }
+              });
+            }
+          });
+        }
+      });
+    }
   }
 }

@@ -7,7 +7,7 @@
               <!--        You can switch " data-color="primary" "  with one of the next bright colors: "green", "orange", "red", "blue"       -->
               <div class="card-header text-center">
                 <h3 class="card-title">
-                  V for Victory Family Family Application
+                  V for Victory Family Application
                 </h3>
                 <h5 class="description">This information will let us know more about you.</h5>
                 <div class="wizard-navigation">
@@ -29,8 +29,8 @@
                         <div class="row justify-content-center">
 
                             <div class="col-md-6 mb-3">
-  
-  
+
+
                                 <label for="cancerwarrior">Cancer Warrior's Name</label>
                                 <input type="text" class="form-control" id="cancerwarrior" name="cancerwarrior" ngModel #cancerwarrior="ngModel" required maxlength="30" minlength="1">
                                 <div *ngIf="cancerwarrior.invalid && (cancerwarrior.dirty || cancerwarrior.touched || errorInForm)" class="text-danger">
@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
 
-                                <label for="relationship">What is your relationship to the Cancer?</label>
+                                <label for="relationship">What is your relationship to the Cancer Warrior?</label>
                                 <input type="text" class="form-control" id="relationship" name="relationship" [ngModel]="family?.relationship_to_warrior" [readonly]="viewMode" #relationship="ngModel"  required>
                                 <div *ngIf="relationship.invalid && (relationship.dirty || relationship.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="relationship.errors.required">
@@ -68,7 +68,7 @@
                                 <input type="text" class="form-control" id="endOftreatmentDate" name="endOftreatmentDate" [ngModel]="family?.end_of_treatment_date" [readonly]="viewMode" #endOftreatmentDate="ngModel"  required>
                                 <div *ngIf="endOftreatmentDate.invalid && (endOftreatmentDate.dirty || endOftreatmentDate.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="endOftreatmentDate.errors.required">
-                                            endOftreatmentDate is required.
+                                            This date is required.  If unknown, please write "unknown" in the text field.
                                     </div>
                                 </div>
 
@@ -76,7 +76,7 @@
 
 
                             <div class="col-md-6 mb-3">
-  
+
                                 <label for="phonenumber">Phone Number</label>
                                 <input type="text" class="form-control" id="phonenumber" name="phonenumber" [ngModel]="family?.phone_number" [readonly]="viewMode" #phonenumber="ngModel" required maxlength="30" minlength="1">
                                 <div *ngIf="phonenumber.invalid && (phonenumber.dirty || phonenumber.touched || errorInForm)" class="text-danger">
@@ -84,11 +84,11 @@
                                         Phone Number is required.
                                     </div>
                                 </div>
-                                
+
 
                                 <label for="workPhone">Secondary Phone Number</label>
                                 <input type="tel" class="form-control" id="workPhone" name="workPhone" [ngModel]="family?.work_phone"  [readonly]="viewMode" #workPhone="ngModel" >
-                                
+
 
                                 <label for="email">Email</label>
                                 <input type="text" class="form-control" id="email" name="email" [ngModel]="family?.email" [readonly]="viewMode" #email="ngModel"  required>
@@ -96,8 +96,8 @@
                                     <div *ngIf="email.errors.required">
                                             email is required.
                                     </div>
-                                </div>    
-                                
+                                </div>
+
                                 <label for="address">Address</label>
                                 <input type="text" class="form-control" id="address" name="address" [ngModel]="family?.street_address" [readonly]="viewMode" #address="ngModel"  required>
                                 <div *ngIf="address.invalid && (address.dirty || address.touched || errorInForm)" class="text-danger">
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
 
-                                <label for="zipcode">ZipCode</label>
+                                <label for="zipcode">Zipcode</label>
                                 <input type="text" class="form-control" id="zipcode" name="zipcode" [ngModel]="family?.zipcode" [readonly]="viewMode" #zipcode="ngModel"  required>
                                 <div *ngIf="zipcode.invalid && (zipcode.dirty || zipcode.touched || errorInForm)" class="text-danger">
                                     <div *ngIf="zipcode.errors.required">
@@ -124,15 +124,8 @@
 
                                 <label for="hearAbout">How did you hear about us?</label>
                                 <input type="text" class="form-control" id="hearAbout" name="hearAbout" [ngModel]="family?.hearAbout" [readonly]="viewMode" #hearAbout="ngModel" >
-                                <div *ngIf="hearAbout.invalid && (hearAbout.dirty || hearAbout.touched || errorInForm)" class="text-danger">
-                                    <div *ngIf="hearAbout.errors.required">
-                                    Household Size is required.
-                                    </div>
-                                </div>
 
 
-                                
-                                
                             </div>
 
 
@@ -150,11 +143,11 @@
 
 
                         </div>
-                
+
                     </div>
-                  
+
                   </div>
-                      
+
                 </div>
               <div class="card-footer">
                 <div class="pull-right">

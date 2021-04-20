@@ -33,6 +33,7 @@ export class NewFamilyComponent implements OnInit {
   public editMode: boolean;
   public viewMode: boolean;
   public creationMode: boolean;
+  public userRole: number;
   public categoryList: [];
   public profileURL: string = null;
   public familyApproved: boolean;
@@ -45,6 +46,7 @@ export class NewFamilyComponent implements OnInit {
     const tree: UrlTree = router.parseUrl(this.router.url);
     const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
     const s: UrlSegment[] = g.segments;
+    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
 
 
     if (s[1].path === 'new') {
@@ -61,7 +63,11 @@ export class NewFamilyComponent implements OnInit {
       this.familyId = params['familyId'];
       this.previousUrl = params['from'];
       if(!this.previousUrl) {
+<<<<<<< Updated upstream
         this.previousUrl = "/services/list";
+=======
+        this.previousUrl = "/services/requests";
+>>>>>>> Stashed changes
       }
     });
 
@@ -364,7 +370,7 @@ export class NewFamilyComponent implements OnInit {
     .then((remove) => {
       if(remove.value) {
         const request: any = {
-          id: noteId,
+          id: noteId
         }
         this.notesService.deleteNote(request).subscribe((noteData) => {
           if (noteData.noteDeleted) {

@@ -84,7 +84,11 @@ export const AppRoutes: Routes = [{
                 path: 'services', component: ListServicesComponent, canActivate: [AuthGuard]
            },
             {
+<<<<<<< Updated upstream
                 path: 'services/list', component: ListServicesComponent, canActivate: [AuthGuard]
+=======
+                path: 'services/requests', component: ListServicesComponent, canActivate: [AuthGuard]
+>>>>>>> Stashed changes
             },
             {
                 path: 'services/edit', component: EditServicesComponent, canActivate: [AuthGuard]

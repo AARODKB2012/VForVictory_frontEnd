@@ -41,6 +41,10 @@ import { NewCategoryComponent } from './new-category/new-category.component';
 import { BusinessSignupComponent } from './business-signup/business-signup.component';
 import { YesNoApprovedPipe } from './yesnoapproved.pipe';
 import { VpizzaHistoryComponent } from './vpizza-history/vpizza-history.component';
+<<<<<<< Updated upstream
+=======
+import { ContactPipe } from './contact.pipe';
+>>>>>>> Stashed changes
 
 
 @NgModule({
@@ -84,7 +88,12 @@ import { VpizzaHistoryComponent } from './vpizza-history/vpizza-history.componen
         NewCategoryComponent,
         BusinessSignupComponent,
         YesNoApprovedPipe,
+<<<<<<< Updated upstream
         VpizzaHistoryComponent
+=======
+        VpizzaHistoryComponent,
+        ContactPipe
+>>>>>>> Stashed changes
     ],
     providers: [AuthGuard],
     bootstrap:    [ AppComponent ]

@@ -18,7 +18,7 @@
                               <span class="btn-label">
                                 <i class="nc-icon nc-box"></i>
                               </span>
-                              Make a family active
+                              View Inactive
                             </button>
                             <button class="btn btn-info" [cdkCopyToClipboard]="url + '/#/family-application'" (click)="showClipboard()">
                                 <span class="btn-label">
@@ -82,7 +82,7 @@
                       <tbody>
                           <tr *ngFor="let row of dataTable.dataRows">
                               <td>{{row.id}}</td>
-                              <td>{{row.first_name}}</td>
+                              <td>{{row.cancer_warrior_name}}</td>
                               <td>{{row.last_name}}</td>
                               <td>{{row.email}}</td>
                               <td>{{row.street_address}}</td>
@@ -90,8 +90,13 @@
                               <td>{{row.approved_by | yesNoApproved}}</td>
                               <td class="text-right">
                                   <a [routerLink]="['/family/view']" [queryParams]="{ familyId: row.id, from: '/family'}" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>
+<<<<<<< Updated upstream
                                   <a [routerLink]="['/family/edit']" [queryParams]="{ familyId: row.id, from: '/family' }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
                                   <a (click)="markFamilyInactive(row.id)"  class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
+=======
+                                  <a *ngIf="userRole == 1" [routerLink]="['/family/edit']" [queryParams]="{ familyId: row.id, from: '/family' }" routerLinkActive="active" class="btn btn-warning btn-link btn-icon btn-sm edit"><i class="fa fa-edit"></i></a>
+                                  <a *ngIf="userRole == 1" (click)="markFamilyInactive(row.id)"  class="btn btn-danger btn-link btn-icon btn-sm archive"><i class="fa fa-times"></i></a>
+>>>>>>> Stashed changes
                               </td>
 
                           </tr>

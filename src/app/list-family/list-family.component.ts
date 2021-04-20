@@ -23,11 +23,14 @@ export class ListFamilyComponent implements OnInit {
   public familyList: FamilyModel[];
   public dataTable: DataTable;
   public currentDate = new Date();
+  public userRole: number;
+  private loggedInUser: any;
   public today;
   public url;
-  
-  constructor(public familyService: FamilyService) {
 
+  constructor(public familyService: FamilyService) {
+    this.userRole = JSON.parse(localStorage.getItem('currentUser')).role;
+    this.loggedInUser = JSON.parse(localStorage.getItem('currentUser')).email;
   }
 
 
@@ -42,9 +45,16 @@ export class ListFamilyComponent implements OnInit {
           dataRows: this.familyList
         };
       }
+      else {
+        this.dataTable = {
+          headerRow: ['Id', 'First Name', 'Last Name', 'Email', 'Address', 'End Of Treatment Date','Approval Status', 'Options'],
+          footerRow: ['Id', 'First Name', 'Last Name', 'Email', 'Address', 'End Of Treatment Date','Approval Status', 'Options'],
+          dataRows: []
+        };
+      }
     });
 
-    
+
   }
   ngAfterViewInit() {
 
@@ -62,7 +72,7 @@ export class ListFamilyComponent implements OnInit {
     });
 
     var table = $('#datatable').DataTable();
-    
+
 
 
     $('#all').on('click', function () {

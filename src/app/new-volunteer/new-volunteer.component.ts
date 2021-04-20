@@ -31,11 +31,14 @@ export class NewVolunteerComponent implements OnInit {
   public roleList: [];
   public fileToUpload: File = null;
   public profileURL: string = null;
+  public userId: number;
+  public ownAccount = false;
 
   constructor(public userService: UsersService, public router: Router, private activeRoute: ActivatedRoute) {
     const tree: UrlTree = router.parseUrl(this.router.url);
     const g: UrlSegmentGroup = tree.root.children[PRIMARY_OUTLET];
     const s: UrlSegment[] = g.segments;
+    this.userId = JSON.parse(localStorage.getItem('currentUser')).record_id;
 
     if (s[1].path === 'new') {
       this.creationMode = true;
@@ -47,10 +50,14 @@ export class NewVolunteerComponent implements OnInit {
       this.editMode = true;
     }
 
+
     this.activeRoute.queryParams.subscribe(params => {
       this.volunteerId = params['volunteerId'];
     });
     if (this.volunteerId) {
+      if(this.volunteerId == this.userId) {
+        this.ownAccount = true;
+      }
       this.userService.getVolunteerById(this.volunteerId).subscribe((responseData) => {
         if (responseData) {
           this.user = responseData.results[0];
@@ -77,8 +84,6 @@ export class NewVolunteerComponent implements OnInit {
       }
     });
   }
-
-
 
   confirmPassword(password: string, confirmPassword: string) {
     if (password === confirmPassword) {

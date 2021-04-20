@@ -5,7 +5,7 @@
               <div class="card-header">
                   <div class="row">
                         <div class="col-md-6">
-                            <h4 class="card-title">Currently Active Businesses</h4>
+                            <h4 class="card-title">All Businesses</h4>
                         </div>
                         <div class="col-md-6 text-right">
                             <button class="btn btn-info" routerLink="/business/new" [queryParams]="{from: '/business/list'}">
@@ -25,10 +25,38 @@
 
               </div>
                 <div class="card-body">
-                    <div class="toolbar">
-                        <!--        Here you can write extra buttons/actions for the toolbar              -->
-
-                    </div>
+                  <div class="toolbar">
+                    <button id="all" class="btn btn-sm btn-info">
+                      <span class="btn-label">
+                        <i class="nc-icon nc-alert-circle-i"></i>
+                      </span>
+                      Show All
+                    </button>
+                    <button id="approved" class="btn btn-sm btn-info">
+                      <span class="btn-label">
+                        <i class="nc-icon nc-check-2"></i>
+                      </span>
+                      Show Approved
+                    </button>
+                    <button id="unapproved" class="btn btn-sm btn-info">
+                      <span class="btn-label">
+                        <i class="nc-icon nc-tap-01"></i>
+                      </span>
+                      Show Pending Approval
+                    </button>
+                    <button id="active" class="btn btn-sm btn-info">
+                      <span class="btn-label">
+                        <i class="nc-icon nc-button-play"></i>
+                      </span>
+                      Show Active
+                    </button>
+                    <button id="inactive" class="btn btn-sm btn-info">
+                      <span class="btn-label">
+                        <i class="fa fa-ban"></i>
+                      </span>
+                      Show Inactive
+                    </button>
+                  <div class="card-body">
                     <table id="datatable" class="table table-striped table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
@@ -40,7 +68,8 @@
                                 <th>{{ dataTable?.headerRow[5] }}</th>
                                 <th>{{ dataTable?.headerRow[6] }}</th>
                                 <th>{{ dataTable?.headerRow[7] }}</th>
-                                <th class="disabled-sorting text-right">{{ dataTable?.headerRow[8] }}</th>
+                                <th>{{ dataTable?.headerRow[8] }}</th>
+                                <th class="disabled-sorting text-right">{{ dataTable?.headerRow[9] }}</th>
                               </tr>
                         </thead>
                         <tbody>
@@ -51,14 +80,16 @@
                                 <td>{{row.Service_Area}}</td>
                                 <td>{{row.email}}</td>
                                 <td>{{formatPhoneNumber(row.primary_contact_phone_number)}}</td>
-                                <td>{{row.Preferred_Method_Contact}}</td>
-                                <td class="td-actions text-center">
+                                <td>{{row.Preferred_Method_Contact | contact }}</td>
+                                <td>{{row.approved_by | yesNoApproved}}</td>
+                                <td class="td-actions text-left">
                                     <div class="form-check">
                                       <label class="form-check-label">
                                         <input class="form-check-input" type="checkbox" [checked]="row.active" disabled>
                                         <span class="form-check-sign"></span>
                                       </label>
-                                    </div>                  
+                                      {{ row.active | yesNoActive}}
+                                    </div>
                                 </td>
                                 <td class="text-right">
                                   <a  [routerLink]="['/business/view']" [queryParams]="{ businessId: row.record_id, from: '/business/list' }" routerLinkActive="active" class="btn btn-info btn-link btn-icon btn-sm view"><i class="fa fa-eye"></i></a>

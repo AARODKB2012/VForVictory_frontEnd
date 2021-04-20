@@ -31,9 +31,15 @@ export const ROUTES: RouteInfo[] = [{
       title: 'Requests',
       icontype: 'nc-icon nc-box',
       type: 'sub',
+<<<<<<< Updated upstream
       collapse: 'components',
       children: [
           {path: 'list', title: 'Service Requests', ab:'R'},
+=======
+      collapse: 'rcomponents',
+      children: [
+          {path: 'requests', title: 'Service Requests', ab:'R'},
+>>>>>>> Stashed changes
           {path: 'vpizza', title: 'V Pizza History', ab:'VP'},
       ]
     },
